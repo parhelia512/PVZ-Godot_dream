@@ -1,0 +1,107 @@
+[gd_scene load_steps=19 format=3 uid="uid://cyavysvocd6t1"]
+
+[ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="0_fuck"]
+[ext_resource type="Animation" uid="uid://dfpy14jrvk1md" path="res://animation/character/plant/004_wanll_nut/Wallnut_idle.tres" id="1_anim"]
+[ext_resource type="Script" uid="uid://fnlirwi40d44" path="res://scripts/character/plant/004_wall_nut.gd" id="1_k6qa0"]
+[ext_resource type="Animation" uid="uid://ctdx2rncxsv0k" path="res://animation/character/plant/004_wanll_nut/Wallnut_face.tres" id="2_anim"]
+[ext_resource type="Texture2D" uid="uid://d06vgaisnbd0n" path="res://assets/reanim/Wallnut_cracked1.png" id="2_w5ly5"]
+[ext_resource type="Animation" uid="uid://cybywn4cqdx61" path="res://animation/character/plant/004_wanll_nut/Wallnut_blink_twitch.tres" id="3_anim"]
+[ext_resource type="Texture2D" uid="uid://bms4xhmhlcsam" path="res://assets/reanim/Wallnut_cracked2.png" id="3_yfchq"]
+[ext_resource type="Animation" uid="uid://chf65txrmy1tx" path="res://animation/character/plant/004_wanll_nut/Wallnut_blink_twice.tres" id="4_anim"]
+[ext_resource type="Animation" uid="uid://blj8i1uf5fop5" path="res://animation/character/plant/004_wanll_nut/Wallnut_blink_thrice.tres" id="5_anim"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5ly5"]
+_data = {
+&"Wallnut_blink_thrice": ExtResource("5_anim"),
+&"Wallnut_blink_twice": ExtResource("4_anim"),
+&"Wallnut_blink_twitch": ExtResource("3_anim"),
+&"Wallnut_face": ExtResource("2_anim"),
+&"Wallnut_idle": ExtResource("1_anim")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tx35c"]
+animation = &"Wallnut_face"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w5ly5"]
+animation = &"Wallnut_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yfchq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_esarn"]
+advance_mode = 2
+advance_expression = "is_face"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_63m75"]
+states/Wallnut_face/node = SubResource("AnimationNodeAnimation_tx35c")
+states/Wallnut_face/position = Vector2(625, 100)
+states/Wallnut_idle/node = SubResource("AnimationNodeAnimation_w5ly5")
+states/Wallnut_idle/position = Vector2(389, 100)
+transitions = ["Start", "Wallnut_idle", SubResource("AnimationNodeStateMachineTransition_yfchq"), "Wallnut_idle", "Wallnut_face", SubResource("AnimationNodeStateMachineTransition_esarn")]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_r0k88"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sk2ft"]
+nodes/AnimationNodeStateMachine/node = SubResource("AnimationNodeStateMachine_63m75")
+nodes/AnimationNodeStateMachine/position = Vector2(260, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_r0k88")
+nodes/TimeScale/position = Vector2(600, 100)
+nodes/output/position = Vector2(900, 120)
+node_connections = [&"TimeScale", 0, &"AnimationNodeStateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrlnw"]
+size = Vector2(50, 60)
+
+[node name="WallNut" type="Node2D"]
+script = ExtResource("1_k6qa0")
+face_damaged = Array[Texture2D]([ExtResource("2_w5ly5"), ExtResource("3_yfchq")])
+max_hp = 4000
+curr_Hp = 4000
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-42, -45)
+
+[node name="_ground" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(5.28082, 6.05857)
+rotation = -0.0232007
+scale = Vector2(0.7, 0.702909)
+texture = ExtResource("0_fuck")
+centered = false
+
+[node name="Anim_blink_twitch" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink_twice" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink_thrice" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w5ly5")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_sk2ft")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yrlnw")

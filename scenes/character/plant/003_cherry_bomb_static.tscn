@@ -1,0 +1,153 @@
+[gd_scene load_steps=21 format=3 uid="uid://b2xmgs8fmun2h"]
+
+[ext_resource type="Texture2D" uid="uid://dvuugtbourjhs" path="res://assets/reanim/CherryBomb_leftstem.png" id="2_nxt2i"]
+[ext_resource type="Texture2D" uid="uid://bmpuc6vb6mfpk" path="res://assets/reanim/CherryBomb_left1.png" id="3_lgson"]
+[ext_resource type="Texture2D" uid="uid://c3mfcmrjen4il" path="res://assets/reanim/CherryBomb_left3.png" id="4_l3o3j"]
+[ext_resource type="Texture2D" uid="uid://dlayj8ftlothc" path="res://assets/reanim/CherryBomb_lefteye11.png" id="5_5i6ou"]
+[ext_resource type="Texture2D" uid="uid://cuv0j6lkkkr5d" path="res://assets/reanim/CherryBomb_lefteye21.png" id="6_wwcku"]
+[ext_resource type="Texture2D" uid="uid://b6gaqdfa477uw" path="res://assets/reanim/CherryBomb_leftmouth1.png" id="7_u4ydd"]
+[ext_resource type="Texture2D" uid="uid://bjdqpef0ve0pg" path="res://assets/reanim/CherryBomb_rightstem.png" id="8_datkx"]
+[ext_resource type="Texture2D" uid="uid://dspmy0uy0cacv" path="res://assets/reanim/CherryBomb_right1.png" id="9_701jr"]
+[ext_resource type="Texture2D" uid="uid://uklt4t2i3j63" path="res://assets/reanim/CherryBomb_right3.png" id="10_bvaql"]
+[ext_resource type="Texture2D" uid="uid://cfdwh0bhgcrlb" path="res://assets/reanim/CherryBomb_righteye11.png" id="11_3i2sw"]
+[ext_resource type="Texture2D" uid="uid://d0dmytj04iew5" path="res://assets/reanim/CherryBomb_righteye21.png" id="12_4dohx"]
+[ext_resource type="Texture2D" uid="uid://biffa3h6h5rxy" path="res://assets/reanim/CherryBomb_rightmouth1.png" id="13_arja5"]
+[ext_resource type="Texture2D" uid="uid://d2cv50584w3k7" path="res://assets/reanim/CherryBomb_leaf3.png" id="14_6setx"]
+[ext_resource type="Texture2D" uid="uid://b6robscgti75e" path="res://assets/reanim/CherryBomb_leaf2tip.png" id="15_cesmo"]
+[ext_resource type="Texture2D" uid="uid://bjskgh2aep1fi" path="res://assets/reanim/CherryBomb_leaf2.png" id="16_iqht0"]
+[ext_resource type="Texture2D" uid="uid://be4ah7odddsjx" path="res://assets/reanim/CherryBomb_leaf1.png" id="17_fx17k"]
+[ext_resource type="Texture2D" uid="uid://fh1tkc18o3qe" path="res://assets/reanim/CherryBomb_leaf1tip.png" id="18_jjx0r"]
+[ext_resource type="Animation" uid="uid://eg5i0srekcuo" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_explode.tres" id="19_7xljf"]
+[ext_resource type="Animation" uid="uid://b2a3f5y4dudyi" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_idle.tres" id="20_d6rht"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5e28"]
+_data = {
+&"CherryBomb_explode": ExtResource("19_7xljf"),
+&"CherryBomb_idle": ExtResource("20_d6rht")
+}
+
+[node name="CherryBomb" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-45, -45)
+
+[node name="Anim_explode" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="CherryBomb_leftstem" type="Sprite2D" parent="Body"]
+position = Vector2(31, 17.1)
+rotation = 0.493928
+scale = Vector2(0.599, 0.599)
+texture = ExtResource("2_nxt2i")
+centered = false
+
+[node name="CherryBomb_left1" type="Sprite2D" parent="Body"]
+position = Vector2(4, 30.9)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_lgson")
+centered = false
+
+[node name="CherryBomb_left3" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(-12.4, 5.3)
+rotation = 0.171042
+scale = Vector2(1.037, 1.003)
+texture = ExtResource("4_l3o3j")
+centered = false
+
+[node name="CherryBomb_lefteye11" type="Sprite2D" parent="Body"]
+position = Vector2(8.7, 41.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_5i6ou")
+centered = false
+
+[node name="CherryBomb_lefteye21" type="Sprite2D" parent="Body"]
+position = Vector2(21.2, 44.3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_wwcku")
+centered = false
+
+[node name="CherryBomb_leftmouth1" type="Sprite2D" parent="Body"]
+position = Vector2(9.2, 52.9)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_u4ydd")
+centered = false
+
+[node name="CherryBomb_rightstem" type="Sprite2D" parent="Body"]
+position = Vector2(34, 21.9)
+rotation = 6.23432
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_datkx")
+centered = false
+
+[node name="CherryBomb_right1" type="Sprite2D" parent="Body"]
+position = Vector2(44.5, 31.3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_701jr")
+centered = false
+
+[node name="CherryBomb_right3" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(26.2, 23.3)
+rotation = -0.270526
+scale = Vector2(1.116, 1.116)
+texture = ExtResource("10_bvaql")
+centered = false
+
+[node name="CherryBomb_righteye11" type="Sprite2D" parent="Body"]
+position = Vector2(66.7, 42)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_3i2sw")
+centered = false
+
+[node name="CherryBomb_righteye21" type="Sprite2D" parent="Body"]
+position = Vector2(51.4, 45.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_4dohx")
+centered = false
+
+[node name="CherryBomb_rightmouth1" type="Sprite2D" parent="Body"]
+position = Vector2(63.1, 50.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_arja5")
+centered = false
+
+[node name="CherryBomb_leaf3" type="Sprite2D" parent="Body"]
+position = Vector2(36.1, 11.7)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_6setx")
+centered = false
+
+[node name="CherryBomb_leaf2tip" type="Sprite2D" parent="Body"]
+position = Vector2(25.5, 7.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("15_cesmo")
+centered = false
+
+[node name="CherryBomb_leaf2" type="Sprite2D" parent="Body"]
+position = Vector2(27.2, 5.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("16_iqht0")
+centered = false
+
+[node name="CherryBomb_leaf1" type="Sprite2D" parent="Body"]
+position = Vector2(23.3, 14.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("17_fx17k")
+centered = false
+
+[node name="CherryBomb_leaf1tip" type="Sprite2D" parent="Body"]
+position = Vector2(18, 14.9)
+scale = Vector2(0.8, 0.871)
+texture = ExtResource("18_jjx0r")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_q5e28")
+}

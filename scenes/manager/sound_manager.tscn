@@ -1,0 +1,116 @@
+[gd_scene load_steps=21 format=3 uid="uid://batejflfm7jxj"]
+
+[ext_resource type="Script" uid="uid://b2p2bkr2jdfep" path="res://scripts/autoload/sound_manager.gd" id="1_yi7ou"]
+[ext_resource type="AudioStream" uid="uid://u8bbkihmmkhm" path="res://assets/audio/SFX/button/gravebutton.ogg" id="2_fii6r"]
+[ext_resource type="AudioStream" uid="uid://nv855tluacea" path="res://assets/audio/SFX/button/tap.ogg" id="3_fe21t"]
+[ext_resource type="AudioStream" uid="uid://d1c5c5a361hmo" path="res://assets/audio/SFX/button/bleep.ogg" id="4_ucwbp"]
+[ext_resource type="AudioStream" uid="uid://1s53j0jmrhhw" path="res://assets/audio/SFX/button/buttonclick.ogg" id="5_fe21t"]
+[ext_resource type="AudioStream" uid="uid://dre1d3ur70l2l" path="res://assets/audio/SFX/button/pause.ogg" id="6_ucwbp"]
+[ext_resource type="AudioStream" uid="uid://n3ic6bmg215p" path="res://assets/audio/SFX/card_and_shovel/buzzer.ogg" id="7_4fgff"]
+[ext_resource type="AudioStream" uid="uid://c620vqqv8870c" path="res://assets/audio/SFX/card_and_shovel/seedlift.ogg" id="8_utxtf"]
+[ext_resource type="AudioStream" uid="uid://n4wmr0j3vwc1" path="res://assets/audio/SFX/card_and_shovel/tap2.ogg" id="9_lf5h0"]
+[ext_resource type="AudioStream" uid="uid://do856pvspmyl1" path="res://assets/audio/SFX/card_and_shovel/shovel.ogg" id="10_utxtf"]
+[ext_resource type="AudioStream" uid="uid://deucayhb34mcr" path="res://assets/audio/SFX/plant_create/plant2.ogg" id="11_piaj7"]
+[ext_resource type="AudioStream" uid="uid://ddgjatyalqh64" path="res://assets/audio/SFX/plant_create/plant.ogg" id="12_wwqp2"]
+[ext_resource type="AudioStream" uid="uid://ctsw36y6dh7jc" path="res://assets/audio/SFX/plant_create/plantgrow.ogg" id="13_4yrum"]
+[ext_resource type="AudioStream" uid="uid://c4gves1trirtq" path="res://assets/audio/SFX/plant_create/plant_water.ogg" id="14_fsw6k"]
+[ext_resource type="AudioStream" uid="uid://chnyvjitissae" path="res://assets/audio/SFX/button/points.ogg" id="15_wwqp2"]
+[ext_resource type="AudioStream" uid="uid://c6wij2ctf7nhd" path="res://assets/audio/SFX/progress/awooga.ogg" id="16_a6iyi"]
+[ext_resource type="AudioStream" uid="uid://bgq8dbso7wori" path="res://assets/audio/SFX/progress/finalwave.ogg" id="17_4g5ki"]
+[ext_resource type="AudioStream" uid="uid://bimtniv8kkaga" path="res://assets/audio/SFX/progress/hugewave.ogg" id="18_nbotw"]
+[ext_resource type="AudioStream" uid="uid://bs7vp71yx6lgi" path="res://assets/audio/SFX/progress/readysetplant.ogg" id="19_72jt4"]
+[ext_resource type="AudioStream" uid="uid://cvpcoiaeca4ag" path="res://assets/audio/SFX/progress/scream.ogg" id="20_sptjd"]
+
+[node name="SoundManager" type="Node"]
+process_mode = 1
+script = ExtResource("1_yi7ou")
+
+[node name="BGMPlay" type="AudioStreamPlayer" parent="."]
+bus = &"BGM"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="StartMenu" type="Node" parent="SFX"]
+
+[node name="MenuButtonDown" type="AudioStreamPlayer" parent="SFX/StartMenu"]
+stream = ExtResource("2_fii6r")
+bus = &"SFX"
+
+[node name="OtherButtonDown" type="AudioStreamPlayer" parent="SFX/StartMenu"]
+stream = ExtResource("3_fe21t")
+bus = &"SFX"
+
+[node name="ButtonMouseEntered" type="AudioStreamPlayer" parent="SFX/StartMenu"]
+stream = ExtResource("4_ucwbp")
+bus = &"SFX"
+
+[node name="MainGameUI" type="Node" parent="SFX"]
+
+[node name="CheckButton" type="AudioStreamPlayer" parent="SFX/MainGameUI"]
+stream = ExtResource("5_fe21t")
+bus = &"SFX"
+
+[node name="ButtonDown" type="AudioStreamPlayer" parent="SFX/MainGameUI"]
+stream = ExtResource("2_fii6r")
+bus = &"SFX"
+
+[node name="Pause" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_ucwbp")
+bus = &"SFX"
+
+[node name="Card" type="Node" parent="SFX"]
+
+[node name="Error" type="AudioStreamPlayer" parent="SFX/Card"]
+stream = ExtResource("7_4fgff")
+bus = &"SFX"
+
+[node name="Choose" type="AudioStreamPlayer" parent="SFX/Card"]
+stream = ExtResource("8_utxtf")
+bus = &"SFX"
+
+[node name="Back" type="AudioStreamPlayer" parent="SFX/Card"]
+stream = ExtResource("9_lf5h0")
+bus = &"SFX"
+
+[node name="Shovel" type="AudioStreamPlayer" parent="SFX/Card"]
+stream = ExtResource("10_utxtf")
+bus = &"SFX"
+
+[node name="PlantCreate" type="Node" parent="SFX"]
+
+[node name="Plant2" type="AudioStreamPlayer" parent="SFX/PlantCreate"]
+stream = ExtResource("11_piaj7")
+bus = &"SFX"
+
+[node name="Plant1" type="AudioStreamPlayer" parent="SFX/PlantCreate"]
+stream = ExtResource("12_wwqp2")
+bus = &"SFX"
+
+[node name="Plantgrow" type="AudioStreamPlayer" parent="SFX/PlantCreate"]
+stream = ExtResource("13_4yrum")
+bus = &"SFX"
+
+[node name="PlantWater" type="AudioStreamPlayer" parent="SFX/PlantCreate"]
+stream = ExtResource("14_fsw6k")
+bus = &"SFX"
+
+[node name="Points" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("15_wwqp2")
+bus = &"SFX"
+
+[node name="Progress" type="Node" parent="SFX"]
+
+[node name="Awooga" type="AudioStreamPlayer" parent="SFX/Progress"]
+stream = ExtResource("16_a6iyi")
+
+[node name="Finalwave" type="AudioStreamPlayer" parent="SFX/Progress"]
+stream = ExtResource("17_4g5ki")
+
+[node name="Hugewave" type="AudioStreamPlayer" parent="SFX/Progress"]
+stream = ExtResource("18_nbotw")
+
+[node name="Readysetplant" type="AudioStreamPlayer" parent="SFX/Progress"]
+stream = ExtResource("19_72jt4")
+
+[node name="Scream" type="AudioStreamPlayer" parent="SFX/Progress"]
+stream = ExtResource("20_sptjd")

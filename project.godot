@@ -1,0 +1,53 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GodotPVZ-Dream"
+run/main_scene="uid://dc1xvxus2co66"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://scripts/autoload/global.gd"
+SoundManager="*res://scenes/manager/sound_manager.tscn"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/size/always_on_top=true
+window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="GodotPVZ2025"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anim_player_refactor/plugin.cfg", "res://addons/todo_controller/plugin.cfg")
+
+[global_group]
+
+Zombie=""
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Plant"
+2d_physics/layer_3="Zombie"
+2d_physics/layer_4="Bullet"
+2d_physics/layer_5="ZombieInJump"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

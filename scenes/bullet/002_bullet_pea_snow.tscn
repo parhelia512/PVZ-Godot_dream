@@ -1,0 +1,136 @@
+[gd_scene load_steps=22 format=3 uid="uid://7pyu84e1m75l"]
+
+[ext_resource type="Script" uid="uid://dop6hrgp7ssyd" path="res://scripts/bullet/002_bullet_pea_snow.gd" id="1_jwve6"]
+[ext_resource type="Texture2D" uid="uid://barututfhosa7" path="res://assets/image/particles/SnowPea_puff.png" id="2_jsxne"]
+[ext_resource type="Texture2D" uid="uid://m0oy3dctwdwv" path="res://assets/image/projectile/ProjectileSnowPea.png" id="2_pg88q"]
+[ext_resource type="Texture2D" uid="uid://bifx1ttlwu3bw" path="res://assets/image/particles/SnowFlakes.png" id="3_5e53v"]
+[ext_resource type="Texture2D" uid="uid://c54er6fxpmcc8" path="res://assets/image/projectile/pea_shadows.png" id="3_jsxne"]
+[ext_resource type="Script" uid="uid://b0jwg1stuxit2" path="res://scripts/fx/bullet_effect/001_effect_bullet_pea.gd" id="4_5e53v"]
+[ext_resource type="Texture2D" uid="uid://lndqqlaj355d" path="res://assets/image/particles/SnowPea_splats.png" id="5_drsiy"]
+[ext_resource type="Texture2D" uid="uid://b2dna0tdjekah" path="res://assets/image/particles/SnowPea_particles.png" id="6_i27vq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pkkre"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_q3utr"]
+_data = [Vector2(0, 0.52809), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hpcex"]
+curve = SubResource("Curve_q3utr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sjk4b"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 9.67
+angle_min = -180.0
+angle_max = 180.0
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_hpcex")
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j7vtg"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_pkkre"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.16037, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j7vtg"]
+curve = SubResource("Curve_pkkre")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q3utr"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 10.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(-1, 0, 0)
+spread = 20.0
+gravity = Vector3(0, 200, 0)
+scale_min = 0.5
+scale_max = 0.5
+alpha_curve = SubResource("CurveTexture_j7vtg")
+anim_offset_max = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xw0nn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q3utr"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_hpcex"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pddgq"]
+curve = SubResource("Curve_hpcex")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhppk"]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 100, 0)
+scale_curve = SubResource("CurveTexture_pddgq")
+anim_offset_max = 1.0
+
+[node name="BulletPeaSnow" type="Node2D"]
+script = ExtResource("1_jwve6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_pkkre")
+texture = ExtResource("2_jsxne")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_sjk4b")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_j7vtg")
+texture = ExtResource("3_5e53v")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_q3utr")
+
+[node name="PeaBulletBody" type="Sprite2D" parent="."]
+texture = ExtResource("2_pg88q")
+
+[node name="PeaBulletShadow" type="Sprite2D" parent="."]
+position = Vector2(0, 50)
+texture = ExtResource("3_jsxne")
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="." groups=["Zombie"]]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xw0nn")
+
+[node name="BulletEffect" type="Node2D" parent="."]
+visible = false
+script = ExtResource("4_5e53v")
+
+[node name="Splats" type="Sprite2D" parent="BulletEffect"]
+texture = ExtResource("5_drsiy")
+hframes = 4
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BulletEffect"]
+material = SubResource("CanvasItemMaterial_q3utr")
+emitting = false
+amount = 10
+texture = ExtResource("6_i27vq")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yhppk")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
