@@ -17,6 +17,7 @@ func _ready() -> void:
 	
 	_start_rise_timer()
 	
+	## 继承樱桃炸弹，已经设置不眨眼
 
 func _start_rise_timer() -> void:
 	await get_tree().create_timer(bury_time).timeout
@@ -27,6 +28,10 @@ func _start_rise_timer() -> void:
 func _rise_end():
 	is_armed = true
 	is_bomb = false
+	
+	## 开始眨眼
+	is_blink = true
+	blink_timer.start()
 
 func _process(delta):
 	if is_armed:

@@ -30,6 +30,11 @@ var current_tween_id := {}
 @onready var curr_sun_value: Label = $CardBarAndShovel/CardBarBg/SunLabelControl/CurrSunValue
 
 
+@export_group("是否为测试场景")
+@export var is_test := false
+
+
+
 var sun: 
 	get:
 		return sun
@@ -44,11 +49,16 @@ var sun:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sun = start_sun
-	## 初始化待选卡槽
-	_init_CardChooser()
-	## 初始化选择卡槽
-	_init_card_bar()
+	if not is_test:
+		## 初始化待选卡槽
+		_init_CardChooser()
+		## 初始化选择卡槽
+		_init_card_bar()
+	else:
+		for card_placeholder in card_ui_list.get_children():
+			cards.append(card_placeholder.get_node("Card"))
 
+	
 ## 初始化选择卡槽
 func _init_card_bar():
 	for i in range(max_choosed_card_num):
@@ -99,7 +109,6 @@ func _on_card_click(card:Card):
 			card.is_choosed = true
 			cards.append(card)
 			move_card_to(card, cards_placeholder[len(cards)-1])
-	
 	
 # 移动card到目标点位置
 func move_card_to(card:Card, target_parent):

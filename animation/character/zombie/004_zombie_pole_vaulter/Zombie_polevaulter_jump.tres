@@ -1622,3 +1622,15 @@ tracks/132/keys = {
 "update": 0,
 "values": [Vector2(-50, -70), Vector2(-187, -70)]
 }
+tracks/133/type = "value"
+tracks/133/imported = false
+tracks/133/enabled = true
+tracks/133/path = NodePath("Body/shadow:position")
+tracks/133/interp = 1
+tracks/133/loop_wrap = true
+tracks/133/keys = {
+"times": PackedFloat32Array(0, 0.84, 2.74541, 3.58333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(57, 126), Vector2(31, 126), Vector2(-73, 126), Vector2(-82, 126)]
+}

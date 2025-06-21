@@ -1,13 +1,13 @@
 [gd_scene load_steps=22 format=3 uid="uid://7pyu84e1m75l"]
 
 [ext_resource type="Script" uid="uid://dop6hrgp7ssyd" path="res://scripts/bullet/002_bullet_pea_snow.gd" id="1_jwve6"]
-[ext_resource type="Texture2D" uid="uid://barututfhosa7" path="res://assets/image/particles/SnowPea_puff.png" id="2_jsxne"]
+[ext_resource type="Texture2D" uid="uid://barututfhosa7" path="res://assets/image/particles/bullet/SnowPea_puff.png" id="2_jsxne"]
 [ext_resource type="Texture2D" uid="uid://m0oy3dctwdwv" path="res://assets/image/projectile/ProjectileSnowPea.png" id="2_pg88q"]
-[ext_resource type="Texture2D" uid="uid://bifx1ttlwu3bw" path="res://assets/image/particles/SnowFlakes.png" id="3_5e53v"]
+[ext_resource type="Texture2D" uid="uid://bifx1ttlwu3bw" path="res://assets/image/particles/bullet/SnowFlakes.png" id="3_5e53v"]
 [ext_resource type="Texture2D" uid="uid://c54er6fxpmcc8" path="res://assets/image/projectile/pea_shadows.png" id="3_jsxne"]
 [ext_resource type="Script" uid="uid://b0jwg1stuxit2" path="res://scripts/fx/bullet_effect/001_effect_bullet_pea.gd" id="4_5e53v"]
-[ext_resource type="Texture2D" uid="uid://lndqqlaj355d" path="res://assets/image/particles/SnowPea_splats.png" id="5_drsiy"]
-[ext_resource type="Texture2D" uid="uid://b2dna0tdjekah" path="res://assets/image/particles/SnowPea_particles.png" id="6_i27vq"]
+[ext_resource type="Texture2D" uid="uid://lndqqlaj355d" path="res://assets/image/particles/bullet/SnowPea_splats.png" id="5_drsiy"]
+[ext_resource type="Texture2D" uid="uid://b2dna0tdjekah" path="res://assets/image/particles/bullet/SnowPea_particles.png" id="6_i27vq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pkkre"]
 particles_animation = true

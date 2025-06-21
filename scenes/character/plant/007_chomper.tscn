@@ -110,40 +110,40 @@ position = Vector2(33, 76)
 texture = ExtResource("2_4r8se")
 
 [node name="Chomper_groundleaf4" type="Sprite2D" parent="Body"]
-position = Vector2(31.6324, 67.2784)
-rotation = -0.238081
-scale = Vector2(0.639, 0.880468)
+position = Vector2(31.6009, 67.2954)
+rotation = -0.242489
+scale = Vector2(0.639, 0.884991)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Chomper_groundleaf3" type="Sprite2D" parent="Body"]
-position = Vector2(9.04604, 61.0863)
-rotation = 0.227797
-scale = Vector2(0.639, 0.719489)
+position = Vector2(9.1, 60.9963)
+rotation = 0.232049
+scale = Vector2(0.639, 0.721119)
 texture = ExtResource("1_fuck")
 centered = false
 
 [node name="Chomper_stem3" type="Sprite2D" parent="Body"]
-position = Vector2(29.4568, 64.8648)
-rotation = 0.229869
-scale = Vector2(0.795432, 0.868734)
-skew = 6.0511
+position = Vector2(29.5037, 64.7936)
+rotation = 0.232289
+scale = Vector2(0.794972, 0.871184)
+skew = 6.05302
 texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Chomper_stem2" type="Sprite2D" parent="Body"]
-position = Vector2(13.795, 42.0892)
-rotation = 0.243266
-scale = Vector2(0.786863, 0.803403)
-skew = 6.09036
+position = Vector2(14.0174, 42.1028)
+rotation = 0.246331
+scale = Vector2(0.785917, 0.801872)
+skew = 6.09512
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="Chomper_stem1" type="Sprite2D" parent="Body"]
-position = Vector2(13.6302, 31.9568)
-rotation = 0.243266
-scale = Vector2(0.786863, 0.803403)
-skew = 6.09036
+position = Vector2(13.9229, 32.0028)
+rotation = 0.246331
+scale = Vector2(0.785917, 0.801872)
+skew = 6.09512
 texture = ExtResource("4_fuck")
 centered = false
 
@@ -152,74 +152,74 @@ visible = false
 centered = false
 
 [node name="Chomper_groundleaf1" type="Sprite2D" parent="Body"]
-position = Vector2(7.46763, 64.3863)
-rotation = 0.150764
+position = Vector2(7.50184, 64.2945)
+rotation = 0.153797
 scale = Vector2(0.639, 0.639)
 texture = ExtResource("6_fuck")
 centered = false
 
 [node name="Chomper_groundleaf1tip" type="Sprite2D" parent="Body"]
-position = Vector2(-4.03237, 68.8619)
-rotation = 6.45636
-scale = Vector2(0.637108, 0.637108)
-skew = -0.00523595
+position = Vector2(-4.00275, 68.7064)
+rotation = 6.46218
+scale = Vector2(0.637009, 0.637)
+skew = -0.00502769
 texture = ExtResource("7_fuck")
 centered = false
 
 [node name="Chomper_Headleaf4" type="Sprite2D" parent="Body"]
-position = Vector2(16.9842, 38.5352)
-rotation = 5.6014
-scale = Vector2(0.799784, 0.799784)
+position = Vector2(17.2138, 38.6037)
+rotation = 5.59063
+scale = Vector2(0.799982, 0.799982)
 texture = ExtResource("8_fuck")
 centered = false
 
 [node name="Chomper_Headleaf3" type="Sprite2D" parent="Body"]
-position = Vector2(17.2165, 19.6137)
-rotation = 5.6014
-scale = Vector2(0.799784, 0.799784)
+position = Vector2(17.4211, 19.6963)
+rotation = 5.59143
+scale = Vector2(0.799982, 0.799982)
 texture = ExtResource("9_fuck")
 centered = false
 
 [node name="Chomper_Headleaf2" type="Sprite2D" parent="Body"]
-position = Vector2(10.7597, 22.3029)
-rotation = 5.61013
-scale = Vector2(0.799784, 0.799892)
-skew = 0.00872674
+position = Vector2(10.922, 22.3945)
+rotation = 5.60016
+scale = Vector2(0.799982, 0.799991)
+skew = 0.00872679
 texture = ExtResource("10_fuck")
 centered = false
 
 [node name="Chomper_Headleaf1" type="Sprite2D" parent="Body"]
-position = Vector2(9.49496, 35.9597)
-rotation = 5.6014
-scale = Vector2(0.799784, 0.799784)
+position = Vector2(9.71468, 36.1028)
+rotation = 5.59063
+scale = Vector2(0.799982, 0.799982)
 texture = ExtResource("11_fuck")
 centered = false
 
 [node name="Chomper_insidemouth" type="Sprite2D" parent="Body"]
-position = Vector2(32.2842, 24.9194)
-rotation = 5.97308
-scale = Vector2(0.817108, 0.764892)
+position = Vector2(32.5165, 25.2239)
+rotation = 5.97249
+scale = Vector2(0.816991, 0.765009)
 texture = ExtResource("12_fuck")
 centered = false
 
 [node name="Chomper_tongue" type="Sprite2D" parent="Body"]
-position = Vector2(33.8791, 31.0597)
+position = Vector2(34.3349, 31.2119)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("13_fuck")
 centered = false
 
 [node name="Chomper_underjaw" type="Sprite2D" parent="Body"]
-position = Vector2(18.3518, 26.8784)
-rotation = 5.80238
-scale = Vector2(0.748784, 0.734)
+position = Vector2(18.622, 26.9037)
+rotation = 5.80708
+scale = Vector2(0.749018, 0.734)
 texture = ExtResource("14_fuck")
 centered = false
 
 [node name="Chomper_bottomlip" type="Sprite2D" parent="Body"]
-position = Vector2(29.5626, 27.7568)
-rotation = 5.77058
+position = Vector2(29.8211, 27.8037)
+rotation = 5.77569
 scale = Vector2(0.796, 0.796)
-skew = 0.00561307
+skew = 0.00523639
 texture = ExtResource("15_fuck")
 centered = false
 
@@ -232,15 +232,15 @@ visible = false
 centered = false
 
 [node name="Chomper_groundleaf2" type="Sprite2D" parent="Body"]
-position = Vector2(30.8, 67.7892)
-rotation = 0.0804234
+position = Vector2(30.7982, 67.8018)
+rotation = 0.0783478
 scale = Vector2(0.64, 0.64)
 texture = ExtResource("18_fuck")
 centered = false
 
 [node name="Chomper_groundleaf2tip" type="Sprite2D" parent="Body"]
-position = Vector2(52.5108, 74.1432)
-rotation = 0.134667
+position = Vector2(52.5, 74.0972)
+rotation = 0.130628
 scale = Vector2(0.799, 0.799)
 texture = ExtResource("19_fuck")
 centered = false
@@ -250,37 +250,37 @@ visible = false
 centered = false
 
 [node name="Chomper_spike4" type="Sprite2D" parent="Body"]
-position = Vector2(44.5223, -7.87266)
-rotation = 5.80709
+position = Vector2(44.9321, -7.68348)
+rotation = 5.80663
 scale = Vector2(0.798, 0.798)
 texture = ExtResource("20_fuck")
 centered = false
 
 [node name="Chomper_spike3" type="Sprite2D" parent="Body"]
-position = Vector2(32.7439, -1.01871)
-rotation = 5.43066
-scale = Vector2(0.796, 0.796)
+position = Vector2(33.1312, -0.891741)
+rotation = 5.42967
+scale = Vector2(0.795991, 0.795991)
 texture = ExtResource("20_fuck")
 centered = false
 
 [node name="Chomper_spike2" type="Sprite2D" parent="Body"]
-position = Vector2(23.787, 9.51367)
-rotation = 5.07131
+position = Vector2(24.1275, 9.60826)
+rotation = 5.07007
 scale = Vector2(0.795, 0.795)
 texture = ExtResource("20_fuck")
 centered = false
 
 [node name="Chomper_spike1" type="Sprite2D" parent="Body"]
-position = Vector2(19.0518, 20.6568)
+position = Vector2(19.3211, 20.7037)
 rotation = 4.79617
 scale = Vector2(0.795, 0.795)
 texture = ExtResource("20_fuck")
 centered = false
 
 [node name="Chomper_topjaw" type="Sprite2D" parent="Body"]
-position = Vector2(18.5763, 7.35683)
-rotation = 6.00403
-scale = Vector2(0.879108, 0.799)
+position = Vector2(18.9266, 7.40367)
+rotation = 6.00769
+scale = Vector2(0.878991, 0.799)
 texture = ExtResource("21_fuck")
 centered = false
 

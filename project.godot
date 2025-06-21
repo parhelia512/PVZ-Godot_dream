@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GodotPVZ-Dream"
+config/name="GodotPVZ-Dream_me"
 run/main_scene="uid://dc1xvxus2co66"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -33,7 +33,7 @@ project/assembly_name="GodotPVZ2025"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anim_player_refactor/plugin.cfg", "res://addons/todo_controller/plugin.cfg")
+enabled=PackedStringArray("res://addons/R2Ga_PVZ/plugin.cfg", "res://addons/anim_delete_track/plugin.cfg", "res://addons/anim_player_refactor/plugin.cfg", "res://addons/todo_controller/plugin.cfg")
 
 [global_group]
 

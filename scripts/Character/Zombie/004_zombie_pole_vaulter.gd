@@ -1,18 +1,6 @@
 extends ZombieBase
 class_name ZombiePoleVaulter
 
-@onready var _head_sprite:= [
-	$Body/Anim_head1, $Body/Anim_head2, $Body/Anim_hair
-]
-@onready var hand_sprite:= [
-	$Body/Zombie_outerarm_hand, $Body/Zombie_polevaulter_outerarm_lower
-]
-
-@onready var head_drop: Node2D = $Node2D_Head_Drop
-@onready var hand_drop: Node2D = $Node2D_Hand_Drop
-
-# 断手图片
-@export var outerarm_upper2 : Texture2D
 
 @export var is_run := false
 @export var is_jump := false
@@ -58,28 +46,7 @@ func _process(delta):
 			
 	else:
 		super._process(delta)
-		
 
-func _hp_3_stage():
-	_head_fade()
-	
-# 头消失，
-func _head_fade():
-	for head_part in _head_sprite:
-		head_part.visible = false
-	head_drop.acitvate_it()
-	
-	
-func _hp_2_stage():
-	_hand_fade()
-	
-# 下半胳膊消失
-func _hand_fade():
-	for arm_hand_part in hand_sprite:
-		arm_hand_part.visible = false
-	$Body/Zombie_polevaulter_outerarm_upper.texture = outerarm_upper2
-
-	hand_drop.acitvate_it()
 
 # 僵尸跳跃动画结束时调用结束
 func _jump_end():

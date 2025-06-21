@@ -7,3 +7,5 @@ class_name CherryBombBombEffect
 func activate_bomb_effect():
 	gpu_particles_2d_2.emitting = true
 	super.activate_bomb_effect()
+	await get_tree().create_timer(gpu_particles_2d.lifetime/2).timeout
+	$Powie.queue_free()

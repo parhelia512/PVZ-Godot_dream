@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://djer0h3ww0sr5"]
+[gd_scene load_steps=35 format=3 uid="uid://djer0h3ww0sr5"]
 
 [ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="0_fuck"]
 [ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="1_fuck"]
@@ -9,6 +9,7 @@
 [ext_resource type="Animation" uid="uid://b46fv0d5ot0mh" path="res://animation/character/plant/006_snow_pea/SnowPea_head_idle.tres" id="3_anim"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_eievp"]
 [ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="3_fuck"]
+[ext_resource type="Texture2D" uid="uid://0tlhci0f4sea" path="res://assets/reanim/SnowPea_blink2.png" id="4_0wq1v"]
 [ext_resource type="Animation" uid="uid://dedyosdodpdq1" path="res://animation/character/plant/006_snow_pea/SnowPea_idle.tres" id="4_anim"]
 [ext_resource type="Texture2D" uid="uid://bu8g84fe1ni48" path="res://assets/reanim/PeaShooter_stalk_top.png" id="4_fuck"]
 [ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="5_fuck"]
@@ -33,59 +34,51 @@ _data = {
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_gw3lt"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0wq1v"]
+animation = &"SnowPea_head_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ayn0h"]
+animation = &"SnowPea_shooting"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71cka"]
 animation = &"SnowPea_idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eievp"]
-animation = &"SnowPea_head_idle"
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_v32jt"]
+sync = true
+fadein_time = 0.3
+fadeout_time = 0.3
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cm5ch"]
-animation = &"SnowPea_shooting"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_02hqy"]
-break_loop_at_end = true
-advance_mode = 2
-advance_expression = "is_attack
-"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fi5vb"]
-break_loop_at_end = true
-switch_mode = 2
-advance_mode = 2
-advance_expression = "not is_attack"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lldgs"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qy4nm"]
-states/SnowPea_head_idle/node = SubResource("AnimationNodeAnimation_eievp")
-states/SnowPea_head_idle/position = Vector2(398, 56)
-states/SnowPea_shooting/node = SubResource("AnimationNodeAnimation_cm5ch")
-states/SnowPea_shooting/position = Vector2(398, 174)
-states/Start/position = Vector2(121, 130)
-transitions = ["SnowPea_head_idle", "SnowPea_shooting", SubResource("AnimationNodeStateMachineTransition_02hqy"), "SnowPea_shooting", "SnowPea_head_idle", SubResource("AnimationNodeStateMachineTransition_fi5vb"), "Start", "SnowPea_head_idle", SubResource("AnimationNodeStateMachineTransition_lldgs")]
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_uesk8"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_71cka"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bubi1"]
-graph_offset = Vector2(-241.207, 39.637)
+graph_offset = Vector2(-466.407, 93.8339)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_gw3lt")
 nodes/Add2/position = Vector2(160, 160)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_71cka")
 nodes/Animation/position = Vector2(-140, 80)
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qy4nm")
-nodes/StateMachine/position = Vector2(-180, 300)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0wq1v")
+"nodes/Animation 2/position" = Vector2(-380, 280)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ayn0h")
+"nodes/Animation 3/position" = Vector2(-540, 480)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_v32jt")
+nodes/OneShot/position = Vector2(-100, 300)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_71cka")
 nodes/TimeScale/position = Vector2(340, 160)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_uesk8")
+"nodes/TimeScale 2/position" = Vector2(-280, 480)
 nodes/output/position = Vector2(520, 160)
-node_connections = [&"Add2", 0, &"Animation", &"Add2", 1, &"StateMachine", &"TimeScale", 0, &"Add2", &"output", 0, &"TimeScale"]
+node_connections = [&"Add2", 0, &"Animation", &"Add2", 1, &"OneShot", &"OneShot", 0, &"Animation 2", &"OneShot", 1, &"TimeScale 2", &"TimeScale", 0, &"Add2", &"TimeScale 2", 0, &"Animation 3", &"output", 0, &"TimeScale"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw3lt"]
 size = Vector2(50, 60)
 
-[node name="SnowPea" type="Node2D"]
+[node name="SnowPea" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
 script = ExtResource("1_lldgs")
 bullet_pea_scene = ExtResource("2_71cka")
+blink_sprite = NodePath("Body/Anim_stem/stem_correct/Anim_blink")
+blink_sprite_texture = Array[Texture]([ExtResource("13_fuck"), ExtResource("4_0wq1v")])
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2(-43, -45)
@@ -95,101 +88,101 @@ position = Vector2(41, 70)
 texture = ExtResource("3_eievp")
 
 [node name="Backleaf" type="Sprite2D" parent="Body"]
-position = Vector2(27.6, 54.0553)
-scale = Vector2(0.575882, 0.507908)
+position = Vector2(27.7, 53.6807)
+scale = Vector2(0.570228, 0.520737)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
-position = Vector2(24.9, 54.4776)
-rotation = 0.0329552
-scale = Vector2(0.591763, 0.524789)
+position = Vector2(25.0807, 54.3807)
+rotation = 0.0244954
+scale = Vector2(0.581649, 0.533158)
 texture = ExtResource("1_fuck")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(47.5, 53.9105)
-rotation = 0.0180279
-scale = Vector2(0.64008, 0.524789)
+position = Vector2(47.4807, 53.4807)
+rotation = 0.0101351
+scale = Vector2(0.615911, 0.533965)
 texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body"]
-position = Vector2(37.4105, 50.2566)
-rotation = 0.137055
-scale = Vector2(0.558776, 0.680619)
-skew = -0.0469173
+position = Vector2(37.3228, 50.8772)
+rotation = 0.138124
+scale = Vector2(0.558807, 0.625332)
+skew = -0.0471844
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body"]
-position = Vector2(32.8882, 38.1118)
-rotation = 0.121163
-scale = Vector2(0.559329, 0.804856)
-skew = -0.0465272
+position = Vector2(32.9842, 38.0158)
+rotation = 0.122018
+scale = Vector2(0.559421, 0.80556)
+skew = -0.0468478
 texture = ExtResource("4_fuck")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body"]
-position = Vector2(22.4224, 55.0776)
-scale = Vector2(0.569105, 0.534118)
+position = Vector2(22.4193, 55.0614)
+scale = Vector2(0.569228, 0.533965)
 texture = ExtResource("5_fuck")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(55.9224, 56.2553)
-rotation = -0.0971187
-scale = Vector2(0.664514, 0.548447)
+position = Vector2(55.7386, 56.3807)
+rotation = -0.0979202
+scale = Vector2(0.665402, 0.548386)
 texture = ExtResource("6_fuck")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
-position = Vector2(19.5776, 60.9447)
-rotation = 0.0901377
-scale = Vector2(0.601316, 0.548447)
+position = Vector2(19.5, 60.9386)
+rotation = 0.0909392
+scale = Vector2(0.601683, 0.548386)
 texture = ExtResource("7_fuck")
 centered = false
 
 [node name="Anim_stem" type="Sprite2D" parent="Body"]
-position = Vector2(38.9882, 43.5671)
+position = Vector2(39.0035, 43.5579)
 centered = false
 
 [node name="stem_correct" type="Node2D" parent="Body/Anim_stem"]
 position = Vector2(-37.6, -48.7)
 
 [node name="SnowPea_crystals1" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(8.2, 9.74473)
-rotation = 0.0550924
-scale = Vector2(0.601, 0.556211)
-skew = -0.0550924
+position = Vector2(8.03861, 11.4193)
+rotation = -0.0197181
+scale = Vector2(0.600807, 0.557263)
+skew = 0.0140845
 texture = ExtResource("8_fuck")
 centered = false
 
 [node name="SnowPea_crystals2" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(9.3671, 12.7895)
-rotation = 0.0618676
-scale = Vector2(0.60554, 0.532211)
-skew = -0.0686424
+position = Vector2(8.95443, 14.6807)
+rotation = -0.0281686
+scale = Vector2(0.609718, 0.533263)
+skew = 0.0112676
 texture = ExtResource("9_fuck")
 centered = false
 
 [node name="SnowPea_crystals3" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(7.7, 22.4671)
-rotation = -0.0566086
-scale = Vector2(0.551, 0.556211)
-skew = 0.0566086
+position = Vector2(7.7, 24.3)
+rotation = -0.137389
+scale = Vector2(0.555614, 0.55807)
+skew = 0.137389
 texture = ExtResource("10_fuck")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(19.3224, 12.9447)
-scale = Vector2(0.555, 0.569329)
+position = Vector2(19.3193, 12.6772)
+scale = Vector2(0.555, 0.571842)
 texture = ExtResource("11_fuck")
 centered = false
 
 [node name="SnowPea_mouth" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(52.6, 12.8671)
-scale = Vector2(0.555, 0.571658)
+position = Vector2(52.6, 12.6579)
+scale = Vector2(0.555, 0.571842)
 texture = ExtResource("12_fuck")
 centered = false
 
@@ -199,7 +192,7 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
 visible = false
-position = Vector2(37.5, 23.5)
+position = Vector2(37.6926, 19.4994)
 scale = Vector2(0.555, 0.555)
 texture = ExtResource("13_fuck")
 centered = false
@@ -219,7 +212,11 @@ tree_root = SubResource("AnimationNodeBlendTree_bubi1")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.2
+"parameters/TimeScale 2/scale" = 3.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(800, 0)

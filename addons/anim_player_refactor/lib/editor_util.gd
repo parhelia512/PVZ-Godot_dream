@@ -7,7 +7,7 @@ static func find_animation_menu_button(node: Node) -> MenuButton:
 		return find_editor_control_with_class(
 			animation_editor, 
 			"MenuButton", 
-			func(node): return node.text == "Animation" or node.text == "动画"
+			func(node): return node.text == "Animation" or node.text == "动画" 
 		)
 
 	return null

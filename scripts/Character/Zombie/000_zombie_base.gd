@@ -22,7 +22,7 @@ class_name ZombieBase
 @export_group("僵尸状态")
 @export_subgroup("管理僵尸动画")
 @export var is_idle := false
-@export var is_walk := false
+@export var is_walk := true			## 默认为移动状态
 @export var is_attack := false
 @export var is_death := false
 
@@ -34,22 +34,42 @@ class_name ZombieBase
 #region 僵尸防具血量变化
 
 @export_group("僵尸防具血量变化")
-@export var curr_hp_status := 1
+@export_subgroup("血量状态")
+@export var curr_hp_status := 1			## 血量状态
+
+@export var zombie_outerarm_upper: Sprite2D							## 上半胳膊
+@export var zombie_outerarm_upper_sprite2d_textures : Texture2D		## 上半胳膊残血图片
+
+@export var zombie_status_2_fade: Array[Sprite2D]					## 僵尸血量状态2时隐藏精灵图（下半胳膊和手）
+@export var hand_drop: Node2D		## 僵尸掉落的手
+
+@export var zombie_status_3_fade: Array[Sprite2D]					## 僵尸血量状态3时隐藏精灵图（头部）
+@export var head_drop: Node2D		## 僵尸掉落的头
+
+
 @export_subgroup("一类防具状态")
 @export var curr_armor_1_hp_status := 1
+
 @export var armor_first_max_hp := 0
 @export var armor_first_curr_hp : int
 
 @export var armor_1_sprite2d : Sprite2D
 @export var armor_1_sprite2d_textures : Array[Texture2D]
 
+@export var arm_1_drop: Node2D
+
+
 @export_subgroup("二类防具状态")
 @export var curr_armor_2_hp_status := 1
+
 @export var armor_second_max_hp := 0
 @export var armor_second_curr_hp : int
 
 @export var armor_2_sprite2d : Sprite2D
 @export var armor_2_sprite2d_textures : Array[Texture2D]
+
+@export var arm_2_drop: Node2D
+
 #endregion
 
 #region 僵尸移动相关
@@ -172,14 +192,14 @@ func _judge_status_armor_2():
 	# 第一次血量小于1/3
 	elif armor_second_curr_hp <= armor_second_max_hp / 3 and curr_armor_2_hp_status < 3:
 		curr_armor_2_hp_status = 3
-		armor_2_sprite2d.texture = armor_2_sprite2d_textures[0]
+		armor_2_sprite2d.texture = armor_2_sprite2d_textures[1]
 		
 		return 0
 	
 	# 第一次血量小于2/3
 	elif armor_second_curr_hp <= armor_second_max_hp * 2/ 3 and curr_armor_2_hp_status < 2:
 		curr_armor_2_hp_status = 2
-		armor_2_sprite2d.texture = armor_2_sprite2d_textures[1]
+		armor_2_sprite2d.texture = armor_2_sprite2d_textures[0]
 		
 		return 0
 		
@@ -188,7 +208,9 @@ func _judge_status_armor_2():
 
 ## 二类防具掉落
 func arm2_drop():
-	pass
+	arm_2_drop.acitvate_it()
+	
+
 
 ## 有一类防具的情况下判断，掉血前一类防具血量大于0
 func _judge_status_armor_1():
@@ -222,7 +244,7 @@ func _judge_status_armor_1():
 
 ## 一类防具掉落
 func arm1_drop():
-	pass
+	arm_1_drop.acitvate_it()
 	
 
 	
@@ -291,13 +313,34 @@ func judge_status():
 		curr_hp_status = 2
 		_hp_2_stage()
 		
-## 第一次血量2阶段变化
+## 第一次血量2阶段变化 掉手状态
 func _hp_2_stage():
-	pass
+	_hand_fade()
 
-## 第一次血量3阶段变化
+# 下半胳膊消失
+func _hand_fade():
+	## 隐藏下半胳膊
+	for arm_hand_part in zombie_status_2_fade:
+		arm_hand_part.visible = false
+	## 掉落下半胳膊
+	hand_drop.acitvate_it()
+	
+	## 修改上半胳膊图片（残血图片）
+	zombie_outerarm_upper.texture = zombie_outerarm_upper_sprite2d_textures
+	
+
+## 第一次血量3阶段变化 掉头状态
 func _hp_3_stage():
-	pass
+	_head_fade()
+	
+# 头消失，
+func _head_fade():
+	# SFX 僵尸头掉落
+	$SFX/Shoop.play()
+	for head_part in zombie_status_3_fade:
+		head_part.visible = false
+		
+	head_drop.acitvate_it()
 #endregion
 #endregion
 
@@ -309,6 +352,7 @@ func _attack_once():
 			# 获取Area2D的父节点
 			var parent_node = collider.get_parent()
 			if parent_node is PlantBase:
+				get_node("SFX/Chomp").play()
 				parent_node.be_attacked(attack_value)
 
 

@@ -4,7 +4,46 @@ class_name PlantBase
 var be_shovel_look_color := Color(1, 1, 1)
 @onready var bullets: Node2D = get_tree().current_scene.get_node("Bullets")
 
+@export_group("植物眨眼相关")
+@export var blink_sprite:Sprite2D				## 控制idle状态下植物眨眼
+@export var blink_sprite_texture:Array[Texture]	## 控制植物眨眼纹理图片
 
+var blink_timer :Timer	## 眨眼计时器
+
+@export_group("动画状态是否可以眨眼,is_blink才会眨眼")
+@export var is_blink := true
+
+
+func _ready() -> void:
+	super._ready()
+	if blink_timer == null:
+		# 创建 Timer 节点
+		blink_timer = Timer.new()
+		blink_timer.name = "BlinkTimer"
+		blink_timer.wait_time = 5.0
+		blink_timer.one_shot = false
+		blink_timer.autostart = true
+		add_child(blink_timer)
+	# 连接 timeout 信号到函数
+	blink_timer.timeout.connect(_on_blink_timer_timeout)
+
+
+func _on_blink_timer_timeout() -> void:
+	## is_blink状态下眨眼
+	if is_blink:
+		do_blink()
+	
+	
+func do_blink() -> void:
+	blink_sprite.visible = true
+	blink_sprite.texture = blink_sprite_texture[0]
+	await get_tree().create_timer(0.1).timeout
+	blink_sprite.texture = blink_sprite_texture[1]
+	await get_tree().create_timer(0.1).timeout
+	blink_sprite.texture = blink_sprite_texture[0]
+	await get_tree().create_timer(0.1).timeout
+	blink_sprite.visible = false
+	
 
 # 重写父类改变颜色方法
 func _update_modulate():

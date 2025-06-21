@@ -38,16 +38,29 @@ class_name MainGameManager
 
 var start_game:=false
 
+
+@export_group("是否为测试场景")
+@export var is_test := false
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SoundManager.play_bgm(bgm_choose_card)
-	zombie_manager.show_zombie_create()
+	if not is_test:
+		SoundManager.play_bgm(bgm_choose_card)
+		zombie_manager.show_zombie_create()
+		
+		await get_tree().create_timer(1.0).timeout
+		await start_game_move_camera()
+		card_manager.move_card_bar(true)
+		card_manager.move_card_chooser(true)
 	
-	await get_tree().create_timer(1.0).timeout
-	await start_game_move_camera()
-	card_manager.move_card_bar(true)
-	card_manager.move_card_chooser(true)
-	
+	else:
+		# TODO： 修改这部分代码
+		await get_tree().create_timer(0.1).timeout
+		# 设置信号连接
+		SoundManager.play_bgm(bgm_main_game)
+		hamd_manager.card_game_signal_connect(card_manager.cards, card_manager.shovel_bg)
+
 	
 	
 func cheeosed_card_start_game():
@@ -79,8 +92,7 @@ func cheeosed_card_start_game():
 		SoundManager.play_bgm(bgm_main_game)
 		# 开始天降阳光
 		day_suns.start_day_sun()
-		# 开始刷新僵尸
-		
+		# 开始刷新僵尸		
 		await get_tree().create_timer(10).timeout
 		zombie_manager.start_first_wave()
 		flag_progress_bar.visible = true

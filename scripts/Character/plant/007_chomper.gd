@@ -20,6 +20,10 @@ func _ready() -> void:
 	timer.wait_time = eat_CD
 	timer.one_shot = true  # 单次执行
 	timer.timeout.connect(_eat_end)  # 无参数
+	
+	blink_timer.stop()
+	is_blink = false
+	
 
 # 检测是否有僵尸
 func _process(delta):

@@ -106,6 +106,7 @@ enum ZombieType {
 	ZombieCone, 
 	ZombiePoleVaulter,
 	ZombieBucket,
+	ZombiePaper
 	}
 
 var ZombieTypeSceneMap = {
@@ -114,6 +115,7 @@ var ZombieTypeSceneMap = {
 	ZombieType.ZombieCone: preload("res://scenes/character/zombie/003_zombie_cone.tscn"),
 	ZombieType.ZombiePoleVaulter: preload("res://scenes/character/zombie/004_zombie_pole_vaulter.tscn"),
 	ZombieType.ZombieBucket: preload("res://scenes/character/zombie/005_zombie_bucket.tscn"),
+	ZombieType.ZombiePaper: preload("res://scenes/character/zombie/006_zombie_paper.tscn"),
 }
 
 ## 普通，穿透，真实

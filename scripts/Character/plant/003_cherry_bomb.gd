@@ -8,6 +8,14 @@ class_name CherryBomb
 
 # 爆炸检测碰撞体
 @onready var area_2d_2: Area2D = $Area2D2
+
+func _ready() -> void:
+	super._ready()
+	## 櫻桃炸弹不咋眼
+	is_blink = false
+	blink_timer.stop()
+	
+
 # 爆炸效果
 func _bomb_particle():
 	# SFX 爆炸植物死亡后销毁，将音效节点移至soundmanager

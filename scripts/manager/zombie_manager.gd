@@ -47,7 +47,8 @@ var zombie_power = {
 	Global.ZombieType.ZombieFlag: 1,        # 旗帜战力
 	Global.ZombieType.ZombieCone: 2,        # 路障战力
 	Global.ZombieType.ZombiePoleVaulter: 2, # 撑杆战力
-	Global.ZombieType.ZombieBucket: 4       # 铁桶战力
+	Global.ZombieType.ZombieBucket: 4,      # 铁桶战力
+	Global.ZombieType.ZombiePaper: 4       # 读报战力
 }
 
 # 创建 zombie_weights 字典，存储初始权重
@@ -56,7 +57,8 @@ var zombie_weights = {
 	Global.ZombieType.ZombieFlag: 0,           # 旗帜权重
 	Global.ZombieType.ZombieCone: 4000,        # 路障权重
 	Global.ZombieType.ZombiePoleVaulter: 2000,  # 撑杆权重
-	Global.ZombieType.ZombieBucket: 3000       # 铁桶权重
+	Global.ZombieType.ZombieBucket: 3000,       # 铁桶权重
+	Global.ZombieType.ZombiePaper: 3000       # 读报权重
 }
 
 
@@ -66,7 +68,9 @@ var zombie_weights = {
 	#Global.ZombieType.ZombieFlag,       # 旗帜僵尸
 	Global.ZombieType.ZombieCone,       # 路障僵尸
 	Global.ZombieType.ZombiePoleVaulter, # 撑杆僵尸
-	Global.ZombieType.ZombieBucket      # 铁桶僵尸
+	Global.ZombieType.ZombieBucket,      # 铁桶僵尸
+	Global.ZombieType.ZombiePaper      # 读报僵尸
+	
 ]
 #endregion
 
@@ -270,6 +274,7 @@ func spawn_wave_zombies(zombie_data: Array) -> void:
 		zombie.zombie_damaged.connect(_on_zombie_damaged)
 		zombie.zombie_dead.connect(_on_zombie_dead)
 		zombie.curr_wave = current_wave
+		zombie.is_idle = false
 		if zombie.zombie_type == Global.ZombieType.ZombieFlag:
 			print("旗帜僵尸")
 			zombie.position.x = -20

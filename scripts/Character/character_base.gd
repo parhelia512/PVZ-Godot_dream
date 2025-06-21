@@ -33,9 +33,9 @@ func _ready() -> void:
 	animation_origin_speed *= animation_speed_random
 	animation_tree.set("parameters/TimeScale/scale", animation_origin_speed)
 	
-	
 	# 创建减速计时器
 	decelerate_timer = Timer.new()
+	decelerate_timer.name = "decelerate_timer"
 	decelerate_timer.one_shot = true
 	add_child(decelerate_timer)
 	decelerate_timer.timeout.connect(_on_timer_timeout_time_decelerate)

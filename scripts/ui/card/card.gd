@@ -16,6 +16,14 @@ var is_sun_enough: bool				# 阳光是否足够
 @export var card_in_seed_chooser:CardInSeedChooser
 ## 种植植物时发送点击信号,使用这个信号控制种植植物
 signal card_click		#点击信号
+@export var is_test:= false
+
+
+func _ready() -> void:
+	if is_test:
+		super.card_init(card_type)
+		init_game_card()
+		_cool_mask.max_value = cool_time
 
 
 func card_init(card_type: Global.PlantType):
@@ -29,6 +37,7 @@ func card_init(card_type: Global.PlantType):
 func init_game_card():
 	is_game = true
 	_cool_mask.visible = true
+	_is_cooling = true
 	
 ## 卡片冷卻
 func _process(delta: float) -> void:

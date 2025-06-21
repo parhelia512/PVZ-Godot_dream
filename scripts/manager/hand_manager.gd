@@ -29,6 +29,9 @@ var new_plant_static_in_cell := false	# 植物是否在cell中
 ## 柱子模式 
 var new_plant_static_shadow_colum : Array 
 
+## 植物种植泥土粒子特效
+const PlantStartEffectScene = preload("res://scenes/character/plant/plant_start_effect.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# 植物种植区域信号，更新植物位置列号
@@ -105,23 +108,12 @@ func _on_click_cell(plant_cell:PlantCell):
 				if plant_cell_row_col.is_plant:
 					continue
 				# 创建植物
-				var new_plant = Global.PlantTypeSceneMap.get(curr_card.card_type).instantiate()
-				
-				plant_cell_row_col.add_child(new_plant)
-				new_plant.global_position = plant_cell_row_col.plant_position.global_position
-				
-				plant_cell_row_col.is_plant = true
-				plant_cell_row_col.plant = new_plant
+				_create_new_plant(curr_card.card_type, plant_cell_row_col)
 		
 				
 		else:
 			# 创建植物
-			var new_plant = Global.PlantTypeSceneMap.get(curr_card.card_type).instantiate()
-			plant_cell.add_child(new_plant)
-			new_plant.global_position = plant_cell.plant_position.global_position
-			
-			plant_cell.is_plant = true
-			plant_cell.plant = new_plant
+			_create_new_plant(curr_card.card_type, plant_cell)
 		
 		
 		# 减少阳光，卡片冷却
@@ -136,6 +128,19 @@ func _on_click_cell(plant_cell:PlantCell):
 		SoundManager.play_sfx("PlantCreate/Plant2")
 		plant_be_shovel_look.be_shovel_kill()
 		_cance_shovel_or_end()
+		
+func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
+	# 创建植物
+	var new_plant = Global.PlantTypeSceneMap.get(plant_type).instantiate()
+	plant_cell.add_child(new_plant)
+	new_plant.global_position = plant_cell.plant_position.global_position
+	
+	plant_cell.is_plant = true
+	plant_cell.plant = new_plant
+	
+	var plant_start_effect_scene = PlantStartEffectScene.instantiate()
+	new_plant.add_child(plant_start_effect_scene)
+
 		
 # 鼠标进入cell
 func _on_cell_mouse_enter(plant_cell:PlantCell):
