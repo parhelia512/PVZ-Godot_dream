@@ -1,0 +1,2 @@
+extends ZombieNorm
+class_name ZombieCone

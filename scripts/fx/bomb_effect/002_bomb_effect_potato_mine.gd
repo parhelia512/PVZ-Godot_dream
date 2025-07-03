@@ -1,0 +1,2 @@
+extends BombEffectBase
+class_name PotatoMineBombEffect

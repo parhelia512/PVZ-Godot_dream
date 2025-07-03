@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://diwpbhs80tudu"]
+
+[ext_resource type="Script" uid="uid://bev10k0po7nhh" path="res://scripts/character/zombie/009_dancer_manager.gd" id="1_5vs8p"]
+
+[sub_resource type="Animation" id="Animation_20c57"]
+length = 0.833342
+step = 0.0833333
+
+[sub_resource type="Animation" id="Animation_5a5kd"]
+resource_name = "armraise_ed"
+length = 0.416675
+step = 0.0833333
+
+[sub_resource type="Animation" id="Animation_uxgga"]
+length = 2.16668
+step = 0.0833333
+
+[sub_resource type="Animation" id="Animation_vxobb"]
+length = 0.750008
+step = 0.0833333
+
+[sub_resource type="Animation" id="Animation_0mrgh"]
+resource_name = "walk"
+length = 1.66668
+step = 0.0833333
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vqi7n"]
+_data = {
+&"armraise": SubResource("Animation_20c57"),
+&"armraise_end": SubResource("Animation_5a5kd"),
+&"moonwalk": SubResource("Animation_uxgga"),
+&"point": SubResource("Animation_vxobb"),
+&"walk": SubResource("Animation_0mrgh")
+}
+
+[node name="DancerManager" type="Node2D"]
+script = ExtResource("1_5vs8p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vqi7n")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

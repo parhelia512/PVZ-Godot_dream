@@ -1,0 +1,323 @@
+[gd_scene load_steps=41 format=3 uid="uid://dulx8ig3l2wwf"]
+
+[ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="0_fuck"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_0g7ir"]
+[ext_resource type="Script" uid="uid://b7l064m65kktw" path="res://scripts/character/plant/002_sun_flower.gd" id="1_7302k"]
+[ext_resource type="Animation" uid="uid://b1ck53g20rabf" path="res://animation/character/plant/002_sun_flower/SunFlower_idle.tres" id="1_anim"]
+[ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="1_fuck"]
+[ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="2_fuck"]
+[ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="3_fuck"]
+[ext_resource type="Texture2D" uid="uid://bu8g84fe1ni48" path="res://assets/reanim/PeaShooter_stalk_top.png" id="4_fuck"]
+[ext_resource type="Texture2D" uid="uid://cyuub21d8s1ih" path="res://assets/reanim/SunFlower_blink1.png" id="4_l2hr3"]
+[ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="5_fuck"]
+[ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="6_fuck"]
+[ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="7_fuck"]
+[ext_resource type="Texture2D" uid="uid://cqimtpo6uxpvv" path="res://assets/reanim/SunFlower_leftpetal8.png" id="8_fuck"]
+[ext_resource type="Texture2D" uid="uid://dba05af6m14qb" path="res://assets/reanim/SunFlower_leftpetal7.png" id="9_fuck"]
+[ext_resource type="Texture2D" uid="uid://f43xv0aun5yb" path="res://assets/reanim/SunFlower_leftpetal6.png" id="10_fuck"]
+[ext_resource type="Texture2D" uid="uid://df06anw7nt00g" path="res://assets/reanim/SunFlower_leftpetal5.png" id="11_fuck"]
+[ext_resource type="Texture2D" uid="uid://csycwxx4kl7gc" path="res://assets/reanim/SunFlower_leftpetal4.png" id="12_fuck"]
+[ext_resource type="Texture2D" uid="uid://coqi3vpwq3dft" path="res://assets/reanim/SunFlower_leftpetal3.png" id="13_fuck"]
+[ext_resource type="Texture2D" uid="uid://dj5sy8aolaots" path="res://assets/reanim/SunFlower_leftpetal2.png" id="14_fuck"]
+[ext_resource type="Texture2D" uid="uid://c88ujwcx255a7" path="res://assets/reanim/SunFlower_leftpetal1.png" id="15_fuck"]
+[ext_resource type="Texture2D" uid="uid://c33g6guw6tx2v" path="res://assets/reanim/SunFlower_bottompetals.png" id="16_fuck"]
+[ext_resource type="Texture2D" uid="uid://dl82be6txvuxn" path="res://assets/reanim/SunFlower_rightpetal9.png" id="17_fuck"]
+[ext_resource type="Texture2D" uid="uid://bg2vmisbxbjaj" path="res://assets/reanim/SunFlower_rightpetal8.png" id="18_fuck"]
+[ext_resource type="Texture2D" uid="uid://vov3fyb78wmx" path="res://assets/reanim/SunFlower_rightpetal7.png" id="19_fuck"]
+[ext_resource type="Texture2D" uid="uid://bv60pjqhu0vxm" path="res://assets/reanim/SunFlower_rightpetal6.png" id="20_fuck"]
+[ext_resource type="Texture2D" uid="uid://bnb4xvrduvnxl" path="res://assets/reanim/SunFlower_rightpetal5.png" id="21_fuck"]
+[ext_resource type="Texture2D" uid="uid://bds7y48b8uyoq" path="res://assets/reanim/SunFlower_rightpetal4.png" id="22_fuck"]
+[ext_resource type="Texture2D" uid="uid://c36k2lh6ryu1i" path="res://assets/reanim/SunFlower_rightpetal3.png" id="23_fuck"]
+[ext_resource type="Texture2D" uid="uid://b0k8h0fw04b17" path="res://assets/reanim/SunFlower_rightpetal2.png" id="24_fuck"]
+[ext_resource type="Texture2D" uid="uid://2mhgcxn85ix5" path="res://assets/reanim/SunFlower_rightpetal1.png" id="25_fuck"]
+[ext_resource type="Texture2D" uid="uid://cnigbyvgwk626" path="res://assets/reanim/SunFlower_toppetals.png" id="26_fuck"]
+[ext_resource type="Texture2D" uid="uid://cu06igj1jmdy" path="res://assets/reanim/SunFlower_head.png" id="27_fuck"]
+[ext_resource type="Texture2D" uid="uid://6sig2vr6hn5j" path="res://assets/reanim/SunFlower_blink2.png" id="28_fuck"]
+[ext_resource type="PackedScene" uid="uid://f0wyiq6h4jnl" path="res://scenes/item/game_scenes_item/sun.tscn" id="32_3ucv5"]
+[ext_resource type="AudioStream" uid="uid://bhtavkuui5a5i" path="res://assets/audio/SFX/plant/throw1.ogg" id="34_labfc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrlnw"]
+size = Vector2(50, 60)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p20s5"]
+_data = {
+&"SunFlower_idle": ExtResource("1_anim")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ucv5"]
+animation = &"SunFlower_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_pq6s2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dlkuj"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3ucv5")
+nodes/Animation/position = Vector2(320, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_pq6s2")
+nodes/TimeScale/position = Vector2(660, 140)
+nodes/output/position = Vector2(840, 140)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="SunFlower" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
+script = ExtResource("1_7302k")
+sun_scene = ExtResource("32_3ucv5")
+blink_sprite = NodePath("Body/Anim_blink")
+blink_sprite_texture = Array[Texture]([ExtResource("28_fuck"), ExtResource("4_l2hr3")])
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-43, -45)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("1_0g7ir")
+
+[node name="Backleaf" type="Sprite2D" parent="Body"]
+position = Vector2(27.5, 54.1134)
+scale = Vector2(0.606866, 0.512496)
+texture = ExtResource("0_fuck")
+centered = false
+
+[node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(24.0067, 55.9034)
+rotation = -0.14561
+scale = Vector2(0.658697, 0.602126)
+skew = 0.0522428
+texture = ExtResource("1_fuck")
+centered = false
+
+[node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(48.4966, 53.9067)
+rotation = 0.161553
+scale = Vector2(0.640168, 0.562328)
+skew = -0.0520669
+texture = ExtResource("2_fuck")
+centered = false
+
+[node name="Stalk_bottom" type="Sprite2D" parent="Body"]
+position = Vector2(42.3731, 50.3966)
+rotation = 0.652034
+scale = Vector2(0.566933, 0.629168)
+skew = -0.233053
+texture = ExtResource("3_fuck")
+centered = false
+
+[node name="Stalk_top" type="Sprite2D" parent="Body"]
+position = Vector2(43.9361, 38.9731)
+rotation = 0.409331
+scale = Vector2(0.532471, 0.785303)
+skew = 0.125179
+texture = ExtResource("4_fuck")
+centered = false
+
+[node name="Frontleaf" type="Sprite2D" parent="Body"]
+position = Vector2(21.7034, 56.4765)
+scale = Vector2(0.599832, 0.48784)
+texture = ExtResource("5_fuck")
+centered = false
+
+[node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(57.8866, 57.0832)
+rotation = -0.000821479
+scale = Vector2(0.600706, 0.535672)
+texture = ExtResource("6_fuck")
+centered = false
+
+[node name="Frontleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(18.2034, 62.4798)
+rotation = -0.0980171
+scale = Vector2(0.580437, 0.58237)
+skew = -0.00349039
+texture = ExtResource("7_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal8" type="Sprite2D" parent="Body"]
+position = Vector2(33.8731, 47.1966)
+rotation = 0.0207093
+scale = Vector2(0.8, 0.914009)
+skew = -0.0207093
+texture = ExtResource("8_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal7" type="Sprite2D" parent="Body"]
+position = Vector2(25.6731, 44.037)
+rotation = 0.016426
+scale = Vector2(1.00024, 0.955026)
+skew = -0.016426
+texture = ExtResource("9_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal6" type="Sprite2D" parent="Body"]
+position = Vector2(20.3, 39.7471)
+rotation = 0.0167193
+scale = Vector2(0.800168, 0.823731)
+skew = -0.0167193
+texture = ExtResource("10_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal5" type="Sprite2D" parent="Body"]
+position = Vector2(17.0765, 33.4975)
+rotation = 0.0167193
+scale = Vector2(0.800168, 0.823731)
+skew = -0.0167193
+texture = ExtResource("11_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal4" type="Sprite2D" parent="Body"]
+position = Vector2(19.4765, 25.2874)
+rotation = 0.0167193
+scale = Vector2(0.800168, 0.823731)
+skew = -0.0167193
+texture = ExtResource("12_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal3" type="Sprite2D" parent="Body"]
+position = Vector2(23.7731, 18.874)
+rotation = 0.0167193
+scale = Vector2(0.800168, 0.823731)
+skew = -0.0167193
+texture = ExtResource("13_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal2" type="Sprite2D" parent="Body"]
+position = Vector2(30.8765, 14.4706)
+rotation = 0.0167193
+scale = Vector2(1.0002, 1.03063)
+skew = -0.0167193
+texture = ExtResource("14_fuck")
+centered = false
+
+[node name="SunFlower_leftpetal1" type="Sprite2D" parent="Body"]
+position = Vector2(37.1765, 13.4235)
+rotation = 0.0207093
+scale = Vector2(0.8, 0.823731)
+skew = -0.0207093
+texture = ExtResource("15_fuck")
+centered = false
+
+[node name="SunFlower_bottompetals" type="Sprite2D" parent="Body"]
+position = Vector2(41.5832, 47.9933)
+rotation = 0.0207093
+scale = Vector2(0.8, 0.873378)
+skew = -0.0207093
+texture = ExtResource("16_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal9" type="Sprite2D" parent="Body"]
+position = Vector2(54.5798, 48.0899)
+rotation = 0.0207093
+scale = Vector2(0.8, 0.818916)
+skew = -0.0207093
+texture = ExtResource("17_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal8" type="Sprite2D" parent="Body"]
+position = Vector2(59.4731, 45.0765)
+rotation = 0.0243472
+scale = Vector2(0.800202, 0.932807)
+skew = -0.0243472
+texture = ExtResource("18_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal7" type="Sprite2D" parent="Body"]
+position = Vector2(62.5832, 41.8067)
+rotation = 0.0240538
+scale = Vector2(0.800168, 0.961151)
+skew = -0.0240538
+texture = ExtResource("19_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal6" type="Sprite2D" parent="Body"]
+position = Vector2(67.6697, 37.8202)
+rotation = -0.0889519
+scale = Vector2(0.804034, 1.05608)
+skew = 0.0889519
+texture = ExtResource("20_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal5" type="Sprite2D" parent="Body"]
+position = Vector2(69.7731, 32.8269)
+rotation = 0.0240538
+scale = Vector2(0.800168, 0.823731)
+skew = -0.0240538
+texture = ExtResource("21_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal4" type="Sprite2D" parent="Body"]
+position = Vector2(67.9731, 23.9269)
+rotation = 0.0240538
+scale = Vector2(1.00024, 1.03063)
+skew = -0.0240538
+texture = ExtResource("22_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal3" type="Sprite2D" parent="Body"]
+position = Vector2(63.4798, 20.6067)
+rotation = 0.0240538
+scale = Vector2(1.00024, 1.03063)
+skew = -0.0240538
+texture = ExtResource("23_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal2" type="Sprite2D" parent="Body"]
+position = Vector2(59.2731, 16.7235)
+rotation = 0.0240538
+scale = Vector2(0.800168, 0.823731)
+skew = -0.0240538
+texture = ExtResource("24_fuck")
+centered = false
+
+[node name="SunFlower_rightpetal1" type="Sprite2D" parent="Body"]
+position = Vector2(53.9765, 14.3269)
+rotation = 0.0207093
+scale = Vector2(0.8, 0.823731)
+skew = -0.0207093
+texture = ExtResource("25_fuck")
+centered = false
+
+[node name="SunFlower_toppetals" type="Sprite2D" parent="Body"]
+position = Vector2(43.3731, 13.5235)
+rotation = 0.0207093
+scale = Vector2(0.8, 0.823731)
+skew = -0.0207093
+texture = ExtResource("26_fuck")
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(25.8731, 20.1597)
+scale = Vector2(0.8, 0.712975)
+texture = ExtResource("27_fuck")
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(38.9496, 25.9664)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("28_fuck")
+centered = false
+
+[node name="Sun" type="Node2D" parent="."]
+position = Vector2(-1, -11)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yrlnw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p20s5")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_dlkuj")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.2
+
+[node name="ProductionTimer" type="Timer" parent="."]
+
+[node name="Throw" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("34_labfc")
+bus = &"SFX"

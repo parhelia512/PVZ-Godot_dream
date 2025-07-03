@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="NodeConfig" load_steps=4 format=3 uid="uid://b8mcvr3yf1ru8"]
+
+[ext_resource type="Script" uid="uid://cg66vr4xagg24" path="res://scripts/character/zombie/001_zombie_norm.gd" id="1_a6tbn"]
+[ext_resource type="Texture2D" uid="uid://ctf3e40px7dxf" path="res://assets/image/damage/Zombie_outerarm_upper2.png" id="2_tfqbh"]
+[ext_resource type="Script" uid="uid://chcjfe7crb4yo" path="res://addons/node_presetting/resource/node_config.gd" id="3_dps2m"]
+
+[resource]
+script = ExtResource("3_dps2m")
+node_data = {
+"_import_path": NodePath(""),
+"animation_origin_speed": 0.0,
+"animation_speed_random": 0.0,
+"area2d_free": false,
+"arm_1_drop": null,
+"arm_2_drop": null,
+"armor_1_sprite2d": null,
+"armor_1_sprite2d_textures": Array[Texture2D]([]),
+"armor_2_sprite2d": null,
+"armor_2_sprite2d_textures": Array[Texture2D]([]),
+"armor_first_curr_hp": 0,
+"armor_first_max_hp": 0,
+"armor_second_curr_hp": 0,
+"armor_second_max_hp": 0,
+"attack_value": 25,
+"auto_translate_mode": 0,
+"be_bullet_SFX_is_shield_first": false,
+"be_bullet_SFX_is_shield_second": false,
+"clip_children": 0,
+"curr_Hp": 270,
+"curr_armor_1_hp_status": 1,
+"curr_armor_2_hp_status": 1,
+"curr_hp_status": 1,
+"curr_wave": -1,
+"death_status": 1,
+"death_status_max": 2,
+"editor_description": "",
+"global_position": Vector2(0, 0),
+"global_rotation": 0.0,
+"global_rotation_degrees": 0.0,
+"global_scale": Vector2(1, 1),
+"global_skew": 0.0,
+"global_transform": Transform2D(1, 0, 0, 1, 0, 0),
+"hand_drop": Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":Resource("res://scripts/character/zombie/drop/ZombieHandDrop.gd"),"drop_body":null,"ground_y":50.0,"x_v":0.0,"rotation_speed":0.0,"bounce_damping":0.5)
+,
+"head_drop": Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":Resource("res://scripts/character/zombie/drop/ZombieHeadDrop.gd"),"drop_body":null,"ground_y":50.0,"x_v":0.0,"rotation_speed":0.0,"bounce_damping":0.5)
+,
+"idle_status": 1,
+"idle_status_max": 2,
+"is_attack": false,
+"is_death": false,
+"is_idle": false,
+"is_walk": true,
+"lane": 0,
+"light_mask": 1,
+"material": null,
+"max_hp": 270,
+"modulate": Color(1, 1, 1, 1),
+"physics_interpolation_mode": 0,
+"position": Vector2(0, 0),
+"process_mode": 0,
+"process_physics_priority": 0,
+"process_priority": 0,
+"process_thread_group": 0,
+"process_thread_group_order": 0,
+"process_thread_messages": 0,
+"rotation": 0.0,
+"rotation_degrees": 0.0,
+"scale": Vector2(1, 1),
+"script": ExtResource("1_a6tbn"),
+"self_modulate": Color(1, 1, 1, 1),
+"show_behind_parent": false,
+"skew": 0.0,
+"texture_filter": 0,
+"texture_repeat": 0,
+"top_level": false,
+"transform": Transform2D(1, 0, 0, 1, 0, 0),
+"unique_name_in_owner": false,
+"use_parent_material": false,
+"visibility_layer": 1,
+"visible": true,
+"walk_status": 2,
+"walk_status_max": 2,
+"walking_status": 0,
+"y_sort_enabled": false,
+"z_as_relative": true,
+"z_index": 0,
+"zombie_outerarm_upper": Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(41.2161, 40.2902),"rotation":6.23083,"scale":Vector2(0.799, 0.799),"skew":3e-07,"texture":Resource("res://assets/reanim/Zombie_outerarm_upper.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+,
+"zombie_outerarm_upper_sprite2d_textures": ExtResource("2_tfqbh"),
+"zombie_status_2_fade": Array[Sprite2D]([Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(41.2161, 40.2902),"rotation":6.23083,"scale":Vector2(0.799, 0.799),"skew":3e-07,"texture":Resource("res://assets/reanim/Zombie_outerarm_upper.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+, Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(31.158, 76.5868),"rotation":6.5061,"scale":Vector2(0.798, 0.798),"skew":-3.21823e-08,"texture":Resource("res://assets/reanim/Zombie_outerarm_hand.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+]),
+"zombie_status_3_fade": Array[Sprite2D]([Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(6.68391, 6.54827),"rotation":0.0161597,"scale":Vector2(0.8, 0.8),"skew":-4e-07,"texture":Resource("res://assets/reanim/Zombie_head.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+, Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(12.942, 39.7161),"rotation":-0.06886,"scale":Vector2(0.799, 0.799),"skew":-3.25863e-07,"texture":Resource("res://assets/reanim/Zombie_jaw.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+, Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(20, 40.9902),"rotation":6.22779,"scale":Vector2(0.79858, 0.672),"skew":3e-07,"texture":Resource("res://assets/reanim/Zombie_tongue.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+, Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(2.62586, 3.90632),"rotation":0.0161597,"scale":Vector2(0.8, 0.8),"skew":-4e-07,"texture":Resource("res://assets/reanim/Zombie_hair.png"),"centered":false,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+]),
+"zombie_type": 0
+}
