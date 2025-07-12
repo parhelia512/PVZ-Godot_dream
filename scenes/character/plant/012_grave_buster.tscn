@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://b7jju4jbc2sbt"]
+[gd_scene load_steps=33 format=3 uid="uid://b7jju4jbc2sbt"]
 
 [ext_resource type="Script" uid="uid://by1gk80c6jfdn" path="res://scripts/character/plant/012_grave_buster.gd" id="1_r7722"]
 [ext_resource type="Texture2D" uid="uid://byhmiftp3dmop" path="res://assets/reanim/Gravebuster_tooth2.png" id="2_0j1c7"]
+[ext_resource type="Resource" uid="uid://c7xmmg5qf31r" path="res://resources/plant_resource/plant_condition/012_grave_buster.tres" id="2_l2emo"]
 [ext_resource type="Animation" uid="uid://27xv57h73g43" path="res://animation/character/plant/012_Grave_buster/Gravebuster_idle.tres" id="2_xp7lv"]
 [ext_resource type="Texture2D" uid="uid://qinarboxtts" path="res://assets/reanim/Gravebuster_tooth3.png" id="3_f1jem"]
 [ext_resource type="Texture2D" uid="uid://7dkpxwhmucee" path="res://assets/reanim/Gravebuster_tooth6.png" id="4_8vv5f"]
@@ -14,6 +15,33 @@
 [ext_resource type="Texture2D" uid="uid://b57mg4i7plnyl" path="res://assets/reanim/Gravebuster_leaf1.png" id="11_8r3xy"]
 [ext_resource type="Texture2D" uid="uid://hq6ny8dbufej" path="res://assets/reanim/Gravebuster_leaf2.png" id="12_8sm66"]
 [ext_resource type="AudioStream" uid="uid://byp7j3rg12vt4" path="res://assets/audio/SFX/plant/gravebusterchomp.ogg" id="14_f1jem"]
+[ext_resource type="Texture2D" uid="uid://igrk4hwpobli" path="res://assets/image/particles/dirtbig.png" id="15_8vv5f"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l2emo"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_v8hqd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.373113), -0.219055, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ltbb6"]
+curve = SubResource("Curve_v8hqd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8wpmc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_ltbb6")
+anim_offset_max = 1.0
 
 [sub_resource type="Animation" id="Animation_fuck"]
 length = 3.16667
@@ -1115,6 +1143,7 @@ size = Vector2(50, 60)
 
 [node name="GraveBuster" type="Node2D"]
 script = ExtResource("1_r7722")
+plant_condition = ExtResource("2_l2emo")
 no_blink = true
 
 [node name="Body" type="Node2D" parent="."]
@@ -1203,6 +1232,14 @@ rotation = 4.7089
 scale = Vector2(0.938, 1.034)
 texture = ExtResource("12_8sm66")
 centered = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Body"]
+modulate = Color(0.235294, 0.235294, 0.219608, 1)
+material = SubResource("CanvasItemMaterial_l2emo")
+position = Vector2(38, 59)
+emitting = false
+texture = ExtResource("15_8vv5f")
+process_material = SubResource("ParticleProcessMaterial_8wpmc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

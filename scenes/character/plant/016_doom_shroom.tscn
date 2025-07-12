@@ -1,11 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://ccji7khljidn"]
+[gd_scene load_steps=32 format=3 uid="uid://ccji7khljidn"]
 
 [ext_resource type="Animation" uid="uid://d36brwlaso680" path="res://animation/character/plant/016_doom_shroom/DoomShroom_sleep.tres" id="1_anim"]
 [ext_resource type="Script" uid="uid://d20mn2v3smoau" path="res://scripts/character/plant/016_doom_shroom.gd" id="1_dc52l"]
 [ext_resource type="Animation" uid="uid://ddwy4t6dlipi2" path="res://animation/character/plant/016_doom_shroom/DoomShroom_explode.tres" id="2_anim"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_h4mhh"]
 [ext_resource type="Texture2D" uid="uid://cdtfyduah2ly" path="res://assets/reanim/DoomShroom_body.png" id="2_xi7k7"]
 [ext_resource type="Animation" uid="uid://bdiplwnh2kbon" path="res://animation/character/plant/016_doom_shroom/DoomShroom_idle.tres" id="3_anim"]
 [ext_resource type="Texture2D" uid="uid://bpjmr3sk4my7i" path="res://assets/reanim/DoomShroom_head1.png" id="3_rcrem"]
+[ext_resource type="Texture2D" uid="uid://cwpi5oo583dgq" path="res://assets/reanim/DoomShroom_head2.png" id="5_0ls8s"]
+[ext_resource type="Texture2D" uid="uid://b5yvt3d0m74sp" path="res://assets/reanim/DoomShroom_head3.png" id="6_c1o6o"]
+[ext_resource type="Texture2D" uid="uid://dm4txot8cyfrb" path="res://assets/reanim/DoomShroom_sleepinghead.png" id="7_ymuxl"]
 [ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="10_xgr5x"]
 [ext_resource type="Texture2D" uid="uid://t7mk75cdipj4" path="res://assets/image/particles/bullet/DoomShroom_Explosion_Stem.png" id="11_k2ghs"]
 [ext_resource type="Script" uid="uid://dnlyx25yj7ugo" path="res://scripts/fx/bomb_effect/004_bomb_effect.gd" id="11_xi7k7"]
@@ -1572,6 +1576,7 @@ _data = {
 [node name="DoomShroom" type="Node2D" node_paths=PackedStringArray("SFX_bomb")]
 script = ExtResource("1_dc52l")
 SFX_bomb = NodePath("Doomshroom")
+plant_condition = ExtResource("2_h4mhh")
 no_blink = true
 
 [node name="Body" type="Node2D" parent="."]
@@ -1584,21 +1589,30 @@ texture = ExtResource("2_xi7k7")
 centered = false
 
 [node name="DoomShroom_head1" type="Sprite2D" parent="Body"]
-position = Vector2(0, 3.6)
-scale = Vector2(0.8, 0.8)
+visible = false
+position = Vector2(-5.5, -5.7)
+scale = Vector2(0.911, 0.955)
 texture = ExtResource("3_rcrem")
 centered = false
 
 [node name="DoomShroom_head2" type="Sprite2D" parent="Body"]
 visible = false
+position = Vector2(-8, -10.4)
+scale = Vector2(0.834, 0.895)
+texture = ExtResource("5_0ls8s")
 centered = false
 
 [node name="DoomShroom_head3" type="Sprite2D" parent="Body"]
 visible = false
+position = Vector2(-20.8, -25.1)
+scale = Vector2(0.978, 0.978)
+texture = ExtResource("6_c1o6o")
 centered = false
 
 [node name="DoomShroom_sleepinghead" type="Sprite2D" parent="Body"]
-visible = false
+position = Vector2(0, 3.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_ymuxl")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

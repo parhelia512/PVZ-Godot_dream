@@ -4,8 +4,11 @@ class_name PlantBase
 var be_shovel_look_color := Color(1, 1, 1)
 @onready var bullets: Node2D = get_tree().current_scene.get_node("Bullets")
 
-@export_group("植物眨眼相关， no_blink表示没有眨眼功能")
+@export_group("植物种植")
+@export var plant_condition : ResourcePlantCondition
 
+	
+@export_group("植物眨眼相关， no_blink表示没有眨眼功能")
 ## 植物没有眨眼功能
 @export var no_blink := false
 @export var blink_sprite:Sprite2D				## 控制idle状态下植物眨眼
@@ -15,6 +18,10 @@ var blink_timer :Timer	## 眨眼计时器
 
 ## 动画状态是否可以眨眼,is_blink才会眨眼
 @export var is_blink := true
+
+	
+## 行和列
+@export var row_col:Vector2i
 
 signal plant_free_signal
 
@@ -42,8 +49,12 @@ func _ready() -> void:
 			# 连接 timeout 信号到函数
 			blink_timer.timeout.connect(_on_blink_timer_timeout)
 
-
-#region 眨眼相關
+## 植物初始化相关
+func init_plant(row_col:Vector2i) -> void:
+	self.row_col = row_col
+	
+	
+#region 眨眼相关
 func _on_blink_timer_timeout() -> void:
 	## is_blink状态下眨眼
 	if is_blink:
@@ -85,9 +96,28 @@ func judge_status():
 	if curr_Hp <= 0:
 		_plant_free()
 
+## 代替受伤，同一个格子内，有保护壳，保护壳代替掉血,睡莲重写
+func replace_attack(attack_value:int,zombie:ZombieBase) -> bool:
+	## 如果不是保护壳
+	if plant_condition.place_plant_in_cell != Global.PlacePlantInCell.Shell:
+		var plant_cell:PlantCell = get_parent()
+		if plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]:
+			plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell].be_eated(attack_value, zombie)
+			return true
+	return false
+	
+# 重写父类被僵尸啃咬攻击
+func be_eated(attack_value:int, zombie:ZombieBase):
+	## 如果没有能替其掉血的
+	if not replace_attack(attack_value, zombie):
+		# 被僵尸啃咬子弹属性为真实伤害（略过2类防具，直接对1类防具和血量攻击）
+		Hp_loss(attack_value, Global.AttackMode.Real)
+	
+
 
 #重写父类血量变化
-func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode = Global.BulletMode.Norm):
+func Hp_loss(attack_value:int, bullet_mode : Global.AttackMode = Global.AttackMode.Norm, trigger_be_attack_SFX:=true, no_drop:=false):
+
 	curr_Hp -= attack_value
 	label_hp.get_node('Label').text = str(curr_Hp)
 

@@ -17,24 +17,41 @@ var is_sun_enough: bool				# 阳光是否足够
 @export var card_in_seed_chooser:CardInSeedChooser
 ## 种植植物时发送点击信号,使用这个信号控制种植植物
 signal card_click		#点击信号
+signal card_plant_end		#卡片种植完成后信号，生成卡片的地方连接
 
 
+#func _ready() -> void:
+	#main_game = get_tree().current_scene
 
-func _ready() -> void:
-	main_game = get_tree().current_scene
-	# 测试场景卡片直接在卡片槽中
-	if main_game.is_test:
-		super.card_init(card_type)
-		_cool_mask.max_value = cool_time
+	## 测试场景卡片直接在卡片槽中
+	#if main_game.is_test:
+		#card_init(card_type)
+		#
 
-
-func card_init(card_type: Global.PlantType):
+## 备选卡槽时卡片初始化
+func card_init_in_seed_chooser(card_type: Global.PlantType):
 	super.card_init(card_type)
 	## 获取其父节点，取消选择卡片时会重新回来
 	card_in_seed_chooser = get_parent()
 	_cool_mask.max_value = cool_time
-
+	#_cool_mask.value = 0
 	
+## 卡片出战时初始化
+func card_init(card_type: Global.PlantType):
+	super.card_init(card_type)
+	_cool_mask.max_value = cool_time
+	_cool_mask.value = 0
+	
+
+## 传送带卡槽初始化卡片
+func card_init_conveyor_belt(card_type: Global.PlantType):
+	super.card_init(card_type)
+	_cool_mask.max_value = cool_time
+	_cool_mask.value = 0
+	sun_cost = 0
+	get_node("CardBg/Cost").text = str(sun_cost)
+
+
 ## 卡片冷卻
 func _process(delta: float) -> void:
 	if _is_cooling:
@@ -61,6 +78,7 @@ func judge_sun_enough(curr_sun_value):
 	else:
 		# 卡片冷却完成
 		if not _is_cooling:
+			_cool_mask.value = 0
 			_cool_mask.visible = true
 			_button.disabled = true
 		
@@ -71,7 +89,7 @@ func card_ready():
 	_button.disabled = false
 
 
-## 卡片冷却
+## 卡片开始冷却
 func card_cool():
 	_is_cooling = true
 	_cool_mask.visible = true

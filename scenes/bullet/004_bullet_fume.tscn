@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cghhn7nuemrci"]
+[gd_scene load_steps=7 format=3 uid="uid://cghhn7nuemrci"]
 
 [ext_resource type="Script" uid="uid://ctpegdqe0mdpg" path="res://scripts/bullet/004_bullet_fume.gd" id="1_fkqdm"]
 [ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="2_fkqdm"]
+[ext_resource type="AudioStream" uid="uid://7mwt2orf6f0w" path="res://assets/audio/SFX/bullet/splat1.ogg" id="3_jgdc7"]
+[ext_resource type="AudioStream" uid="uid://d267mh21n8tmg" path="res://assets/audio/SFX/bullet/splat2.ogg" id="4_jdx3t"]
+[ext_resource type="AudioStream" uid="uid://cjcfmkkumvowa" path="res://assets/audio/SFX/bullet/splat3.ogg" id="5_nnare"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xw0nn"]
 radius = 6.08276
@@ -10,7 +13,7 @@ radius = 6.08276
 script = ExtResource("1_fkqdm")
 speed = 500.0
 bullet_mode = 1
-bullet_shield_SFX = false
+trigger_be_attack_SFX = false
 max_distance = 350.0
 
 [node name="PuffBulletBody" type="Sprite2D" parent="."]
@@ -18,11 +21,25 @@ visible = false
 scale = Vector2(0.625, 0.666667)
 texture = ExtResource("2_fkqdm")
 
-[node name="Area2D" type="Area2D" parent="." groups=["Zombie"]]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_xw0nn")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Splat1" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_jgdc7")
+bus = &"SFX"
+
+[node name="Splat2" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_jdx3t")
+bus = &"SFX"
+
+[node name="Splat3" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_nnare")
+bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

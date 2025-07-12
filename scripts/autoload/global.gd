@@ -10,17 +10,21 @@ extends Node
 #Ui1: 100	鼠标未移入UI时，在最下面
 #墓碑: 150
 #植物： 200
-#僵尸： 400
-#小推车： 450
+#僵尸： 400	每行僵尸隔10图层
+#保龄球： 根据行更新图层，在僵尸行之间
+#小推车： 每行比僵尸行+5，
 #子弹： 600
 #爆炸： 650
 #阳光： 800
 #Ui2 : 900 鼠标移入UI时，在植物和僵尸下面
 #真实铲子 : 950
+# 锤子： 950
+# 锤击僵尸特效： 951
 #血量显示： 980
 #UI3： 1000 进度条、准备放置植物
 #UI4： 1100 所有备选植物卡槽
 #UI5:  1150 卡片选择移动时临时位置
+
 #奖杯： 2000
 
 
@@ -29,87 +33,17 @@ extends Node
 # 定义枚举
 enum CharacterType {Plant, Zombie}
 
-#region 卡片
-enum CardInfoAttribute {
-	CoolTime,
-	SunCost,	
-}
-
-var CardInfo = {
-	PlantType.PeaShooterSingle: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 100
-		},
-	PlantType.SunFlower: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 50
-		},
-	PlantType.CherryBomb: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 150
-		},
-	PlantType.WallNut: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 50
-		},
-	PlantType.PotatoMine: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 25
-		},
-	PlantType.SnowPea: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 175
-		},
-	PlantType.Chomper: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 150
-		},
-	PlantType.PeaShooterDouble: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 200
-		},
-	PlantType.PuffShroom: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 0
-		},
-	PlantType.SunShroom: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 25
-		},
-	PlantType.FumeShroom: {
-		CardInfoAttribute.CoolTime: 0.0,
-		CardInfoAttribute.SunCost: 75
-		},
-	PlantType.GraveBuster: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 75
-		},
-	PlantType.HypnoShroom: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 75
-		},
-	PlantType.ScaredyShroom: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 25
-		},
-	PlantType.IceShroom: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 75
-		},
-	PlantType.DoomShroom: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 125
-		},
-	PlantType.ThreePeater: {
-		CardInfoAttribute.CoolTime: 2.0,
-		CardInfoAttribute.SunCost: 325
-		},
-}
-
-
-#endregion
 
 #region 植物
+
+enum PlantInfoAttribute{
+	CoolTime,		## 植物种植冷却时间
+	SunCost,		## 阳光消耗
+	PlantScenes,	## 植物场景预加载
+	PlantStaticScenes,	## 静态植物预加载
+	PlantConditionResource,	## 植物种植条件资源预加载
+}
+
 enum PlantType {
 	PeaShooterSingle, 
 	SunFlower, 
@@ -130,48 +64,182 @@ enum PlantType {
 	LilyPad,
 	Squash,
 	ThreePeater,
+	
+	WallNutBowling = 51,
+	WallNutBowlingBomb,
+	WallNutBowlingBig,
 	}
 
-var PlantTypeSceneMap = {
-	PlantType.PeaShooterSingle: preload("res://scenes/character/plant/001_pea_shooter_single.tscn"),
-	PlantType.SunFlower: preload("res://scenes/character/plant/002_sun_flower.tscn"),
-	PlantType.CherryBomb: preload("res://scenes/character/plant/003_cherry_bomb.tscn"),
-	PlantType.WallNut: preload("res://scenes/character/plant/004_wall_nut.tscn"),
-	PlantType.PotatoMine: preload("res://scenes/character/plant/005_potato_mine.tscn"),
-	PlantType.SnowPea: preload("res://scenes/character/plant/006_snow_pea.tscn"),
-	PlantType.Chomper: preload("res://scenes/character/plant/007_chomper.tscn"),
-	PlantType.PeaShooterDouble: preload("res://scenes/character/plant/008_pea_shooter_double.tscn"),
-	PlantType.PuffShroom: preload("res://scenes/character/plant/009_puff_shroom.tscn"),
-	PlantType.SunShroom: preload("res://scenes/character/plant/010_sun_shroom.tscn"),
-	PlantType.FumeShroom: preload("res://scenes/character/plant/011_fume_shroom.tscn"),
-	PlantType.GraveBuster: preload("res://scenes/character/plant/012_grave_buster.tscn"),
-	PlantType.HypnoShroom: preload("res://scenes/character/plant/013_hypno_shroom.tscn"),
-	PlantType.ScaredyShroom: preload("res://scenes/character/plant/014_scaredy_shroom.tscn"),
-	PlantType.IceShroom: preload("res://scenes/character/plant/015_ice_shroom.tscn"),
-	PlantType.DoomShroom: preload("res://scenes/character/plant/016_doom_shroom.tscn"),
-	PlantType.ThreePeater: preload("res://scenes/character/plant/019_three_peater.tscn"),
+
+var PlantInfo = {
+	PlantType.PeaShooterSingle: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 100,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/001_pea_shooter_single.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/001_pea_shooter_single_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+		
+	PlantType.SunFlower: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/002_sun_flower.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/002_sun_flower_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		
+		},
+	PlantType.CherryBomb: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 150,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/003_cherry_bomb.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/003_cherry_bomb_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		
+		},
+	PlantType.WallNut: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/004_wall_nut.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/004_wall_nut_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.PotatoMine: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 25,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/005_potato_mine.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/005_potato_mine_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/005_potato_mine.tres")
+		},
+	PlantType.SnowPea: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 175,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/006_snow_pea.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/006_snow_pea_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.Chomper: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 150,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/007_chomper.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/007_chomper_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.PeaShooterDouble: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 200,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/008_pea_shooter_double.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/008_pea_shooter_double_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.PuffShroom: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 0,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/009_puff_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/009_puff_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.SunShroom: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 25,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/010_sun_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/010_sun_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.FumeShroom: {
+		PlantInfoAttribute.CoolTime: 0.0,
+		PlantInfoAttribute.SunCost: 75,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/011_fume_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/011_fume_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.GraveBuster: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 75,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/012_grave_buster.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/012_grave_buster_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/012_grave_buster.tres")
+		},
+	PlantType.HypnoShroom: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 75,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/013_hypno_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/013_hypno_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.ScaredyShroom: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 25,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/014_scaredy_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/014_scaredy_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.IceShroom: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 75,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/015_ice_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/015_ice_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.DoomShroom: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 125,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/016_doom_shroom.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/016_doom_shroom_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.ThreePeater: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 325,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/019_three_peater.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/019_three_peater_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.LilyPad: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 25,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/017_lily_pad.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/017_lily_pad_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/017_lily_pad.tres")
+		},
+		
+		
+	## 保龄球
+	PlantType.WallNutBowling: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/051_wall_nut_bowling.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/051_wall_nut_bowling_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.WallNutBowlingBomb: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/052_wall_nut_bowling_bomb.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/052_wall_nut_bowling_bomb_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+	PlantType.WallNutBowlingBig: {
+		PlantInfoAttribute.CoolTime: 2.0,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/053_wall_nut_bowlingBig.tscn"),
+		PlantInfoAttribute.PlantStaticScenes : preload("res://scenes/character/plant/053_wall_nut_bowlingBig_static.tscn"),
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/plant_resource/plant_condition/000_common_plant_land.tres")
+		},
+
 }
 
-var StaticPlantTypeSceneMap = {
-	PlantType.PeaShooterSingle: preload("res://scenes/character/plant/001_pea_shooter_single_static.tscn"),
-	PlantType.SunFlower: preload("res://scenes/character/plant/002_sun_flower_static.tscn"),
-	PlantType.CherryBomb: preload("res://scenes/character/plant/003_cherry_bomb_static.tscn"),
-	PlantType.WallNut: preload("res://scenes/character/plant/004_wall_nut_static.tscn"),
-	PlantType.PotatoMine: preload("res://scenes/character/plant/005_potato_mine_static.tscn"),
-	PlantType.SnowPea: preload("res://scenes/character/plant/006_snow_pea_static.tscn"),
-	PlantType.Chomper: preload("res://scenes/character/plant/007_chomper_static.tscn"),
-	PlantType.PeaShooterDouble: preload("res://scenes/character/plant/008_pea_shooter_double_static.tscn"),
-	PlantType.PuffShroom: preload("res://scenes/character/plant/009_puff_shroom_static.tscn"),
-	PlantType.SunShroom: preload("res://scenes/character/plant/010_sun_shroom_static.tscn"),
-	PlantType.FumeShroom: preload("res://scenes/character/plant/011_fume_shroom_static.tscn"),
-	PlantType.GraveBuster: preload("res://scenes/character/plant/012_grave_buster_static.tscn"),
-	PlantType.HypnoShroom: preload("res://scenes/character/plant/013_hypno_shroom_static.tscn"),
-	PlantType.ScaredyShroom: preload("res://scenes/character/plant/014_scaredy_shroom_static.tscn"),
-	PlantType.IceShroom: preload("res://scenes/character/plant/015_ice_shroom_static.tscn"),
-	PlantType.DoomShroom: preload("res://scenes/character/plant/016_doom_shroom_static.tscn"),
-	PlantType.ThreePeater: preload("res://scenes/character/plant/019_three_peater_static.tscn"),
+## 植物在格子中的位置
+enum PlacePlantInCell{
+	Norm,	## 普通位置
+	Float,	## 漂浮位置
+	Down,	## 花盆（睡莲）位置
+	Shell,	## 保护壳位置
 }
 
+## 获取植物属性方法
+func get_plant_info(plant_type:PlantType, info_attribute:PlantInfoAttribute):
+	return PlantInfo.get(plant_type)[info_attribute]
+	
 #endregion
 
 #region 僵尸
@@ -186,7 +254,7 @@ enum ZombieType {
 	ZombieFootball,
 	ZombieJackson,
 	ZombieDancer,
-	DuckytubeZombie,
+	ZombieDuckytube,
 	
 	}
 
@@ -203,33 +271,29 @@ var ZombieTypeSceneMap = {
 	ZombieType.ZombieDancer: preload("res://scenes/character/zombie/010_zombie_dancer.tscn"),
 
 	}
+	
+## 泳池水花场景
+var splash_pool_scenes = preload("res://scenes/item/game_scenes_item/splash.tscn")
+
 #endregion
 
 #endregion
 
 #region 子弹种类
 ## 普通，穿透，真实
-enum BulletMode {
+enum AttackMode {
 	Norm, 			# 按顺序对二类防具、一类防具、本体造成伤害
-	penetration, 	# 对二类防具造成伤害同时对一类防具造成伤害
-	real			# 不对二类防具造成伤害，直接对一类防具造成伤害
+	Penetration, 	# 对二类防具造成伤害同时对一类防具造成伤害
+	Real,			# 不对二类防具造成伤害，直接对一类防具造成伤害
+	BowlingFront,		## 保龄球正面
+	BowlingSide,		## 保龄球侧面
+	
+	Hammer,			## 锤子
 	} 
 
-#endregion
-
-#region 游戏背景
-enum GameBg{
-	FrontDay,
-	FrontNight
-}
-
-var GameBgTextureMap = {
-	GameBg.FrontDay: preload("res://assets/image/background/background1.jpg"),
-	GameBg.FrontNight: preload("res://assets/image/background/background2.jpg"),
-	#GameBg.BackNight: preload("res://assets/bg_back_night.png"),
-}
 
 #endregion
+
 
 #endregion
 
@@ -245,6 +309,7 @@ var auto_collect_coin := false
 var disappear_spare_card_Placeholder := false
 var display_plant_HP_label := false
 var display_zombie_HP_label := false
+var display_plant_card_bar_follow_mouse := false
 
 var time_scale := 1.0
 
@@ -260,6 +325,7 @@ func save_config():
 	config.set_value("user_control", "disappear_spare_card_Placeholder", disappear_spare_card_Placeholder) 
 	config.set_value("user_control", "display_plant_HP_label", display_plant_HP_label) 
 	config.set_value("user_control", "display_zombie_HP_label", display_zombie_HP_label) 
+	config.set_value("user_control", "display_plant_card_bar_follow_mouse", display_plant_card_bar_follow_mouse) 
 
 	config.save(CONGIF_PATH)
 	
@@ -287,8 +353,8 @@ func load_config():
 	disappear_spare_card_Placeholder = config.get_value("user_control", "disappear_spare_card_Placeholder", false) 
 	display_plant_HP_label = config.get_value("user_control", "display_plant_HP_label", false) 
 	display_zombie_HP_label = config.get_value("user_control", "display_zombie_HP_label", false) 
-	
-	
+	display_plant_card_bar_follow_mouse = config.get_value("user_control", "display_plant_card_bar_follow_mouse", false) 
+
 	
 #endregion
 
@@ -312,12 +378,14 @@ var curr_plant = [
 	PlantType.ScaredyShroom,
 	PlantType.IceShroom,
 	PlantType.DoomShroom,
+	PlantType.LilyPad,
+	
 	PlantType.ThreePeater,
 ]
 
 
-
 var card_in_seed_chooser = preload("res://scenes/ui/card_in_seed_chooser.tscn")
+var card = preload("res://scenes/ui/card.tscn")
 
 
 func save_game():
@@ -350,31 +418,22 @@ func load_game():
 #endregion
 
 #region 关卡相关
-enum MainGameLevel{
-	FrontDay,
-	FrontNight
-}
 
-var  MainGameLevelBgmMap = {
-	MainGameLevel.FrontDay: "res://assets/audio/BGM/front_day.mp3",
-	MainGameLevel.FrontNight: "res://assets/audio/BGM/front_night.mp3"
-}
-
-var main_game_level :MainGameLevel = MainGameLevel.FrontNight
-
-
-## 预加载关卡
+## 加载场景
 enum MainScenes{
 	StartMenu,
 	ChooseLevel,
-	MainGame
+	MainGameFront,
+	MainGameBack,
 }
 
 var MainScenesMap = {
 	MainScenes.StartMenu: "res://scenes/main/01StartMenu.tscn",
 	MainScenes.ChooseLevel: "res://scenes/main/02ChooesLevel.tscn",
-	MainScenes.MainGame: "res://scenes/main/MainGame.tscn",
+	MainScenes.MainGameFront: "res://scenes/main/MainGameFront.tscn",
+	MainScenes.MainGameBack: "res://scenes/main/MainGameBack.tscn",
 }
 
 
+var game_para:ResourceLevelData = load("res://resources/level_date_resource/mode_adventure/adventure_01_day.tres")
 #endregion

@@ -9,6 +9,11 @@ func _ready():
 	
 	_init_dance()
 
+
+func game_init_zombie_jackson():
+	pass
+
+
 ## 重写舞王初始方法
 func _init_dance():
 	animation_player.set_blend_time('armraise', 'walk', 0.1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpaa326ftym5a"]
+[gd_scene load_steps=11 format=3 uid="uid://dpaa326ftym5a"]
 
 [ext_resource type="Script" uid="uid://csqombr7s87dx" path="res://scripts/ui/main_game_ui/trophy.gd" id="1_46dpp"]
 [ext_resource type="Texture2D" uid="uid://dsx7x222200ae" path="res://assets/image/ui/ui_trophy/AwardGlow.png" id="2_qvwtp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://yk66wnfu0ye8" path="res://assets/image/ui/ui_trophy/AwardRays.png" id="7_87gxn"]
 [ext_resource type="Texture2D" uid="uid://ck3qd7qu37g43" path="res://assets/image/ui/ui_trophy/AwardPickupGlow.png" id="8_mcse2"]
 [ext_resource type="Texture2D" uid="uid://c8kyjcgv2a6vr" path="res://assets/image/ui/ui_trophy/AwardRays_star.png" id="9_o13aw"]
+[ext_resource type="AudioStream" uid="uid://bouhg13qcaawh" path="res://assets/audio/SFX/progress/winmusic.ogg" id="10_qvwtp"]
 
 [node name="Trophy" type="Node2D"]
 z_index = 2000
@@ -52,6 +53,7 @@ offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("3_loqis")
 texture_pressed = ExtResource("3_loqis")
 texture_hover = ExtResource("3_loqis")
@@ -64,4 +66,9 @@ modulate = Color(1, 1, 1, 0)
 scale = Vector2(100, 100)
 texture = ExtResource("2_qvwtp")
 
+[node name="Winmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_qvwtp")
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="TrophyButton" to="." method="_on_trophy_button_mouse_entered"]
 [connection signal="pressed" from="TrophyButton" to="." method="_on_trophy_button_pressed"]

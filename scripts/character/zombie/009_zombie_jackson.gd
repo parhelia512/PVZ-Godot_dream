@@ -24,8 +24,8 @@ var direction_scale = Vector2(1,1)
 func _ready():
 	super._ready()
 	
-	#gmae_init_zombie_jackson()
-	_init_dance()
+	#game_init_zombie_jackson()
+	#_init_dance()
 
 func show_init_zombie_jackson():
 	var anim = animation_player.get_animation("moonwalk")
@@ -36,18 +36,19 @@ func show_init_zombie_jackson():
 	animation_player.play("moonwalk")
 	is_walk = false
 
-func gmae_init_zombie_jackson():
+func game_init_zombie_jackson():
 	var anim = animation_player.get_animation("moonwalk")
 	if anim:
 		# 设置循环模式
 		anim.loop_mode = Animation.LOOP_NONE
-		
+	$Dancer.play()
 	_init_dance()
 
 ## 舞王出场动画，伴舞继承重写
 func _init_dance():
 	animation_player.set_blend_time('armraise', 'walk', 0.1)
 	scale = Vector2(-1,1) * direction_scale
+	ray_cast_2d.scale = scale
 	label_hp.scale = scale
 	
 	for i in range(num_moon_walk):
@@ -57,6 +58,7 @@ func _init_dance():
 		await animation_player.animation_finished
 		
 	scale *= Vector2(-1,1) * direction_scale
+	ray_cast_2d.scale = scale
 	label_hp.scale = scale
 	
 	animation_player.play("point")	
@@ -71,7 +73,7 @@ func _zombie_walk():
 	state_transition_judge_walking_status()
 	
 	## 检查是否移动,
-	if is_walk:
+	if is_walk and not is_bomb_death:
 		if walking_status == WalkingStatus.end:
 			_previous_ground_global_x = _ground.global_position.x
 		elif walking_status == WalkingStatus.start:
@@ -133,11 +135,16 @@ func start_attack():
 	
 	is_walk = false
 	is_attack = true
+	
 	dancer_manager.manager_update_walk(dancer_id, is_walk)
 	# 如果舞王刚刚入场，不让其移动，并不修改动画
 	if is_start_enter:
 		walking_status = WalkingStatus.end
 	else:
+		## 攻击方向
+		scale = direction_scale
+		ray_cast_2d.scale = scale
+		label_hp.scale = scale
 		animation_player.play("eat")
 		
 		anim_change = true
@@ -225,7 +232,7 @@ func be_hypnotized():
 	var new_dancer_manager = DancerManagerScene.instantiate()
 	add_child(new_dancer_manager)
 	dancer_manager = new_dancer_manager
-	print(new_dancer_manager)
+	
 	dancer_manager.start_anim()
 	dancer_manager._init_anim_speed(animation_origin_speed, self)
 	dancer_manager.is_hypnotized = true
@@ -244,7 +251,7 @@ func call_end():
 func anim_play(name, curr_scale, start_time, speed):
 
 	## 非攻击状态更新,非死亡状态,非舞王入场状态
-	if not is_attack and not is_death and not is_start_enter:
+	if not is_attack and not is_death and not is_start_enter and not is_bomb_death:
 		_walking_end()
 		## 最后一次举手需要举起，重新创建了新动画控制播放时间
 		if name == "armraise_end":
@@ -262,6 +269,8 @@ func anim_play(name, curr_scale, start_time, speed):
 			animation_player.play_section(name, start_time)
 		## 控制舞王方向
 		scale = curr_scale * direction_scale
+
+		ray_cast_2d.scale = scale
 		label_hp.scale = scale
 		
 		anim_change = true
@@ -283,27 +292,3 @@ func allow_dance():
 func call_zombie_dancer():
 	if not area2d_free:
 		dancer_manager.call_zombie_dancer()
-
-## 获取当前播放动画的完整信息（名称、时间、速度等）
-#func get_current_animation_info():
-	#if animation_player.is_playing():
-		## 1. 获取当前动画名称
-		#var anim_name = animation_player.current_animation
-		## 2. 获取当前已播放时间（秒）
-		#var current_time = animation_player.get_current_animation_position()
-		## 3. 获取当前动画总时长（秒）
-		#var total_time = animation_player.get_current_animation_length()
-		## 4. 获取当前播放速度（1.0 为正常速度）
-		#var speed = animation_player.playback_speed
-		#
-		## 返回整合后的信息字典
-		#return {
-			#"name": anim_name,
-			#"curr_scale": scale,
-			#"current_time": current_time,
-			#"total_time": total_time,
-			#"speed": speed,
-			#"progress": current_time / total_time if total_time > 0 else 0.0
-		#}
-	#else:
-		#return null  # 无动画播放时返回空

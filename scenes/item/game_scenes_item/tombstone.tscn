@@ -115,7 +115,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eg40l")
 
 [node name="tombstone" type="Sprite2D" parent="TombstoneMask"]
-position = Vector2(39, 48)
+position = Vector2(39, 53)
 texture = ExtResource("2_fendi")
 hframes = 5
 vframes = 4
@@ -160,9 +160,9 @@ stream = ExtResource("5_jeiep")
 
 [node name="NewZombieMask" type="Panel" parent="."]
 clip_children = 1
-offset_left = -115.0
+offset_left = -208.0
 offset_top = -162.0
-offset_right = 116.0
+offset_right = 211.0
 offset_bottom = 46.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uiv8m")

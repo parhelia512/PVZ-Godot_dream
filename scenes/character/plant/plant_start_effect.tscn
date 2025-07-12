@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cernv2ifofl2k"]
+[gd_scene load_steps=9 format=3 uid="uid://cernv2ifofl2k"]
 
 [ext_resource type="Texture2D" uid="uid://dhawpqhvsxd83" path="res://assets/image/particles/dirtsmall.png" id="1_b7unr"]
 [ext_resource type="Script" uid="uid://bmdbvp327cg0q" path="res://scripts/character/plant/plant_start_effect.gd" id="1_y473e"]
+[ext_resource type="AudioStream" uid="uid://deucayhb34mcr" path="res://assets/audio/SFX/plant_create/plant2.ogg" id="3_uh0o4"]
+[ext_resource type="AudioStream" uid="uid://ddgjatyalqh64" path="res://assets/audio/SFX/plant_create/plant.ogg" id="4_3gt5y"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2len5"]
 particles_animation = true
@@ -29,8 +31,9 @@ scale_max = 0.5
 alpha_curve = SubResource("CurveTexture_0kobc")
 anim_offset_max = 1.0
 
-[node name="PlantStartEffect" type="Node2D"]
+[node name="PlantStartEffect" type="Node2D" node_paths=PackedStringArray("SFX_create_new_plant")]
 script = ExtResource("1_y473e")
+SFX_create_new_plant = [NodePath("SFX/Plant2"), NodePath("SFX/Plant")]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_2len5")
@@ -42,3 +45,11 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_swcy4")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Plant2" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_uh0o4")
+
+[node name="Plant" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_3gt5y")

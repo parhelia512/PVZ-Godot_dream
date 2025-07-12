@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dvrnqpyyjgdt"]
+[gd_scene load_steps=26 format=3 uid="uid://dvrnqpyyjgdt"]
 
 [ext_resource type="Texture2D" uid="uid://3a0yexorxcsk" path="res://assets/reanim/IceShroom_body.png" id="0_fuck"]
 [ext_resource type="Animation" uid="uid://bv1w6c5kxvxdu" path="res://animation/character/plant/015_ice_shroom/IceShroom_idle.tres" id="1_anim"]
 [ext_resource type="Texture2D" uid="uid://c213mmlt125el" path="res://assets/reanim/IceShroom_base.png" id="1_fuck"]
 [ext_resource type="Script" uid="uid://byeyumxg7gxg5" path="res://scripts/character/plant/015_ice_shroom.gd" id="1_ju8vi"]
 [ext_resource type="Animation" uid="uid://bg3t1o4lre152" path="res://animation/character/plant/015_ice_shroom/IceShroom_sleep.tres" id="2_anim"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_bgvgt"]
 [ext_resource type="Texture2D" uid="uid://502erh735gni" path="res://assets/reanim/IceShroom_blink2.png" id="2_fuck"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_hkwun"]
 [ext_resource type="Texture2D" uid="uid://dhb33lor5gb5w" path="res://assets/reanim/IceShroom_blink1.png" id="3_fuck"]
@@ -74,6 +75,7 @@ scale_max = 3.0
 [node name="IceShroom" type="Node2D" node_paths=PackedStringArray("SFX_bomb", "blink_sprite")]
 script = ExtResource("1_ju8vi")
 SFX_bomb = NodePath("Frozen")
+plant_condition = ExtResource("2_bgvgt")
 blink_sprite = NodePath("Body/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("3_fuck"), ExtResource("2_fuck")])
 
@@ -85,8 +87,8 @@ position = Vector2(41, 70)
 texture = ExtResource("2_hkwun")
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(13.7, 38.1)
-scale = Vector2(0.8, 0.8)
+position = Vector2(13.4215, 39.2925)
+scale = Vector2(0.80914, 0.771149)
 texture = ExtResource("0_fuck")
 centered = false
 
@@ -97,19 +99,20 @@ texture = ExtResource("1_fuck")
 centered = false
 
 [node name="Anim_sleep1" type="Sprite2D" parent="Body"]
-visible = false
+position = Vector2(27.3, 38.8355)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(27.3, 38.1)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="IceShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(-1.4, 1.5)
-scale = Vector2(0.8, 0.8)
+position = Vector2(-1.4, 3.34954)
+scale = Vector2(0.8, 0.787075)
 texture = ExtResource("4_fuck")
 centered = false
 

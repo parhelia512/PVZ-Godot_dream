@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://mcad1jl5d1ui"]
+[gd_scene load_steps=29 format=3 uid="uid://mcad1jl5d1ui"]
 
 [ext_resource type="Texture2D" uid="uid://bwevuvs5nnwfx" path="res://assets/image/ui/ui_challenge/Challenge_Background.jpg" id="1_77tr5"]
 [ext_resource type="Script" uid="uid://jru6xfv7g4f1" path="res://scripts/choose_level/02_chooes_level.gd" id="1_qbhvk"]
@@ -10,9 +10,28 @@
 [ext_resource type="PackedScene" uid="uid://cc56wstwe4f2m" path="res://scenes/character/plant/001_pea_shooter_single_static.tscn" id="6_y0ybt"]
 [ext_resource type="Texture2D" uid="uid://bvp2j68muqgm8" path="res://assets/image/Almanac/Almanac_GroundNight.jpg" id="7_7gy53"]
 [ext_resource type="PackedScene" uid="uid://l2p51ejr4l2i" path="res://scenes/character/plant/009_puff_shroom_static.tscn" id="8_c1hwb"]
+[ext_resource type="Resource" uid="uid://cdcg662one7df" path="res://resources/level_date_resource/mode_adventure/adventure_01_day.tres" id="9_ykbb6"]
+[ext_resource type="PackedScene" uid="uid://m7dhqeju3er4" path="res://scenes/character/plant/051_wall_nut_bowling_static.tscn" id="11_7gy53"]
+[ext_resource type="Texture2D" uid="uid://bx8xtt6oantp1" path="res://assets/image/Almanac/Almanac_GroundPool.jpg" id="11_ddvl6"]
 [ext_resource type="Texture2D" uid="uid://xc3kqag3vqlq" path="res://assets/image/ui/ui_level/Almanac_CloseButton.png" id="11_y0ybt"]
+[ext_resource type="Texture2D" uid="uid://bqtnl31pv3rv3" path="res://assets/reanim/Hammer_3.png" id="12_1i0xb"]
 [ext_resource type="Texture2D" uid="uid://c82uuprowr5d" path="res://assets/image/ui/ui_level/Almanac_CloseButtonHighlight.png" id="12_7gy53"]
+[ext_resource type="Resource" uid="uid://r8eb38jjjno7" path="res://resources/level_date_resource/mode_adventure/adventure_02_night.tres" id="12_43bok"]
+[ext_resource type="PackedScene" uid="uid://emo1ok1dv5kg" path="res://scenes/character/plant/017_lily_pad_static.tscn" id="12_a108d"]
 [ext_resource type="BitMap" uid="uid://bc7yq02xscrlr" path="res://assets/image/ui/ui_level/Almanac_CloseButton_Mask.png" id="13_c1hwb"]
+[ext_resource type="Texture2D" uid="uid://qtifu6lsmq6x" path="res://assets/reanim/hammer_1.png" id="13_ddvl6"]
+[ext_resource type="Texture2D" uid="uid://dweon5ml8otw5" path="res://assets/reanim/Hammer_2.png" id="14_a108d"]
+[ext_resource type="Resource" uid="uid://d06li2axn7r16" path="res://resources/level_date_resource/mode_adventure/adventure_03_pool.tres" id="15_umhll"]
+[ext_resource type="Resource" uid="uid://c8yt6n65ponc6" path="res://resources/level_date_resource/mode_minigame/minigame_01_bowling.tres" id="17_syrok"]
+[ext_resource type="Resource" uid="uid://3mvuumsl5v6c" path="res://resources/level_date_resource/mode_minigame/minigame_02_hammer_zombie.tres" id="21_0w6wv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i0xb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddvl6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a108d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykbb6"]
 
 [node name="ChooseLevel" type="Control"]
 layout_mode = 3
@@ -37,18 +56,52 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -335.0
-offset_top = 145.0
-offset_right = 336.0
-offset_bottom = 390.0
+offset_left = -333.0
+offset_top = 123.0
+offset_right = 338.0
+offset_bottom = 373.0
 grow_horizontal = 2
 theme_override_constants/h_separation = 85
-theme_override_constants/v_separation = 15
+theme_override_constants/v_separation = 20
 columns = 4
 
 [node name="TextureRect" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
+
+[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.0
+offset_top = 2.13101
+offset_right = 46.0
+offset_bottom = 74.131
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1i0xb")
+
+[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -39.0
+offset_right = 145.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_2o48a")
+
+[node name="PeaShooterSingle" parent="BG/GridContainer/TextureRect/Panel" instance=ExtResource("6_y0ybt")]
+position = Vector2(47, 35.869)
 
 [node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect"]
 layout_mode = 1
@@ -68,39 +121,7 @@ texture_normal = ExtResource("3_qbhvk")
 texture_pressed = ExtResource("4_5ankq")
 texture_focused = ExtResource("3_qbhvk")
 script = ExtResource("6_5ankq")
-
-[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect/TextureButton"]
-clip_children = 1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_top = 7.0
-offset_right = 40.0
-offset_bottom = 68.0
-grow_horizontal = 2
-pivot_offset = Vector2(41, 33.5)
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect/TextureButton/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -39.0
-offset_right = 145.0
-offset_bottom = 161.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("5_2o48a")
-
-[node name="PeaShooterSingle" parent="BG/GridContainer/TextureRect/TextureButton" instance=ExtResource("6_y0ybt")]
-position = Vector2(57, 40.5)
+curr_level_data_game_para = ExtResource("9_ykbb6")
 
 [node name="Label" type="Label" parent="BG/GridContainer/TextureRect/TextureButton"]
 layout_mode = 0
@@ -109,13 +130,49 @@ offset_top = 82.0
 offset_right = 89.0
 offset_bottom = 105.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "前院白天"
+text = "白天"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 
-[node name="TextureButton2" type="TextureButton" parent="BG/GridContainer/TextureRect2"]
+[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect2"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 73.0
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ddvl6")
+
+[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect2/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -41.5
+offset_right = 142.0
+offset_bottom = 158.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_7gy53")
+
+[node name="PuffShroom" parent="BG/GridContainer/TextureRect2/Panel" instance=ExtResource("8_c1hwb")]
+position = Vector2(46, 38)
+
+[node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -133,53 +190,89 @@ texture_normal = ExtResource("3_qbhvk")
 texture_pressed = ExtResource("4_5ankq")
 texture_focused = ExtResource("3_qbhvk")
 script = ExtResource("6_5ankq")
-curr_level = 1
+curr_level_data_game_para = ExtResource("12_43bok")
 
-[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect2/TextureButton2"]
-clip_children = 1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -41.0
-offset_top = 8.0
-offset_right = 39.0
-offset_bottom = 70.0
-grow_horizontal = 2
-pivot_offset = Vector2(41, 33.5)
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect2/TextureButton2/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = -41.5
-offset_right = 142.0
-offset_bottom = 158.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_7gy53")
-
-[node name="PuffShroom" parent="BG/GridContainer/TextureRect2/TextureButton2" instance=ExtResource("8_c1hwb")]
-position = Vector2(59, 43.5)
-
-[node name="Label" type="Label" parent="BG/GridContainer/TextureRect2/TextureButton2"]
+[node name="Label" type="Label" parent="BG/GridContainer/TextureRect2/TextureButton"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 82.0
 offset_right = 89.0
 offset_bottom = 105.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "前院黑夜"
+text = "黑夜"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect3" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
+
+[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect3"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 73.0
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ddvl6")
+
+[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect3/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.683
+offset_top = -59.9414
+offset_right = 141.317
+offset_bottom = 140.059
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("11_ddvl6")
+
+[node name="LilyPad" parent="BG/GridContainer/TextureRect3/Panel/TextureRect" instance=ExtResource("12_a108d")]
+position = Vector2(93.4249, 110.063)
+scale = Vector2(0.7, 0.7)
+
+[node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -60.0
+offset_right = 59.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qbhvk")
+texture_pressed = ExtResource("4_5ankq")
+texture_focused = ExtResource("3_qbhvk")
+script = ExtResource("6_5ankq")
+curr_sences = 3
+curr_level_data_game_para = ExtResource("15_umhll")
+
+[node name="Label" type="Label" parent="BG/GridContainer/TextureRect3/TextureButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 82.0
+offset_right = 89.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "泳池"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect4" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
@@ -189,9 +282,165 @@ texture = ExtResource("2_7vy8i")
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 
+[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect5"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.3976
+offset_top = 4.38553
+offset_right = 42.6024
+offset_bottom = 70.3855
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a108d")
+
+[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect5/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -39.0
+offset_right = 145.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_2o48a")
+
+[node name="WallNutBowling" parent="BG/GridContainer/TextureRect5/Panel" instance=ExtResource("11_7gy53")]
+position = Vector2(48.0861, 37.2077)
+
+[node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -60.0
+offset_right = 59.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qbhvk")
+texture_pressed = ExtResource("4_5ankq")
+texture_focused = ExtResource("3_qbhvk")
+script = ExtResource("6_5ankq")
+curr_level_data_game_para = ExtResource("17_syrok")
+
+[node name="Label" type="Label" parent="BG/GridContainer/TextureRect5/TextureButton"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 82.5
+offset_right = 99.0
+offset_bottom = 105.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "保龄球"
+horizontal_alignment = 1
+
 [node name="TextureRect6" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
+
+[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect6"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.9398
+offset_top = 0.987915
+offset_right = 42.0602
+offset_bottom = 68.9879
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ykbb6")
+
+[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect6/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -51.0
+offset_right = 141.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_7gy53")
+
+[node name="Hammer" type="Node2D" parent="BG/GridContainer/TextureRect6/Panel"]
+z_index = 950
+z_as_relative = false
+position = Vector2(45.241, 35.5121)
+scale = Vector2(0.51, 0.51)
+
+[node name="Body" type="Node2D" parent="BG/GridContainer/TextureRect6/Panel/Hammer"]
+position = Vector2(-62, -11)
+
+[node name="Hammer_3" type="Sprite2D" parent="BG/GridContainer/TextureRect6/Panel/Hammer/Body"]
+position = Vector2(57.9, -19.3)
+rotation = 1.11527
+scale = Vector2(0.797, 0.797)
+texture = ExtResource("12_1i0xb")
+centered = false
+
+[node name="Hammer_2" type="Sprite2D" parent="BG/GridContainer/TextureRect6/Panel/Hammer/Body"]
+position = Vector2(74.6, -29.3)
+rotation = 1.11527
+scale = Vector2(0.797, 0.797)
+texture = ExtResource("13_ddvl6")
+centered = false
+
+[node name="Hammer1" type="Sprite2D" parent="BG/GridContainer/TextureRect6/Panel/Hammer/Body"]
+position = Vector2(65.3, 4.1)
+rotation = 1.11527
+scale = Vector2(0.797, 0.797)
+texture = ExtResource("14_a108d")
+centered = false
+
+[node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -60.0
+offset_right = 59.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qbhvk")
+texture_pressed = ExtResource("4_5ankq")
+texture_focused = ExtResource("3_qbhvk")
+script = ExtResource("6_5ankq")
+curr_level_data_game_para = ExtResource("21_0w6wv")
+
+[node name="Label" type="Label" parent="BG/GridContainer/TextureRect6/TextureButton"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 82.5
+offset_right = 98.0
+offset_bottom = 105.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "锤僵尸"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect7" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
@@ -247,5 +496,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="BG/GridContainer/TextureRect/TextureButton" to="BG/GridContainer/TextureRect/TextureButton" method="_on_pressed"]
-[connection signal="pressed" from="BG/GridContainer/TextureRect2/TextureButton2" to="BG/GridContainer/TextureRect2/TextureButton2" method="_on_pressed"]
+[connection signal="pressed" from="BG/GridContainer/TextureRect2/TextureButton" to="BG/GridContainer/TextureRect2/TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="BG/GridContainer/TextureRect3/TextureButton" to="BG/GridContainer/TextureRect3/TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="BG/GridContainer/TextureRect5/TextureButton" to="BG/GridContainer/TextureRect5/TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="BG/GridContainer/TextureRect6/TextureButton" to="BG/GridContainer/TextureRect6/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="back_start_menu"]

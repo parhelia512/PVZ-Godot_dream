@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://truhmqn4vl4t"]
+
+[ext_resource type="Script" uid="uid://xdkaojxiw6qj" path="res://scripts/character/plant/051_wall_nut_bowling.gd" id="1_slxmd"]
+[ext_resource type="PackedScene" uid="uid://cnu0pqlwoftv4" path="res://scenes/bullet/051_bullet_wall_nut_bowling.tscn" id="2_78tt6"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_slxmd"]
+[ext_resource type="Texture2D" uid="uid://co3e8k6uwm4hi" path="res://assets/reanim/Wallnut_blink1.png" id="4_fjys6"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="6_ku74b"]
+[ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="7_cxy75"]
+[ext_resource type="Texture2D" uid="uid://cpbkvykx6yq07" path="res://assets/reanim/Wallnut_twitch.png" id="8_pshjh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrlnw"]
+size = Vector2(50, 60)
+
+[node name="WallNutBowling" type="Node2D"]
+script = ExtResource("1_slxmd")
+bullet_scene = ExtResource("2_78tt6")
+plant_condition = ExtResource("3_slxmd")
+no_blink = true
+is_blink = false
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-42, -45)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("6_ku74b")
+
+[node name="_ground" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(3.837, 8.25237)
+rotation = -0.0454682
+scale = Vector2(0.7, 0.68937)
+texture = ExtResource("7_cxy75")
+centered = false
+
+[node name="Anim_blink_twitch" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(27.4106, 36.6841)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_pshjh")
+centered = false
+
+[node name="Anim_blink_twice" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(26.2106, 22.6841)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_fjys6")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yrlnw")

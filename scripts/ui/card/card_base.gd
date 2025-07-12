@@ -11,10 +11,10 @@ class_name CardBase
 
 func card_init(card_type: Global.PlantType):
 	self.card_type = card_type
-	cool_time = Global.CardInfo[card_type][Global.CardInfoAttribute.CoolTime]
-	sun_cost = Global.CardInfo[card_type][Global.CardInfoAttribute.SunCost]
-	
+	cool_time = Global.get_plant_info(card_type, Global.PlantInfoAttribute.CoolTime)
+	sun_cost = Global.get_plant_info(card_type, Global.PlantInfoAttribute.SunCost)
+
 	get_node("CardBg/Cost").text = str(sun_cost)
-	var static_plant = Global.StaticPlantTypeSceneMap.get(card_type).instantiate()
+	var static_plant = Global.get_plant_info(card_type, Global.PlantInfoAttribute.PlantStaticScenes).instantiate()
 	get_node("CardBg").add_child(static_plant)
 	static_plant.position = Vector2(25,33)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://dq0yq8m7157pj"]
+[gd_scene load_steps=41 format=3 uid="uid://dq0yq8m7157pj"]
 
 [ext_resource type="Script" uid="uid://u3ymxqsru8yx" path="res://scripts/character/plant/008_pea_shooter_double.gd" id="1_56ee2"]
 [ext_resource type="PackedScene" uid="uid://dd8wl34s7myh6" path="res://scenes/bullet/001_bullet_pea.tscn" id="1_bdk7l"]
 [ext_resource type="Texture2D" uid="uid://b2h6wuvxt68vx" path="res://assets/reanim/PeaShooter_blink2.png" id="3_62iuy"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_bdk7l"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_fafux"]
 [ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="3_t3qlx"]
 [ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="4_yfi41"]
 [ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="5_51vrd"]
@@ -98,6 +99,7 @@ script = ExtResource("1_56ee2")
 bullet_scene = ExtResource("1_bdk7l")
 bullet_position = NodePath("Body/Anim_stem/stem_correct/Projectile")
 throw_SFX = [NodePath("Throw2"), NodePath("Throw1")]
+plant_condition = ExtResource("3_fafux")
 blink_sprite = NodePath("Body/Anim_stem/stem_correct/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("19_r5oia"), ExtResource("3_62iuy")])
 
@@ -109,120 +111,120 @@ position = Vector2(41, 70)
 texture = ExtResource("3_bdk7l")
 
 [node name="Backleaf" type="Sprite2D" parent="Body"]
-position = Vector2(27.6, 54.7932)
-scale = Vector2(0.589576, 0.477205)
+position = Vector2(27.7, 53.4156)
+scale = Vector2(0.563311, 0.536299)
 texture = ExtResource("3_t3qlx")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
-position = Vector2(24.7356, 55.3575)
-rotation = 0.00396774
-scale = Vector2(0.618151, 0.515)
+position = Vector2(25, 54.1156)
+rotation = 0.0142347
+scale = Vector2(0.569545, 0.543533)
 texture = ExtResource("4_yfi41")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(47.9288, 54.5288)
-rotation = 0.0513805
-scale = Vector2(0.658781, 0.506137)
+position = Vector2(47.4, 53.2156)
+rotation = 0.00550776
+scale = Vector2(0.588246, 0.543533)
 texture = ExtResource("5_51vrd")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body"]
-position = Vector2(39.8507, 50.0644)
-rotation = 0.411351
-scale = Vector2(0.562644, 0.649137)
-skew = -0.146513
+position = Vector2(36.6311, 51.5689)
+rotation = 0.0745471
+scale = Vector2(0.557078, 0.593401)
+skew = -0.0240475
 texture = ExtResource("6_w5mwk")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body"]
-position = Vector2(37.9014, 36.9)
-rotation = 0.323438
-scale = Vector2(0.574575, 0.81963)
-skew = -0.0772971
+position = Vector2(32.0389, 40.7132)
+rotation = 0.0689044
+scale = Vector2(0.557, 0.715994)
+skew = -0.0271314
 texture = ExtResource("7_yhffo")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body"]
-position = Vector2(22.0356, 55.9644)
-scale = Vector2(0.586932, 0.506137)
+position = Vector2(22.5922, 54.8078)
+scale = Vector2(0.563234, 0.543533)
 texture = ExtResource("8_w3egk")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(56.6576, 56.8)
-rotation = -0.0861174
-scale = Vector2(0.671835, 0.540712)
+position = Vector2(55.9922, 56.1156)
+rotation = -0.0526529
+scale = Vector2(0.615258, 0.551844)
 texture = ExtResource("9_5rbbi")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
-position = Vector2(19.0068, 61.3932)
-rotation = 0.0363636
-scale = Vector2(0.606849, 0.560863)
-skew = -0.0033713
+position = Vector2(19.4078, 61.1922)
+rotation = 0.0504994
+scale = Vector2(0.580934, 0.551844)
 texture = ExtResource("10_fh6s4")
 centered = false
 
 [node name="Anim_stem" type="Sprite2D" parent="Body"]
-position = Vector2(42.8083, 43.6932)
+position = Vector2(38.3234, 45.3677)
 centered = false
 
 [node name="stem_correct" type="Node2D" parent="Body/Anim_stem"]
 position = Vector2(-36.5861, -47.9858)
 
 [node name="Idle_headleaf_farthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(14.1, 29.8068)
-rotation = 0.24626
-scale = Vector2(0.628028, 0.554644)
+position = Vector2(13.7311, 33.8443)
+rotation = -0.0722478
+scale = Vector2(0.552234, 0.538401)
+skew = -0.0241424
 texture = ExtResource("11_w774x")
 centered = false
 
 [node name="Idle_headleaf_3rdfarthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(20.0712, 17.1795)
-rotation = -0.641138
-scale = Vector2(0.554, 0.554)
+position = Vector2(22.1844, 15.2066)
+rotation = -0.125183
+scale = Vector2(0.555, 0.535635)
 texture = ExtResource("12_i0sbs")
 centered = false
 
 [node name="Idle_headleaf_2ndfarthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(14.2863, 24.2356)
-rotation = 0.395498
-scale = Vector2(0.554644, 0.554644)
+position = Vector2(11.9311, 26.4988)
+rotation = 0.0910703
+scale = Vector2(0.555, 0.535635)
 texture = ExtResource("16_fafux")
 centered = false
 
 [node name="Idle_headleaf_tip_bottom" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(7.95755, 26.5424)
-rotation = 0.395498
-scale = Vector2(0.554644, 0.554644)
+position = Vector2(6.61557, 30.3988)
+rotation = 0.0910703
+scale = Vector2(0.555, 0.535635)
 texture = ExtResource("17_qax2o")
 centered = false
 
 [node name="Idle_headleaf_nearest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(12.3425, 18.9507)
-rotation = -0.579523
-scale = Vector2(0.554644, 0.554644)
+position = Vector2(15.5377, 17.0533)
+rotation = -0.179581
+scale = Vector2(0.546701, 0.54209)
 texture = ExtResource("18_hnpjq")
 centered = false
 
 [node name="Idle_headleaf_tip_top" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(8.87123, 21.2439)
-rotation = -0.579523
-scale = Vector2(0.554644, 0.554644)
+position = Vector2(11.3455, 17.8766)
+rotation = -0.179581
+scale = Vector2(0.546701, 0.54209)
 texture = ExtResource("19_jcmm8")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(19.1356, 13.6863)
-scale = Vector2(0.555, 0.558561)
+position = Vector2(19.3078, 14.4754)
+scale = Vector2(0.555, 0.546713)
 texture = ExtResource("20_tbq7c")
 centered = false
 
 [node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(52.4356, 13.6507)
-scale = Vector2(0.555, 0.558561)
+position = Vector2(52.5078, 14.4677)
+scale = Vector2(0.555, 0.546713)
 texture = ExtResource("21_53a1u")
 centered = false
 
@@ -231,13 +233,13 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
 visible = false
-position = Vector2(37.687, 20.4734)
+position = Vector2(37.6017, 20.7729)
 scale = Vector2(0.555, 0.555)
 texture = ExtResource("19_r5oia")
 centered = false
 
 [node name="PeaShooter_eyebrow" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(35.5, 17.2863)
+position = Vector2(35.3156, 17.5144)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("22_3hm6e")
 centered = false

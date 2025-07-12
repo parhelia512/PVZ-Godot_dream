@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://blmc1ixchtx4y"]
+
+[ext_resource type="Script" uid="uid://cw5vocd7hroh8" path="res://scripts/character/plant/017_lily_pad.gd" id="1_36qgt"]
+[ext_resource type="Texture2D" uid="uid://cbhaawnc37cwe" path="res://assets/reanim/LilyPad_body.png" id="1_yqhr1"]
+[ext_resource type="Animation" uid="uid://bt0dx7u5axpxp" path="res://animation/character/plant/017_lily_pad/LilyPad_idle.tres" id="2_3puwi"]
+[ext_resource type="Resource" uid="uid://bxaajpvpfqkho" path="res://resources/plant_resource/plant_condition/017_lily_pad.tres" id="2_akhdm"]
+[ext_resource type="Texture2D" uid="uid://dmmcjbsd028oj" path="res://assets/reanim/LilyPad_blink1.png" id="3_1lygi"]
+[ext_resource type="Texture2D" uid="uid://blj21d64csfsk" path="res://assets/reanim/LilyPad_blink2.png" id="4_beokx"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gmjy2"]
+_data = {
+&"LilyPad_idle": ExtResource("2_3puwi")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3puwi"]
+animation = &"LilyPad_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_36qgt"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_akhdm"]
+graph_offset = Vector2(-258.231, 2.38843)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3puwi")
+nodes/Animation/position = Vector2(20, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_36qgt")
+nodes/TimeScale/position = Vector2(280, 80)
+nodes/output/position = Vector2(480, 120)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqhr1"]
+size = Vector2(50, 60)
+
+[node name="LilyPad" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
+script = ExtResource("1_36qgt")
+plant_condition = ExtResource("2_akhdm")
+blink_sprite = NodePath("Body/Anim_blink")
+blink_sprite_texture = Array[Texture]([ExtResource("3_1lygi"), ExtResource("4_beokx")])
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41, -43)
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(-0.2, 5.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_yqhr1")
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gmjy2")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_akhdm")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 6.94444e-06
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_yqhr1")

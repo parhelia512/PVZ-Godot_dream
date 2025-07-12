@@ -1,6 +1,11 @@
 extends Node2D
 class_name ZombieManager
 
+## 锤僵尸模式管理器
+@onready var zombie_manager_in_mini_game_hammer_zombie: ZombieManagerInMiniGameHammerZombie = $ZombieManagerInMiniGameHammerZombie
+## 出怪选行系统
+@onready var zombie_choose_row_system: ZombieSpawnSystem = $ZombieChooseRowSystem
+
 @onready var main_game: MainGameManager = $"../.."
 ## 最大波次
 var max_wave :int
@@ -19,9 +24,10 @@ var flag_front_wave := false	#是否为旗前波
 	set(v):
 		curr_zombie_num=v
 		label_zombie_sum.text = "当前僵尸数量：" + str(curr_zombie_num)
-		
-
-
+## 出怪倍率
+var zombie_multy := 1
+## 大波是否生成墓碑
+var create_tombston_in_flag_wave := false
 ## 所有僵尸行的节点
 @export var zombies_row_node:Array[Node]
 ## 按行保存僵尸，用于保存僵尸列表的列表
@@ -92,13 +98,13 @@ var zombie_weights = {
 @export var show_zombie_pos_start := Vector2(50, 50)
 @export var show_zombie_pos_end := Vector2(250, 450)
 @export var show_zombie_array : Array[ZombieBase] = []
-
+var zombie_refresh_types:Array
 #endregion
 
 ## 奖杯
 const trophy_scenes = preload("res://scenes/ui/trophy.tscn")
 
-#region 魅惑僵尸管理
+# 魅惑僵尸管理
 @export var zombie_list_be_hypno:Array[ZombieBase] = []
 ## 每波查看是否有被魅惑的僵尸走出屏幕后没被销毁
 ## 超出屏幕500像素删除
@@ -106,21 +112,51 @@ var screen_rect: Rect2
 
 # 生成100波出怪列表，每波最多50只僵尸
 func _ready():
-	create_spawn_list()
 	## 被魅惑僵尸移动边界
 	screen_rect = get_viewport_rect().grow(500)
 
 ## 初始僵尸管理器
-func init_zombie_manager(zombies:Node2D, max_wave:int):
+func init_zombie_manager(zombies:Node2D, max_wave:int, zombie_multy:int, zombie_refresh_types:Array, create_tombston_in_flag_wave:=false):
+	self.zombie_refresh_types = zombie_refresh_types
+	self.zombie_multy = zombie_multy
+	self.create_tombston_in_flag_wave = create_tombston_in_flag_wave
 	zombies_row_node = zombies.get_children()
 	for i in range(len(zombies_row_node)):
 		zombies_all_list.append([])  # 每次添加一个新的空列表
-		
+	
 	self.max_wave = max_wave
 	flag_progress_bar.init_flag_from_wave(max_wave)
-
 	progress_bar_segment_every_wave = 100.0 / (max_wave - 1)
+	create_spawn_list()
+	## 根据僵尸行的属性，初始化出怪选行系统
+	var ori_weight_land = []
+	var ori_weight_pool = []
+	var ori_weight_both = []
+	for i in range(zombies_row_node.size()):
+		var zombie_row_node:ZombieRow = zombies_row_node[i]
+		match zombie_row_node.zombie_row_type:
+			ZombieRow.ZombieRowType.Land:
+				ori_weight_land.append(1.0)
+				ori_weight_pool.append(0.0)
+			ZombieRow.ZombieRowType.Pool:
+				ori_weight_land.append(0.0)
+				ori_weight_pool.append(1.0)
+			ZombieRow.ZombieRowType.Both:
+				ori_weight_land.append(1.0)
+				ori_weight_pool.append(1.0)
+		
+		ori_weight_both.append(1.0)
+		
+	zombie_choose_row_system.setup(ori_weight_land, ori_weight_pool, ori_weight_both)
 
+func init_zombie_manager_in_mini_game_hammer_zombie(zombies:Node2D, zombie_multy:int):
+	
+	## 出怪倍率影响锤僵尸的僵尸管理器
+	self.zombie_multy = zombie_multy
+	zombies_row_node = zombies.get_children()
+	for i in range(len(zombies_row_node)):
+		zombies_all_list.append([])  # 每次添加一个新的空列表
+	zombie_manager_in_mini_game_hammer_zombie.init_manager()
 
 ## 显示僵尸血量
 func display_zombie_HP_label():
@@ -149,7 +185,7 @@ func create_spawn_list():
 		# 判断是否为大波
 		var is_big_wave = (wave_index + 1) % 10 == 0
 		# 计算当前波的战力上限
-		var current_power_limit = calculate_wave_power_limit(wave_index + 1, is_big_wave)
+		var current_power_limit :int = calculate_wave_power_limit(wave_index + 1, is_big_wave)
 
 		# 如果是大波，先刷新特殊僵尸
 		var total_power = 0
@@ -201,9 +237,9 @@ func calculate_wave_power_limit(wave_index:int, is_big_wave: bool) -> int:
 	
 	# 如果是大波，战力上限是原战力上限的2.5倍
 	if is_big_wave:
-		return int(base_power_limit * 2.5)
+		return int(base_power_limit * 2.5) * zombie_multy
 	
-	return base_power_limit
+	return base_power_limit * zombie_multy
 
 
 # 获取根据权重选择的僵尸
@@ -213,12 +249,12 @@ func get_random_zombie_based_on_weight() -> int:
 	var max_weight = 0
 	
 	# 计算所有可能僵尸的权重总和
-	for zombie_type in main_game.zombie_refresh_types:
+	for zombie_type in zombie_refresh_types:
 		max_weight += zombie_weights[zombie_type]
 
 	var random_value = randi_range(0, max_weight)  # 使用动态计算的最大权重
 
-	for zombie_type in main_game.zombie_refresh_types:
+	for zombie_type in zombie_refresh_types:
 		cumulative_weight += zombie_weights[zombie_type]
 		
 		if random_value < cumulative_weight:
@@ -264,12 +300,15 @@ func set_progress_bar():
 	flag_progress_bar.set_progress(curr_progress, curr_flag)
 	
 func start_first_wave():
+
 	start_next_wave()
 	one_wave_progress_timer.start()
 
 
 ## 开始刷新下一波
 func start_next_wave() -> void:
+	## 更新当前波次僵尸列表，删除已被释放的僵尸
+	update_zombies_all_list()
 	print("-----------------------------------")
 	if current_wave >= max_wave:
 		print("🎉 结束(该语句应该不出现逻辑才对)")
@@ -279,15 +318,15 @@ func start_next_wave() -> void:
 	if current_wave % 10 == 9 and current_wave != 0:
 		print("当前为旗帜波刷新")
 		
-		if main_game.game_bg == Global.GameBg.FrontNight:
+		if create_tombston_in_flag_wave:
 			#创建墓碑 (1-3个)
 			main_game.hand_manager.create_tombstone(randi()%3+1)
 			await get_tree().create_timer(2).timeout
-		# 更新墓碑
-		main_game.hand_manager.update_tombstone_list()
 		## 墓碑生成僵尸
 		for tombstone:TombStone in main_game.hand_manager.tombstone_list:
-			tombstone.create_new_zombie()
+			
+			var new_zombie_type = tombstone.zombie_candidate_list.pick_random()
+			tombstone.create_new_zombie(new_zombie_type)
 		
 	spawn_wave_zombies(spawn_list[current_wave])
 	
@@ -307,6 +346,18 @@ func start_next_wave() -> void:
 	print("🌀 第 %d 波开始，刷新阈值设为 %.2f，刷新血量为 %d，自然刷新时间为 %f" % [current_wave, refresh_threshold, refresh_health, wave_timer.wait_time])
 	
 #region 生成波次僵尸
+# 安全更新僵尸二维列表，移除已被释放的实例
+func update_zombies_all_list():
+	for i in range(zombies_all_list.size()):
+		var row = zombies_all_list[i]
+		# 创建一个新数组来存储有效的僵尸实例
+		var new_row = []
+		for zombie in row:
+			if is_instance_valid(zombie):
+				new_row.append(zombie)
+		# 替换原数组
+		zombies_all_list[i] = new_row
+
 ## 生成当前波次僵尸
 func spawn_wave_zombies(zombie_data: Array) -> void:
 	# 更新当前波次僵尸总血量
@@ -314,42 +365,62 @@ func spawn_wave_zombies(zombie_data: Array) -> void:
 	wave_current_health = 0
 	
 	for z in zombie_data:
-		var lane : int = randi() % len(zombies_row_node)
-		spawn_zombie(z, lane)
+		spawn_zombie(z)
 		
 	wave_current_health = wave_total_health
 	
 ## 生成一个僵尸
-func spawn_zombie(zombie_type: Global.ZombieType, lane: int) -> Node:
+func spawn_zombie(zombie_type: Global.ZombieType) -> Node:
 
 	var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
-	zombies_row_node[lane].add_child(z)
-
-	## 如果是舞王僵尸
-	if z is ZombieJackson:
-		z.gmae_init_zombie_jackson()
-			
+	var lane : int = zombie_choose_row_system.select_spawn_row(z.zombie_row_type)
+	
 	z.lane = lane
+	z.curr_zombie_row_type = zombies_row_node[lane].zombie_row_type
 	z.zombie_damaged.connect(_on_zombie_damaged)
 	z.zombie_dead.connect(_on_zombie_dead)
 	z.zombie_hypno.connect(_on_zombie_hypno)
 	z.curr_wave = current_wave
 	z.is_idle = false
+	
+	
+	zombies_row_node[lane].add_child(z)
+
+	## 如果是舞王僵尸
+	if z is ZombieJackson:
+		z.game_init_zombie_jackson()
+			
 	if z.zombie_type == Global.ZombieType.ZombieFlag:
 		print("旗帜僵尸")
-		z.position.x = -20
+		z.global_position = Vector2(-20, 0)  + zombies_row_node[lane].get_node("ZombieCreatePosition").global_position
 	else:
-		z.position.x = randf_range(0, 20)
+		z.global_position = Vector2(randf_range(0, 20), 0) + zombies_row_node[lane].get_node("ZombieCreatePosition").global_position
 		
-		wave_total_health += z.get_zombie_all_hp()
+	wave_total_health += z.get_zombie_all_hp()
 	
 	zombies_all_list[lane].append(z)
 	curr_zombie_num += 1
 	
+	
+	
 	return z
 
-func return_zombie(zombie_type: Global.ZombieType):
+## 非关卡自动生成的僵尸is_hypno 是否召唤被魅惑僵尸
+func return_zombie(zombie_type: Global.ZombieType, lane: int, is_hypno:=false):
 	var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
+	if not is_hypno:
+		z.zombie_dead.connect(_on_zombie_dead)
+		z.zombie_hypno.connect(_on_zombie_hypno)
+		
+		zombies_all_list[lane].append(z)
+		curr_zombie_num += 1
+		
+	else:
+		_on_zombie_hypno(z)
+		
+	z.curr_wave = current_wave
+	z.is_idle = false
+	
 	return z
 	
 #endregion
@@ -374,7 +445,7 @@ func _on_zombie_dead(zombie: ZombieBase) -> void:
 		refresh_flag_wave()
 	
 	# 如果到了最后一波刷新,且僵尸全部死亡
-	if end_wave and curr_zombie_num == 0 :
+	if end_wave and curr_zombie_num == 0:
 		print("=======================游戏结束，您获胜了=======================")
 		var trophy = trophy_scenes.instantiate()
 		get_tree().current_scene.add_child(trophy)
@@ -542,15 +613,14 @@ func _on_one_wave_progress_timer_timeout() -> void:
 
 #region 生成关卡前展示僵尸
 func show_zombie_create():
-	for zombie_type in main_game.zombie_refresh_types:
+	for zombie_type in zombie_refresh_types:
 		for i in range(randi_range(1, 4)):
 
 			var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
-			
 			z.is_idle = true
-
 			# 避免僵尸移动
 			z.walking_status = z.WalkingStatus.end
+			
 			z.position = Vector2(
 				randf_range(show_zombie_pos_start.x, show_zombie_pos_end.x),
 				randf_range(show_zombie_pos_start.y, show_zombie_pos_end.y)
@@ -558,18 +628,20 @@ func show_zombie_create():
 			show_zombie.add_child(z)
 			
 			z.label_hp.visible = false
+			## 删除展示僵尸碰撞箱
+			z.area2d.queue_free()
 			
 			## 如果是舞王僵尸
 			if z is ZombieJackson:
 				z.show_init_zombie_jackson()
-			
 			
 			show_zombie_array.append(z)
 			
 			
 func show_zombie_delete():
 	for z in show_zombie_array:
-		z.queue_free()  # 标记节点待释放
+		if z:
+			z.queue_free()  # 标记节点待释放
 
 	show_zombie_array.clear()  # 最后清空数组
 
@@ -577,7 +649,10 @@ func show_zombie_delete():
 
 
 #region 植物调用相关，冰冻所有僵尸
+
+
 func ice_all_zombie(time_ice:float, time_decelerate: float):
+	update_zombies_all_list()
 	for zombie_row:Array in zombies_all_list:
 		if zombie_row.is_empty():
 			continue

@@ -1,21 +1,25 @@
 extends Node2D
 class_name Trophy
 
+@onready var main_game: MainGameManager
+
 @onready var pick_up_glow: Sprite2D = $PickUpGlow
 
 @onready var all_rays: Node2D = $AllRays
 @onready var glow: Node2D = $Glow
 
 func _ready():
+	main_game = get_tree().current_scene
 	var tween = create_tween()
 	tween.tween_property(pick_up_glow, "scale", Vector2(1.5, 1.5), 1.0) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(pick_up_glow, "scale", Vector2(1, 1), 1.0) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.set_loops()  # 无限循环	
-
+	
 
 func _on_trophy_button_pressed() -> void:
+	$Winmusic.play()
 	$TrophyButton.disabled = true
 	var center = get_viewport().get_visible_rect().size / 2
 	var tween = create_tween()
@@ -39,3 +43,9 @@ func _on_trophy_button_pressed() -> void:
 	
 	await get_tree().create_timer(5.0).timeout
 	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.StartMenu])
+
+
+func _on_trophy_button_mouse_entered() -> void:
+	## 如果有锤子
+	if main_game.hammer:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

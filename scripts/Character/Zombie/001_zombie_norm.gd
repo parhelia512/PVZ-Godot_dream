@@ -15,6 +15,7 @@ class_name  ZombieNorm
 @export var walk_status_max := 2
 @export var death_status_max := 2
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -22,6 +23,13 @@ func _ready() -> void:
 	_rand_anim_status()
 	_rand_hair_tonge()
 	
+	if curr_zombie_row_type == ZombieRow.ZombieRowType.Land:
+		for sprite in swim_zombie_appear_start:
+			sprite.visible = false
+	elif curr_zombie_row_type == ZombieRow.ZombieRowType.Pool:
+		for sprite in swim_zombie_appear_start:
+			sprite.visible = true
+
 # 随机生成状态
 func _rand_anim_status():
 	idle_status = randi_range(1, idle_status_max)
@@ -29,5 +37,6 @@ func _rand_anim_status():
 	death_status = randi_range(1, death_status_max)
 
 func _rand_hair_tonge():
+	
 	anim_tongue.visible = randi() % 2 == 0
 	anim_hair.visible = randi() % 2 == 0

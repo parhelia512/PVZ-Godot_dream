@@ -16,9 +16,13 @@ var card_list:Array[Card]
 @export var curr_card:Card
 @export var new_plant_static:Node2D
 @export var new_plant_static_shadow:Node2D
+@export var new_plant_condition:ResourcePlantCondition
 
 @onready var plant_cells: Node2D = $"../../PlantCells"
 var plant_cells_array: Array	# 二维数组，保存每个植物格子节点
+
+## 当前鼠标所在植物格子
+var curr_plant_cell:PlantCell
 
 var new_plant_static_in_cell := false	# 植物是否在cell中
 ## 手上是否拿铲子
@@ -31,6 +35,8 @@ var new_plant_static_shadow_colum : Array
 
 ## 植物种植泥土粒子特效
 const PlantStartEffectScene = preload("res://scenes/character/plant/plant_start_effect.tscn")
+## 植物种植水池粒子特效
+const PlantStartEffectWaterScene = preload("res://scenes/character/plant/plant_start_effect_water.tscn")
 
 ## 墓碑场景，黑夜关卡加载
 const tombstone_scenes:PackedScene =  preload("res://scenes/item/game_scenes_item/tombstone.tscn")
@@ -39,13 +45,14 @@ var is_tombstone := []
 var tombstone_num := 0
 ## 生成的墓碑列表
 var tombstone_list :Array[TombStone]
-
 ## 种植的植物
 var curr_plants :Array[PlantBase]= []
+## 铲子快捷键信号
+signal shortcut_keys_shovel_F
+
 
 
 func init_plant_cells():
-
 	# 植物种植区域信号，更新植物位置列号
 	for plant_cells_row_i in plant_cells.get_child_count():
 		## 某一行plant_cells
@@ -66,19 +73,34 @@ func init_plant_cells():
 		plant_cells_array.append(plant_cells_row.get_children())
 		
 		is_tombstone.append(is_tombstone_row)
-		
-
-
+	
+## 保龄球模式下，只能种左边
+func minigame_bowling_del_right_plant_cells():
+	for plant_cells_row:Array in plant_cells_array:
+		for i in range(plant_cells_row.size()):  # 遍历
+			## 顺序是从右往左，删除右边信号，保留3列
+			if i < 6:
+				plant_cells_row[i].click_cell.disconnect(_on_click_cell)
+				plant_cells_row[i].cell_mouse_enter.disconnect(_on_cell_mouse_enter)
+				plant_cells_row[i].cell_mouse_exit.disconnect(_on_cell_mouse_exit)
+				
 ## 卡片和铲子信号连接
 func card_game_signal_connect(cards:Array[Card], shovel_bg):
 	for card in cards:
-		card.card_click.connect(_manage_new_plant_static)
+		if card:
+			card.card_click.connect(_manage_new_plant_static)
 	# 铲子
 	shovel_bg.shovel_click.connect(_manage_shovel)
+	## 连接快捷键信号
+	shortcut_keys_shovel_F.connect(_pressed_shortcut_keys_shovel_F)
 	
+## 一张卡片信号连接，传送带使用
+func one_card_game_signal_connect(card:Card):
+	card.card_click.connect(_manage_new_plant_static)
+
 
 func _process(delta: float) -> void:
-	if new_plant_static:
+	if curr_card:
 		new_plant_static.global_position = get_global_mouse_position()
 
 	if is_shovel:
@@ -86,12 +108,20 @@ func _process(delta: float) -> void:
 		
 
 # 点击卡片
-func _manage_new_plant_static(curr_card:Card) -> void:
+func _manage_new_plant_static(card:Card) -> void:
 	SoundManager.play_sfx("Card/Choose")
-	if not new_plant_static:
-		self.curr_card = curr_card
-
-		new_plant_static = Global.StaticPlantTypeSceneMap.get(curr_card.card_type).instantiate()
+	if not curr_card:
+		## 如果有铲子
+		if is_shovel:
+				SoundManager.play_sfx("Card/Back")
+				if plant_be_shovel_look:
+					plant_be_shovel_look.be_shovel_look_end()
+					plant_be_shovel_look = null
+				_cance_shovel_or_end()
+				
+		self.curr_card = card
+		new_plant_condition = Global.get_plant_info(curr_card.card_type, Global.PlantInfoAttribute.PlantConditionResource)
+		new_plant_static = Global.get_plant_info(curr_card.card_type, Global.PlantInfoAttribute.PlantStaticScenes).instantiate()
 		new_plant_static.scale = Vector2.ONE
 		new_plant_static_shadow = new_plant_static.duplicate()
 		new_plant_static_shadow.modulate.a = 0
@@ -119,54 +149,27 @@ func _manage_shovel() -> void:
 
 # 点击种植或铲掉植物
 func _on_click_cell(plant_cell:PlantCell):
-	
-	if new_plant_static and plant_cell.can_common_plant:
-		SoundManager.play_sfx("PlantCreate/Plant1")
-		
-		if main_game.mode_column:
-			for i in len(plant_cells_array):
-				var plant_cell_row_col:PlantCell = plant_cells_array[i][plant_cell.row_col.y]
-				## 如果当前cell已有植物
-				if not plant_cell_row_col.can_common_plant:
-					continue
-				# 创建植物
-				_create_new_plant(curr_card.card_type, plant_cell_row_col)
-		
-		else:
-			# 创建植物
-			_create_new_plant(curr_card.card_type, plant_cell)
-		
-		
-		# 减少阳光，卡片冷却
-		card_manager.sun = card_manager.sun - curr_card.sun_cost
-		curr_card.card_cool()
-		
-		new_plant_static_in_cell = false
-		_cancel_plant_or_end()
-		
-	## 如果是墓碑吞噬者   #TODO: 柱子模式
-	elif new_plant_static and plant_cell.is_tombstone and curr_card.card_type == Global.PlantType.GraveBuster:
-		SoundManager.play_sfx("PlantCreate/Plant1")
+
+	if new_plant_static_in_cell:
 		# 创建植物
-		var grave_buster:GraveBuster = _create_new_plant(curr_card.card_type, plant_cell)
-		grave_buster.start_eat_grave()
-		
-		# 减少阳光，卡片冷却
-		card_manager.sun = card_manager.sun - curr_card.sun_cost
-		curr_card.card_cool()
+		_create_new_plant(curr_card.card_type, plant_cell)
+		## 卡片种植完成后发射信号
+		curr_card.card_plant_end.emit(curr_card)
 		
 		new_plant_static_in_cell = false
 		_cancel_plant_or_end()
+		
 		
 	# 手拿铲子并且当前存在被铲子威胁的植物
 	if is_shovel and plant_be_shovel_look:
 		SoundManager.play_sfx("PlantCreate/Plant2")
-		plant_be_shovel_look.be_shovel_kill()
 		_cance_shovel_or_end()
-		
+		plant_be_shovel_look.be_shovel_kill()
+
 func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	# 创建植物
-	var new_plant :PlantBase= Global.PlantTypeSceneMap.get(plant_type).instantiate()
+	var new_plant :PlantBase= Global.get_plant_info(plant_type, Global.PlantInfoAttribute.PlantScenes).instantiate()
+	
 	
 	plant_cell.add_child(new_plant)
 	curr_plants.append(new_plant)
@@ -174,72 +177,70 @@ func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	new_plant.plant_free_signal.connect(_one_plant_free)
 	new_plant.plant_free_signal.connect(plant_cell.one_plant_free)
 	
-	new_plant.global_position = plant_cell.plant_position.global_position
+	plant_cell.new_plant(new_plant)
 	
-	plant_cell.is_plant = true
-	plant_cell.plant = new_plant
 	
-	var plant_start_effect_scene = PlantStartEffectScene.instantiate()
+	var plant_start_effect_scene:Node2D
+	## 当前地形为水或者睡莲
+	if plant_cell.curr_condition & 8 or plant_cell.curr_condition & 16:
+		plant_start_effect_scene = PlantStartEffectWaterScene.instantiate()
+	else:
+		plant_start_effect_scene = PlantStartEffectScene.instantiate()
+
 	new_plant.add_child(plant_start_effect_scene)
 	
+
 	return new_plant
 	
 func _one_plant_free(plant:PlantBase):
 	curr_plants.erase(plant)
 	
-
+	
 # 鼠标进入cell
 func _on_cell_mouse_enter(plant_cell:PlantCell):
-	
-	if curr_card:
-		## 存在植物、格子普通植物可以种植、植物不是墓碑吞
-		if new_plant_static and plant_cell.can_common_plant and curr_card.card_type != Global.PlantType.GraveBuster:
-			
-			new_plant_static_in_cell = true
-			
-			if main_game.mode_column:
-				# 当前cell的列
-				var curr_col = plant_cell.row_col.y
-				#对每一行cell变量，获取当前列的所有cell
-				for i in len(plant_cells_array):
-					var plant_cell_row_col:PlantCell = plant_cells_array[i][curr_col]
-					var new_node = new_plant_static_shadow_colum[i]
-					## 如果当前cell已有植物
-					if plant_cell_row_col.is_plant:
-						continue
-					new_node.global_position = plant_cell_row_col.plant_position.global_position
-					new_node.modulate.a = 0.5
-					
+	curr_plant_cell = plant_cell
+	## 静态植物比当前植物种植条件慢一帧消除
+	if  curr_card:
+		## 如果是普通植物并且当前格子可以种植普通植物
+		if not new_plant_condition.is_special_plants and plant_cell.can_common_plant:
+			## 如果地形当前格子地形符合 并且 当前格子对应的植物位置为空
+			if new_plant_condition.plant_condition & plant_cell.curr_condition and plant_cell.plant_in_cell[new_plant_condition.place_plant_in_cell] == null:
+				new_plant_static_in_cell = true
+				new_plant_static_shadow.global_position = plant_cell.get_new_plant_static_shadow_global_position(new_plant_condition.place_plant_in_cell)
+				
+				new_plant_static_shadow.modulate.a = 0.5
 				
 			else:
-				new_plant_static_shadow.global_position = plant_cell.plant_position.global_position
-				new_plant_static_shadow.modulate.a = 0.5
-		
-		## 如果是墓碑吞噬者
-		#TODO: 柱子模式
-		elif new_plant_static and plant_cell.is_tombstone and curr_card.card_type == Global.PlantType.GraveBuster:
-			
-			new_plant_static_in_cell = true
-			
-			new_plant_static_shadow.global_position = plant_cell.plant_position.global_position
-			new_plant_static_shadow.modulate.a = 0.5
+				new_plant_static_shadow.modulate.a = 0
+				new_plant_static_in_cell = false
 
+		## 如果是特殊植物，特殊植物调用自己的方法判断是否可以种植
+		elif new_plant_condition.is_special_plants:
+			if new_plant_condition.judge_special_plants_condition(plant_cell):
+				new_plant_static_in_cell = true
+				new_plant_static_shadow.global_position = plant_cell.get_new_plant_static_shadow_global_position(new_plant_condition.place_plant_in_cell)
+				new_plant_static_shadow.modulate.a = 0.5
+				
+			else:
+				new_plant_static_shadow.modulate.a = 0
+				new_plant_static_in_cell = false
 
 	# 如果手拿铲子
-	if is_shovel and plant_cell.plant:
-		plant_be_shovel_look = plant_cell.plant
-		plant_be_shovel_look.be_shovel_look()
+	if is_shovel:
+		plant_be_shovel_look =  plant_cell.return_plant_be_shovel_look()
+		if plant_be_shovel_look:
+			plant_be_shovel_look.be_shovel_look()
 
 # 鼠标移出cell
 func _on_cell_mouse_exit(plant_cell:PlantCell):
-	if new_plant_static:
+	plant_cell = null
+	if curr_card:
 		if main_game.mode_column:
 			# 当前cell的列
 			#对每一行new_node变量，获取当前new_plant_static_shadow_colum的所有new_node
 			for new_node in new_plant_static_shadow_colum:
 				new_node.modulate.a = 0
 				new_plant_static_in_cell = false
-				
 				
 		else:
 			new_plant_static_shadow.modulate.a = 0
@@ -250,10 +251,33 @@ func _on_cell_mouse_exit(plant_cell:PlantCell):
 		plant_be_shovel_look.be_shovel_look_end()
 		plant_be_shovel_look = null
 
+## 铲子快捷键
+func _pressed_shortcut_keys_shovel_F():
+	## 如果手上有植物
+	if  curr_card:
+		SoundManager.play_sfx("Card/Back")
+		_cancel_plant_or_end()
+	## 如果手上有铲子
+	if is_shovel:
+		SoundManager.play_sfx("Card/Back")
+		if plant_be_shovel_look:
+			plant_be_shovel_look.be_shovel_look_end()
+			plant_be_shovel_look = null
+		_cance_shovel_or_end()
+	## 点击铲子函数
+	_manage_shovel()
+	## 如果当前在植物格子中
+	if curr_plant_cell:
+		_on_cell_mouse_enter(curr_plant_cell)
+		
 # 右键点击
 func _input(event):
+	## 铲子快捷键
+	if Input.is_action_just_pressed("Shovel_F"):
+		shortcut_keys_shovel_F.emit()
+
 	if event is InputEventMouseButton:
-		if new_plant_static:
+		if curr_card:
 			#右键点击
 			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 				SoundManager.play_sfx("Card/Back")
@@ -282,6 +306,7 @@ func _input(event):
 # 取消种植或者种植完成后
 func _cancel_plant_or_end():
 	curr_card = null
+	new_plant_condition = null
 	new_plant_static.queue_free()
 	new_plant_static_shadow.queue_free()
 	
@@ -361,21 +386,17 @@ func _create_one_tombstone(plant_cell: PlantCell, pos:Vector2i):
 	
 	tombstone_list.append(tombstone)
 
-## 更新墓碑列表，刪除已经清空的墓碑
-func update_tombstone_list():
-	tombstone_list = tombstone_list.filter(func(node): return node != null)
-
-
-## 修改对应的参数并断开信号连接
-func _delete_tombstone(plant_cell:PlantCell):
+	
+## 删除墓碑修改对应的参数并断开信号连接
+func _delete_tombstone(plant_cell:PlantCell, tombstone:TombStone):
 	plant_cell.cell_delete_tombstone.disconnect(_delete_tombstone)
 	
 	var pos:Vector2i = plant_cell.row_col
 	is_tombstone[pos.x][pos.y] = false
 	tombstone_num -= 1
+	tombstone_list.erase(tombstone)
 
-
-## 黑夜关卡生成墓碑（生成数量，生成的最大列数，从右向左）
+## 黑夜关卡生成墓碑（生成数量）
 func create_tombstone(new_num:int):
 	## 最大数量： 最大可生成列数 * 行数
 	## 生成随机位置
@@ -383,10 +404,19 @@ func create_tombstone(new_num:int):
 	for pos in selected_positions:
 		var plant_cell:PlantCell = plant_cells_array[pos.x][pos.y]
 		## 如果存在植物
-		if plant_cell.is_plant:
-			plant_cell.plant._plant_free()
+		if plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]:
+			plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]._plant_free()
+			
+		## 如果存在植物
+		if plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]:
+			plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]._plant_free()
+			
+		## 如果存在植物
+		if plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]:
+			plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]._plant_free()
 			
 		_create_one_tombstone(plant_cell, pos)
+
 
 #endregion
 

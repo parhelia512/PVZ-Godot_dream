@@ -167,8 +167,6 @@ func get_current_animation_info():
 			"progress": 0
 		}
 
-
-
 ## 召唤伴舞僵尸
 func call_zombie_dancer():
 	for i in zombie_dancers:
@@ -176,34 +174,23 @@ func call_zombie_dancer():
 			if i == -1:
 				print("舞王不存在？有问题")
 				
-			var new_zombie_dancer_lane_and_postion = get__new_zombie_dancer_lane_and_postion(i, zombie_dancers[-1].lane, zombie_dancers[-1].global_position.x)
+			var new_zombie_dancer_lane_and_postion = get_new_zombie_dancer_lane_and_postion(i, zombie_dancers[-1].lane, zombie_dancers[-1].global_position.x)
 			## 如果当前位置可以生成伴舞
 			if new_zombie_dancer_lane_and_postion:
-					
-				var new_zombie_dancer:ZombieBase = preload("res://scenes/character/zombie/010_zombie_dancer.tscn").instantiate()
-				
+				var new_zombie_dancer:ZombieDancer = zombie_manager.return_zombie(Global.ZombieType.ZombieDancer, new_zombie_dancer_lane_and_postion["lane"], is_hypnotized)
+				new_zombie_dancer.lane = new_zombie_dancer_lane_and_postion["lane"]
 				zombie_manager.zombies_row_node[new_zombie_dancer_lane_and_postion["lane"]].add_child(new_zombie_dancer)
 				zombie_dancers[i] = new_zombie_dancer
 				new_zombie_dancer.dancer_id = i
 				new_zombie_dancer.global_position.x = new_zombie_dancer_lane_and_postion["global_position_x"]
 				
 				new_zombie_dancer.init_anim_speed_dance(animation_origin_speed, animation_curr_speed)
-			
 				new_zombie_dancer.dancer_manager = self
 				
+				## 如果舞王被魅惑
 				if is_hypnotized:
-					zombie_manager.zombie_list_be_hypno.append(new_zombie_dancer)
 					new_zombie_dancer.call_be_hypnotized()
 					
-				else:
-					## 更新僵尸管理器,伴舞僵尸不计入波次血量,连接僵尸死亡，魅惑信号
-					new_zombie_dancer.zombie_dead.connect(zombie_manager._on_zombie_dead)
-					new_zombie_dancer.zombie_hypno.connect(zombie_manager._on_zombie_hypno)
-				
-					zombie_manager.curr_zombie_num += 1
-				
-				
-				
 			# 不能生成伴舞，用true填充
 			else:
 				zombie_dancers[i] = true
@@ -211,14 +198,15 @@ func call_zombie_dancer():
 	## 召唤伴舞完成后更新移动
 	update_all_walk()
 	
-func get__new_zombie_dancer_lane_and_postion(i:int, lane_Jackson:int, global_postion_x_jackson:float):
+func get_new_zombie_dancer_lane_and_postion(i:int, lane_Jackson:int, global_postion_x_jackson:float):
 	## 上下左右顺序
 	if i == 0:
-		if lane_Jackson == 0:
+		## 舞王在第一行，或者召唤行为泳池行
+		if lane_Jackson == 0 or zombie_manager.zombies_row_node[lane_Jackson - 1].zombie_row_type == ZombieRow.ZombieRowType.Pool:
 			return false
 		return {"lane":lane_Jackson - 1, "global_position_x":global_postion_x_jackson}
 	elif i == 1:
-		if lane_Jackson == zombie_manager.zombies_row_node.size() - 1:
+		if lane_Jackson == zombie_manager.zombies_row_node.size() - 1 or zombie_manager.zombies_row_node[lane_Jackson + 1].zombie_row_type == ZombieRow.ZombieRowType.Pool:
 			return false
 		return {"lane":lane_Jackson + 1, "global_position_x":global_postion_x_jackson}
 	elif i == 2:

@@ -9,6 +9,9 @@ class_name ControlCanvasLayer
 @onready var check_box_3: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox3
 @onready var check_box_4: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox4
 @onready var check_box_5: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox5
+@onready var check_box_6: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox6
+@onready var check_box_7: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox7
+
 
 ## 初始化控制台
 func init_control_panel():
@@ -18,6 +21,8 @@ func init_control_panel():
 	check_box_3.button_pressed = Global.disappear_spare_card_Placeholder
 	check_box_4.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 	check_box_5.button_pressed = Global.display_plant_HP_label
+	check_box_6.button_pressed = Global.display_zombie_HP_label
+	check_box_7.button_pressed = Global.display_plant_card_bar_follow_mouse
 
 
 ## 自动收集阳光
@@ -62,4 +67,13 @@ func _on_check_box_6_toggled(toggled_on: bool) -> void:
 	
 	Global.save_config()
 	main_game.display_zombie_HP_label()
+	
+
+
+func _on_check_box_7_toggled(toggled_on: bool) -> void:
+	Global.display_plant_card_bar_follow_mouse = toggled_on
+
+	Global.save_config()
+	main_game.card_bar_and_shovel_z_index_100()
+	main_game.conveyor_belt_card_bar_z_index_100()
 	

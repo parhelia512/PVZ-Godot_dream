@@ -109,7 +109,7 @@ position = Vector2(0, 50)
 texture = ExtResource("3_jsxne")
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="." groups=["Zombie"]]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 

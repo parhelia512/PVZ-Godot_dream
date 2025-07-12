@@ -123,3 +123,5 @@ stream = ExtResource("21_4g5ki")
 [node name="GravestoneRumble" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("22_nbotw")
 bus = &"SFX"
+
+[node name="BulletSFX" type="Node" parent="."]

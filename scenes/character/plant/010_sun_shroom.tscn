@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://bt07br5ypejyq"]
+[gd_scene load_steps=33 format=3 uid="uid://bt07br5ypejyq"]
 
 [ext_resource type="Script" uid="uid://xmlolyqvbiue" path="res://scripts/character/plant/010_sun_shroom.gd" id="1_dmoof"]
 [ext_resource type="PackedScene" uid="uid://f0wyiq6h4jnl" path="res://scenes/item/game_scenes_item/sun.tscn" id="2_hwl54"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_24j40"]
 [ext_resource type="Texture2D" uid="uid://boh05go0jrax1" path="res://assets/reanim/SunShroom_blink2.png" id="4_veen5"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="5_2je2o"]
 [ext_resource type="Texture2D" uid="uid://d3fiedp7rmj02" path="res://assets/reanim/SunShroom_body.png" id="5_5cx50"]
@@ -140,6 +141,7 @@ size = Vector2(50, 60)
 script = ExtResource("1_dmoof")
 sun_scene = ExtResource("2_hwl54")
 sun_value = 15
+plant_condition = ExtResource("3_24j40")
 blink_sprite = NodePath("Body/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("6_2je2o"), ExtResource("4_veen5")])
 
@@ -152,28 +154,29 @@ scale = Vector2(0.796914, 0.736522)
 texture = ExtResource("5_2je2o")
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(31, 47.8)
-scale = Vector2(0.366, 0.354)
+position = Vector2(31, 47.8725)
+scale = Vector2(0.368536, 0.351826)
 texture = ExtResource("5_5cx50")
 centered = false
 
 [node name="Anim_sleep1" type="Sprite2D" parent="Body"]
-position = Vector2(36.9, 50.4)
-scale = Vector2(0.37, 0.38)
+position = Vector2(36.8638, 50.8087)
+rotation = 0.00650095
+scale = Vector2(0.383986, 0.363652)
+skew = -0.00650095
 texture = ExtResource("7_24j40")
 centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(36.5195, 51.2415)
-scale = Vector2(0.399049, 0.351146)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_veen5")
 centered = false
 
 [node name="SunShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(26, 26.6)
+position = Vector2(25.2551, 27.9623)
 rotation = 0.07854
-scale = Vector2(0.36, 0.36)
+scale = Vector2(0.370899, 0.345014)
 texture = ExtResource("7_oyc14")
 centered = false
 

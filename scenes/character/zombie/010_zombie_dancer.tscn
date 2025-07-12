@@ -1142,6 +1142,7 @@ anim_offset_max = 1.0
 
 [node name="ZombieDancer" type="Node2D" node_paths=PackedStringArray("zombie_outerarm_upper", "zombie_status_2_fade", "hand_drop", "zombie_status_3_fade", "head_drop")]
 script = ExtResource("1_8g1g5")
+zombie_row_type = 0
 zombie_outerarm_upper = NodePath("Mask/Body/Zombie_Jackson_outerarm_upper")
 zombie_outerarm_upper_sprite2d_textures = ExtResource("18_fuck")
 zombie_status_2_fade = [NodePath("Mask/Body/Zombie_outerarm_hand"), NodePath("Mask/Body/Zombie_outerarm_lower")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bpqnfubk3sqri"]
+[gd_scene load_steps=39 format=3 uid="uid://bpqnfubk3sqri"]
 
 [ext_resource type="Animation" uid="uid://cenx6nfh0tar8" path="res://animation/character/plant/005_potato_mine/PotatoMine_armed.tres" id="1_anim"]
 [ext_resource type="Texture2D" uid="uid://bo22elcj4cnrl" path="res://assets/reanim/PotatoMine_rock4.png" id="1_fuck"]
@@ -7,6 +7,7 @@
 [ext_resource type="Animation" uid="uid://rourh2mea42j" path="res://animation/character/plant/005_potato_mine/PotatoMine_rise.tres" id="2_anim"]
 [ext_resource type="Texture2D" uid="uid://dnilkxbadh0rl" path="res://assets/reanim/PotatoMine_blink1.png" id="2_as5ej"]
 [ext_resource type="Texture2D" uid="uid://cwcs1c31vf7xx" path="res://assets/reanim/PotatoMine_rock2.png" id="2_fuck"]
+[ext_resource type="Resource" uid="uid://dqj6jhj3pdbq0" path="res://resources/plant_resource/plant_condition/005_potato_mine.tres" id="2_pji5j"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_muccc"]
 [ext_resource type="Texture2D" uid="uid://nqtupvaignh1" path="res://assets/reanim/PotatoMine_blink2.png" id="3_th2kl"]
 [ext_resource type="Texture2D" uid="uid://bem7ao15bhj4u" path="res://assets/reanim/PotatoMine_stem.png" id="4_fuck"]
@@ -162,6 +163,7 @@ anim_offset_max = 1.0
 script = ExtResource("1_ums80")
 is_bomb = false
 SFX_bomb = NodePath("PotatoMine")
+plant_condition = ExtResource("2_pji5j")
 blink_sprite = NodePath("Body/PotatoMine_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("2_as5ej"), ExtResource("3_th2kl")])
 is_blink = false
@@ -196,7 +198,8 @@ texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-visible = false
+position = Vector2(21.4631, 57.7786)
+scale = Vector2(0.368985, 0.186978)
 centered = false
 
 [node name="PotatoMine_stem" type="Sprite2D" parent="Body"]
@@ -206,7 +209,8 @@ texture = ExtResource("4_fuck")
 centered = false
 
 [node name="Anim_eye" type="Sprite2D" parent="Body"]
-visible = false
+position = Vector2(28.7605, 58.5513)
+scale = Vector2(0.5115, 0.532105)
 centered = false
 
 [node name="PotatoMine_blink" type="Sprite2D" parent="Body"]
@@ -219,7 +223,9 @@ visible = false
 centered = false
 
 [node name="PotatoMine_rock3b" type="Sprite2D" parent="Body"]
-visible = false
+position = Vector2(17.1705, 56.1474)
+rotation = -0.0734218
+scale = Vector2(0.793096, 0.804257)
 centered = false
 
 [node name="PotatoMine_rock1b" type="Sprite2D" parent="Body"]
@@ -245,25 +251,28 @@ visible = false
 centered = false
 
 [node name="PotatoMine_rock6" type="Sprite2D" parent="Body"]
-position = Vector2(14.7, 66.1)
+position = Vector2(10.6649, 67.3878)
+rotation = -0.148343
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_fuck")
 centered = false
 
 [node name="PotatoMine_rock1" type="Sprite2D" parent="Body"]
-position = Vector2(26.8, 68.5)
-scale = Vector2(0.8, 0.8)
+position = Vector2(25.4264, 70.217)
+rotation = -0.247237
+scale = Vector2(0.799142, 0.799142)
 texture = ExtResource("9_fuck")
 centered = false
 
 [node name="PotatoMine_rock3" type="Sprite2D" parent="Body"]
-position = Vector2(42.5, 64.5)
-scale = Vector2(0.8, 0.8)
+position = Vector2(46.2775, 63.2122)
+rotation = 0.184304
+scale = Vector2(0.799142, 0.799142)
 texture = ExtResource("8_fuck")
 centered = false
 
 [node name="PotatoMine_rock5" type="Sprite2D" parent="Body"]
-position = Vector2(31.1, 69.1)
+position = Vector2(31.7868, 69.1)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("11_fuck")
 centered = false

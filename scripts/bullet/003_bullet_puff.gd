@@ -1,2 +1,2 @@
-extends BulletPea
+extends BulletLineraBase
 class_name BulletPuff

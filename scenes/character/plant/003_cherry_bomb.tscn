@@ -1,19 +1,20 @@
-[gd_scene load_steps=46 format=3 uid="uid://cu0wuqktyhssa"]
+[gd_scene load_steps=47 format=3 uid="uid://cu0wuqktyhssa"]
 
 [ext_resource type="Animation" uid="uid://eg5i0srekcuo" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_explode.tres" id="1_anim"]
 [ext_resource type="Script" uid="uid://b7vg4ofxajdtb" path="res://scripts/character/plant/003_cherry_bomb.gd" id="1_fj2s8"]
 [ext_resource type="Animation" uid="uid://b2a3f5y4dudyi" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_idle.tres" id="2_anim"]
 [ext_resource type="Texture2D" uid="uid://dvuugtbourjhs" path="res://assets/reanim/CherryBomb_leftstem.png" id="2_ocibd"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_w6qmx"]
 [ext_resource type="Texture2D" uid="uid://bmpuc6vb6mfpk" path="res://assets/reanim/CherryBomb_left1.png" id="3_gijk3"]
-[ext_resource type="Texture2D" uid="uid://c3mfcmrjen4il" path="res://assets/reanim/CherryBomb_left3.png" id="4_ocibd"]
 [ext_resource type="Texture2D" uid="uid://dlayj8ftlothc" path="res://assets/reanim/CherryBomb_lefteye11.png" id="5_cjc23"]
 [ext_resource type="Texture2D" uid="uid://cuv0j6lkkkr5d" path="res://assets/reanim/CherryBomb_lefteye21.png" id="6_sobky"]
+[ext_resource type="Texture2D" uid="uid://c3mfcmrjen4il" path="res://assets/reanim/CherryBomb_left3.png" id="6_xru78"]
 [ext_resource type="Texture2D" uid="uid://b6gaqdfa477uw" path="res://assets/reanim/CherryBomb_leftmouth1.png" id="7_wh83y"]
 [ext_resource type="Texture2D" uid="uid://bjdqpef0ve0pg" path="res://assets/reanim/CherryBomb_rightstem.png" id="8_vttkl"]
 [ext_resource type="Texture2D" uid="uid://dspmy0uy0cacv" path="res://assets/reanim/CherryBomb_right1.png" id="9_hfb7l"]
-[ext_resource type="Texture2D" uid="uid://uklt4t2i3j63" path="res://assets/reanim/CherryBomb_right3.png" id="10_gijk3"]
 [ext_resource type="Texture2D" uid="uid://cfdwh0bhgcrlb" path="res://assets/reanim/CherryBomb_righteye11.png" id="11_q257l"]
 [ext_resource type="Texture2D" uid="uid://d0dmytj04iew5" path="res://assets/reanim/CherryBomb_righteye21.png" id="12_7dx3j"]
+[ext_resource type="Texture2D" uid="uid://uklt4t2i3j63" path="res://assets/reanim/CherryBomb_right3.png" id="12_w6qmx"]
 [ext_resource type="Texture2D" uid="uid://biffa3h6h5rxy" path="res://assets/reanim/CherryBomb_rightmouth1.png" id="13_cc70x"]
 [ext_resource type="Texture2D" uid="uid://d2cv50584w3k7" path="res://assets/reanim/CherryBomb_leaf3.png" id="14_1eoq8"]
 [ext_resource type="Texture2D" uid="uid://b6robscgti75e" path="res://assets/reanim/CherryBomb_leaf2tip.png" id="15_yiqn5"]
@@ -73,7 +74,7 @@ size = Vector2(250, 200)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456044, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.4015, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_xru78"]
+[sub_resource type="CurveTexture" id="CurveTexture_p5gqp"]
 curve = SubResource("Curve_sobky")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sobky"]
@@ -92,13 +93,13 @@ gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_min = 0.1
 scale_max = 0.3
-alpha_curve = SubResource("CurveTexture_xru78")
+alpha_curve = SubResource("CurveTexture_p5gqp")
 
 [sub_resource type="Curve" id="Curve_gijk3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.582418, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_p5gqp"]
+[sub_resource type="CurveTexture" id="CurveTexture_svbgh"]
 curve = SubResource("Curve_gijk3")
 
 [sub_resource type="Curve" id="Curve_cjc23"]
@@ -106,14 +107,14 @@ _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.510989, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.985075), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_svbgh"]
+[sub_resource type="CurveTexture" id="CurveTexture_3oaqw"]
 curve = SubResource("Curve_cjc23")
 
 [sub_resource type="Curve" id="Curve_hfb7l"]
 _data = [Vector2(0, 0.696629), 0.0, 0.0, 0, 0, Vector2(0.494505, 1), 0.0, 0.0, 0, 0, Vector2(0.972528, 0.247191), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_3oaqw"]
+[sub_resource type="CurveTexture" id="CurveTexture_me3ek"]
 curve = SubResource("Curve_hfb7l")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q257l"]
@@ -122,19 +123,20 @@ emission_shape = 1
 emission_sphere_radius = 50.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = 91.64
-angular_velocity_curve = SubResource("CurveTexture_svbgh")
+angular_velocity_curve = SubResource("CurveTexture_3oaqw")
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_min = 0.0
-scale_curve = SubResource("CurveTexture_3oaqw")
+scale_curve = SubResource("CurveTexture_me3ek")
 color = Color(0.917647, 0.756863, 0, 1)
-alpha_curve = SubResource("CurveTexture_p5gqp")
+alpha_curve = SubResource("CurveTexture_svbgh")
 
 [node name="CherryBomb" type="Node2D" node_paths=PackedStringArray("SFX_bomb")]
 script = ExtResource("1_fj2s8")
 SFX_bomb = NodePath("Cherrybomb")
+plant_condition = ExtResource("2_w6qmx")
 no_blink = true
 
 [node name="Cherrybomb" type="AudioStreamPlayer" parent="."]
@@ -174,7 +176,7 @@ centered = false
 position = Vector2(-12.4, 5.3)
 rotation = 0.171042
 scale = Vector2(1.037, 1.003)
-texture = ExtResource("4_ocibd")
+texture = ExtResource("6_xru78")
 centered = false
 
 [node name="CherryBomb_lefteye11" type="Sprite2D" parent="Body"]
@@ -219,7 +221,7 @@ centered = false
 position = Vector2(26.2, 23.3)
 rotation = -0.270526
 scale = Vector2(1.116, 1.116)
-texture = ExtResource("10_gijk3")
+texture = ExtResource("12_w6qmx")
 centered = false
 
 [node name="CherryBomb_righteye11" type="Sprite2D" parent="Body"]

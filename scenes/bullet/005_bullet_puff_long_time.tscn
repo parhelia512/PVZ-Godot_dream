@@ -55,7 +55,7 @@ process_material = SubResource("ParticleProcessMaterial_mmpy7")
 scale = Vector2(0.625, 0.666667)
 texture = ExtResource("3_8bcht")
 
-[node name="Area2D" type="Area2D" parent="." groups=["Zombie"]]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 

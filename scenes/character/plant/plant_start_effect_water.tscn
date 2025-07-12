@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://vgg8iloyqu3e"]
+
+[ext_resource type="Script" uid="uid://bmdbvp327cg0q" path="res://scripts/character/plant/plant_start_effect.gd" id="1_6sqnc"]
+[ext_resource type="Texture2D" uid="uid://dokski45v5dh2" path="res://assets/reanim/splash_particle.png" id="2_ofeam"]
+[ext_resource type="AudioStream" uid="uid://c4gves1trirtq" path="res://assets/audio/SFX/plant_create/plant_water.ogg" id="3_4tvjw"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ofeam"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+velocity_pivot = Vector3(0, -1, 0)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 66.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.3
+
+[node name="PlantStartWaterEffect" type="Node2D" node_paths=PackedStringArray("SFX_create_new_plant")]
+script = ExtResource("1_6sqnc")
+SFX_create_new_plant = [NodePath("SFX/PlantWater")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 31)
+emitting = false
+amount = 15
+texture = ExtResource("2_ofeam")
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ofeam")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="PlantWater" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_4tvjw")

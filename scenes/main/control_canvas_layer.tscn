@@ -8,7 +8,7 @@
 [ext_resource type="BitMap" uid="uid://bc7yq02xscrlr" path="res://assets/image/ui/ui_level/Almanac_CloseButton_Mask.png" id="6_g2rg4"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
-layer = 2
+layer = 3
 script = ExtResource("1_urijc")
 
 [node name="OptionBG" type="TextureRect" parent="."]
@@ -72,6 +72,11 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "显示僵尸血量"
 
+[node name="CheckBox7" type="CheckBox" parent="OptionBG/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "焦点卡槽自动置顶"
+
 [node name="TextureButton" type="TextureButton" parent="OptionBG"]
 layout_mode = 0
 offset_left = 550.0
@@ -98,4 +103,5 @@ text = "关闭"
 [connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox4" to="." method="_on_check_box_4_toggled"]
 [connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox5" to="." method="_on_check_box_5_toggled"]
 [connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox6" to="." method="_on_check_box_6_toggled"]
+[connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox7" to="." method="_on_check_box_7_toggled"]
 [connection signal="pressed" from="OptionBG/TextureButton" to="." method="_on_texture_button_pressed"]

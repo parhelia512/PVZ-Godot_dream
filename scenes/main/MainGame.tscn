@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b2soejmoqi7wd"]
+[gd_scene load_steps=66 format=3 uid="uid://b2soejmoqi7wd"]
 
 [ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_7dde3"]
 [ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_8fvtd"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="4_w5iw5"]
 [ext_resource type="PackedScene" uid="uid://cflpyoqris51r" path="res://scenes/fx/doom_shroom_crater.tscn" id="5_3tcal"]
 [ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="5_j3aa3"]
-[ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mower.tscn" id="5_w0404"]
+[ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mover/lawn_mower.tscn" id="5_w0404"]
 [ext_resource type="Script" uid="uid://c5llwle352r6f" path="res://scripts/manager/card_manager.gd" id="5_yy6tc"]
 [ext_resource type="Script" uid="uid://bd3w3y5b02dut" path="res://scripts/ui/main_game_ui/card_bar.gd" id="8_ifnc6"]
 [ext_resource type="Texture2D" uid="uid://hvvk2fdgo3pw" path="res://assets/image/ui/ui_card/SeedBank.png" id="8_xvvqk"]
@@ -21,18 +21,24 @@
 [ext_resource type="PackedScene" uid="uid://brbdbxg2tocla" path="res://scenes/ui/flag_progress_bar.tscn" id="16_dc1ex"]
 [ext_resource type="Script" uid="uid://cyutow4qwsjq5" path="res://scripts/ui/main_game_ui/ui_remind_word.gd" id="17_ybhi1"]
 [ext_resource type="Texture2D" uid="uid://bll1o67ycmid6" path="res://assets/image/ui/ui_remind_word/StartReady.png" id="18_gyila"]
+[ext_resource type="Script" uid="uid://h4kkw30hjgsr" path="res://scripts/ui/card/conveyor_belt.gd" id="18_xaurn"]
 [ext_resource type="Texture2D" uid="uid://daqyr7g1dgckt" path="res://assets/image/ui/ui_remind_word/StartSet.png" id="19_3tcal"]
 [ext_resource type="Script" uid="uid://c8vlhy0axw8nc" path="res://scripts/ui/main_game_ui/area_2d_home.gd" id="19_tjo6j"]
+[ext_resource type="Texture2D" uid="uid://cpweorxgjagtw" path="res://assets/image/ui/ui_card/ConveyorBelt_backdrop.png" id="19_v6enx"]
 [ext_resource type="Texture2D" uid="uid://bcv81qevn5hpt" path="res://assets/image/ui/ui_remind_word/StartPlant.png" id="20_2b7lk"]
 [ext_resource type="Texture2D" uid="uid://uh50cdkqdl67" path="res://assets/image/background/background1.jpg" id="20_ifnc6"]
+[ext_resource type="Texture2D" uid="uid://clu7agu73dxr8" path="res://assets/image/ui/ui_card/ConveyorBelt.png" id="20_q0roe"]
 [ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="21_48j6u"]
+[ext_resource type="PackedScene" uid="uid://cjuiaaq33o5aa" path="res://scenes/ui/card.tscn" id="21_v6enx"]
 [ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="22_httmh"]
 [ext_resource type="AudioStream" uid="uid://b0a14btnqbv0l" path="res://assets/audio/SFX/zombie/groan/groan2.ogg" id="22_vyo3a"]
 [ext_resource type="AudioStream" uid="uid://c1v38q1krjff6" path="res://assets/audio/SFX/zombie/groan/groan3.ogg" id="23_b4qea"]
 [ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="23_vyo3a"]
 [ext_resource type="Script" uid="uid://dhkfw0onmxcyf" path="res://scripts/camera/main_game_camera.gd" id="24_b4qea"]
+[ext_resource type="Script" uid="uid://0num78yxy82x" path="res://scripts/manager/zombie_manager_in_mini_game_hammer_zombie.gd" id="24_iuyhw"]
 [ext_resource type="AudioStream" uid="uid://ds0xvjrngfga7" path="res://assets/audio/SFX/zombie/groan/groan4.ogg" id="24_xaurn"]
 [ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="25_aop5g"]
+[ext_resource type="Script" uid="uid://duv8spyw6f44n" path="res://scripts/manager/zombie_choose_row_system.gd" id="25_iuyhw"]
 [ext_resource type="AudioStream" uid="uid://defpxdm4tuwyl" path="res://assets/audio/SFX/zombie/groan/groan5.ogg" id="25_v6enx"]
 [ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="26_84h1o"]
 [ext_resource type="AudioStream" uid="uid://b74lc0i183mdq" path="res://assets/audio/SFX/zombie/groan/groan6.ogg" id="26_q0roe"]
@@ -45,6 +51,22 @@
 [ext_resource type="Script" uid="uid://bwp666ia1e8t7" path="res://scripts/fx/panel_color.gd" id="33_ybhi1"]
 [ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="34_8fvtd"]
 [ext_resource type="PackedScene" uid="uid://5v0fdtao52jl" path="res://scenes/main/control_canvas_layer.tscn" id="34_ifnc6"]
+[ext_resource type="Texture2D" uid="uid://cb5umxqmoviab" path="res://assets/image/background/Wallnut_bowlingstripe.png" id="34_q0roe"]
+[ext_resource type="Texture2D" uid="uid://b6gd58cnsxid2" path="res://assets/image/background/background2_gameover_interior_overlay.png" id="35_h7ybh"]
+[ext_resource type="Texture2D" uid="uid://css4w8rs4mm6l" path="res://assets/image/background/background1_gameover_interior_overlay.png" id="37_kqxwt"]
+[ext_resource type="AudioStream" uid="uid://cvpcoiaeca4ag" path="res://assets/audio/SFX/progress/scream.ogg" id="38_h7ybh"]
+[ext_resource type="Texture2D" uid="uid://dltdtjwn6a800" path="res://assets/image/background/background2_gameover_mask.png" id="38_r4252"]
+[ext_resource type="Texture2D" uid="uid://bter5jg6j45k" path="res://assets/image/background/background1_gameover_mask.png" id="39_h7ybh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tf6e"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iuyhw"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 6
+particles_anim_loop = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0roe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x628s"]
 texture = ExtResource("8_xvvqk")
@@ -56,7 +78,9 @@ texture_margin_bottom = 10.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbbka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yy6tc"]
-size = Vector2(141, 602)
+size = Vector2(150, 600)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4252"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybhi1"]
 
@@ -64,9 +88,6 @@ size = Vector2(141, 602)
 script = ExtResource("1_7dde3")
 bgm_choose_card = ExtResource("2_8fvtd")
 mode_column = false
-zombie_refresh_types = Array[int]([0, 2, 3, 4, 5, 6, 7, 8])
-start_sun = 50
-game_bg = 1
 
 [node name="PlantCells" type="Node2D" parent="."]
 z_index = 200
@@ -336,28 +357,41 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LawnMovers" type="Node2D" parent="."]
-z_index = 450
+z_index = 400
+position = Vector2(-4, -1)
 
 [node name="LawnMover" parent="LawnMovers" instance=ExtResource("5_w0404")]
-position = Vector2(25, 151)
+z_index = 15
+position = Vector2(25, 166)
+scale = Vector2(0.8, 0.8)
 
 [node name="LawnMover2" parent="LawnMovers" instance=ExtResource("5_w0404")]
-position = Vector2(25, 243)
+z_index = 25
+position = Vector2(25, 258)
+scale = Vector2(0.8, 0.8)
 
 [node name="LawnMover3" parent="LawnMovers" instance=ExtResource("5_w0404")]
-position = Vector2(25, 341)
+z_index = 35
+position = Vector2(25, 356)
+scale = Vector2(0.8, 0.8)
 
 [node name="LawnMover4" parent="LawnMovers" instance=ExtResource("5_w0404")]
-position = Vector2(25, 439)
+z_index = 45
+position = Vector2(25, 454)
+scale = Vector2(0.8, 0.8)
 
 [node name="LawnMover5" parent="LawnMovers" instance=ExtResource("5_w0404")]
-position = Vector2(25, 542)
+z_index = 55
+position = Vector2(25, 557)
+scale = Vector2(0.8, 0.8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 anchor_mode = 0
 script = ExtResource("24_b4qea")
 
 [node name="CardManager" type="Control" parent="Camera2D"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 676.0
@@ -365,8 +399,88 @@ offset_bottom = 600.0
 mouse_filter = 2
 script = ExtResource("5_yy6tc")
 
+[node name="ConveyorBelt" type="Control" parent="Camera2D/CardManager" node_paths=PackedStringArray("CB_list")]
+z_index = 100
+z_as_relative = false
+anchors_preset = 0
+offset_top = -94.0
+offset_right = 631.0
+offset_bottom = -7.0
+script = ExtResource("18_xaurn")
+CB_list = [NodePath("BG/ConveyorBeltGear/ConveyorBeltGear1"), NodePath("BG/ConveyorBeltGear/ConveyorBeltGear2"), NodePath("BG/ConveyorBeltGear/ConveyorBeltGear3")]
+time_create_cd = 5.0
+card_type = Array[int]([51, 52, 53])
+card_type_probability = Array[int]([5, 1, 1])
+card_type_start_list = Array[int]([51, 52, 53])
+
+[node name="BG" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt"]
+layout_mode = 0
+offset_left = 107.0
+offset_right = 623.0
+offset_bottom = 86.0
+texture = ExtResource("19_v6enx")
+
+[node name="ConveyorBeltGear" type="Panel" parent="Camera2D/CardManager/ConveyorBelt/BG"]
+clip_children = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 63.0
+offset_right = 509.0
+offset_bottom = 79.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_2tf6e")
+
+[node name="ConveyorBeltGear3" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt/BG/ConveyorBeltGear"]
+material = SubResource("CanvasItemMaterial_iuyhw")
+layout_mode = 0
+offset_left = 438.0
+offset_right = 940.0
+offset_bottom = 15.0
+texture = ExtResource("20_q0roe")
+expand_mode = 3
+stretch_mode = 2
+
+[node name="ConveyorBeltGear2" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt/BG/ConveyorBeltGear"]
+material = SubResource("CanvasItemMaterial_iuyhw")
+layout_mode = 0
+offset_left = 138.0
+offset_right = 640.0
+offset_bottom = 15.0
+texture = ExtResource("20_q0roe")
+expand_mode = 3
+stretch_mode = 2
+
+[node name="ConveyorBeltGear1" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt/BG/ConveyorBeltGear"]
+material = SubResource("CanvasItemMaterial_iuyhw")
+layout_mode = 2
+offset_left = -162.0
+offset_right = 340.0
+offset_bottom = 15.0
+texture = ExtResource("20_q0roe")
+expand_mode = 3
+stretch_mode = 2
+
+[node name="CardArea" type="Panel" parent="Camera2D/CardManager/ConveyorBelt/BG"]
+clip_children = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 510.0
+offset_bottom = 78.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_q0roe")
+
+[node name="CardPosition" parent="Camera2D/CardManager/ConveyorBelt/BG/CardArea" instance=ExtResource("21_v6enx")]
+visible = false
+layout_mode = 2
+offset_left = 512.0
+offset_right = 562.0
+
+[node name="Timer" type="Timer" parent="Camera2D/CardManager/ConveyorBelt"]
+
 [node name="CardBarAndShovel" type="HBoxContainer" parent="Camera2D/CardManager"]
 z_index = 100
+z_as_relative = false
 layout_mode = 0
 offset_left = 13.0
 offset_top = -94.0
@@ -441,6 +555,18 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jbbka")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_jbbka")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_jbbka")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jbbka")
+
+[node name="Label" type="Label" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 50.0
+offset_right = 72.0
+offset_bottom = 73.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CardChooser" type="Control" parent="Camera2D/CardManager"]
 z_index = 1100
@@ -712,6 +838,14 @@ offset = Vector2(-14, -70)
 [node name="ZombieManager" type="Node2D" parent="Manager"]
 script = ExtResource("5_j3aa3")
 
+[node name="ZombieChooseRowSystem" type="Node2D" parent="Manager/ZombieManager"]
+script = ExtResource("25_iuyhw")
+
+[node name="ZombieManagerInMiniGameHammerZombie" type="Node2D" parent="Manager/ZombieManager"]
+script = ExtResource("24_iuyhw")
+
+[node name="HammerZombieTimer" type="Timer" parent="Manager/ZombieManager/ZombieManagerInMiniGameHammerZombie"]
+
 [node name="WaveTimer" type="Timer" parent="Manager/ZombieManager"]
 one_shot = true
 
@@ -767,6 +901,7 @@ stream = ExtResource("27_2tf6e")
 bus = &"SFX"
 
 [node name="Background" type="Sprite2D" parent="."]
+process_mode = 3
 position = Vector2(493, 0)
 texture = ExtResource("20_ifnc6")
 offset = Vector2(0, 300)
@@ -777,130 +912,57 @@ position = Vector2(-624, 8)
 collision_mask = 20
 script = ExtResource("19_tjo6j")
 
-[node name="Dialog" type="Control" parent="Background/Area2DHome"]
-visible = false
-z_index = 2000
-z_as_relative = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 335.0
-offset_top = 153.0
-offset_right = 335.0
-offset_bottom = 153.0
-theme = ExtResource("25_aop5g")
-
-[node name="Panel" type="Panel" parent="Background/Area2DHome/Dialog"]
-layout_mode = 0
-offset_right = 321.0
-offset_bottom = 313.0
-theme_type_variation = &"PanelDialogBG"
-
-[node name="PVZButton" type="BaseButton" parent="Background/Area2DHome/Dialog"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 2
-auto_translate_mode = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 40)
-layout_direction = 0
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 75.0
-offset_top = 233.0
-offset_right = 235.0
-offset_bottom = 273.0
-grow_horizontal = 1
-grow_vertical = 1
-rotation = 0.0
-scale = Vector2(1, 1)
-pivot_offset = Vector2(0, 0)
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-localize_numeral_system = true
-tooltip_text = ""
-tooltip_auto_translate_mode = 0
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 2
-mouse_filter = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-theme = null
-theme_type_variation = &""
-disabled = false
-toggle_mode = false
-button_pressed = false
-action_mode = 1
-button_mask = 1
-keep_pressed_outside = false
-button_group = null
-shortcut = null
-shortcut_feedback = true
-shortcut_in_tooltip = true
-script = ExtResource("29_8fvtd")
-metadata/_custom_type_script = "uid://parybxg7tb1k"
-
-[node name="Panel" type="Panel" parent="Background/Area2DHome/Dialog/PVZButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_type_variation = &"PanelButtonBG"
-
-[node name="Label" type="Label" parent="Background/Area2DHome/Dialog/PVZButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "返回"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Background/Area2DHome/Dialog"]
-layout_mode = 0
-offset_left = 118.0
-offset_top = 129.0
-offset_right = 187.0
-offset_bottom = 152.0
-text = "戴夫 接客"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Area2DHome"]
 position = Vector2(11, 292)
 shape = SubResource("RectangleShape2D_yy6tc")
+
+[node name="Door" type="Node2D" parent="Background/Area2DHome"]
+position = Vector2(624, -8)
+
+[node name="DoorDown" type="Node2D" parent="Background/Area2DHome/Door"]
+
+[node name="Background1GameoverInteriorOverlay" type="Sprite2D" parent="Background/Area2DHome/Door/DoorDown"]
+visible = false
+position = Vector2(-570, 321)
+texture = ExtResource("37_kqxwt")
+
+[node name="Background2GameoverInteriorOverlay" type="Sprite2D" parent="Background/Area2DHome/Door/DoorDown"]
+visible = false
+position = Vector2(-550, 335)
+texture = ExtResource("35_h7ybh")
+
+[node name="Panel" type="Panel" parent="Background/Area2DHome/Door/DoorDown"]
+clip_children = 1
+offset_left = -610.0
+offset_right = -410.0
+offset_bottom = 600.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4252")
+metadata/_edit_lock_ = true
+
+[node name="DoorMask" type="Node2D" parent="Background/Area2DHome/Door"]
+
+[node name="Background1GameoverMask" type="Sprite2D" parent="Background/Area2DHome/Door/DoorMask"]
+visible = false
+position = Vector2(-586, 326)
+texture = ExtResource("39_h7ybh")
+
+[node name="Background2GameoverMask" type="Sprite2D" parent="Background/Area2DHome/Door/DoorMask"]
+visible = false
+position = Vector2(-585, 328)
+texture = ExtResource("38_r4252")
+
+[node name="SFX" type="Node2D" parent="Background/Area2DHome"]
+position = Vector2(624, -8)
+
+[node name="Scream" type="AudioStreamPlayer" parent="Background/Area2DHome/SFX"]
+stream = ExtResource("38_h7ybh")
+bus = &"SFX"
+
+[node name="WallnutBowlingstripe" type="Sprite2D" parent="Background"]
+visible = false
+position = Vector2(-203, 324)
+texture = ExtResource("34_q0roe")
 
 [node name="TemporaryPlants" type="Node2D" parent="."]
 z_index = 900
@@ -912,24 +974,34 @@ z_index = 400
 z_index = 400
 
 [node name="Zombies_row1" type="Node2D" parent="Zombies"]
-z_index = 1
+z_index = 10
 position = Vector2(850, 125)
 
+[node name="ZombieCreatePosition" type="Node2D" parent="Zombies/Zombies_row1"]
+
 [node name="Zombies_row2" type="Node2D" parent="Zombies"]
-z_index = 2
+z_index = 20
 position = Vector2(850, 225)
 
+[node name="ZombieCreatePosition" type="Node2D" parent="Zombies/Zombies_row2"]
+
 [node name="Zombies_row3" type="Node2D" parent="Zombies"]
-z_index = 3
+z_index = 30
 position = Vector2(850, 325)
 
+[node name="ZombieCreatePosition" type="Node2D" parent="Zombies/Zombies_row3"]
+
 [node name="Zombies_row4" type="Node2D" parent="Zombies"]
-z_index = 4
+z_index = 40
 position = Vector2(850, 425)
 
+[node name="ZombieCreatePosition" type="Node2D" parent="Zombies/Zombies_row4"]
+
 [node name="Zombies_row5" type="Node2D" parent="Zombies"]
-z_index = 5
+z_index = 50
 position = Vector2(850, 525)
+
+[node name="ZombieCreatePosition" type="Node2D" parent="Zombies/Zombies_row5"]
 
 [node name="ShowZombie" type="Node2D" parent="."]
 z_index = 400
@@ -944,114 +1016,6 @@ z_index = 650
 
 [node name="DaySuns" parent="." instance=ExtResource("15_w0404")]
 z_index = 800
-
-[node name="UIRemindWord" type="Control" parent="."]
-visible = false
-z_index = 1000
-layout_mode = 3
-anchors_preset = 0
-offset_right = 800.0
-offset_bottom = 600.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("17_ybhi1")
-
-[node name="Ready" type="TextureRect" parent="UIRemindWord"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -66.5
-offset_right = 150.0
-offset_bottom = 66.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("18_gyila")
-
-[node name="Set" type="TextureRect" parent="UIRemindWord"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -66.5
-offset_right = 150.0
-offset_bottom = 66.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("19_3tcal")
-
-[node name="Plant" type="TextureRect" parent="UIRemindWord"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -66.5
-offset_right = 150.0
-offset_bottom = 66.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("20_2b7lk")
-
-[node name="Approaching" type="TextureRect" parent="UIRemindWord"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -246.0
-offset_top = -40.0
-offset_right = 246.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("21_48j6u")
-
-[node name="FinalWave" type="TextureRect" parent="UIRemindWord"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -170.5
-offset_top = -40.0
-offset_right = 170.5
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("22_httmh")
-
-[node name="ZombiesWon" type="TextureRect" parent="UIRemindWord"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -282.0
-offset_top = -234.0
-offset_right = 282.0
-offset_bottom = 234.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("23_vyo3a")
 
 [node name="CanvasLayer_FX" type="CanvasLayer" parent="."]
 
@@ -1078,6 +1042,113 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ybhi1")
 script = ExtResource("33_ybhi1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="UIRemindWord" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("17_ybhi1")
+
+[node name="Ready" type="TextureRect" parent="CanvasLayer/UIRemindWord"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -66.5
+offset_right = 150.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_gyila")
+
+[node name="Set" type="TextureRect" parent="CanvasLayer/UIRemindWord"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -66.5
+offset_right = 150.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_3tcal")
+
+[node name="Plant" type="TextureRect" parent="CanvasLayer/UIRemindWord"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -66.5
+offset_right = 150.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_2b7lk")
+
+[node name="Approaching" type="TextureRect" parent="CanvasLayer/UIRemindWord"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -40.0
+offset_right = 246.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_48j6u")
+
+[node name="FinalWave" type="TextureRect" parent="CanvasLayer/UIRemindWord"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.5
+offset_top = -40.0
+offset_right = 170.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_httmh")
+
+[node name="ZombiesWon" type="TextureRect" parent="CanvasLayer/UIRemindWord"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -282.0
+offset_top = -234.0
+offset_right = 282.0
+offset_bottom = 234.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_vyo3a")
 
 [node name="All_UI" type="Control" parent="CanvasLayer"]
 process_mode = 3
@@ -1189,26 +1260,23 @@ vertical_alignment = 1
 [node name="MainGameMenuOptionDialog" type="TextureRect" parent="CanvasLayer/All_UI"]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -206.0
-offset_top = -241.5
-offset_right = 206.0
-offset_bottom = 241.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("27_w5iw5")
+expand_mode = 1
+stretch_mode = 3
 script = ExtResource("28_mddbc")
 
 [node name="Option" type="Control" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog"]
 anchors_preset = 0
-offset_left = 102.0
-offset_top = 115.0
-offset_right = 320.0
-offset_bottom = 373.0
+offset_left = 300.0
+offset_top = 173.0
+offset_right = 518.0
+offset_bottom = 431.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option"]
 layout_mode = 0
@@ -1670,10 +1738,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -179.0
-offset_top = -102.5
-offset_right = 181.0
-offset_bottom = -2.5
+offset_left = -175.0
+offset_top = -161.0
+offset_right = 185.0
+offset_bottom = -61.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("33_w0404")
@@ -1706,17 +1774,21 @@ offset_right = 169.0
 offset_bottom = 155.0
 text = "没做"
 
+[connection signal="mouse_entered" from="Camera2D/CardManager/ConveyorBelt/BG" to="Camera2D/CardManager/ConveyorBelt" method="_on_bg_mouse_entered"]
+[connection signal="mouse_exited" from="Camera2D/CardManager/ConveyorBelt/BG" to="Camera2D/CardManager/ConveyorBelt" method="_on_bg_mouse_exited"]
 [connection signal="mouse_entered" from="Camera2D/CardManager/CardBarAndShovel/CardBarBg" to="Camera2D/CardManager/CardBarAndShovel/CardBarBg" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Camera2D/CardManager/CardBarAndShovel/CardBarBg" to="Camera2D/CardManager/CardBarAndShovel/CardBarBg" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" to="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" to="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" method="_on_mouse_exited"]
 [connection signal="pressed" from="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg/Button" to="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" method="_on_button_pressed"]
 [connection signal="pressed" from="Camera2D/CardManager/CardChooser/TextureRect/TextureButton" to="." method="cheeosed_card_start_game"]
+[connection signal="timeout" from="Manager/ZombieManager/ZombieManagerInMiniGameHammerZombie/HammerZombieTimer" to="Manager/ZombieManager/ZombieManagerInMiniGameHammerZombie" method="_on_hammer_zombie_timer_timeout"]
 [connection signal="timeout" from="Manager/ZombieManager/WaveTimer" to="Manager/ZombieManager" method="_on_WaveTimer_timeout"]
 [connection signal="timeout" from="Manager/ZombieManager/OneWaveProgressTimer" to="Manager/ZombieManager" method="_on_one_wave_progress_timer_timeout"]
 [connection signal="area_entered" from="Background/Area2DHome" to="Background/Area2DHome" method="_on_area_entered"]
-[connection signal="pressed" from="Background/Area2DHome/Dialog/PVZButton" to="Background/Area2DHome" method="resume_game"]
+[connection signal="mouse_entered" from="CanvasLayer/All_UI/MainGameMenuButton" to="CanvasLayer/All_UI/MainGameMenuButton" method="_on_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/All_UI/MainGameMenuButton" to="CanvasLayer/All_UI/MainGameMenuOptionDialog" method="appear_menu"]
+[connection signal="mouse_entered" from="CanvasLayer/All_UI/MainGameMenuOptionDialog" to="CanvasLayer/All_UI/MainGameMenuOptionDialog" method="_on_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button1" to="CanvasLayer/All_UI/MainGameMenuOptionDialog" method="encyclopedia"]
 [connection signal="pressed" from="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4" to="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4/CanvasLayer" method="appear_canvas_layer_control"]
 [connection signal="pressed" from="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button2" to="CanvasLayer/All_UI/MainGameMenuOptionDialog" method="resume_game"]

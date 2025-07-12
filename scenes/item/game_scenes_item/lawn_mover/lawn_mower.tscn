@@ -24,10 +24,11 @@ size = Vector2(54, 48)
 
 [node name="LawnMower" type="Node2D"]
 script = ExtResource("1_nbmi7")
-move_speed = 400.0
+move_speed = 300.0
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2(-49, -46)
+position = Vector2(-39, -38)
+scale = Vector2(0.8, 0.8)
 
 [node name="Anim_normal" type="Sprite2D" parent="Body"]
 centered = false

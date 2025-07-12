@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://emo1ok1dv5kg"]
+
+[ext_resource type="Texture2D" uid="uid://cbhaawnc37cwe" path="res://assets/reanim/LilyPad_body.png" id="1_4ctqv"]
+
+[node name="LilyPad" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-43, -45)
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(-0.2, 5.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_4ctqv")
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://c0ghmbsjamhwv"]
+[gd_scene load_steps=63 format=3 uid="uid://c0ghmbsjamhwv"]
 
 [ext_resource type="Texture2D" uid="uid://cgu8jugkb0jj0" path="res://assets/reanim/Zombie_Jackson_innerarm_upper.png" id="0_fuck"]
 [ext_resource type="Animation" uid="uid://bpbk4s8akoin0" path="res://animation/character/zombie/009_zombie_jackson/Zombie_Jackson_moonwalk.tres" id="1_anim"]
@@ -54,6 +54,7 @@
 [ext_resource type="AudioStream" uid="uid://141vq8e7otqy" path="res://assets/audio/SFX/bullet/shieldhit1.ogg" id="54_xyr48"]
 [ext_resource type="AudioStream" uid="uid://bkjquajfcuk7n" path="res://assets/audio/SFX/bullet/shieldhit2.ogg" id="55_s5u71"]
 [ext_resource type="AudioStream" uid="uid://7mwt2orf6f0w" path="res://assets/audio/SFX/bullet/splat1.ogg" id="56_jl055"]
+[ext_resource type="AudioStream" uid="uid://dv63axlftklwv" path="res://assets/audio/SFX/zombie/dancer.ogg" id="57_se61d"]
 [ext_resource type="AudioStream" uid="uid://d267mh21n8tmg" path="res://assets/audio/SFX/bullet/splat2.ogg" id="57_y3h3c"]
 [ext_resource type="AudioStream" uid="uid://cjcfmkkumvowa" path="res://assets/audio/SFX/bullet/splat3.ogg" id="58_7frco"]
 
@@ -1106,6 +1107,7 @@ _data = {
 
 [node name="ZombieJackson" type="Node2D" node_paths=PackedStringArray("zombie_outerarm_upper", "zombie_status_2_fade", "hand_drop", "zombie_status_3_fade", "head_drop")]
 script = ExtResource("1_u01i8")
+zombie_row_type = 0
 zombie_outerarm_upper = NodePath("Body/Zombie_Jackson_outerarm_upper")
 zombie_outerarm_upper_sprite2d_textures = ExtResource("2_htuqx")
 zombie_status_2_fade = [NodePath("Body/Zombie_outerarm_lower"), NodePath("Body/Zombie_outerarm_hand")]
@@ -1430,4 +1432,8 @@ bus = &"SFX"
 
 [node name="Splat3" type="AudioStreamPlayer" parent="SFX/Bullet"]
 stream = ExtResource("58_7frco")
+bus = &"SFX"
+
+[node name="Dancer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("57_se61d")
 bus = &"SFX"

@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://cfwft4jigut7b"]
+[gd_scene load_steps=33 format=3 uid="uid://cfwft4jigut7b"]
 
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_42ykv"]
 [ext_resource type="Script" uid="uid://cyb6y7fh8ihhp" path="res://scripts/character/plant/011_fume_shroom.gd" id="1_ic5q6"]
 [ext_resource type="Texture2D" uid="uid://b5v5vannbipgc" path="res://assets/reanim/FumeShroom_body.png" id="2_gq4uw"]
 [ext_resource type="PackedScene" uid="uid://cghhn7nuemrci" path="res://scenes/bullet/004_bullet_fume.tscn" id="2_p2ylm"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_oiiue"]
 [ext_resource type="Texture2D" uid="uid://bdecyr5u832mx" path="res://assets/reanim/FumeShroom_head.png" id="4_4eul3"]
 [ext_resource type="Texture2D" uid="uid://dvjtgvsprc5em" path="res://assets/reanim/FumeShroom_blink2.png" id="4_p2ylm"]
 [ext_resource type="Texture2D" uid="uid://b8hsdl8m0la2k" path="res://assets/reanim/FumeShroom_spout.png" id="5_ic5q6"]
@@ -98,6 +99,7 @@ script = ExtResource("1_ic5q6")
 bullet_scene = ExtResource("2_p2ylm")
 bullet_position = NodePath("Body/PuffShroomPuff1")
 throw_SFX = [NodePath("Fume")]
+plant_condition = ExtResource("3_oiiue")
 blink_sprite = NodePath("Body/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("7_6btfu"), ExtResource("4_p2ylm")])
 
@@ -109,13 +111,13 @@ position = Vector2(41, 70)
 texture = ExtResource("1_42ykv")
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(9.8, 37.5112)
-scale = Vector2(0.8, 0.817221)
+position = Vector2(9.8, 38.8574)
+scale = Vector2(0.8, 0.790853)
 texture = ExtResource("2_gq4uw")
 centered = false
 
 [node name="DoomShroom_eyes" type="Sprite2D" parent="Body"]
-position = Vector2(43.5, 50.5556)
+position = Vector2(43.5, 51.0762)
 scale = Vector2(0.8, 0.787)
 texture = ExtResource("4_p2ylm")
 centered = false
@@ -127,20 +129,24 @@ texture = ExtResource("4_p2ylm")
 centered = false
 
 [node name="DoomShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(6.38883, -7.52183)
-scale = Vector2(0.773891, 0.842774)
+position = Vector2(4.91887, -1.48038)
+scale = Vector2(0.809147, 0.790853)
 texture = ExtResource("4_4eul3")
 centered = false
 
 [node name="DoomShroom_spout" type="Sprite2D" parent="Body"]
-position = Vector2(66.8668, 12.6114)
-scale = Vector2(0.773891, 0.842774)
+position = Vector2(68.1811, 17.4672)
+rotation = 0.0133038
+scale = Vector2(0.809909, 0.790853)
+skew = -0.0133038
 texture = ExtResource("5_ic5q6")
 centered = false
 
 [node name="DoomShroom_tip" type="Sprite2D" parent="Body"]
-position = Vector2(72.9668, 10.267)
-scale = Vector2(0.773891, 0.842774)
+position = Vector2(74.5574, 15.7245)
+rotation = 0.0133038
+scale = Vector2(0.809909, 0.790853)
+skew = -0.0133038
 texture = ExtResource("6_oiiue")
 centered = false
 

@@ -77,12 +77,12 @@ func _process(delta):
 	
 	
 func _shoot_bullet():
-	var bullet = bullet_scene.instantiate()
+	var bullet:BulletLineraBase = bullet_scene.instantiate()
 	
 	bullets.add_child(bullet)
 	bullet.global_position = bullet_position.global_position
+	bullet.init_bullet(row_col.x, bullet.global_position)
 	
-	bullet.start_pos = bullet.global_position
 	## 攻击音效
 	if throw_SFX.size() > 0:
 		throw_SFX[randi() % throw_SFX.size()].play()

@@ -39,13 +39,11 @@ func zombie_approach(final:bool) -> void:
 	
 	visible = false
 
-## 准备放置植物
-func zombie_won() -> void:
+## 僵尸获胜
+func zombie_won_word_appear() -> void:
 	
 	visible = true
-	# 所有节点放进一个数组
 	zombies_won.visible = true
-	await get_tree().create_timer(0.8).timeout  # 等待 1 秒
-	zombies_won.visible = false
-	
-	visible = false
+	#await get_tree().create_timer(0.8).timeout  # 等待 1 秒
+	#zombies_won.visible = false
+	#visible = false

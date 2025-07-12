@@ -7,6 +7,7 @@ class_name MainGameMenuOptionDialog
 @onready var sound_h_slider: HSlider = $Option/VBoxContainer/SoundEffect/HSlider
 @onready var time_scale_h_slider: HSlider = $Option/VBoxContainer/TimeScale/HSlider
 @onready var time_sacle_label: Label = $Option/VBoxContainer/TimeScale/Label
+@onready var main_game: MainGameManager = $"../../.."
 
 
 func _ready() -> void:
@@ -49,9 +50,16 @@ func appear_menu():
 ## 关闭菜单
 func return_button_pressed():
 	await get_tree().create_timer(0.1).timeout
-	get_tree().paused = false
 	visible = false
+	
+	if main_game.main_game_progress == main_game.MainGameProgress.GAME_OVER:
+		return
+	get_tree().paused = false
 	#mouse_filter = Control.MOUSE_FILTER_IGNORE
+	## 如果有锤子
+	if main_game.hammer:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 
 
 ## 图鉴
@@ -62,6 +70,7 @@ func encyclopedia():
 func resume_game():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
 	Global.time_scale = 1.0
 	Engine.time_scale = Global.time_scale
 	
@@ -75,3 +84,9 @@ func return_main_menu():
 ## 功能未实现
 func _unrealized():
 	dialog.appear_dialog()
+
+
+func _on_mouse_entered() -> void:
+	## 如果有锤子
+	if main_game.hammer:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

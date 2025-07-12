@@ -13,12 +13,17 @@ var _curr_character :CharacterBase
 
 ## 僵尸所在行
 @export var lane : int = -1
+## 僵尸合法行，陆地、水、两者都可以
+@export var zombie_row_type := ZombieRow.ZombieRowType.Both
+var curr_zombie_row_type = ZombieRow.ZombieRowType.Land
 ## 僵尸所属波次
 @export var curr_wave:int = -1
 ## 僵尸受击音效是否为铁器防具 一类防具
 @export var be_bullet_SFX_is_shield_first := false
 ## 僵尸受击音效是否为铁器防具 二类防具
 @export var be_bullet_SFX_is_shield_second := false
+## 僵尸是否在水中，爆炸无灰烬, 死亡时body下降
+@export var is_water := false
 
 #endregion
 
@@ -62,6 +67,8 @@ var _curr_character :CharacterBase
 @export var armor_1_sprite2d_textures : Array[Texture2D]
 
 @export var arm_1_drop: Node2D
+## 一类防具受击音效(僵尸本体没有受击音效，本体被击中音效为子弹音效)
+@export var arm_1_SFX: SoundManagerClass.TypeZombieBeAttackSFX
 
 
 @export_subgroup("二类防具状态")
@@ -74,6 +81,8 @@ var _curr_character :CharacterBase
 @export var armor_2_sprite2d_textures : Array[Texture2D]
 
 @export var arm_2_drop: Node2D
+## 二类防具受击音效
+@export var arm_2_SFX: SoundManagerClass.TypeZombieBeAttackSFX
 
 #endregion
 
@@ -102,7 +111,7 @@ var is_transitioning: bool = false
 
 #endregion
 
-## 僵尸被攻击信号，传递给ZombieManager
+## 僵尸被攻击信号，传递给ZombieManager,除了被魅惑，其余受伤害都从Hp_loss发射信号
 signal zombie_damaged
 ## 僵尸被击杀信号，传递给ZombieManager
 signal zombie_dead
@@ -116,6 +125,19 @@ signal zombie_hypno
 ## 被魅惑颜色
 var be_hypnotized_color := Color(1, 1, 1)
 var be_hypnotized_color_res := Color(1, 0.5, 1)
+
+#endregion
+
+
+#region 游泳相关
+@export_group("游泳相关")
+@export var is_swimming := false
+##游泳开始时僵尸需要出现的精灵图
+@export var swim_zombie_appear_start : Array[Sprite2D]
+##游泳消失的精灵图
+@export var swimming_fade : Array[Sprite2D]
+##游泳出现的精灵图
+@export var swimming_appear : Array[Sprite2D]
 
 #endregion
 
@@ -150,11 +172,11 @@ func _get_some_node():
 	# 获取状态机播放控制器
 	playback = animation_tree.get("parameters/StateMachine/playback")
 
-
 func updata_hp_label():
 	label_hp.get_node('Label').text = str(curr_Hp)
 	if armor_first_curr_hp > 0:
 		label_hp.get_node('Label').text = label_hp.get_node('Label').text + "+" + str(armor_first_curr_hp)
+
 	if armor_second_curr_hp > 0:
 		label_hp.get_node('Label').text = label_hp.get_node('Label').text + "+" + str(armor_second_curr_hp)
 	
@@ -254,7 +276,7 @@ func state_transition_judge_walking_status():
 
 ## 获取当前僵尸所有血量（HP+防具）
 func get_zombie_all_hp():
-	return max_hp + armor_first_curr_hp + armor_second_curr_hp
+	return curr_Hp + armor_first_curr_hp + armor_second_curr_hp
 
 
 #region 僵尸移动相关
@@ -278,22 +300,15 @@ func _walk():
 #endregion
 
 #region 僵尸被攻击
-## 被子弹攻击，重写父类方法
-func be_attacked_bullet(attack_value:int, bullet_mode : Global.BulletMode, bullet_shield_SFX:=true):
-	# SFX 根据防具是否有铁器进行判断，防具掉落时修改bool值
-	if (be_bullet_SFX_is_shield_first or be_bullet_SFX_is_shield_second) and bullet_shield_SFX: 
-		get_node("SFX/Bullet/Shieldhit" + str(randi_range(1,2))).play()
-	else:
-		get_node("SFX/Bullet/Splat" + str(randi_range(1,3))).play()
-		
+## 被锤子
+func be_attacked_hammer(attack_value:int):
 	## 掉血，发光,直接调用父类方法
-	super.be_attacked_bullet(attack_value, bullet_mode)
-
+	super.be_attacked_bullet(attack_value, Global.AttackMode.Hammer)
+	return is_death
 
 #region 僵尸血量防具改变
 ## 有二类防具的情况下判断，掉血前二类防具血量大于0
 func _judge_status_armor_2():
-
 	# 二类防具第一次血量小于0， 将小于0的血量返回，表示剩余攻击力
 	if armor_second_curr_hp <= 0 and curr_armor_2_hp_status < 4:
 		curr_armor_2_hp_status = 4
@@ -302,8 +317,9 @@ func _judge_status_armor_2():
 		## 二类防具音效改变
 		be_bullet_SFX_is_shield_second = false
 		arm2_drop()
-		
-		return -armor_second_curr_hp
+		var res_attack = -armor_second_curr_hp
+		armor_second_curr_hp = 0
+		return res_attack
 		
 	# 第一次血量小于1/3
 	elif armor_second_curr_hp <= armor_second_max_hp / 3 and curr_armor_2_hp_status < 3:
@@ -324,8 +340,11 @@ func _judge_status_armor_2():
 
 ## 二类防具掉落
 func arm2_drop():
-	arm_2_drop.acitvate_it()
-	
+	## 如果是水路僵尸并且没有入水
+	if curr_zombie_row_type == ZombieRow.ZombieRowType.Pool and not is_water:
+		arm_2_drop.acitvate_it(50)
+	else:
+		arm_2_drop.acitvate_it()
 
 
 ## 有一类防具的情况下判断，掉血前一类防具血量大于0
@@ -338,8 +357,9 @@ func _judge_status_armor_1():
 		## 一类防具音效改变
 		be_bullet_SFX_is_shield_first = false
 		arm1_drop()
-		
-		return -armor_first_curr_hp
+		var res_attack = -armor_first_curr_hp
+		armor_first_curr_hp = 0
+		return res_attack
 		
 	# 第一次血量小于1/3
 	elif armor_first_curr_hp <= armor_first_max_hp / 3 and curr_armor_1_hp_status < 3:
@@ -360,36 +380,52 @@ func _judge_status_armor_1():
 
 ## 一类防具掉落
 func arm1_drop():
-	arm_1_drop.acitvate_it()
+	## 如果是水路僵尸并且没有入水
+	if curr_zombie_row_type == ZombieRow.ZombieRowType.Pool and not is_water:
+		arm_1_drop.acitvate_it(50)
+	else:
+		arm_1_drop.acitvate_it()
 
 #endregion
 
 #region 僵尸血量改变
-# 僵尸被攻击时掉血（包括防具变化）
-func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode = Global.BulletMode.Norm):
+## 僵尸被攻击时掉血（包括防具变化）
+## @param attack_value:int 伤害
+## @param bullet_mode : Global.AttackMode = Global.AttackMode.Norm 伤害类型
+## @param trigger_be_attack_SFX:=true,  是否有受击音效
+## @param no_drop:= false 伤害是否有掉落（防具、手、头）
+func Hp_loss(attack_value:int, bullet_mode : Global.AttackMode = Global.AttackMode.Norm, trigger_be_attack_SFX:=true, no_drop:= false):
 	var ori_hp = get_zombie_all_hp()
+	var ori_zombie_hp = curr_Hp
+	var ori_arm_1_hp = armor_first_curr_hp
+	var ori_arm_2_hp = armor_second_curr_hp
+	
 	match bullet_mode:
 		## 普通子弹
-		Global.BulletMode.Norm:
+		Global.AttackMode.Norm:
 			# 如果有二类防具，先对二类防具掉血，若二类防具血量<0, 修改
 			if armor_second_curr_hp > 0:
+					
 				armor_second_curr_hp -= attack_value
 				attack_value = _judge_status_armor_2()
-				
+			
 			# 如果有一类防具
 			if armor_first_curr_hp > 0 and attack_value > 0:
+				
 				armor_first_curr_hp -= attack_value
 				attack_value = _judge_status_armor_1()
 			
 			# 血量>0
 			if curr_Hp > 0 and attack_value > 0:
 				curr_Hp -= attack_value
-				judge_status()
-		# 穿透子弹
-		Global.BulletMode.penetration:
+				judge_status(no_drop)
+
+		## 穿透子弹,爆炸
+		Global.AttackMode.Penetration:
 			
 			# 如果有二类防具，先对二类防具掉血，若二类防具血量<0, 修改
 			if armor_second_curr_hp > 0:
+				
 				armor_second_curr_hp -= attack_value
 				_judge_status_armor_2()
 				
@@ -401,29 +437,109 @@ func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode = Global.BulletMo
 			# 血量>0
 			if curr_Hp > 0 and attack_value > 0:
 				curr_Hp -= attack_value
-				judge_status()
-				
-		Global.BulletMode.real:
+				judge_status(no_drop)
+		
+		## 真实伤害子弹
+		Global.AttackMode.Real:
 				
 			# 如果有一类防具
 			if armor_first_curr_hp > 0 and attack_value > 0:
 				armor_first_curr_hp -= attack_value
 				attack_value = _judge_status_armor_1()
-			
+				
+				
 			# 血量>0
 			if curr_Hp > 0 and attack_value > 0:
 				curr_Hp -= attack_value
 				judge_status()
+		
+		## 保龄球子弹
+		Global.AttackMode.BowlingFront:
+			# 如果是正面
+			# 如果有二类防具，先对二类防具掉血
+			if armor_second_curr_hp > 0:
+				# 如果为正面,无溢出伤害对二类防具造成400血量
+				armor_second_curr_hp -= 400
+				attack_value = _judge_status_armor_2()
+				attack_value = 0
+
+			# 如果有一类防具
+			if armor_first_curr_hp > 0 and attack_value > 0:
+				## 对一类防具造成无溢出伤害800
+				armor_first_curr_hp -= 800
+				attack_value = _judge_status_armor_1()
+				attack_value = 0
+				
+			# 血量>0
+			if curr_Hp > 0 and attack_value > 0:
+				#若有溢出伤害或没有防具 对僵尸本体造成1800伤害
+				curr_Hp -= 1800
+				judge_status()
+				
+		## 保龄球侧面子弹
+		Global.AttackMode.BowlingSide:
+			
+			#如果是正面
+			# 如果有二类防具，先对二类防具掉血，若二类防具血量<0, 修改
+			if armor_second_curr_hp > 0:
+				
+				#如果为侧面,二类防具造成1800血量， 溢出伤害1800
+				armor_second_curr_hp -= 1800
+				attack_value = _judge_status_armor_2()
+				attack_value = 1800
+
+			# 如果有一类防具
+			if armor_first_curr_hp > 0 and attack_value > 0:
+				
+				## 对一类防具造成无溢出伤害800
+				armor_first_curr_hp -= 800
+				attack_value = _judge_status_armor_1()
+				attack_value = 0
+
+			# 血量>0
+			if curr_Hp > 0 and attack_value > 0:
+				#若有溢出伤害或没有防具 对僵尸本体造成1800伤害
+				curr_Hp -= 1800
+				judge_status()
+		
+		## 锤子		
+		Global.AttackMode.Hammer:
+			# 如果有二类防具，无视二类防具,
+			if armor_second_curr_hp > 0:
+				pass
+			# 如果有一类防具
+			if armor_first_curr_hp > 0 and attack_value > 0:
+				## 对一类防具造成无溢出伤害800
+				armor_first_curr_hp -= 900
+				attack_value = _judge_status_armor_1()
+				attack_value = 0
+				
+			# 血量>0 本体代码杀
+			if curr_Hp > 0 and attack_value > 0:
+				#若有溢出伤害或没有防具 对僵尸本体造成伤害
+				is_death = true
+				_delete_area2d()	# 删除碰撞器,发射死亡信号
+				## 如果被锤子击杀，直接删除该僵尸
+				queue_free()
 	
+	## 如果有受击音效，根据掉血的防具触发音效，
+	## 我写的是僵尸本体没有受击音效，本体受击音效为子弹破裂音效
+	#print("有受击音效")
+	if trigger_be_attack_SFX: 
+		if ori_arm_2_hp > armor_second_curr_hp and arm_2_SFX != SoundManagerClass.TypeZombieBeAttackSFX.Null:
+			SoundManager.play_be_attack_SFX(arm_2_SFX)
+		elif ori_arm_1_hp > armor_first_curr_hp and arm_1_SFX != SoundManagerClass.TypeZombieBeAttackSFX.Null:
+			SoundManager.play_be_attack_SFX(arm_1_SFX)
+			
 	updata_hp_label()
 	
 	var res_hp = get_zombie_all_hp()
 	var loss_hp = ori_hp - res_hp
-	
 	zombie_damaged.emit(loss_hp, curr_wave)
 
+
 ## 血量状态判断
-func judge_status():
+func judge_status(no_drop:=false):
 	## 若僵尸满血被小推车碾压，需要先判断掉手阶段血量，在判断掉头阶段血量
 	if curr_Hp <= max_hp*2/3 and curr_hp_status < 2:
 		curr_hp_status = 2
@@ -434,6 +550,13 @@ func judge_status():
 		hp_status_3_anim_para()
 		_delete_area2d()	# 删除碰撞器
 		
+		## 如果血量小于0，将血量置为0
+		if curr_Hp < 0:
+			curr_Hp = 0
+		## 如果血量大于0，但是已经死亡，将剩余血量发射受伤信号
+		else:
+			zombie_damaged.emit(get_zombie_all_hp(), curr_wave)
+		
 		## 让有一类防具和二类防具的僵尸防具血量都置为0，更新状态
 		if armor_first_curr_hp > 0:
 			armor_first_curr_hp = 0
@@ -443,7 +566,18 @@ func judge_status():
 			armor_second_curr_hp = 0
 			_judge_status_armor_2()
 			
+		
 		_hp_3_stage()
+		## 如果没有掉落物,删除还未掉落的body
+		if no_drop:
+			if hand_drop:
+				hand_drop.queue_free()
+			if head_drop:
+				head_drop.queue_free()
+			if arm_1_drop:
+				arm_1_drop.queue_free()
+			if arm_2_drop:
+				arm_2_drop.queue_free()
 		
 		
 ## 血量状态为3时的动画相关参数变化
@@ -459,8 +593,11 @@ func _hand_fade():
 	## 隐藏下半胳膊
 	for arm_hand_part in zombie_status_2_fade:
 		arm_hand_part.visible = false
-	## 掉落下半胳膊
-	hand_drop.acitvate_it()
+	## 如果是水路僵尸并且没有入水
+	if curr_zombie_row_type == ZombieRow.ZombieRowType.Pool and not is_water:
+		hand_drop.acitvate_it(40)
+	else:
+		hand_drop.acitvate_it()
 	
 	## 修改上半胳膊图片（残血图片）
 	zombie_outerarm_upper.texture = zombie_outerarm_upper_sprite2d_textures
@@ -477,7 +614,11 @@ func _head_fade():
 	for head_part in zombie_status_3_fade:
 		head_part.visible = false
 		
-	head_drop.acitvate_it()
+	## 如果是水路僵尸并且没有入水
+	if curr_zombie_row_type == ZombieRow.ZombieRowType.Pool and not is_water:
+		head_drop.acitvate_it(40)
+	else:
+		head_drop.acitvate_it()
 #endregion
 #endregion
 
@@ -539,7 +680,6 @@ func be_hypnotized_signal():
 	
 
 
-
 # 重写父类颜色变化
 func _update_modulate():
 	var final_color = base_color * _hit_color * debuff_color * be_hypnotized_color
@@ -565,46 +705,61 @@ func delete_zombie():
 ## 被小推车碾压
 func be_mowered_run():
 	# 减速当前所有血量
-	Hp_loss(get_zombie_all_hp())
+	Hp_loss(get_zombie_all_hp(), Global.AttackMode.Norm, false)
+
+
+## 被水池小推车吃
+func be_pool_mowered_run():
+	Hp_loss(get_zombie_all_hp(), Global.AttackMode.Norm, false, true)
+	delete_zombie()
+
+
+## 被大保龄球碾压
+func be_big_bowling_run():
+	# 减速当前所有血量
+	Hp_loss(get_zombie_all_hp(), Global.AttackMode.Norm, false)
 
 
 ## 僵尸删除area,即僵尸死亡
 func _delete_area2d():
-	## 未死亡或
 	if not area2d_free:
 		area2d_free = true
 		_curr_damage_per_second = 0
 		
 		var zombie_all_hp = get_zombie_all_hp()
-		zombie_damaged.emit(zombie_all_hp, curr_wave)
 		zombie_dead.emit(self)
 		area2d.queue_free()
 	
 	
 ## 僵尸被炸死	
 func be_bomb_death():
-	
-	_delete_area2d()	# 删除碰撞器
-	
-	## 清空血量
-	armor_second_curr_hp -= armor_second_curr_hp
-	armor_first_curr_hp -= armor_first_curr_hp
-	curr_Hp -= curr_Hp
-	updata_hp_label()
-	
-	body.visible = false
-	#animation_tree.active = false
-	zombie_charred.visible = true
-	is_bomb_death = true
-	# 播放僵尸灰烬动画
-	anim_lib.play("ALL_ANIMS")
-	await anim_lib.animation_finished
-	delete_zombie()
+	## 爆炸伤害为穿透伤害，对二类防具造成伤害同时对一类防具（本体）造成伤害
+	Hp_loss(1800, Global.AttackMode.Penetration, false, true)
+	if is_death:
+		### 清空血量
+		#armor_second_curr_hp -= armor_second_curr_hp
+		#armor_first_curr_hp -= armor_first_curr_hp
+		#curr_Hp -= curr_Hp
+		#updata_hp_label()
+		
+		body.visible = false
+		is_bomb_death = true
+		#animation_tree.active = false
+		## 如果僵尸在水里
+		if is_water:
+			delete_zombie()
+		else:
+			zombie_charred.visible = true
+			# 播放僵尸灰烬动画
+			anim_lib.play("ALL_ANIMS")
+			await anim_lib.animation_finished
+			delete_zombie()
 
 ## 僵尸直接死亡 （大嘴花、土豆雷）
 func disappear_death():
-	_delete_area2d()	# 删除碰撞器
-	delete_zombie()
+	Hp_loss(1800, Global.AttackMode.Norm, false, true)
+	if is_death:
+		delete_zombie()
 
 
 ## 僵尸死亡后逐渐透明，最后删除节点
@@ -614,4 +769,74 @@ func _fade_and_remove():
 	tween.tween_callback(delete_zombie)  # 动画完成后删除僵尸
 
 #endregion
+
+
+#region 水池游泳相关
+func in_water_death_start():
 	
+	var tween = create_tween()
+	# 仅移动y轴，在1.5秒内下移200像素
+	tween.tween_property(body, "position:y", body.position.y + 80, 2)
+	
+
+func start_swim():
+	# 水花
+	var splash = Global.splash_pool_scenes.instantiate()
+	add_child(splash)
+	splash.get_node("PlantWater").play()
+	var splash_anim:AnimationPlayer = splash.get_node("AnimLib")
+	splash_anim.play("ALL_ANIMS")
+	
+	for sprite in swimming_fade:
+		sprite.visible = false
+	for sprite in swimming_appear:
+		sprite.visible = true
+		
+	var tween = create_tween()
+	# 仅移动y轴，在1.5秒内下移200像素
+	tween.tween_property(body, "position:y", body.position.y + 30, 0.5)
+	await tween.finished
+	is_swimming = true
+	is_water = true
+	
+	await splash_anim.animation_finished
+	splash.queue_free()
+	
+func end_swim():
+	# 水花
+	var splash = Global.splash_pool_scenes.instantiate()
+	add_child(splash)
+	splash.get_node("PlantWater").play()
+	var splash_anim:AnimationPlayer = splash.get_node("AnimLib")
+	splash_anim.play("ALL_ANIMS")
+	
+	for sprite in swimming_fade:
+		sprite.visible = true
+	for sprite in swimming_appear:
+		sprite.visible = false
+		
+	is_swimming = false
+	is_water = false
+	
+	var tween = create_tween()
+	# 仅移动y轴，在1.5秒内下移200像素
+	tween.tween_property(body, "position:y", body.position.y - 30, 0.5)
+	await tween.finished
+	await splash_anim.animation_finished
+	splash.queue_free()
+	
+## 碰撞到泳池
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print("进入泳池")
+	start_swim()
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	print("离开泳池")
+	if is_death:
+		print("已经死亡")
+		return
+	end_swim()
+
+
+#endregion

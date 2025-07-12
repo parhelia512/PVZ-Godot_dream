@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cyavysvocd6t1"]
+[gd_scene load_steps=21 format=3 uid="uid://cyavysvocd6t1"]
 
 [ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="0_fuck"]
 [ext_resource type="Animation" uid="uid://dfpy14jrvk1md" path="res://animation/character/plant/004_wanll_nut/Wallnut_idle.tres" id="1_anim"]
@@ -6,6 +6,7 @@
 [ext_resource type="Animation" uid="uid://ctdx2rncxsv0k" path="res://animation/character/plant/004_wanll_nut/Wallnut_face.tres" id="2_anim"]
 [ext_resource type="Texture2D" uid="uid://d06vgaisnbd0n" path="res://assets/reanim/Wallnut_cracked1.png" id="2_w5ly5"]
 [ext_resource type="Texture2D" uid="uid://bms4xhmhlcsam" path="res://assets/reanim/Wallnut_cracked2.png" id="3_yfchq"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="4_87jv5"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="4_gwaae"]
 [ext_resource type="Texture2D" uid="uid://cku5wd5qvdq7m" path="res://assets/reanim/Wallnut_blink2.png" id="5_nyqmn"]
 [ext_resource type="Texture2D" uid="uid://cpbkvykx6yq07" path="res://assets/reanim/Wallnut_twitch.png" id="6_vxn41"]
@@ -54,6 +55,7 @@ size = Vector2(50, 60)
 [node name="WallNut" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
 script = ExtResource("1_k6qa0")
 face_damaged = Array[Texture2D]([ExtResource("2_w5ly5"), ExtResource("3_yfchq")])
+plant_condition = ExtResource("4_87jv5")
 blink_sprite = NodePath("Body/Anim_blink_twice")
 blink_sprite_texture = Array[Texture]([ExtResource("7_nyqmn"), ExtResource("5_nyqmn")])
 max_hp = 4000
@@ -67,29 +69,29 @@ position = Vector2(41, 70)
 texture = ExtResource("4_gwaae")
 
 [node name="_ground" type="Sprite2D" parent="Body"]
-visible = false
 centered = false
 
 [node name="Anim_idle" type="Sprite2D" parent="Body"]
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(5.57368, 5.54606)
-rotation = -0.0179129
-scale = Vector2(0.7, 0.705737)
+position = Vector2(4.35408, 7.42189)
+rotation = -0.0375581
+scale = Vector2(0.7, 0.694481)
+skew = 0.00164027
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Anim_blink_twitch" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(28.4335, 35.1497)
+position = Vector2(27.73, 36.629)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_vxn41")
 centered = false
 
 [node name="Anim_blink_twice" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(27.2335, 21.1497)
+position = Vector2(26.53, 22.629)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_nyqmn")
 centered = false

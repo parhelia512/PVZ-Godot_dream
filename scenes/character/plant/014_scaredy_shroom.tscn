@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dnn3ihsv8k03j"]
+[gd_scene load_steps=46 format=3 uid="uid://dnn3ihsv8k03j"]
 
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_a7418"]
 [ext_resource type="Animation" uid="uid://cxl6ver7rvf52" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_sleep.tres" id="1_anim"]
@@ -6,6 +6,7 @@
 [ext_resource type="Animation" uid="uid://bb1fbfe1fqcco" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_grow.tres" id="2_anim"]
 [ext_resource type="PackedScene" uid="uid://b7pr8l7ew4bgg" path="res://scenes/bullet/005_bullet_puff_long_time.tscn" id="2_ilb0t"]
 [ext_resource type="Animation" uid="uid://cu4gugoc8ey8" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_scaredidle.tres" id="3_anim"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_oxht4"]
 [ext_resource type="Texture2D" uid="uid://d1ync1uai7er" path="res://assets/reanim/ScaredyShroom_head_inner.png" id="4_03gk8"]
 [ext_resource type="Animation" uid="uid://c0rscs7awmh6t" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_scared.tres" id="4_anim"]
 [ext_resource type="Animation" uid="uid://wl32oegoyf56" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_shooting.tres" id="5_anim"]
@@ -124,6 +125,7 @@ script = ExtResource("1_inx5s")
 bullet_scene = ExtResource("2_ilb0t")
 bullet_position = NodePath("Body/PuffShroomPuff1")
 throw_SFX = [NodePath("Puff")]
+plant_condition = ExtResource("3_oxht4")
 no_blink = true
 
 [node name="Body" type="Node2D" parent="."]

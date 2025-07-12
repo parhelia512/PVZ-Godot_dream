@@ -60,13 +60,13 @@ func _ready() -> void:
 	ice_timer.timeout.connect(_on_timer_timeout_time_ice)
 
 	# 初始化颜色
-	_update_modulate()
-	
+	_update_modulate()	
 	curr_Hp = max_hp
 	
 	# 血量显示
 	label_hp = Label_HP.instantiate()
 	add_child(label_hp)
+
 
 ## 随机初始化动画播放速度
 func _init_anim_speed():
@@ -76,12 +76,20 @@ func _init_anim_speed():
 	animation_origin_speed *= animation_speed_random
 	animation_curr_speed = animation_origin_speed
 	animation_tree.set("parameters/TimeScale/scale", animation_curr_speed)
+
+## 设置动画倍率，
+func set_anim_speed(multiply:float, update_ori:bool=false):
+	if update_ori:
+		animation_origin_speed = animation_origin_speed * multiply
+	animation_curr_speed =  animation_curr_speed * multiply
 	
+	animation_tree.set("parameters/TimeScale/scale", animation_curr_speed)
 
 ## 获取身体节点，僵尸子类会重写该方法，获取ground，部分僵尸修改body位置在panel节点下
 func _get_some_node():
 	body = $Body
 	animation_tree = $AnimationTree
+	print(body)
 	
 # 更新最终 modulate 的合成颜色
 func _update_modulate():
@@ -170,21 +178,20 @@ func update_anim_speed_scale(animation_speed, is_norm=true):
 #region 被攻击
 #被子弹攻击
 ## 被子弹攻击，僵尸子类重写
-func be_attacked_bullet(attack_value:int, bullet_mode : Global.BulletMode):
+func be_attacked_bullet(attack_value:int, bullet_mode : Global.AttackMode, trigger_be_attack_SFX:=true):
 	## 掉血，发光
-	Hp_loss(attack_value, bullet_mode)
+	Hp_loss(attack_value, bullet_mode, trigger_be_attack_SFX)
 	be_attacked_body_light()
 
 
 # 被僵尸啃咬攻击
 func be_eated(attack_value:int, zombie):
 	# 被僵尸啃咬子弹属性为真实伤害（略过2类防具，直接对1类防具和血量攻击）
-	Hp_loss(attack_value, Global.BulletMode.real)
+	Hp_loss(attack_value, Global.AttackMode.Real)
 	
 
 # 掉血，子类重写
-func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode = Global.BulletMode.Norm):
-
+func Hp_loss(attack_value:int, bullet_mode : Global.AttackMode = Global.AttackMode.Norm, trigger_be_attack_SFX:=true, no_drop:=false):
 	pass
 
 ## 被攻击时发光，攻击者调用

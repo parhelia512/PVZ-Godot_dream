@@ -13,6 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 75.0
 offset_bottom = 95.0
+mouse_filter = 1
 script = ExtResource("1_66flf")
 
 [node name="Button" type="Button" parent="."]

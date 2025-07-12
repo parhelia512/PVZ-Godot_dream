@@ -2,11 +2,11 @@ extends Node2D
 class_name LawnMover
 ## 小推车
 
-@export var move_speed: float = 200.0  # 推车移动速度（像素/秒）
+@export var move_speed: float = 200.0  ## 推车移动速度（像素/秒）
+@export var lane: int = -1  ## 推车在行，从0开始
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var is_moving: bool = false
-
 ## 超出屏幕500像素删除
 var screen_rect: Rect2  # 延后初始化
 
@@ -24,10 +24,11 @@ func _process(delta: float) -> void:
 		
 		
 func _on_area_entered(area: Area2D) -> void:
-
-	if not is_moving:
-		is_moving = true
-		animation_player.play("LawnMower_normal")
-		$Lawnmower.play()
 	var zombie :ZombieBase = area.get_parent()
-	zombie.be_mowered_run()
+	if lane == zombie.lane:
+		if not is_moving:
+			is_moving = true
+			animation_player.play("LawnMower_normal")
+			$Lawnmower.play()
+			
+		zombie.be_mowered_run()

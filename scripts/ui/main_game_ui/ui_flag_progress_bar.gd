@@ -27,7 +27,7 @@ var end_flag = end_minizombie + 6
 ## 存储生成的旗帜
 var flag_arr : Array[FlagProgressBarFlag] = []
 ## 当前旗帜的索引
-@export var curr_flag_i : int = 0
+#@export var curr_flag_i : int = 0
 
 
 func _ready() -> void:
@@ -35,8 +35,8 @@ func _ready() -> void:
 	set_progress(0)
 	texture_progress_bar.value = 0
 	mini_zombie.position.x = start_minizombie
-	
-	
+
+
 ## 根据旗帜数量生成旗帜，并删除原本的旗帜
 func create_flag(flag_num:int):
 	flag_arr.clear()
@@ -57,7 +57,7 @@ func create_flag(flag_num:int):
 	
 	## 删除原始的flag
 	flag.queue_free()
-	
+
 
 ## 根据波数生成大波的旗帜
 func init_flag_from_wave(wave_num:int):
@@ -85,8 +85,8 @@ func set_progress_add_every_sec(add_value:float):
 func _process(delta):
 	# 在1秒内追赶真实进度
 	if abs(chase_value - real_value) > 0.1:
-		# 计算追赶速度 (每秒100单位)
-		var speed = 100.0 * delta
+		# 计算追赶速度 (每秒10单位)
+		var speed = 10.0 * delta
 		
 		if chase_value < real_value:
 			chase_value = min(chase_value + speed, real_value)
@@ -99,9 +99,9 @@ func _process(delta):
 		curr_minizombie = start_minizombie + chase_value * (end_minizombie - start_minizombie) * 0.01
 		mini_zombie.position.x = curr_minizombie
 		
-		if curr_minizombie <= flag_arr[curr_flag_i].position.x - 6:
-			flag_arr[curr_flag_i].up_flag()
-			curr_flag_i += 1
+		#if curr_minizombie <= flag_arr[curr_flag_i].position.x - 6:
+			#flag_arr[curr_flag_i].up_flag()
+			#curr_flag_i += 1
 		
 	else:
 		# 如果非常接近，直接设为相等
@@ -113,7 +113,7 @@ func _process(delta):
 			mini_zombie.position.x = curr_minizombie
 		
 	
-			if curr_minizombie <= flag_arr[curr_flag_i].position.x - 6:
-				flag_arr[curr_flag_i].up_flag()
-				curr_flag_i += 1
+			#if curr_minizombie <= flag_arr[curr_flag_i].position.x - 6:
+				#flag_arr[curr_flag_i].up_flag()
+				#curr_flag_i += 1
 	

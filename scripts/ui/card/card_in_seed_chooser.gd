@@ -5,4 +5,4 @@ class_name CardInSeedChooser
 
 func card_init(card_type: Global.PlantType):
 	super.card_init(card_type)
-	card.card_init(card_type)
+	card.card_init_in_seed_chooser(card_type)

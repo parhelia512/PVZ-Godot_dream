@@ -18,6 +18,8 @@ var min_bounce_speed := 30.0  # 小于这个速度就不再反弹
 var shake_intensity := 5.0  # 初始震动强度
 var min_rotation_speed := 0.2  # 最小旋转速度
 
+var zombie:ZombieBase
+var is_water := false
 
 	
 func _process(delta):
@@ -36,6 +38,13 @@ func _process(delta):
 
 		# 检查是否到达地面
 		if drop_body.position.y >= ground_y:
+			if is_water:
+				# 在水里直接停止移动
+				velocity = Vector2.ZERO
+				rotation_speed = 0.0
+				landed = true
+				fade_and_delete()
+				
 			drop_body.position.y = ground_y
 
 			if abs(velocity.y) > min_bounce_speed:
@@ -52,9 +61,17 @@ func _process(delta):
 				
 
 
-func acitvate_it():
+func acitvate_it(control_x:float = 0):
+	if control_x != 0:
+		velocity = Vector2(control_x, velocity.y)
 	is_active = true
 	visible = true
+	zombie = get_parent()
+	## 如果僵尸在水里
+	if zombie.is_water:
+		ground_y = 200
+		is_water = true
+		
 	move_parent_to_be_sibling()
 	
 func move_parent_to_be_sibling():
