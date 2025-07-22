@@ -42,7 +42,7 @@ func appear_menu():
 	await get_tree().create_timer(0.1).timeout
 	# 游戏暂停
 	get_tree().paused = true
-	SoundManager.play_sfx("Pause")
+	SoundManager.play_other_SFX("pause")
 
 	visible = true
 	#mouse_filter = Control.MOUSE_FILTER_STOP 
@@ -50,6 +50,7 @@ func appear_menu():
 ## 关闭菜单
 func return_button_pressed():
 	await get_tree().create_timer(0.1).timeout
+	SoundManager.play_other_SFX("pause")
 	visible = false
 	
 	if main_game.main_game_progress == main_game.MainGameProgress.GAME_OVER:

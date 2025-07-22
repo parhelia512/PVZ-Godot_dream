@@ -40,7 +40,7 @@ func _input(event):
 func hammer_once():
 	animation_player.stop()
 	animation_player.play("Hammer_whack_zombie")
-	$SFX/Swing.play()
+	SoundManager.play_other_SFX("swing")
 	
 	hammer_zombie()
 
@@ -90,7 +90,7 @@ func hammer_zombie():
 
 	## 锤子攻击僵尸,使用锤子攻击方法
 	var zombie_is_death = zombie_be_choosed.be_attacked_hammer(1800)
-	$SFX/Bonk.play()
+	SoundManager.play_other_SFX("bonk")
 	
 	## 锤击僵尸掉落阳光
 	if zombie_is_death:

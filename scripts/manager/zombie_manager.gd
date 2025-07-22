@@ -5,8 +5,8 @@ class_name ZombieManager
 @onready var zombie_manager_in_mini_game_hammer_zombie: ZombieManagerInMiniGameHammerZombie = $ZombieManagerInMiniGameHammerZombie
 ## 出怪选行系统
 @onready var zombie_choose_row_system: ZombieSpawnSystem = $ZombieChooseRowSystem
-
 @onready var main_game: MainGameManager = $"../.."
+
 ## 最大波次
 var max_wave :int
 var current_wave := 0
@@ -33,6 +33,10 @@ var create_tombston_in_flag_wave := false
 ## 按行保存僵尸，用于保存僵尸列表的列表
 @export var zombies_all_list:Array 
 
+## 冰道
+var ice_road_list:Array
+
+## 关卡进度条
 @onready var flag_progress_bar: FlagProgressBar = $FlagProgressBar
 
 ## 自然刷新计时器
@@ -71,10 +75,16 @@ var zombie_power = {
 	Global.ZombieType.ZombieCone: 2,        # 路障战力
 	Global.ZombieType.ZombiePoleVaulter: 2, # 撑杆战力
 	Global.ZombieType.ZombieBucket: 4,      # 铁桶战力
+	
 	Global.ZombieType.ZombiePaper: 4,       # 读报战力
 	Global.ZombieType.ZombieScreenDoor: 4,      # 铁门战力
 	Global.ZombieType.ZombieFootball: 4,       # 橄榄球战力
 	Global.ZombieType.ZombieJackson: 4,       # 舞王战力
+	
+	Global.ZombieType.ZombieSnorkle: 2,       # 潜水
+	Global.ZombieType.ZombieZamboni: 4,       # 冰车
+	Global.ZombieType.ZombieBobsled: 4,       # 滑雪四兄弟
+	Global.ZombieType.ZombieDolphinrider: 3,       # 海豚僵尸
 }
 
 # 创建 zombie_weights 字典，存储初始权重
@@ -88,6 +98,10 @@ var zombie_weights = {
 	Global.ZombieType.ZombieScreenDoor: 3000,      # 铁门权重
 	Global.ZombieType.ZombieFootball: 3000,       # 橄榄球权重
 	Global.ZombieType.ZombieJackson: 3000,       # 舞王权重
+	Global.ZombieType.ZombieSnorkle: 3000,       # 潜水
+	Global.ZombieType.ZombieZamboni: 3000,       # 冰车
+	Global.ZombieType.ZombieBobsled: 3000,       # 滑雪四兄弟
+	Global.ZombieType.ZombieDolphinrider: 3000,       # 海豚僵尸
 }
 
 #endregion
@@ -123,7 +137,8 @@ func init_zombie_manager(zombies:Node2D, max_wave:int, zombie_multy:int, zombie_
 	zombies_row_node = zombies.get_children()
 	for i in range(len(zombies_row_node)):
 		zombies_all_list.append([])  # 每次添加一个新的空列表
-	
+		ice_road_list.append([])	## 冰道的列表
+		
 	self.max_wave = max_wave
 	flag_progress_bar.init_flag_from_wave(max_wave)
 	progress_bar_segment_every_wave = 100.0 / (max_wave - 1)
@@ -327,6 +342,18 @@ func start_next_wave() -> void:
 			
 			var new_zombie_type = tombstone.zombie_candidate_list.pick_random()
 			tombstone.create_new_zombie(new_zombie_type)
+		## 如果是最后一波
+		if current_wave == max_wave - 1:
+			## 泳池的行,在泳池行中生成珊瑚僵尸
+			var lane_pool :Array[int] = []
+			for lane:int in range(zombies_row_node.size()):
+				## 如果为泳池地形
+				if  zombies_row_node[lane].zombie_row_type == ZombieRow.ZombieRowType.Pool:
+					lane_pool.append(lane)
+			if not lane_pool.is_empty():
+				print(lane_pool)
+				spawn_sea_weed_zombies(lane_pool)
+			
 		
 	spawn_wave_zombies(spawn_list[current_wave])
 	
@@ -371,9 +398,26 @@ func spawn_wave_zombies(zombie_data: Array) -> void:
 	
 ## 生成一个僵尸
 func spawn_zombie(zombie_type: Global.ZombieType) -> Node:
-
+	### 如果是雪橇车僵尸小队
+	var lane_ZombieBobsled:int = -1
+	if zombie_type == Global.ZombieType.ZombieBobsled:
+		var curr_lane_have_ice = []
+		for i in range(ice_road_list.size()):
+			var ice_road:Array = ice_road_list[i]
+			if not ice_road.is_empty():
+				curr_lane_have_ice.append(i)
+		## 当前没有冰道，换成冰车僵尸
+		if curr_lane_have_ice.is_empty():
+			zombie_type = Global.ZombieType.ZombieZamboni
+		else:
+			lane_ZombieBobsled = curr_lane_have_ice.pick_random()
+	
 	var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
 	var lane : int = zombie_choose_row_system.select_spawn_row(z.zombie_row_type)
+	
+	## 如果有冰道已选择
+	if lane_ZombieBobsled != -1:
+		lane = lane_ZombieBobsled
 	
 	z.lane = lane
 	z.curr_zombie_row_type = zombies_row_node[lane].zombie_row_type
@@ -383,13 +427,8 @@ func spawn_zombie(zombie_type: Global.ZombieType) -> Node:
 	z.curr_wave = current_wave
 	z.is_idle = false
 	
-	
 	zombies_row_node[lane].add_child(z)
-
-	## 如果是舞王僵尸
-	if z is ZombieJackson:
-		z.game_init_zombie_jackson()
-			
+	
 	if z.zombie_type == Global.ZombieType.ZombieFlag:
 		print("旗帜僵尸")
 		z.global_position = Vector2(-20, 0)  + zombies_row_node[lane].get_node("ZombieCreatePosition").global_position
@@ -401,19 +440,31 @@ func spawn_zombie(zombie_type: Global.ZombieType) -> Node:
 	zombies_all_list[lane].append(z)
 	curr_zombie_num += 1
 	
-	
-	
 	return z
+
+## 最后一大波珊瑚僵尸
+func spawn_sea_weed_zombies(lane_pool:Array[int]):
+	var zombie_type_sea_weed_list :Array= [Global.ZombieType.ZombieNorm, Global.ZombieType.ZombieCone, Global.ZombieType.ZombieBucket] 
+	for i in range(3):
+		var zombie_type:Global.ZombieType = zombie_type_sea_weed_list.pick_random()
+		var lane :int = lane_pool.pick_random()
+		var new_zombie :ZombieBase= return_zombie(zombie_type, lane)
+		new_zombie.curr_zombie_row_type = zombies_row_node[lane].zombie_row_type
+		new_zombie.lane = lane
+		new_zombie.is_sea_weed_zombie = true
+		zombies_row_node[lane].add_child(new_zombie)
+		new_zombie.global_position.y = zombies_row_node[lane].get_node("ZombieCreatePosition").global_position.y
+		new_zombie.global_position.x = randf_range(500, 750)
+		new_zombie.sea_weed_init()
+		
+		new_zombie.sea_weed_appear()
 
 ## 非关卡自动生成的僵尸is_hypno 是否召唤被魅惑僵尸
 func return_zombie(zombie_type: Global.ZombieType, lane: int, is_hypno:=false):
 	var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
 	if not is_hypno:
-		z.zombie_dead.connect(_on_zombie_dead)
-		z.zombie_hypno.connect(_on_zombie_hypno)
-		
 		zombies_all_list[lane].append(z)
-		curr_zombie_num += 1
+		new_zombie_connect_signal(z)
 		
 	else:
 		_on_zombie_hypno(z)
@@ -423,6 +474,12 @@ func return_zombie(zombie_type: Global.ZombieType, lane: int, is_hypno:=false):
 	
 	return z
 	
+## 僵尸信号连接
+func new_zombie_connect_signal(z:ZombieBase):
+	z.zombie_dead.connect(_on_zombie_dead)
+	z.zombie_hypno.connect(_on_zombie_hypno)
+		
+	curr_zombie_num += 1
 #endregion
 
 ## 僵尸收到伤害调用函数
@@ -514,8 +571,8 @@ func refresh_flag_wave():
 	await main_game.ui_remind_word.zombie_approach(current_wave == max_wave-1)
 	await get_tree().create_timer(2.0).timeout
 	
-	## 汽笛音效
-	SoundManager.play_sfx("Progress/Siren")
+	## 汽笛音效	
+	SoundManager.play_other_SFX("siren")
 	
 	var end_time = Time.get_ticks_msec()
 	var elapsed = (end_time - start_time) / 1000.0  # 转换为秒
@@ -618,22 +675,12 @@ func show_zombie_create():
 
 			var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
 			z.is_idle = true
-			# 避免僵尸移动
-			z.walking_status = z.WalkingStatus.end
-			
+			show_zombie.add_child(z)
 			z.position = Vector2(
 				randf_range(show_zombie_pos_start.x, show_zombie_pos_end.x),
 				randf_range(show_zombie_pos_start.y, show_zombie_pos_end.y)
 			)
-			show_zombie.add_child(z)
-			
-			z.label_hp.visible = false
-			## 删除展示僵尸碰撞箱
-			z.area2d.queue_free()
-			
-			## 如果是舞王僵尸
-			if z is ZombieJackson:
-				z.show_init_zombie_jackson()
+			z.keep_idle()
 			
 			show_zombie_array.append(z)
 			

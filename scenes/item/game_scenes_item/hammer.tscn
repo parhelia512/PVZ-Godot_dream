@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://3anktsw826yt"]
+[gd_scene load_steps=10 format=3 uid="uid://3anktsw826yt"]
 
 [ext_resource type="Texture2D" uid="uid://bqtnl31pv3rv3" path="res://assets/reanim/Hammer_3.png" id="1_3meaf"]
 [ext_resource type="Script" uid="uid://kadjgg4bxb66" path="res://scripts/main_game_item/hammer.gd" id="1_sl5fj"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://f0wyiq6h4jnl" path="res://scenes/item/game_scenes_item/sun.tscn" id="2_ybjkg"]
 [ext_resource type="Texture2D" uid="uid://dweon5ml8otw5" path="res://assets/reanim/Hammer_2.png" id="3_gmp28"]
 [ext_resource type="Animation" uid="uid://cf18nflpwmmfk" path="res://animation/item/Hammer/Hammer_whack_zombie.tres" id="4_6lef7"]
-[ext_resource type="AudioStream" uid="uid://sllgw1btijy7" path="res://assets/audio/SFX/item/bonk.ogg" id="6_gmp28"]
-[ext_resource type="AudioStream" uid="uid://c2stuov2k2550" path="res://assets/audio/sounds/swing.ogg" id="7_sb1x3"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3meaf"]
 _data = {
@@ -61,14 +59,6 @@ libraries = {
 speed_scale = 1.5
 
 [node name="SFX" type="Node2D" parent="."]
-
-[node name="Bonk" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_gmp28")
-bus = &"SFX"
-
-[node name="Swing" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("7_sb1x3")
-bus = &"SFX"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 20

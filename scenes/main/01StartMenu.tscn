@@ -1707,6 +1707,7 @@ offset_left = 188.0
 offset_top = 6.0
 offset_right = 287.0
 offset_bottom = 105.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("31_sxpcx")
 texture_pressed = ExtResource("32_ortyp")
 texture_hover = ExtResource("32_ortyp")
@@ -2056,8 +2057,8 @@ offset_right = 174.0
 offset_bottom = 151.0
 text = "没做"
 
-[connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_menu_button_1_pressed"]
+[connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Menu/Button2" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Menu/Button3" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Menu/Button4" to="Dialog" method="appear_dialog"]
@@ -2065,7 +2066,7 @@ text = "没做"
 [connection signal="pressed" from="BG_Right/Option/TextureButton2" to="." method="_on_option_button_2_pressed"]
 [connection signal="pressed" from="BG_Right/Option/TextureButton3" to="." method="_on_option_button_3_pressed"]
 [connection signal="pressed" from="BG_Right/Item/TextureButton" to="Dialog" method="appear_dialog"]
-[connection signal="pressed" from="BG_Right/Item/TextureButton2" to="Dialog" method="appear_dialog"]
+[connection signal="pressed" from="BG_Right/Item/TextureButton2" to="." method="_on_item_button_2_pressed"]
 [connection signal="pressed" from="BG_Right/Item/TextureButton3" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="WoodSign/TextureRect2" to="Dialog" method="appear_dialog"]
 [connection signal="toggled" from="StartMenuOptionDialog/Option/FullScreen/CheckButton" to="." method="_on_full_screen_button_toggled"]

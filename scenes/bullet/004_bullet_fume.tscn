@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cghhn7nuemrci"]
+[gd_scene load_steps=4 format=3 uid="uid://cghhn7nuemrci"]
 
-[ext_resource type="Script" uid="uid://ctpegdqe0mdpg" path="res://scripts/bullet/004_bullet_fume.gd" id="1_fkqdm"]
+[ext_resource type="Script" uid="uid://ctpegdqe0mdpg" path="res://scripts/bullet/bullet_004_fume.gd" id="1_fkqdm"]
 [ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="2_fkqdm"]
-[ext_resource type="AudioStream" uid="uid://7mwt2orf6f0w" path="res://assets/audio/SFX/bullet/splat1.ogg" id="3_jgdc7"]
-[ext_resource type="AudioStream" uid="uid://d267mh21n8tmg" path="res://assets/audio/SFX/bullet/splat2.ogg" id="4_jdx3t"]
-[ext_resource type="AudioStream" uid="uid://cjcfmkkumvowa" path="res://assets/audio/SFX/bullet/splat3.ogg" id="5_nnare"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xw0nn"]
 radius = 6.08276
@@ -27,19 +24,5 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_xw0nn")
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="Splat1" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("3_jgdc7")
-bus = &"SFX"
-
-[node name="Splat2" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_jdx3t")
-bus = &"SFX"
-
-[node name="Splat3" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_nnare")
-bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

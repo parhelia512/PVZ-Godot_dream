@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjuiaaq33o5aa"]
+[gd_scene load_steps=8 format=3 uid="uid://cjuiaaq33o5aa"]
 
 [ext_resource type="Script" uid="uid://bucd2k4pt4m5r" path="res://scripts/ui/card/card.gd" id="1_tioa6"]
 [ext_resource type="Texture2D" uid="uid://cdm356vgex30b" path="res://assets/image/ui/ui_card/SeedPacket_Larger.png" id="2_o6lw3"]
 [ext_resource type="Script" uid="uid://df8056ofttluk" path="res://scripts/ui/main_game_ui/card_button.gd" id="3_mli0n"]
-[ext_resource type="AudioStream" uid="uid://nv855tluacea" path="res://assets/audio/SFX/button/tap.ogg" id="4_ulu11"]
 
 [sub_resource type="SystemFont" id="SystemFont_fpdtd"]
 font_names = PackedStringArray("Sans-Serif")
@@ -93,8 +92,5 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tioa6")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 script = ExtResource("3_mli0n")
-
-[node name="Tap" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ulu11")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

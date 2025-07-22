@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://3a0yexorxcsk" path="res://assets/reanim/IceShroom_body.png" id="0_fuck"]
 [ext_resource type="Animation" uid="uid://bv1w6c5kxvxdu" path="res://animation/character/plant/015_ice_shroom/IceShroom_idle.tres" id="1_anim"]
 [ext_resource type="Texture2D" uid="uid://c213mmlt125el" path="res://assets/reanim/IceShroom_base.png" id="1_fuck"]
-[ext_resource type="Script" uid="uid://byeyumxg7gxg5" path="res://scripts/character/plant/015_ice_shroom.gd" id="1_ju8vi"]
+[ext_resource type="Script" uid="uid://byeyumxg7gxg5" path="res://scripts/character/plant/plant_015_ice_shroom.gd" id="1_ju8vi"]
 [ext_resource type="Animation" uid="uid://bg3t1o4lre152" path="res://animation/character/plant/015_ice_shroom/IceShroom_sleep.tres" id="2_anim"]
 [ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_bgvgt"]
 [ext_resource type="Texture2D" uid="uid://502erh735gni" path="res://assets/reanim/IceShroom_blink2.png" id="2_fuck"]
@@ -12,8 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cco82p2wd1ql4" path="res://assets/reanim/IceShroom_head.png" id="4_fuck"]
 [ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="10_sa70k"]
 [ext_resource type="Texture2D" uid="uid://bifx1ttlwu3bw" path="res://assets/image/particles/bullet/SnowFlakes.png" id="11_vpvam"]
-[ext_resource type="Script" uid="uid://dxi6nxsnre1w8" path="res://scripts/fx/bomb_effect/000_bomb_effect_base.gd" id="12_4kgfq"]
-[ext_resource type="AudioStream" uid="uid://1emodkbeeuqw" path="res://assets/audio/SFX/plant/frozen.ogg" id="13_4kgfq"]
+[ext_resource type="Script" uid="uid://dxi6nxsnre1w8" path="res://scripts/fx/plant_effect/plant_effect_000_bomb_base.gd" id="12_4kgfq"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_euprm"]
 _data = {
@@ -29,17 +28,23 @@ animation = &"IceShroom_sleep"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sxd4y"]
 advance_mode = 2
+advance_expression = "not is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkwun"]
 advance_mode = 2
 advance_expression = "not is_sleep"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4kgfq"]
+advance_mode = 2
+advance_expression = "is_idle"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fc1ok"]
 states/IceShroom_idle/node = SubResource("AnimationNodeAnimation_2xsdr")
-states/IceShroom_idle/position = Vector2(603, 93)
+states/IceShroom_idle/position = Vector2(393, 215)
 states/IceShroom_sleep/node = SubResource("AnimationNodeAnimation_edbt1")
 states/IceShroom_sleep/position = Vector2(401, 93)
-transitions = ["Start", "IceShroom_sleep", SubResource("AnimationNodeStateMachineTransition_sxd4y"), "IceShroom_sleep", "IceShroom_idle", SubResource("AnimationNodeStateMachineTransition_hkwun")]
+transitions = ["Start", "IceShroom_sleep", SubResource("AnimationNodeStateMachineTransition_sxd4y"), "IceShroom_sleep", "IceShroom_idle", SubResource("AnimationNodeStateMachineTransition_hkwun"), "Start", "IceShroom_idle", SubResource("AnimationNodeStateMachineTransition_4kgfq")]
+graph_offset = Vector2(60, 1)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sa70k"]
 
@@ -72,9 +77,8 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 98, 0)
 scale_max = 3.0
 
-[node name="IceShroom" type="Node2D" node_paths=PackedStringArray("SFX_bomb", "blink_sprite")]
+[node name="IceShroom" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
 script = ExtResource("1_ju8vi")
-SFX_bomb = NodePath("Frozen")
 plant_condition = ExtResource("2_bgvgt")
 blink_sprite = NodePath("Body/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("3_fuck"), ExtResource("2_fuck")])
@@ -87,8 +91,8 @@ position = Vector2(41, 70)
 texture = ExtResource("2_hkwun")
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(13.4215, 39.2925)
-scale = Vector2(0.80914, 0.771149)
+position = Vector2(13.5524, 38.6906)
+scale = Vector2(0.804429, 0.784759)
 texture = ExtResource("0_fuck")
 centered = false
 
@@ -99,7 +103,7 @@ texture = ExtResource("1_fuck")
 centered = false
 
 [node name="Anim_sleep1" type="Sprite2D" parent="Body"]
-position = Vector2(27.3, 38.8355)
+position = Vector2(27.3, 38.4429)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_fuck")
 centered = false
@@ -111,8 +115,8 @@ texture = ExtResource("3_fuck")
 centered = false
 
 [node name="IceShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(-1.4, 3.34954)
-scale = Vector2(0.8, 0.787075)
+position = Vector2(-1.4, 2.43351)
+scale = Vector2(0.8, 0.793094)
 texture = ExtResource("4_fuck")
 centered = false
 
@@ -148,7 +152,3 @@ one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_1kc8l")
-
-[node name="Frozen" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_4kgfq")
-bus = &"SFX"

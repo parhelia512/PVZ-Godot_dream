@@ -1,24 +1,12 @@
-[gd_scene load_steps=66 format=3 uid="uid://cuqbeq6t0d15v"]
+[gd_scene load_steps=50 format=3 uid="uid://cuqbeq6t0d15v"]
 
 [ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_bc04r"]
 [ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_3jvaj"]
 [ext_resource type="PackedScene" uid="uid://brnfbv2sxv2qh" path="res://scenes/ui/plant_cell.tscn" id="3_43wcq"]
 [ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mover/lawn_mower.tscn" id="5_oteh6"]
 [ext_resource type="Script" uid="uid://dhkfw0onmxcyf" path="res://scripts/camera/main_game_camera.gd" id="6_p8akp"]
-[ext_resource type="Script" uid="uid://c5llwle352r6f" path="res://scripts/manager/card_manager.gd" id="7_ci8po"]
-[ext_resource type="Script" uid="uid://h4kkw30hjgsr" path="res://scripts/ui/card/conveyor_belt.gd" id="8_qqvud"]
-[ext_resource type="Texture2D" uid="uid://cpweorxgjagtw" path="res://assets/image/ui/ui_card/ConveyorBelt_backdrop.png" id="9_s2jac"]
-[ext_resource type="Texture2D" uid="uid://clu7agu73dxr8" path="res://assets/image/ui/ui_card/ConveyorBelt.png" id="10_k6t34"]
-[ext_resource type="PackedScene" uid="uid://cjuiaaq33o5aa" path="res://scenes/ui/card.tscn" id="11_3ikrf"]
-[ext_resource type="Texture2D" uid="uid://hvvk2fdgo3pw" path="res://assets/image/ui/ui_card/SeedBank.png" id="12_4tjns"]
-[ext_resource type="Script" uid="uid://bd3w3y5b02dut" path="res://scripts/ui/main_game_ui/card_bar.gd" id="13_qw4q8"]
-[ext_resource type="Texture2D" uid="uid://dw6btivnki0kt" path="res://assets/image/ui/ui_card/SeedPacketSilhouette.png" id="14_hf2bd"]
-[ext_resource type="Texture2D" uid="uid://47ixd5hsddft" path="res://assets/image/ui/ui_card/ShovelBank.png" id="15_vpoxo"]
-[ext_resource type="Script" uid="uid://drl7ywtxslsbm" path="res://scripts/ui/card/shovel_in_ui.gd" id="16_8c507"]
+[ext_resource type="PackedScene" uid="uid://ba7yefjge3rjc" path="res://scenes/manager/card_manager.tscn" id="6_xii1m"]
 [ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="17_qgmti"]
-[ext_resource type="Texture2D" uid="uid://bgy071auro307" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Background.png" id="18_dq6w7"]
-[ext_resource type="Texture2D" uid="uid://b1fuu1s6nfxnq" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Button_Glow.png" id="19_brlm5"]
-[ext_resource type="Texture2D" uid="uid://gy84wwo8bimw" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Button_Glow2.png" id="20_80mwe"]
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="21_83c4c"]
 [ext_resource type="Script" uid="uid://b2rst408m72au" path="res://scripts/manager/hand_manager.gd" id="22_q1xgk"]
 [ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="23_3ib14"]
@@ -37,11 +25,12 @@
 [ext_resource type="Texture2D" uid="uid://b6gd58cnsxid2" path="res://assets/image/background/background2_gameover_interior_overlay.png" id="36_24fus"]
 [ext_resource type="Texture2D" uid="uid://bter5jg6j45k" path="res://assets/image/background/background1_gameover_mask.png" id="37_h2q12"]
 [ext_resource type="Texture2D" uid="uid://dltdtjwn6a800" path="res://assets/image/background/background2_gameover_mask.png" id="38_o2lep"]
+[ext_resource type="AudioStream" uid="uid://dk47vqyf2elfk" path="res://assets/audio/SFX/progress/losemusic.ogg" id="39_3jvaj"]
 [ext_resource type="AudioStream" uid="uid://cvpcoiaeca4ag" path="res://assets/audio/SFX/progress/scream.ogg" id="39_nqwe0"]
 [ext_resource type="Texture2D" uid="uid://cb5umxqmoviab" path="res://assets/image/background/Wallnut_bowlingstripe.png" id="40_0wj35"]
 [ext_resource type="Script" uid="uid://bkeu6j2ek3su7" path="res://scripts/main_game_item/zombies_row.gd" id="40_bc04r"]
 [ext_resource type="PackedScene" uid="uid://c8bd2m73sdwhf" path="res://scenes/item/game_scenes_item/day_suns.tscn" id="41_g8uyw"]
-[ext_resource type="Script" uid="uid://bwp666ia1e8t7" path="res://scripts/fx/panel_color.gd" id="42_aifs7"]
+[ext_resource type="Script" uid="uid://bwp666ia1e8t7" path="res://scripts/fx/other_effect/panel_color.gd" id="42_aifs7"]
 [ext_resource type="Script" uid="uid://cyutow4qwsjq5" path="res://scripts/ui/main_game_ui/ui_remind_word.gd" id="43_bvxsr"]
 [ext_resource type="Texture2D" uid="uid://bll1o67ycmid6" path="res://assets/image/ui/ui_remind_word/StartReady.png" id="44_oyqh0"]
 [ext_resource type="Texture2D" uid="uid://daqyr7g1dgckt" path="res://assets/image/ui/ui_remind_word/StartSet.png" id="45_ew2gm"]
@@ -57,25 +46,6 @@
 [ext_resource type="Texture2D" uid="uid://blge6mwmus5fv" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2.png" id="55_am7n1"]
 [ext_resource type="BitMap" uid="uid://bhg7gejfpw036" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2_mask.png" id="56_o2j7y"]
 [ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="57_6nw5v"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tf6e"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iuyhw"]
-particles_animation = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 6
-particles_anim_loop = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0roe"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x628s"]
-texture = ExtResource("12_4tjns")
-texture_margin_left = 80.0
-texture_margin_top = 10.0
-texture_margin_right = 10.0
-texture_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbbka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yy6tc"]
 size = Vector2(150, 600)
@@ -387,436 +357,7 @@ lane = 4
 anchor_mode = 0
 script = ExtResource("6_p8akp")
 
-[node name="CardManager" type="Control" parent="Camera2D"]
-process_mode = 1
-layout_mode = 3
-anchors_preset = 0
-offset_right = 676.0
-offset_bottom = 600.0
-mouse_filter = 2
-script = ExtResource("7_ci8po")
-
-[node name="ConveyorBelt" type="Control" parent="Camera2D/CardManager" node_paths=PackedStringArray("CB_list")]
-z_index = 100
-z_as_relative = false
-anchors_preset = 0
-offset_top = -94.0
-offset_right = 631.0
-offset_bottom = -7.0
-script = ExtResource("8_qqvud")
-CB_list = [NodePath("BG/ConveyorBeltGear/ConveyorBeltGear1"), NodePath("BG/ConveyorBeltGear/ConveyorBeltGear2"), NodePath("BG/ConveyorBeltGear/ConveyorBeltGear3")]
-time_create_cd = 5.0
-card_type = Array[int]([51, 52, 53])
-card_type_probability = Array[int]([5, 1, 1])
-card_type_start_list = Array[int]([51, 52, 53])
-
-[node name="BG" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt"]
-layout_mode = 0
-offset_left = 107.0
-offset_right = 623.0
-offset_bottom = 86.0
-texture = ExtResource("9_s2jac")
-
-[node name="ConveyorBeltGear" type="Panel" parent="Camera2D/CardManager/ConveyorBelt/BG"]
-clip_children = 1
-layout_mode = 0
-offset_left = 7.0
-offset_top = 63.0
-offset_right = 509.0
-offset_bottom = 79.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_2tf6e")
-
-[node name="ConveyorBeltGear3" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt/BG/ConveyorBeltGear"]
-material = SubResource("CanvasItemMaterial_iuyhw")
-layout_mode = 0
-offset_left = 438.0
-offset_right = 940.0
-offset_bottom = 15.0
-texture = ExtResource("10_k6t34")
-expand_mode = 3
-stretch_mode = 2
-
-[node name="ConveyorBeltGear2" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt/BG/ConveyorBeltGear"]
-material = SubResource("CanvasItemMaterial_iuyhw")
-layout_mode = 0
-offset_left = 138.0
-offset_right = 640.0
-offset_bottom = 15.0
-texture = ExtResource("10_k6t34")
-expand_mode = 3
-stretch_mode = 2
-
-[node name="ConveyorBeltGear1" type="TextureRect" parent="Camera2D/CardManager/ConveyorBelt/BG/ConveyorBeltGear"]
-material = SubResource("CanvasItemMaterial_iuyhw")
-layout_mode = 2
-offset_left = -162.0
-offset_right = 340.0
-offset_bottom = 15.0
-texture = ExtResource("10_k6t34")
-expand_mode = 3
-stretch_mode = 2
-
-[node name="CardArea" type="Panel" parent="Camera2D/CardManager/ConveyorBelt/BG"]
-clip_children = 1
-layout_mode = 0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 510.0
-offset_bottom = 78.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_q0roe")
-
-[node name="CardPosition" parent="Camera2D/CardManager/ConveyorBelt/BG/CardArea" instance=ExtResource("11_3ikrf")]
-visible = false
-layout_mode = 2
-offset_left = 512.0
-offset_right = 562.0
-
-[node name="Timer" type="Timer" parent="Camera2D/CardManager/ConveyorBelt"]
-
-[node name="CardBarAndShovel" type="HBoxContainer" parent="Camera2D/CardManager"]
-z_index = 100
-z_as_relative = false
-layout_mode = 0
-offset_left = 13.0
-offset_top = -94.0
-offset_right = 227.0
-offset_bottom = -4.0
-theme_override_constants/separation = 0
-
-[node name="CardBarBg" type="PanelContainer" parent="Camera2D/CardManager/CardBarAndShovel"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_x628s")
-script = ExtResource("13_qw4q8")
-
-[node name="SunLabelControl" type="Control" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CurrSunValue" type="Label" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/SunLabelControl"]
-layout_mode = 2
-offset_left = -101.0
-offset_top = 51.0
-offset_right = 14.0
-offset_bottom = 79.0
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "999990"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CardUiList" type="HBoxContainer" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CardPlaceholder_ori" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="MarginContainer" type="MarginContainer" parent="Camera2D/CardManager/CardBarAndShovel"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 18
-
-[node name="ShovelBg" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("15_vpoxo")
-script = ExtResource("16_8c507")
-
-[node name="Shovel" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -4.0
-offset_right = 5.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("17_qgmti")
-
-[node name="Button" type="Button" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jbbka")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_jbbka")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jbbka")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_jbbka")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_jbbka")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_jbbka")
-
-[node name="Label" type="Label" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg"]
-layout_mode = 0
-offset_left = 54.0
-offset_top = 50.0
-offset_right = 72.0
-offset_bottom = 73.0
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-text = "F"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CardChooser" type="Control" parent="Camera2D/CardManager"]
-z_index = 1100
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = 15.0
-offset_right = 498.0
-offset_bottom = 526.0
-grow_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="Camera2D/CardManager/CardChooser"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -232.5
-offset_top = -513.0
-offset_right = 232.5
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("18_dq6w7")
-
-[node name="GridContainer" type="GridContainer" parent="Camera2D/CardManager/CardChooser/TextureRect"]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 32.0
-offset_right = 450.0
-offset_bottom = 449.0
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 0
-columns = 8
-
-[node name="CardPlaceholder" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-custom_minimum_size = Vector2(50, 70)
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder2" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder3" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder4" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder5" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder6" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder7" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder8" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder9" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder10" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder11" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder12" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder13" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder14" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder15" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder16" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder17" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder18" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder19" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder20" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder21" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder22" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder23" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder24" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder25" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder26" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder27" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder28" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder29" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder30" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder31" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder32" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder33" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder34" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder35" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder36" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder37" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder38" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder39" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder40" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder41" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder42" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder43" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder44" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder45" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder46" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder47" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="CardPlaceholder48" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("14_hf2bd")
-
-[node name="TextureButton" type="TextureButton" parent="Camera2D/CardManager/CardChooser/TextureRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -83.5
-offset_top = 202.5
-offset_right = 72.5
-offset_bottom = 244.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-texture_normal = ExtResource("19_brlm5")
-texture_pressed = ExtResource("20_80mwe")
-texture_hover = ExtResource("20_80mwe")
-script = ExtResource("21_83c4c")
-
-[node name="TemporaryCard" type="Control" parent="Camera2D/CardManager"]
-z_index = 1150
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CardManager" parent="Camera2D" instance=ExtResource("6_xii1m")]
 
 [node name="Manager" type="Node2D" parent="."]
 
@@ -953,6 +494,10 @@ position = Vector2(624, -8)
 
 [node name="Scream" type="AudioStreamPlayer" parent="Background/Area2DHome/SFX"]
 stream = ExtResource("39_nqwe0")
+bus = &"SFX"
+
+[node name="Losemusic" type="AudioStreamPlayer" parent="Background/Area2DHome/SFX"]
+stream = ExtResource("39_3jvaj")
 bus = &"SFX"
 
 [node name="WallnutBowlingstripe" type="Sprite2D" parent="Background"]
@@ -1782,14 +1327,6 @@ offset_right = 169.0
 offset_bottom = 155.0
 text = "没做"
 
-[connection signal="mouse_entered" from="Camera2D/CardManager/ConveyorBelt/BG" to="Camera2D/CardManager/ConveyorBelt" method="_on_bg_mouse_entered"]
-[connection signal="mouse_exited" from="Camera2D/CardManager/ConveyorBelt/BG" to="Camera2D/CardManager/ConveyorBelt" method="_on_bg_mouse_exited"]
-[connection signal="mouse_entered" from="Camera2D/CardManager/CardBarAndShovel/CardBarBg" to="Camera2D/CardManager/CardBarAndShovel/CardBarBg" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Camera2D/CardManager/CardBarAndShovel/CardBarBg" to="Camera2D/CardManager/CardBarAndShovel/CardBarBg" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" to="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" to="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" method="_on_mouse_exited"]
-[connection signal="pressed" from="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg/Button" to="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg" method="_on_button_pressed"]
-[connection signal="pressed" from="Camera2D/CardManager/CardChooser/TextureRect/TextureButton" to="." method="cheeosed_card_start_game"]
 [connection signal="timeout" from="Manager/ZombieManager/ZombieManagerInMiniGameHammerZombie/HammerZombieTimer" to="Manager/ZombieManager/ZombieManagerInMiniGameHammerZombie" method="_on_hammer_zombie_timer_timeout"]
 [connection signal="timeout" from="Manager/ZombieManager/WaveTimer" to="Manager/ZombieManager" method="_on_WaveTimer_timeout"]
 [connection signal="timeout" from="Manager/ZombieManager/OneWaveProgressTimer" to="Manager/ZombieManager" method="_on_one_wave_progress_timer_timeout"]

@@ -18,9 +18,9 @@ var min_bounce_speed := 30.0  # 小于这个速度就不再反弹
 var shake_intensity := 5.0  # 初始震动强度
 var min_rotation_speed := 0.2  # 最小旋转速度
 
-var zombie:ZombieBase
-var is_water := false
-
+var is_swimming := false
+@export var zombie: ZombieBase
+	
 	
 func _process(delta):
 	if is_active:
@@ -38,7 +38,7 @@ func _process(delta):
 
 		# 检查是否到达地面
 		if drop_body.position.y >= ground_y:
-			if is_water:
+			if is_swimming:
 				# 在水里直接停止移动
 				velocity = Vector2.ZERO
 				rotation_speed = 0.0
@@ -62,15 +62,19 @@ func _process(delta):
 
 
 func acitvate_it(control_x:float = 0):
+	## 如果zombie为空
+	if not zombie:
+		zombie = $"../../.."
+		
 	if control_x != 0:
 		velocity = Vector2(control_x, velocity.y)
 	is_active = true
 	visible = true
-	zombie = get_parent()
+	#zombie = get_parent()
 	## 如果僵尸在水里
-	if zombie.is_water:
+	if zombie.is_swimming:
 		ground_y = 200
-		is_water = true
+		is_swimming = true
 		
 	move_parent_to_be_sibling()
 	
@@ -83,21 +87,21 @@ func _deferred_move_parent():
 	if parent == null:
 		return
 
-	var grandparent := parent.get_parent()
-	if grandparent == null:
+	var zombie_parent := zombie.get_parent()
+	if zombie_parent == null:
 		return
-
 	# 保持位置
 	var global_pos: Vector2 = global_position
 
 	# 真正修改结构
 	parent.remove_child(self)
-	grandparent.add_child(self)
+	zombie_parent.add_child(self)
 
 	# 恢复位置
-	self.global_position = global_pos
-
-
+	global_position = global_pos
+	
+	print(global_position)
+	
 func fade_and_delete():
 	var tween = create_tween()
 	tween.tween_property(drop_body, "modulate:a", 0.0, 1.0)  # 1秒内 alpha 从当前变到 0

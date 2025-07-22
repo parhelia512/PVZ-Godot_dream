@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://crtjv3ddovlbi"]
+
+[ext_resource type="Texture2D" uid="uid://b4dihaqonj4k4" path="res://assets/reanim/Caltrop_blink1.png" id="1_05ngt"]
+[ext_resource type="Texture2D" uid="uid://djsyco71dq21c" path="res://assets/reanim/Caltrop_body.png" id="2_vdyr0"]
+[ext_resource type="Texture2D" uid="uid://bt8vfd40soar2" path="res://assets/reanim/Caltrop_horn1.png" id="3_v1rlt"]
+[ext_resource type="Texture2D" uid="uid://fa60cdkuf7oe" path="res://assets/reanim/Caltrop_horn2.png" id="4_fctb4"]
+[ext_resource type="Texture2D" uid="uid://dbjgn3in4at66" path="res://assets/reanim/Caltrop_horn3.png" id="5_1dh8l"]
+[ext_resource type="Texture2D" uid="uid://dsvk38sshl42f" path="res://assets/reanim/Caltrop_horn4.png" id="6_pdiub"]
+
+[node name="Caltrop" type="Node2D"]
+scale = Vector2(0.45, 0.45)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-40, -44.4444)
+
+[node name="Anim_attack" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(-1.40063, 45.9006)
+scale = Vector2(0.81851, 0.761478)
+texture = ExtResource("2_vdyr0")
+centered = false
+
+[node name="Caltrop_horn1" type="Sprite2D" parent="Body"]
+position = Vector2(5.99873, 47.4261)
+rotation = -0.098238
+scale = Vector2(0.799248, 0.765229)
+texture = ExtResource("3_v1rlt")
+centered = false
+
+[node name="Caltrop_horn2" type="Sprite2D" parent="Body"]
+position = Vector2(22.5242, 42.9509)
+rotation = -0.0908125
+scale = Vector2(0.8, 0.786242)
+texture = ExtResource("4_fctb4")
+centered = false
+
+[node name="Caltrop_horn3" type="Sprite2D" parent="Body"]
+position = Vector2(46.4006, 43.1752)
+rotation = 0.0685454
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_1dh8l")
+centered = false
+
+[node name="Caltrop_horn4" type="Sprite2D" parent="Body"]
+position = Vector2(57.4006, 49.9)
+rotation = 0.0480244
+scale = Vector2(0.799, 0.799)
+texture = ExtResource("6_pdiub")
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(19.4, 60.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_05ngt")
+centered = false

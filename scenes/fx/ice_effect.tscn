@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2y2ygq62yaag"]
 
-[ext_resource type="Script" uid="uid://cc2pukv2rh1pk" path="res://scripts/fx/bomb_effect/003_ice_effect.gd" id="1_q33bu"]
+[ext_resource type="Script" uid="uid://cc2pukv2rh1pk" path="res://scripts/fx/plant_effect/plant_effect_003_ice_effect.gd" id="1_q33bu"]
 [ext_resource type="Texture2D" uid="uid://b8wyfl4uolim5" path="res://assets/image/main_game_item/icetrap.png" id="2_pnb1i"]
 [ext_resource type="Texture2D" uid="uid://dsfa44kvaul2b" path="res://assets/image/main_game_item/icetrap2.png" id="3_oux6n"]
 [ext_resource type="Texture2D" uid="uid://ce5qywnpuq2ob" path="res://assets/image/particles/icetrap_particles.png" id="4_05hx1"]

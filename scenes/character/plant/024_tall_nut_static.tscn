@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxtyxvk6vk60b"]
+
+[ext_resource type="Texture2D" uid="uid://bx76a21ng1hd1" path="res://assets/reanim/Tallnut_body.png" id="1_2f1fn"]
+[ext_resource type="Texture2D" uid="uid://df5yxhm82xo61" path="res://assets/reanim/Tallnut_blink1.png" id="2_s0d1x"]
+
+[node name="TallNut" type="Node2D"]
+scale = Vector2(0.35, 0.35)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-42.8571, -34.2857)
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(0, -37.1)
+scale = Vector2(0.8, 0.816)
+texture = ExtResource("1_2f1fn")
+centered = false
+
+[node name="Anim_blink_twice" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(31.2, -15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_s0d1x")
+centered = false
+
+[node name="Anim_blink_thrice" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(31.2, -15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_s0d1x")
+centered = false

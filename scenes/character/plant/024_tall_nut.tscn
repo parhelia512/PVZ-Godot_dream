@@ -1,0 +1,103 @@
+[gd_scene load_steps=15 format=3 uid="uid://vnpmqbieql56"]
+
+[ext_resource type="Script" uid="uid://nbs1tc607wsa" path="res://scripts/character/plant/plant_024_tall_nut.gd" id="1_30n4e"]
+[ext_resource type="Texture2D" uid="uid://bx76a21ng1hd1" path="res://assets/reanim/Tallnut_body.png" id="1_dgm8j"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_khj7b"]
+[ext_resource type="Texture2D" uid="uid://d0q3vvxpeqiia" path="res://assets/reanim/Tallnut_cracked1.png" id="2_uxf8y"]
+[ext_resource type="Texture2D" uid="uid://df5yxhm82xo61" path="res://assets/reanim/Tallnut_blink1.png" id="2_uyw20"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_dgm8j"]
+[ext_resource type="Texture2D" uid="uid://c6a2y7jjdxove" path="res://assets/reanim/Tallnut_cracked2.png" id="3_urga3"]
+[ext_resource type="Animation" uid="uid://vv3qtbm6a1td" path="res://animation/character/plant/024_tall_nut/Tallnut_idle.tres" id="4_urga3"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mp8j5"]
+_data = {
+&"Tallnut_idle": ExtResource("4_urga3")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uyw20"]
+animation = &"Tallnut_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_uxf8y"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_urga3"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_uyw20")
+nodes/Animation/position = Vector2(100, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_uxf8y")
+nodes/TimeScale/position = Vector2(340, 60)
+nodes/output/position = Vector2(520, 80)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgm8j"]
+size = Vector2(50, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxf8y"]
+size = Vector2(65, 55)
+
+[node name="TallNut" type="Node2D" node_paths=PackedStringArray("anim_face")]
+script = ExtResource("1_30n4e")
+face_damaged = Array[Texture2D]([ExtResource("2_uxf8y"), ExtResource("3_urga3")])
+anim_face = NodePath("Body/Anim_idle")
+plant_condition = ExtResource("2_khj7b")
+no_blink = true
+max_hp = 8000
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41.5, -42)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(40, 76)
+scale = Vector2(1.22093, 0.902778)
+texture = ExtResource("3_dgm8j")
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(0.588832, -35.4927)
+rotation = 0.0102774
+scale = Vector2(0.809184, 0.802223)
+texture = ExtResource("1_dgm8j")
+centered = false
+
+[node name="Anim_blink_twice" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(31.2, -15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_uyw20")
+centered = false
+
+[node name="Anim_blink_thrice" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(31.2, -15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_uyw20")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mp8j5")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_urga3")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dgm8j")
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(-12, -18)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(7.5, 19)
+shape = SubResource("RectangleShape2D_uxf8y")
+
+[connection signal="area_entered" from="Area2D2" to="." method="_on_area_2d_2_area_entered"]

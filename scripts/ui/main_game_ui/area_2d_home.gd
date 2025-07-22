@@ -1,10 +1,13 @@
 extends Area2D
 class_name Area2DHome
 
-@onready var main_game: MainGameManager = $"../.."
+var main_game: MainGameManager
+var camera_2d: MainGameCamera
 
-@onready var camera_2d: MainGameCamera = $"../../Camera2D"
 @onready var panel: Panel = $Door/DoorDown/Panel
+func _ready() -> void:
+	main_game = get_tree().current_scene
+	camera_2d = main_game.get_node("Camera2D")
 
 func change_zombie_position(zombie:ZombieBase):
 	## 要删除碰撞器，不然会闪退
@@ -20,7 +23,7 @@ func _on_area_entered(area: Area2D) -> void:
 	# 游戏暂停
 	get_tree().paused = true
 	var zombie :ZombieBase = area.get_parent()
-	change_zombie_position(zombie)
+	call_deferred("change_zombie_position", zombie)
 	zombie.walking_status = ZombieBase.WalkingStatus.start
 	## 如果有锤子
 	if main_game.hammer:
@@ -30,9 +33,9 @@ func _on_area_entered(area: Area2D) -> void:
 	## 设置相机可以移动
 	camera_2d.process_mode = Node.PROCESS_MODE_ALWAYS
 	camera_2d.move_to(Vector2(-200, 0), 2)
-	
+	SoundManager.play_other_SFX("losemusic")
 	await get_tree().create_timer(3).timeout
-	$SFX/Scream.play()
+	SoundManager.play_other_SFX("scream")
 	var ui_remind_word: UIRemindWord = main_game.ui_remind_word
 	ui_remind_word.zombie_won_word_appear()
 	

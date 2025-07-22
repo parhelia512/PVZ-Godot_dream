@@ -29,6 +29,6 @@ func _on_area_entered(area: Area2D) -> void:
 		if not is_moving:
 			is_moving = true
 			animation_player.play("LawnMower_normal")
-			$Lawnmower.play()
+			SoundManager.play_other_SFX("lawnmower")
 			
 		zombie.be_mowered_run()

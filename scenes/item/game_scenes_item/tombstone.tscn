@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bxkoutl6ne7bt" path="res://assets/image/main_game_item/Tombstone_mounds.png" id="3_4gxsu"]
 [ext_resource type="Texture2D" uid="uid://dhawpqhvsxd83" path="res://assets/image/particles/dirtsmall.png" id="4_k66uw"]
 [ext_resource type="AudioStream" uid="uid://cen767dg5fuva" path="res://assets/audio/SFX/zombie/dirt_rise.ogg" id="5_jeiep"]
-[ext_resource type="Script" uid="uid://qf80xhqf2ko6" path="res://scripts/fx/dirt_new_zombie_appear_from_ground.gd" id="7_0is8d"]
+[ext_resource type="Script" uid="uid://qf80xhqf2ko6" path="res://scripts/fx/other_effect/dirt_new_zombie_appear_from_ground.gd" id="7_0is8d"]
 [ext_resource type="Texture2D" uid="uid://igrk4hwpobli" path="res://assets/image/particles/dirtbig.png" id="8_ii21w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg40l"]

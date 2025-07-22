@@ -109,11 +109,12 @@ func _process(delta: float) -> void:
 
 # 点击卡片
 func _manage_new_plant_static(card:Card) -> void:
-	SoundManager.play_sfx("Card/Choose")
+	SoundManager.play_other_SFX("seedlift")
+	
 	if not curr_card:
 		## 如果有铲子
 		if is_shovel:
-				SoundManager.play_sfx("Card/Back")
+				SoundManager.play_other_SFX("tap2")
 				if plant_be_shovel_look:
 					plant_be_shovel_look.be_shovel_look_end()
 					plant_be_shovel_look = null
@@ -142,7 +143,7 @@ func _manage_new_plant_static(card:Card) -> void:
 # 点击铲子
 func _manage_shovel() -> void:
 	if not is_shovel:
-		SoundManager.play_sfx("Card/Shovel")
+		SoundManager.play_other_SFX("shovel")
 		is_shovel = true
 		shovel_real.visible = true
 		card_manager.shovel_ui.visible = false
@@ -150,7 +151,7 @@ func _manage_shovel() -> void:
 # 点击种植或铲掉植物
 func _on_click_cell(plant_cell:PlantCell):
 
-	if new_plant_static_in_cell:
+	if new_plant_static_in_cell and curr_card:
 		# 创建植物
 		_create_new_plant(curr_card.card_type, plant_cell)
 		## 卡片种植完成后发射信号
@@ -162,7 +163,7 @@ func _on_click_cell(plant_cell:PlantCell):
 		
 	# 手拿铲子并且当前存在被铲子威胁的植物
 	if is_shovel and plant_be_shovel_look:
-		SoundManager.play_sfx("PlantCreate/Plant2")
+		SoundManager.play_other_SFX("plant2")
 		_cance_shovel_or_end()
 		plant_be_shovel_look.be_shovel_kill()
 
@@ -224,6 +225,10 @@ func _on_cell_mouse_enter(plant_cell:PlantCell):
 			else:
 				new_plant_static_shadow.modulate.a = 0
 				new_plant_static_in_cell = false
+		## 如果都不是，不能种植
+		else:
+			new_plant_static_shadow.modulate.a = 0
+			new_plant_static_in_cell = false
 
 	# 如果手拿铲子
 	if is_shovel:
@@ -233,7 +238,7 @@ func _on_cell_mouse_enter(plant_cell:PlantCell):
 
 # 鼠标移出cell
 func _on_cell_mouse_exit(plant_cell:PlantCell):
-	plant_cell = null
+	curr_plant_cell = null
 	if curr_card:
 		if main_game.mode_column:
 			# 当前cell的列
@@ -255,11 +260,11 @@ func _on_cell_mouse_exit(plant_cell:PlantCell):
 func _pressed_shortcut_keys_shovel_F():
 	## 如果手上有植物
 	if  curr_card:
-		SoundManager.play_sfx("Card/Back")
+		SoundManager.play_other_SFX("tap2")
 		_cancel_plant_or_end()
 	## 如果手上有铲子
 	if is_shovel:
-		SoundManager.play_sfx("Card/Back")
+		SoundManager.play_other_SFX("tap2")
 		if plant_be_shovel_look:
 			plant_be_shovel_look.be_shovel_look_end()
 			plant_be_shovel_look = null
@@ -280,18 +285,18 @@ func _input(event):
 		if curr_card:
 			#右键点击
 			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				SoundManager.play_sfx("Card/Back")
+				SoundManager.play_other_SFX("tap2")
 				_cancel_plant_or_end()
 
 			#左键点击空白
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not new_plant_static_in_cell:
-				SoundManager.play_sfx("Card/Back")
+				SoundManager.play_other_SFX("tap2")
 				_cancel_plant_or_end()
 		
 		if is_shovel:
 			#右键点击
 			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				SoundManager.play_sfx("Card/Back")
+				SoundManager.play_other_SFX("tap2")
 				if plant_be_shovel_look:
 					plant_be_shovel_look.be_shovel_look_end()
 					plant_be_shovel_look = null
@@ -299,7 +304,7 @@ func _input(event):
 			
 			#左键点击空白
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not plant_be_shovel_look:
-				SoundManager.play_sfx("Card/Back")
+				SoundManager.play_other_SFX("tap2")
 				_cance_shovel_or_end()
 		
 

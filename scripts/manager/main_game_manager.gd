@@ -169,7 +169,7 @@ func _init_game_card_bar():
 
 			## 初始化预选卡
 			if game_para.pre_choosed_card_list:
-				card_manager.init_pre_choosed_card(game_para.pre_choosed_card_list)
+				card_manager.init_pre_choosed_card(game_para.pre_choosed_card_list, is_test)
 		game_para.CardMode.ConveyorBelt:
 			conveyor_belt.init_conveyor_belt_card_bar(game_para.card_type, game_para.card_type_probability, game_para.card_type_start_list)
 

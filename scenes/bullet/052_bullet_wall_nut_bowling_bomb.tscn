@@ -1,15 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://dln1uyxxh2qke"]
+[gd_scene load_steps=21 format=3 uid="uid://dln1uyxxh2qke"]
 
-[ext_resource type="Script" uid="uid://brh517akx01is" path="res://scripts/bullet/052_bullet_wall_nut_bowling_bomb.gd" id="1_1gyqr"]
+[ext_resource type="Script" uid="uid://brh517akx01is" path="res://scripts/bullet/bullet_052_wall_nut_bowling_bomb.gd" id="1_1gyqr"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_sgdfp"]
 [ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="3_dxce5"]
 [ext_resource type="Texture2D" uid="uid://cpbkvykx6yq07" path="res://assets/reanim/Wallnut_twitch.png" id="4_tio1d"]
 [ext_resource type="Texture2D" uid="uid://co3e8k6uwm4hi" path="res://assets/reanim/Wallnut_blink1.png" id="5_66n4t"]
-[ext_resource type="Script" uid="uid://uv71i8wk2job" path="res://scripts/fx/bomb_effect/001_bomb_effect_cherry_bomb.gd" id="6_tio1d"]
+[ext_resource type="Script" uid="uid://uv71i8wk2job" path="res://scripts/fx/plant_effect/plant_effect_001_bomb_cherry.gd" id="6_tio1d"]
 [ext_resource type="Texture2D" uid="uid://lr726nfj8o4l" path="res://assets/image/particles/bullet/DoomShroom_Explosion_Top.png" id="7_66n4t"]
 [ext_resource type="Texture2D" uid="uid://ysajcyiwrdnk" path="res://assets/image/particles/ExplosionPowie.png" id="8_m83sr"]
-[ext_resource type="AudioStream" uid="uid://dwjo8pcmj0gjr" path="res://assets/audio/SFX/plant/cherrybomb.ogg" id="9_66n4t"]
-[ext_resource type="AudioStream" uid="uid://qkm6isknt63q" path="res://assets/audio/SFX/plant/bowling.ogg" id="10_7stia"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4j2e"]
 radius = 35.0
@@ -80,10 +78,9 @@ alpha_curve = SubResource("CurveTexture_p5gqp")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l4jw"]
 size = Vector2(250, 200)
 
-[node name="BulletWallNutBowlingBomb" type="Node2D" node_paths=PackedStringArray("SFX_bomb", "bullet_effect")]
+[node name="BulletWallNutBowlingBomb" type="Node2D" node_paths=PackedStringArray("bullet_effect")]
 z_as_relative = false
 script = ExtResource("1_1gyqr")
-SFX_bomb = NodePath("SFX/Cherrybomb")
 speed = 188.0
 bullet_effect = NodePath("BulletEffect")
 
@@ -170,16 +167,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_6l4jw")
-
-[node name="SFX" type="Node2D" parent="."]
-
-[node name="Bowling" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("10_7stia")
-bus = &"SFX"
-
-[node name="Cherrybomb" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("9_66n4t")
-bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

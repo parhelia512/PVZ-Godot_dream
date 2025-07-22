@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NodeConfig" load_steps=4 format=3 uid="uid://b8mcvr3yf1ru8"]
 
-[ext_resource type="Script" uid="uid://cg66vr4xagg24" path="res://scripts/character/zombie/001_zombie_norm.gd" id="1_a6tbn"]
-[ext_resource type="Texture2D" uid="uid://ctf3e40px7dxf" path="res://assets/image/damage/Zombie_outerarm_upper2.png" id="2_tfqbh"]
+[ext_resource type="Script" uid="uid://cg66vr4xagg24" path="res://scripts/character/zombie/zombie_001_norm.gd" id="1_a6tbn"]
+[ext_resource type="Texture2D" path="res://assets/image/damage/Zombie_outerarm_upper2.png" id="2_tfqbh"]
 [ext_resource type="Script" uid="uid://chcjfe7crb4yo" path="res://addons/node_presetting/resource/node_config.gd" id="3_dps2m"]
 
 [resource]

@@ -11,9 +11,8 @@ class_name UIRemindWord
 
 ## 准备放置植物
 func ready_set_plant() -> void:
-	# SFX 开局红字音效
 	visible = true
-	SoundManager.play_sfx("Progress/Readysetplant")
+	SoundManager.play_other_SFX("readysetplant")
 	for node in [ready_plant, set_plant, plant]:
 		node.visible = true
 		await get_tree().create_timer(0.6).timeout  # 等待 1 秒
@@ -24,15 +23,14 @@ func ready_set_plant() -> void:
 ## 僵尸靠近
 func zombie_approach(final:bool) -> void:
 	visible = true
-	# SFX 大波僵尸红字音效
-	SoundManager.play_sfx("Progress/Hugewave")
+	SoundManager.play_other_SFX("hugewave")
 	approaching.visible = true
 	await get_tree().create_timer(4).timeout  # 等待 1 秒
 	approaching.visible = false
 	await get_tree().create_timer(2).timeout  # 等待 1 秒
 	if final:
 		# SFX 最后一波红字音效
-		SoundManager.play_sfx("Progress/Finalwave")
+		SoundManager.play_other_SFX("finalwave")
 		final_wave.visible = true
 		await get_tree().create_timer(3).timeout  # 等待 1 秒
 		final_wave.visible = false

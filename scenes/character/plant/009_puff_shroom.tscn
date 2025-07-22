@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://du2e1o3whmhu"]
 
-[ext_resource type="Script" uid="uid://c1ni5bhdnc4d5" path="res://scripts/character/plant/009_puff_shroom.gd" id="1_rfjc7"]
+[ext_resource type="Script" uid="uid://c1ni5bhdnc4d5" path="res://scripts/character/plant/plant_009_puff_shroom.gd" id="1_rfjc7"]
 [ext_resource type="PackedScene" uid="uid://cyjs8bpfoj18t" path="res://scenes/bullet/003_bullet_puff.tscn" id="2_ttckk"]
 [ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_rfjc7"]
 [ext_resource type="Texture2D" uid="uid://chp5oagqacrw2" path="res://assets/reanim/PuffShroom_blink1.png" id="3_w23mn"]
@@ -14,7 +14,6 @@
 [ext_resource type="Animation" uid="uid://g2qcnpjpttmx" path="res://animation/character/plant/009_puff_shroom/PuffShroom_idle.tres" id="11_y7dnu"]
 [ext_resource type="Animation" uid="uid://6n7yf3akvtw1" path="res://animation/character/plant/009_puff_shroom/PuffShroom_shooting.tres" id="12_cwo1n"]
 [ext_resource type="Animation" uid="uid://dwapvt7508kup" path="res://animation/character/plant/009_puff_shroom/PuffShroom_sleep.tres" id="13_yxo1c"]
-[ext_resource type="AudioStream" uid="uid://csca27b4amg75" path="res://assets/audio/SFX/plant/puff.ogg" id="15_mc8sy"]
 [ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="16_v8hxs"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kf1mc"]
@@ -42,20 +41,26 @@ advance_expression = "not is_sleep"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tm5gy"]
 advance_mode = 2
+advance_expression = "not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mc8sy"]
+advance_mode = 2
+advance_expression = "is_idle"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_31qs1"]
 states/PuffShroom_idle/node = SubResource("AnimationNodeAnimation_sr8f0")
 states/PuffShroom_idle/position = Vector2(422, 51)
 states/PuffShroom_sleep/node = SubResource("AnimationNodeAnimation_rexsj")
-states/PuffShroom_sleep/position = Vector2(429, 177)
-transitions = ["PuffShroom_sleep", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_kf1mc"), "Start", "PuffShroom_sleep", SubResource("AnimationNodeStateMachineTransition_tm5gy")]
+states/PuffShroom_sleep/position = Vector2(422, 176)
+transitions = ["PuffShroom_sleep", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_kf1mc"), "Start", "PuffShroom_sleep", SubResource("AnimationNodeStateMachineTransition_tm5gy"), "Start", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_mc8sy")]
+graph_offset = Vector2(51, -2)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7p5dm"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3gdsv"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_77dap"]
-graph_offset = Vector2(-462.618, 63.9838)
+graph_offset = Vector2(-461.398, 59.2404)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_54vaa")
 nodes/Animation/position = Vector2(-540, 420)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_jxqfk")
@@ -72,11 +77,10 @@ node_connections = [&"OneShot", 0, &"StateMachine", &"OneShot", 1, &"TimeScale 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tm5gy"]
 size = Vector2(50, 60)
 
-[node name="PuffShroom" type="Node2D" node_paths=PackedStringArray("bullet_position", "throw_SFX", "blink_sprite")]
+[node name="PuffShroom" type="Node2D" node_paths=PackedStringArray("bullet_position", "blink_sprite")]
 script = ExtResource("1_rfjc7")
 bullet_scene = ExtResource("2_ttckk")
 bullet_position = NodePath("Body/PuffShroomPuff1")
-throw_SFX = [NodePath("Puff")]
 plant_condition = ExtResource("3_rfjc7")
 blink_sprite = NodePath("Body/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("3_w23mn"), ExtResource("4_6bex2")])
@@ -101,32 +105,32 @@ visible = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(29.3, 47.1806)
-scale = Vector2(0.44, 0.423687)
+position = Vector2(29.3, 47.4922)
+scale = Vector2(0.44, 0.414594)
 texture = ExtResource("6_2hw4s")
 centered = false
 
 [node name="PuffShroom_stem" type="Sprite2D" parent="Body"]
-position = Vector2(47.6, 51.4403)
-scale = Vector2(0.45, 0.433687)
+position = Vector2(47.6, 51.6922)
+scale = Vector2(0.45, 0.424594)
 texture = ExtResource("7_hlrmg")
 centered = false
 
 [node name="PuffShroom_tip" type="Sprite2D" parent="Body"]
-position = Vector2(49.4, 49.0701)
+position = Vector2(49.4, 49.2922)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("8_ukjud")
 centered = false
 
 [node name="PuffShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(22.1299, 29.4209)
-scale = Vector2(0.446806, 0.424687)
+position = Vector2(21.9719, 30.0484)
+scale = Vector2(0.449922, 0.416235)
 texture = ExtResource("9_nsn87")
 centered = false
 
 [node name="PuffShroom_eyes" type="Sprite2D" parent="Body"]
-position = Vector2(43.9, 49.5701)
-scale = Vector2(0.44, 0.461806)
+position = Vector2(43.9, 49.7922)
+scale = Vector2(0.44, 0.465562)
 texture = ExtResource("4_6bex2")
 centered = false
 
@@ -173,7 +177,3 @@ input_pickable = false
 shape = SubResource("RectangleShape2D_tm5gy")
 
 [node name="SleepShroom" parent="." instance=ExtResource("16_v8hxs")]
-
-[node name="Puff" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_mc8sy")
-bus = &"SFX"

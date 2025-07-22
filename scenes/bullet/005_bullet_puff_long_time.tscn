@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://b7pr8l7ew4bgg"]
 
-[ext_resource type="Script" uid="uid://b73xi27nloj38" path="res://scripts/bullet/003_bullet_puff.gd" id="1_1ius6"]
+[ext_resource type="Script" uid="uid://b73xi27nloj38" path="res://scripts/bullet/bullet_003_puff.gd" id="1_1ius6"]
 [ext_resource type="Texture2D" uid="uid://bq2t7ki1icbpq" path="res://assets/image/particles/bullet/PuffShroom_puff2.png" id="2_qsf5v"]
 [ext_resource type="Texture2D" uid="uid://yjc7pkf5hdn2" path="res://assets/image/particles/bullet/PuffShroom_puff1.png" id="3_8bcht"]
-[ext_resource type="Script" uid="uid://b0jwg1stuxit2" path="res://scripts/fx/bullet_effect/001_effect_bullet_pea.gd" id="4_3fpuf"]
+[ext_resource type="Script" uid="uid://b0jwg1stuxit2" path="res://scripts/fx/bullet_effect/bullet_effect_001_pea.gd" id="4_3fpuf"]
 
 [sub_resource type="Curve" id="Curve_c2c7f"]
 _data = [Vector2(0, 0.52809), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -42,8 +42,9 @@ initial_velocity_max = 80.0
 gravity = Vector3(0, 100, 0)
 scale_curve = SubResource("CurveTexture_pddgq")
 
-[node name="BulletPuffLongTime" type="Node2D"]
+[node name="BulletPuffLongTime" type="Node2D" node_paths=PackedStringArray("bullet_effect")]
 script = ExtResource("1_1ius6")
+bullet_effect = NodePath("BulletEffect")
 max_distance = 800.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

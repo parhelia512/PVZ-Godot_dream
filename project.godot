@@ -51,6 +51,9 @@ Shovel_F={
 2d_physics/layer_6="ZombieBeHypnotized"
 2d_physics/layer_7="Bowling"
 2d_physics/layer_8="Pool"
+2d_physics/layer_9="Caltrop"
+2d_physics/layer_10="UpBulletPlant"
+2d_physics/layer_11="ZombieInPoolDown"
 
 [rendering]
 

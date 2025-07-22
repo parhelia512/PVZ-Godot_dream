@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://jos0ek2dkfn2"]
 
-[ext_resource type="Script" uid="uid://b13huctulxsir" path="res://scripts/bullet/053_bullet_wall_nut_bowling_big.gd" id="1_n1lgo"]
+[ext_resource type="Script" uid="uid://b13huctulxsir" path="res://scripts/bullet/bullet_053_wall_nut_bowling_big.gd" id="1_n1lgo"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_egqrc"]
 [ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="3_mhr3x"]
 [ext_resource type="Texture2D" uid="uid://cpbkvykx6yq07" path="res://assets/reanim/Wallnut_twitch.png" id="4_w823p"]

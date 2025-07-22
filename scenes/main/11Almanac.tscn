@@ -1,0 +1,682 @@
+[gd_scene load_steps=23 format=3 uid="uid://colkdhubp27eq"]
+
+[ext_resource type="Script" uid="uid://b16fmyyjt3mej" path="res://scripts/Almanac/main_almanac.gd" id="1_fstyb"]
+[ext_resource type="Texture2D" uid="uid://dwpq6yo6ma8wc" path="res://assets/image/Almanac/Almanac_IndexBack.jpg" id="2_db05o"]
+[ext_resource type="PackedScene" uid="uid://dulx8ig3l2wwf" path="res://scenes/character/plant/002_sun_flower.tscn" id="3_r56a8"]
+[ext_resource type="Texture2D" uid="uid://cxg73c4c5e3mw" path="res://assets/image/ui/ui_card/SeedChooser_Button.png" id="4_ikq35"]
+[ext_resource type="PackedScene" uid="uid://dajgv0lrme2e5" path="res://scenes/character/zombie/001_zombie_norm.tscn" id="5_0vkb5"]
+[ext_resource type="BitMap" uid="uid://ccmgmr2kpk10u" path="res://assets/image/ui/ui_card/SeedChooser_Button_Mask.png" id="5_db05o"]
+[ext_resource type="Texture2D" uid="uid://b48l4yjq0j5mo" path="res://assets/image/ui/ui_main_game_menu/UI_BG/button_BG.png" id="6_pt714"]
+[ext_resource type="BitMap" uid="uid://cxokl66i7qyda" path="res://assets/image/ui/ui_main_game_menu/UI_BG/button_BG_mask.png" id="7_2p4k2"]
+[ext_resource type="Texture2D" uid="uid://cqdma5cmebu84" path="res://assets/image/Almanac/Almanac_CloseButton.png" id="8_u1nrc"]
+[ext_resource type="Texture2D" uid="uid://gm7pwyw5fmdc" path="res://assets/image/Almanac/Almanac_CloseButtonHighlight.png" id="9_ji74r"]
+[ext_resource type="BitMap" uid="uid://dpjf3mqsip8ql" path="res://assets/image/Almanac/Almanac_CloseButton_Mask.png" id="10_dyjda"]
+[ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="11_pn30t"]
+[ext_resource type="FontFile" uid="uid://bjnvl0v2ws21u" path="res://assets/fonts/SIMSUN.TTC" id="12_jlxhy"]
+[ext_resource type="Texture2D" uid="uid://bpqvs0x2gh8ya" path="res://assets/image/Almanac/Almanac_PlantBack.jpg" id="13_s1ymg"]
+[ext_resource type="PackedScene" uid="uid://cjuiaaq33o5aa" path="res://scenes/ui/card.tscn" id="14_758mv"]
+[ext_resource type="Texture2D" uid="uid://dsaa0bforjqoc" path="res://assets/image/Almanac/Almanac_IndexButton.png" id="15_0vkb5"]
+[ext_resource type="Texture2D" uid="uid://hb4b6ujaahoc" path="res://assets/image/Almanac/Almanac_GroundDay.jpg" id="15_frd25"]
+[ext_resource type="Texture2D" uid="uid://cy68aplkty3cc" path="res://assets/image/Almanac/Almanac_IndexButtonHighlight.png" id="16_pt714"]
+[ext_resource type="Texture2D" uid="uid://b6t4ree7mqqnx" path="res://assets/image/Almanac/Almanac_PlantCard.png" id="16_w4u2o"]
+[ext_resource type="BitMap" uid="uid://bu8dpvt5qxwnc" path="res://assets/image/Almanac/Almanac_IndexButton_Mask.png" id="17_2p4k2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi68g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jly7p"]
+
+[node name="Almanac" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fstyb")
+
+[node name="StartPage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_db05o")
+
+[node name="Label" type="Label" parent="StartPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -269.0
+offset_right = 72.0
+offset_bottom = -223.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 33
+text = "图鉴--索引"
+
+[node name="Panel" type="Panel" parent="StartPage"]
+clip_children = 1
+layout_mode = 0
+offset_left = 36.0
+offset_top = 188.0
+offset_right = 378.0
+offset_bottom = 405.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi68g")
+
+[node name="SunFlower" parent="StartPage/Panel" instance=ExtResource("3_r56a8")]
+position = Vector2(157, 93)
+is_idle = true
+
+[node name="PlantButton" type="TextureButton" parent="StartPage/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -60.0
+offset_right = 70.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_ikq35")
+texture_pressed = ExtResource("4_ikq35")
+texture_click_mask = ExtResource("5_db05o")
+script = ExtResource("11_pn30t")
+
+[node name="Label" type="Label" parent="StartPage/Panel/PlantButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -11.5
+offset_right = 32.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "查看植物"
+
+[node name="Panel2" type="Panel" parent="StartPage"]
+clip_children = 1
+layout_mode = 0
+offset_left = 437.0
+offset_top = 194.0
+offset_right = 741.0
+offset_bottom = 393.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi68g")
+
+[node name="ZombieNorm" parent="StartPage/Panel2" instance=ExtResource("5_0vkb5")]
+position = Vector2(143, 92)
+is_idle = true
+is_walk = false
+
+[node name="ZombieButton" type="TextureButton" parent="StartPage/Panel2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -51.0
+offset_right = 90.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_pt714")
+texture_pressed = ExtResource("6_pt714")
+texture_click_mask = ExtResource("7_2p4k2")
+stretch_mode = 0
+script = ExtResource("11_pn30t")
+
+[node name="Label" type="Label" parent="StartPage/Panel2/ZombieButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -13.0
+offset_right = 32.5
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.917647, 0, 1)
+text = "查看僵尸"
+
+[node name="PlantPage" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("13_s1ymg")
+
+[node name="Label" type="Label" parent="PlantPage"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -83.0
+offset_top = 24.0
+offset_right = 57.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.835294, 0.623529, 0.168627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 30
+text = "图鉴--植物"
+
+[node name="CardGridContainer" type="GridContainer" parent="PlantPage"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -207.0
+offset_right = 439.0
+offset_bottom = 259.0
+grow_vertical = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 8
+columns = 8
+
+[node name="Card" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card2" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card3" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card4" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card5" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card6" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card7" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card8" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card9" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card10" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card11" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card12" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card13" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card14" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card15" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card16" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card17" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card18" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card19" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card20" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card21" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card22" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card23" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card24" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card25" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card26" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card27" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card28" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card29" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card30" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card31" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card32" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card33" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card34" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card35" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card36" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card37" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card38" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card39" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card40" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card41" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card42" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card43" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card44" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card45" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card46" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card47" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="Card48" parent="PlantPage/CardGridContainer" instance=ExtResource("14_758mv")]
+layout_mode = 2
+
+[node name="PanelContainer" type="Panel" parent="PlantPage"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -214.0
+offset_right = -27.0
+offset_bottom = 262.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jly7p")
+
+[node name="PlantBg" type="TextureRect" parent="PlantPage/PanelContainer"]
+layout_mode = 2
+offset_left = 59.0
+offset_top = 8.0
+offset_right = 259.0
+offset_bottom = 208.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("15_frd25")
+
+[node name="AllBg" type="TextureRect" parent="PlantPage/PanelContainer"]
+layout_mode = 2
+offset_right = 324.0
+offset_bottom = 484.0
+texture = ExtResource("16_w4u2o")
+
+[node name="PlantName" type="Label" parent="PlantPage/PanelContainer/AllBg"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = 179.0
+offset_right = 11.0
+offset_bottom = 211.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.772549, 0.54902, 0.152941, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 23
+text = "名字"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PlantPage/PanelContainer/AllBg"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -260.0
+offset_right = 141.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="PlantText1" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(255.42, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.156863, 0.196078, 0.352941, 1)
+theme_override_colors/font_outline_color = Color(0.156863, 0.196078, 0.352941, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "豌豆射手，你的第一道防线，发射豌豆攻击僵尸"
+autowrap_mode = 2
+
+[node name="PlantText2Para" type="VBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlantPara" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "伤害: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+autowrap_mode = 2
+
+[node name="PlantPara2" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para"]
+visible = false
+layout_mode = 2
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "伤害: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+autowrap_mode = 2
+
+[node name="PlantPara3" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para"]
+visible = false
+layout_mode = 2
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "伤害: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+autowrap_mode = 2
+
+[node name="PlantPara4" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para"]
+visible = false
+layout_mode = 2
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "伤害: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara4"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+autowrap_mode = 2
+
+[node name="PlantPara5" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para"]
+visible = false
+layout_mode = 2
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "伤害: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer/PlantText2Para/PlantPara5"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+autowrap_mode = 2
+
+[node name="PlantText3Hint" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.196078, 0.666667, 1)
+theme_override_colors/font_outline_color = Color(0.533333, 0.196078, 0.666667, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
+
+[node name="PlantText4Introduction" type="Label" parent="PlantPage/PanelContainer/AllBg/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手说：“努力工作，奉献自己，加上一份阳光，高纤维和二氧化碳均衡搭配，这种健康早餐让一切管成可能。”"
+autowrap_mode = 2
+
+[node name="PlantText5EndPara" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg"]
+layout_mode = 2
+offset_left = 26.0
+offset_top = 437.0
+offset_right = 287.0
+offset_bottom = 451.0
+
+[node name="Cost" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara/Cost"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "花费: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara/Cost"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+
+[node name="Control" type="Control" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CoolTime" type="HBoxContainer" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Key" type="Label" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara/CoolTime"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "冷却时间: "
+
+[node name="Value" type="Label" parent="PlantPage/PanelContainer/AllBg/PlantText5EndPara/CoolTime"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 13
+text = "中等"
+
+[node name="ReturnButton" type="TextureButton" parent="PlantPage"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -33.0
+offset_right = 180.0
+offset_bottom = 7.0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_0vkb5")
+texture_pressed = ExtResource("16_pt714")
+texture_hover = ExtResource("16_pt714")
+texture_click_mask = ExtResource("17_2p4k2")
+script = ExtResource("11_pn30t")
+
+[node name="Label" type="Label" parent="PlantPage/ReturnButton"]
+offset_left = 53.0
+offset_top = 5.0
+offset_right = 117.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.164706, 0.164706, 0.352941, 1)
+theme_override_colors/font_outline_color = Color(0.164706, 0.164706, 0.352941, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 16
+text = "图鉴索引"
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 568.0
+offset_right = 769.0
+offset_bottom = 608.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_u1nrc")
+texture_pressed = ExtResource("9_ji74r")
+texture_hover = ExtResource("9_ji74r")
+texture_click_mask = ExtResource("10_dyjda")
+script = ExtResource("11_pn30t")
+
+[node name="Label" type="Label" parent="ExitButton"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 4.0
+offset_right = 61.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0.164706, 0.164706, 0.352941, 1)
+theme_override_colors/font_outline_color = Color(0.164706, 0.164706, 0.352941, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_jlxhy")
+theme_override_font_sizes/font_size = 16
+text = "关闭"
+
+[connection signal="pressed" from="StartPage/Panel/PlantButton" to="." method="_on_plant_button_pressed"]
+[connection signal="pressed" from="PlantPage/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

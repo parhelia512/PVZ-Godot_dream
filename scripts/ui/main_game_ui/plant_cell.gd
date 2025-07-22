@@ -57,12 +57,15 @@ var curr_condition:int = 3
 		is_crater = v
 		_update_state()
 ## 是否有冰道
-@export var is_ice_tunnel := false:
+@export var is_ice_road :=false:
 	get:
-		return is_ice_tunnel
+		return is_ice_road
 	set(v):
-		is_ice_tunnel = v
+		is_ice_road = v
 		_update_state()
+
+## 当前格子冰道
+var curr_ice_roads :Array[IceRoad] = []
 
 ## 当前cell的墓碑
 var tombstone:TombStone
@@ -86,18 +89,17 @@ func _process(delta: float) -> void:
 	## 如果水池有植物，跟随位置缓慢移动
 	if tween:
 		if plant_in_cell[Global.PlacePlantInCell.Down]:
-			plant_in_cell[Global.PlacePlantInCell.Down].global_position = plant_position.global_position
+			plant_in_cell[Global.PlacePlantInCell.Down].global_position.y = plant_position.global_position.y
 		if plant_in_cell[Global.PlacePlantInCell.Norm]:
-			plant_in_cell[Global.PlacePlantInCell.Norm].global_position = plant_position.global_position - Vector2(0, 20)
+			plant_in_cell[Global.PlacePlantInCell.Norm].global_position.y = plant_position.global_position.y - 20
 		if plant_in_cell[Global.PlacePlantInCell.Shell]:
-			plant_in_cell[Global.PlacePlantInCell.Shell].global_position = plant_position.global_position - Vector2(0, 20)
+			plant_in_cell[Global.PlacePlantInCell.Shell].global_position.y = plant_position.global_position.y - 20
 
 ## 新植物种植
 func new_plant(plant:PlantBase):
 	plant_in_cell[plant.plant_condition.place_plant_in_cell] = plant
 	plant.global_position = plant_position.global_position
 
-	
 	plant.init_plant(row_col)
 	
 	## 如果下面有植物，提高中间植物和壳的位置
@@ -160,11 +162,14 @@ func start_movement():
 ## 更新状态
 func _update_state():
 	# 先判断特殊状态(有墓碑、坑洞或冰道)
-	if is_tombstone or is_crater or is_ice_tunnel:
+	if is_tombstone or is_crater or is_ice_road:
 		can_common_plant = false
 	else:
 		can_common_plant = true
-	
+	##如果更新状态时鼠标在当前植物格子中，重新发射鼠标进入格子信号检测种植
+	if is_mouse_in_ui(button):
+		_on_button_mouse_entered()
+
 ## 荷叶种植死亡时调用
 func lily_pad_change_condition():
 	## 切换荷叶地形
@@ -238,4 +243,25 @@ func return_plant_be_shovel_look():
 		return null
 		
 
+#endregion
+
+
+#region 冰道相关
+#TODO:测试完删除
+func add_new_ice_road(new_ice_road):
+	if new_ice_road in curr_ice_roads:
+		print("当前冰道已在该植物格子，不应该出现该句,后面一直不出现该句可以删除")
+	
+	else:
+		curr_ice_roads.append(new_ice_road)
+		if not is_ice_road:
+			is_ice_road = true
+
+
+## 删除冰道
+func del_new_ice_road(new_ice_road):
+	curr_ice_roads.erase(new_ice_road)
+	if curr_ice_roads.is_empty():
+		is_ice_road = false
+		
 #endregion

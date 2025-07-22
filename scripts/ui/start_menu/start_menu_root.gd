@@ -32,6 +32,7 @@ func _on_menu_button_1_pressed() -> void:
 	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.ChooseLevel])
 
 
+#region 选项
 func _on_option_button_1_pressed() -> void:
 	$StartMenuOptionDialog.appear_menu()
 	
@@ -49,3 +50,9 @@ func _on_full_screen_button_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+#endregion 
+
+
+## 图鉴
+func _on_item_button_2_pressed() -> void:
+	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.Almanac])

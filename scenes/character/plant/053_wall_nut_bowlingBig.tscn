@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c135qfbjmlcw6"]
 
-[ext_resource type="Script" uid="uid://baewoc1xc6s1x" path="res://scripts/character/plant/053_wall_nut_bowling_big.gd" id="1_6p1f5"]
+[ext_resource type="Script" uid="uid://baewoc1xc6s1x" path="res://scripts/character/plant/plant_053_wall_nut_bowling_big.gd" id="1_6p1f5"]
 [ext_resource type="PackedScene" uid="uid://jos0ek2dkfn2" path="res://scenes/bullet/053_bullet_wall_nut_bowling_big.tscn" id="2_7ltqx"]
 [ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_3i7e6"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_t8ny1"]

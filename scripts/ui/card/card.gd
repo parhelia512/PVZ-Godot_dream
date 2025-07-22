@@ -1,9 +1,6 @@
 extends CardBase
 class_name Card
 
-## 主游戏场景 目前用于是否为测试场景
-@onready var main_game: MainGameManager
-
 @onready var _cool_mask: ProgressBar = $ProgressBar			# 冷却进度条
 @onready var _button: Button = $Button				# 卡片点击按钮
 
@@ -20,14 +17,6 @@ signal card_click		#点击信号
 signal card_plant_end		#卡片种植完成后信号，生成卡片的地方连接
 
 
-#func _ready() -> void:
-	#main_game = get_tree().current_scene
-
-	## 测试场景卡片直接在卡片槽中
-	#if main_game.is_test:
-		#card_init(card_type)
-		#
-
 ## 备选卡槽时卡片初始化
 func card_init_in_seed_chooser(card_type: Global.PlantType):
 	super.card_init(card_type)
@@ -42,6 +31,10 @@ func card_init(card_type: Global.PlantType):
 	_cool_mask.max_value = cool_time
 	_cool_mask.value = 0
 	
+func card_change_cool_time(cool_time):
+	self.cool_time = cool_time
+	_cool_mask.max_value = cool_time
+	_cool_mask.value = 0
 
 ## 传送带卡槽初始化卡片
 func card_init_conveyor_belt(card_type: Global.PlantType):

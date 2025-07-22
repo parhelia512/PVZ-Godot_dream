@@ -19,7 +19,7 @@ func _ready():
 	
 
 func _on_trophy_button_pressed() -> void:
-	$Winmusic.play()
+	SoundManager.play_other_SFX("winmusic")
 	$TrophyButton.disabled = true
 	var center = get_viewport().get_visible_rect().size / 2
 	var tween = create_tween()

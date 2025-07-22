@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dv5fiu4pkryba"]
+[gd_scene load_steps=14 format=3 uid="uid://dv5fiu4pkryba"]
 
 [ext_resource type="Script" uid="uid://bm01xxk7oygdx" path="res://scripts/main_game_item/lawn_mower.gd" id="1_nbmi7"]
 [ext_resource type="Texture2D" uid="uid://de8gk86hm1rty" path="res://assets/reanim/LawnMower_wheelpiece.png" id="1_tkewj"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://c8x8a2do7pbn4" path="res://assets/reanim/LawnMower_exhaust.png" id="8_iqjm2"]
 [ext_resource type="Animation" uid="uid://bjws0p5cnsuoc" path="res://animation/item/LawnMover/LawnMower_normal.tres" id="9_5jk62"]
 [ext_resource type="Animation" uid="uid://c6drj4spil3qx" path="res://animation/item/LawnMover/LawnMower_tricked.tres" id="10_nbmi7"]
-[ext_resource type="AudioStream" uid="uid://dhhq5bh4lvnqc" path="res://assets/audio/SFX/item/lawnmower.ogg" id="12_om6jw"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wxdc1"]
 _data = {
@@ -155,8 +154,5 @@ collision_mask = 20
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-3, -10)
 shape = SubResource("RectangleShape2D_5jk62")
-
-[node name="Lawnmower" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_om6jw")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

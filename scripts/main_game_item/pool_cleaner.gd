@@ -31,9 +31,9 @@ func _on_area_entered(area: Area2D) -> void:
 		if lane == parent_node.lane:
 			if not is_moving:
 				is_moving = true
-				
+				SoundManager.play_other_SFX("pool_cleaner")
 				animation_player.play("PoolCleaner_land")
-				#$Lawnmower.play()
+				
 			parent_node.be_pool_mowered_run()
 			move_speed = ori_move_speed / 4
 			is_zombie = true
@@ -57,30 +57,20 @@ func suck_end():
 	move_speed = ori_move_speed
 	is_zombie = false
 	
-#region 水池游泳相
+#region 水池游泳
 	
 func start_swim():
 	# 水花
 	var splash = Global.splash_pool_scenes.instantiate()
 	get_parent().add_child(splash)
-	splash.get_node("PlantWater").play()
 	splash.global_position = global_position
-	var splash_anim:AnimationPlayer = splash.get_node("AnimLib")
-	splash_anim.play("ALL_ANIMS")
 	is_water = true
-	await splash_anim.animation_finished
-	splash.queue_free()
 	
 func end_swim():
 	# 水花
 	var splash = Global.splash_pool_scenes.instantiate()
 	get_parent().add_child(splash)
 	splash.global_position = global_position
-	splash.get_node("PlantWater").play()
-	var splash_anim:AnimationPlayer = splash.get_node("AnimLib")
-	splash_anim.play("ALL_ANIMS")
 	is_water = false
-	await splash_anim.animation_finished
-	splash.queue_free()
 	
 #endregion

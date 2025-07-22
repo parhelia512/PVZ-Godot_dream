@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://crn503bg8h8v5"]
 
-[ext_resource type="Script" uid="uid://c80jtugetgqap" path="res://scripts/character/plant/052_wall_nut_bowling_bomb.gd" id="1_ko0tl"]
+[ext_resource type="Script" uid="uid://c80jtugetgqap" path="res://scripts/character/plant/plant_052_wall_nut_bowling_bomb.gd" id="1_ko0tl"]
 [ext_resource type="PackedScene" uid="uid://dln1uyxxh2qke" path="res://scenes/bullet/052_bullet_wall_nut_bowling_bomb.tscn" id="2_5k22p"]
 [ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_lrf4a"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_nckio"]

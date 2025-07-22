@@ -27,7 +27,7 @@ func _on_button_pressed() -> void:
 	
 	collected = true  # 设置已被收集
 	
-	SoundManager.play_sfx("Points")
+	SoundManager.play_other_SFX("points")
 	var parent_position = get_parent().global_position
 	var tween = get_tree().create_tween()
 	# 将节点从当前位置移动到(100, 200)，耗时1秒

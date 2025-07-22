@@ -13,7 +13,11 @@ var animation_tree: AnimationTree
 @export var animation_origin_speed: float  # 初始动画速度
 @export var animation_speed_random: float  # 初始随机速度波动
 @export var animation_curr_speed :float  # 当前动画速度
-
+## 每次减速或冰冻修改
+## 减速的系数
+var decelerate_speed :float = 1
+## 冰冻的系数
+var ice_speed :float = 1
 
 @export var is_decelerated := false
 @export var is_iced := false
@@ -40,6 +44,9 @@ var debuff_color := Color(1, 1, 1)
 var Label_HP := preload("res://scenes/character/label_hp.tscn")
 var label_hp :Control 
 
+## 影子
+var shadow: Sprite2D
+
 func _ready() -> void:
 	## 获取节点
 	_get_some_node()
@@ -60,7 +67,7 @@ func _ready() -> void:
 	ice_timer.timeout.connect(_on_timer_timeout_time_ice)
 
 	# 初始化颜色
-	_update_modulate()	
+	_update_modulate()
 	curr_Hp = max_hp
 	
 	# 血量显示
@@ -73,23 +80,27 @@ func _init_anim_speed():
 	# 获取动画初始速度
 	animation_origin_speed = animation_tree.get("parameters/TimeScale/scale")
 	animation_speed_random = randf_range(0.9, 1.1)
-	animation_origin_speed *= animation_speed_random
-	animation_curr_speed = animation_origin_speed
-	animation_tree.set("parameters/TimeScale/scale", animation_curr_speed)
+	set_anim_speed(animation_speed_random, true)
 
+## 设置动画倍率，
+## 参数：
+## [code]multiply[/code] – 修改动画倍率
+## [code]b[/code] – 是否修改原始动画速度
 ## 设置动画倍率，
 func set_anim_speed(multiply:float, update_ori:bool=false):
 	if update_ori:
 		animation_origin_speed = animation_origin_speed * multiply
-	animation_curr_speed =  animation_curr_speed * multiply
-	
-	animation_tree.set("parameters/TimeScale/scale", animation_curr_speed)
+		animation_curr_speed = animation_origin_speed 
+	else:
+		animation_curr_speed =  animation_origin_speed * multiply
+		
+	update_anim_speed_scale(animation_curr_speed)
 
 ## 获取身体节点，僵尸子类会重写该方法，获取ground，部分僵尸修改body位置在panel节点下
 func _get_some_node():
 	body = $Body
 	animation_tree = $AnimationTree
-	print(body)
+	shadow = $Body/shadow
 	
 # 更新最终 modulate 的合成颜色
 func _update_modulate():
@@ -106,13 +117,17 @@ func body_light():
 	hit_tween = get_tree().create_tween()
 	hit_tween.tween_method(set_hit_color, _hit_color, Color(1, 1, 1), 0.5)
 
+## 被子弹减速（子弹调用该方法减速，冰车不受子弹减速影响，重写该方法）
+func be_decelerated_bullet(time_decelerate:float):
+	be_decelerated(time_decelerate)
+
+
 # 被减速处理
 func be_decelerated(time_decelerate:float):
-	# 如果还在被冰冻，忽略
-	if is_iced:
-		return
+	## 减速的速度
+	decelerate_speed = 0.5
 	_be_decelerated_time = time_decelerate
-	animation_curr_speed = animation_origin_speed * 0.5
+	animation_curr_speed = animation_origin_speed * decelerate_speed * ice_speed
 	update_anim_speed_scale(animation_curr_speed, false)
 	debuff_color = Color(0.4, 1, 1)
 	_update_modulate()
@@ -123,7 +138,9 @@ func be_decelerated(time_decelerate:float):
 func be_ice(time_ice:float, time_decelerate: float):
 	_be_iced_time = time_ice
 	_be_decelerated_time = time_decelerate
-	update_anim_speed_scale(0, false)
+	ice_speed = 0
+	animation_curr_speed = animation_origin_speed * decelerate_speed * ice_speed
+	update_anim_speed_scale(animation_curr_speed, false)
 	debuff_color = Color(0.4, 1, 1)
 	_update_modulate()
 	_update_is_iced(true)
@@ -141,12 +158,9 @@ func start_timer(wait_time: float, timer:Timer):
 # 减速恢复回调
 func _on_timer_timeout_time_decelerate():
 	# 如果还在被冰冻，忽略
-	if is_iced:
-		return
-		
 	_update_is_decelerated(false)
-	
-	animation_curr_speed = animation_origin_speed
+	decelerate_speed = 1
+	animation_curr_speed = animation_origin_speed * decelerate_speed * ice_speed
 	update_anim_speed_scale(animation_curr_speed, true)
 	debuff_color = Color(1, 1, 1)
 	_update_modulate()
@@ -154,26 +168,21 @@ func _on_timer_timeout_time_decelerate():
 # 冰冻恢复减速
 func _on_timer_timeout_time_ice():
 	_update_is_iced(false)
+	ice_speed = 1
+	animation_curr_speed = animation_origin_speed * decelerate_speed * ice_speed
 	be_decelerated(_be_decelerated_time)
 
 
 func _update_is_iced(curr_is_iced):
 	is_iced = curr_is_iced
-	
-	#如果被冰冻，同时被减速
-	if curr_is_iced:
-		_update_is_decelerated(curr_is_iced)
-	
 
 func _update_is_decelerated(curr_is_decelerated):
 	is_decelerated = curr_is_decelerated
 
-
+## 舞王僵尸使用is_norm参数，表示速度是否恢复正常
 func update_anim_speed_scale(animation_speed, is_norm=true):
 	animation_tree.set("parameters/TimeScale/scale", animation_speed)
 	
-
-
 
 #region 被攻击
 #被子弹攻击
@@ -182,7 +191,6 @@ func be_attacked_bullet(attack_value:int, bullet_mode : Global.AttackMode, trigg
 	## 掉血，发光
 	Hp_loss(attack_value, bullet_mode, trigger_be_attack_SFX)
 	be_attacked_body_light()
-
 
 # 被僵尸啃咬攻击
 func be_eated(attack_value:int, zombie):

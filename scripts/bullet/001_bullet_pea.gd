@@ -1,2 +1,0 @@
-extends BulletLineraBase
-class_name BulletPea

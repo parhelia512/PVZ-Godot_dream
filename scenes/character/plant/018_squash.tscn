@@ -1,0 +1,182 @@
+[gd_scene load_steps=31 format=3 uid="uid://dhaa1q0u4cf4r"]
+
+[ext_resource type="Script" uid="uid://c85ivc6rrhn00" path="res://scripts/character/plant/plant_018_squash.gd" id="1_cpkc7"]
+[ext_resource type="Texture2D" uid="uid://db3ehuxapn0l1" path="res://assets/reanim/Squash_stem.png" id="1_mih57"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_ycudw"]
+[ext_resource type="Texture2D" uid="uid://irbh4snyltu1" path="res://assets/reanim/Squash_body.png" id="2_yeb3p"]
+[ext_resource type="Texture2D" uid="uid://bgijsa0y0ayos" path="res://assets/reanim/Squash_eyes.png" id="3_cpkc7"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_ycudw"]
+[ext_resource type="Texture2D" uid="uid://kewigqip7qgf" path="res://assets/reanim/Squash_eyebrows.png" id="4_ycudw"]
+[ext_resource type="Animation" uid="uid://c8b0mp77ymp24" path="res://animation/character/plant/018_squash/Squash_idle.tres" id="5_slcoe"]
+[ext_resource type="Animation" uid="uid://v23h6rycvrwm" path="res://animation/character/plant/018_squash/Squash_jumpdown.tres" id="6_f7ot6"]
+[ext_resource type="Animation" uid="uid://qq4s7m264mj1" path="res://animation/character/plant/018_squash/Squash_jumpup.tres" id="7_gtlmn"]
+[ext_resource type="Animation" uid="uid://ph5epkvaxlw8" path="res://animation/character/plant/018_squash/Squash_lookleft.tres" id="8_7xfop"]
+[ext_resource type="Animation" uid="uid://bkw8ev4lim0mg" path="res://animation/character/plant/018_squash/Squash_lookright.tres" id="9_825ym"]
+
+[sub_resource type="Animation" id="Animation_slcoe"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-45, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mrk0"]
+_data = {
+&"RESET": SubResource("Animation_slcoe"),
+&"Squash_idle": ExtResource("5_slcoe"),
+&"Squash_jumpdown": ExtResource("6_f7ot6"),
+&"Squash_jumpup": ExtResource("7_gtlmn"),
+&"Squash_lookleft": ExtResource("8_7xfop"),
+&"Squash_lookright": ExtResource("9_825ym")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6i8j2"]
+animation = &"Squash_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ilce"]
+animation = &"Squash_jumpdown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5vec"]
+animation = &"Squash_jumpup"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b3bnl"]
+animation = &"Squash_lookleft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hpc5c"]
+animation = &"Squash_lookright"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mspd"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m8m84"]
+advance_mode = 2
+advance_expression = "is_attack and not is_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fa7qm"]
+advance_mode = 2
+advance_expression = "is_attack and is_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q67rh"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_io6vx"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_abnyl"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_r8nbb"]
+states/Squash_idle/node = SubResource("AnimationNodeAnimation_6i8j2")
+states/Squash_idle/position = Vector2(461, 75)
+states/Squash_jumpdown/node = SubResource("AnimationNodeAnimation_6ilce")
+states/Squash_jumpdown/position = Vector2(481, 339)
+states/Squash_jumpup/node = SubResource("AnimationNodeAnimation_c5vec")
+states/Squash_jumpup/position = Vector2(468, 251)
+states/Squash_lookleft/node = SubResource("AnimationNodeAnimation_b3bnl")
+states/Squash_lookleft/position = Vector2(376, 177)
+states/Squash_lookright/node = SubResource("AnimationNodeAnimation_hpc5c")
+states/Squash_lookright/position = Vector2(587, 177)
+transitions = ["Start", "Squash_idle", SubResource("AnimationNodeStateMachineTransition_7mspd"), "Squash_idle", "Squash_lookleft", SubResource("AnimationNodeStateMachineTransition_m8m84"), "Squash_idle", "Squash_lookright", SubResource("AnimationNodeStateMachineTransition_fa7qm"), "Squash_lookleft", "Squash_jumpup", SubResource("AnimationNodeStateMachineTransition_q67rh"), "Squash_lookright", "Squash_jumpup", SubResource("AnimationNodeStateMachineTransition_io6vx"), "Squash_jumpup", "Squash_jumpdown", SubResource("AnimationNodeStateMachineTransition_abnyl")]
+graph_offset = Vector2(141, 43)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hxowj"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_knlv7"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_r8nbb")
+nodes/StateMachine/position = Vector2(0, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_hxowj")
+nodes/TimeScale/position = Vector2(360, 120)
+nodes/output/position = Vector2(560, 140)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krpj7"]
+size = Vector2(50, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycudw"]
+size = Vector2(100, 44)
+
+[node name="Squash" type="Node2D"]
+script = ExtResource("1_cpkc7")
+plant_condition = ExtResource("2_ycudw")
+no_blink = true
+
+[node name="shadow" type="Sprite2D" parent="."]
+position = Vector2(1, 29)
+texture = ExtResource("3_ycudw")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-39, -45)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(40, 74)
+texture = ExtResource("3_ycudw")
+
+[node name="Squash_stem" type="Sprite2D" parent="Body"]
+position = Vector2(35.8131, -6.00637)
+rotation = 0.159395
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_mih57")
+centered = false
+
+[node name="Squash_body" type="Sprite2D" parent="Body"]
+position = Vector2(8.09323, 1.26693)
+scale = Vector2(0.775602, 0.841064)
+texture = ExtResource("2_yeb3p")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(33.8733, 27.9335)
+scale = Vector2(0.779602, 0.815932)
+texture = ExtResource("3_cpkc7")
+centered = false
+
+[node name="Anim_eye" type="Sprite2D" parent="Body"]
+position = Vector2(26.1466, 16.3869)
+scale = Vector2(0.779602, 0.815932)
+texture = ExtResource("4_ycudw")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0mrk0")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_knlv7")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.5
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-115, 0)
+target_position = Vector2(230, 0)
+collision_mask = 1028
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_krpj7")
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1028
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_ycudw")

@@ -1,13 +1,14 @@
-[gd_scene load_steps=69 format=3 uid="uid://ckkte8vij174a"]
+[gd_scene load_steps=63 format=3 uid="uid://ckkte8vij174a"]
 
 [ext_resource type="Texture2D" uid="uid://qekixo4vwyav" path="res://assets/reanim/Zombie_dancer_innerarm_upper.png" id="0_fuck"]
-[ext_resource type="Script" uid="uid://djvnwbypjvr1w" path="res://scripts/character/zombie/010_zombie_dancer.gd" id="1_8g1g5"]
+[ext_resource type="Script" uid="uid://djvnwbypjvr1w" path="res://scripts/character/zombie/zombie_010_dancer.gd" id="1_8g1g5"]
 [ext_resource type="Animation" uid="uid://dx0ebxyib0ejn" path="res://animation/character/zombie/010_zombie_dancer/Zombie_dancer_walk.tres" id="1_anim"]
 [ext_resource type="Texture2D" uid="uid://brbbklqtpm0o3" path="res://assets/reanim/Zombie_dancer_innerarm_lower.png" id="1_fuck"]
 [ext_resource type="Animation" uid="uid://0pjyeuutl4iw" path="res://animation/character/zombie/010_zombie_dancer/Zombie_dancer_armraise.tres" id="2_anim"]
 [ext_resource type="Texture2D" uid="uid://dvi66xy68dfvb" path="res://assets/reanim/Zombie_dancer_innerarm_hand.png" id="2_fuck"]
 [ext_resource type="Animation" uid="uid://bcrandf52tx0" path="res://animation/character/zombie/010_zombie_dancer/Zombie_dancer_eat.tres" id="3_anim"]
 [ext_resource type="Texture2D" uid="uid://8wb7ln25tod5" path="res://assets/reanim/Zombie_dancer_innerleg_lower.png" id="3_fuck"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_lnb11"]
 [ext_resource type="Animation" uid="uid://blafwt8jwkl6s" path="res://animation/character/zombie/010_zombie_dancer/Zombie_dancer_death.tres" id="4_anim"]
 [ext_resource type="Texture2D" uid="uid://b1cws5bphatqt" path="res://assets/reanim/Zombie_dancer_innerleg_foot.png" id="4_fuck"]
 [ext_resource type="Texture2D" uid="uid://6tfc0hmfjb4h" path="res://assets/reanim/Zombie_dancer_innerleg_upper.png" id="5_fuck"]
@@ -45,14 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://crm1gvhyudrtn" path="res://assets/reanim/Zombie_charred_eyes2.png" id="43_tarm0"]
 [ext_resource type="Script" uid="uid://dmcra0pjlpu70" path="res://scripts/character/zombie/drop/ZombieHeadDrop.gd" id="44_kvwq2"]
 [ext_resource type="Script" uid="uid://33sxeu6n870x" path="res://scripts/character/zombie/drop/ZombieHandDrop.gd" id="47_2fqg6"]
-[ext_resource type="AudioStream" uid="uid://cxfwltw5os0i8" path="res://assets/audio/SFX/zombie/chompsoft.ogg" id="50_s2w48"]
-[ext_resource type="AudioStream" uid="uid://bvh0fo86vctwq" path="res://assets/audio/SFX/zombie/shoop.ogg" id="51_ooauv"]
-[ext_resource type="AudioStream" uid="uid://141vq8e7otqy" path="res://assets/audio/SFX/bullet/shieldhit1.ogg" id="52_7nyxu"]
-[ext_resource type="AudioStream" uid="uid://bkjquajfcuk7n" path="res://assets/audio/SFX/bullet/shieldhit2.ogg" id="53_0upus"]
-[ext_resource type="AudioStream" uid="uid://7mwt2orf6f0w" path="res://assets/audio/SFX/bullet/splat1.ogg" id="54_62v1p"]
-[ext_resource type="AudioStream" uid="uid://d267mh21n8tmg" path="res://assets/audio/SFX/bullet/splat2.ogg" id="55_51mrj"]
-[ext_resource type="AudioStream" uid="uid://cjcfmkkumvowa" path="res://assets/audio/SFX/bullet/splat3.ogg" id="56_qtggi"]
-[ext_resource type="Script" uid="uid://qf80xhqf2ko6" path="res://scripts/fx/dirt_new_zombie_appear_from_ground.gd" id="57_hsrfe"]
+[ext_resource type="Script" uid="uid://qf80xhqf2ko6" path="res://scripts/fx/other_effect/dirt_new_zombie_appear_from_ground.gd" id="57_hsrfe"]
 [ext_resource type="Texture2D" uid="uid://dhawpqhvsxd83" path="res://assets/image/particles/dirtsmall.png" id="57_jkb4s"]
 [ext_resource type="Texture2D" uid="uid://igrk4hwpobli" path="res://assets/image/particles/dirtbig.png" id="58_hsrfe"]
 
@@ -1146,9 +1140,9 @@ zombie_row_type = 0
 zombie_outerarm_upper = NodePath("Mask/Body/Zombie_Jackson_outerarm_upper")
 zombie_outerarm_upper_sprite2d_textures = ExtResource("18_fuck")
 zombie_status_2_fade = [NodePath("Mask/Body/Zombie_outerarm_hand"), NodePath("Mask/Body/Zombie_outerarm_lower")]
-hand_drop = NodePath("Node2D_Hand_Drop")
+hand_drop = NodePath("Mask/Body/Node2D_Drop/Node2D_Hand_Drop")
 zombie_status_3_fade = [NodePath("Mask/Body/Anim_head1"), NodePath("Mask/Body/Anim_head2"), NodePath("Mask/Body/Anim_earing"), NodePath("Mask/Body/Anim_hair")]
-head_drop = NodePath("Node2D_Head_Drop")
+head_drop = NodePath("Mask/Body/Node2D_Drop/Node2D_Head_Drop")
 walking_status = 1
 max_hp = 270
 
@@ -1163,6 +1157,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2s0r5")
 
 [node name="Body" type="Node2D" parent="Mask"]
 position = Vector2(164, 19)
+
+[node name="shadow" type="Sprite2D" parent="Mask/Body"]
+position = Vector2(52, 119)
+texture = ExtResource("3_lnb11")
 
 [node name="_ground" type="Sprite2D" parent="Mask/Body"]
 visible = false
@@ -1324,6 +1322,67 @@ scale = Vector2(0.802, 0.795)
 texture = ExtResource("20_fuck")
 centered = false
 
+[node name="Node2D_Drop" type="Node2D" parent="Mask/Body"]
+
+[node name="Node2D_Head_Drop" type="Node2D" parent="Mask/Body/Node2D_Drop" node_paths=PackedStringArray("zombie")]
+visible = false
+position = Vector2(52, 67)
+script = ExtResource("44_kvwq2")
+zombie = NodePath("../../../..")
+
+[node name="Head_Drop" type="Node2D" parent="Mask/Body/Node2D_Drop/Node2D_Head_Drop"]
+position = Vector2(-13, -51)
+
+[node name="Anim_head1" type="Sprite2D" parent="Mask/Body/Node2D_Drop/Node2D_Head_Drop/Head_Drop"]
+position = Vector2(-13.4775, -18.5)
+rotation = 0.144862
+scale = Vector2(0.797, 0.797)
+texture = ExtResource("13_fuck")
+centered = false
+
+[node name="Anim_head2" type="Sprite2D" parent="Mask/Body/Node2D_Drop/Node2D_Head_Drop/Head_Drop"]
+position = Vector2(-9.37751, 12.5)
+rotation = 0.092502
+scale = Vector2(0.796, 0.796)
+texture = ExtResource("14_fuck")
+centered = false
+
+[node name="Anim_earing" type="Sprite2D" parent="Mask/Body/Node2D_Drop/Node2D_Head_Drop/Head_Drop"]
+position = Vector2(16.2225, 6.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("15_fuck")
+centered = false
+
+[node name="Anim_hair" type="Sprite2D" parent="Mask/Body/Node2D_Drop/Node2D_Head_Drop/Head_Drop"]
+position = Vector2(-12.3775, -35)
+rotation = 0.144862
+scale = Vector2(0.797, 0.797)
+texture = ExtResource("16_fuck")
+centered = false
+
+[node name="Node2D_Hand_Drop" type="Node2D" parent="Mask/Body/Node2D_Drop" node_paths=PackedStringArray("zombie")]
+visible = false
+position = Vector2(52, 67)
+script = ExtResource("47_2fqg6")
+zombie = NodePath("../../../..")
+
+[node name="Hand_Drop" type="Node2D" parent="Mask/Body/Node2D_Drop/Node2D_Hand_Drop"]
+position = Vector2(-5, 5)
+
+[node name="Zombie_outerarm_lower" type="Sprite2D" parent="Mask/Body/Node2D_Drop/Node2D_Hand_Drop/Hand_Drop"]
+position = Vector2(-1.34418, -18)
+rotation = 0.294961
+scale = Vector2(0.791, 0.791)
+texture = ExtResource("19_fuck")
+centered = false
+
+[node name="Zombie_outerarm_hand" type="Sprite2D" parent="Mask/Body/Node2D_Drop/Node2D_Hand_Drop/Hand_Drop"]
+position = Vector2(-8.14418, -3.80001)
+rotation = 0.610865
+scale = Vector2(0.802, 0.795)
+texture = ExtResource("20_fuck")
+centered = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_jg1ri")
@@ -1340,7 +1399,7 @@ shape = SubResource("CapsuleShape2D_piyw0")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(-20, 0)
-collision_mask = 2
+collision_mask = 34
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
@@ -1405,93 +1464,6 @@ centered = false
 libraries = {
 &"": SubResource("AnimationLibrary_vsp5b")
 }
-
-[node name="Node2D_Head_Drop" type="Node2D" parent="."]
-visible = false
-script = ExtResource("44_kvwq2")
-
-[node name="Head_Drop" type="Node2D" parent="Node2D_Head_Drop"]
-position = Vector2(-13, -51)
-
-[node name="Anim_head1" type="Sprite2D" parent="Node2D_Head_Drop/Head_Drop"]
-position = Vector2(-13.4775, -18.5)
-rotation = 0.144862
-scale = Vector2(0.797, 0.797)
-texture = ExtResource("13_fuck")
-centered = false
-
-[node name="Anim_head2" type="Sprite2D" parent="Node2D_Head_Drop/Head_Drop"]
-position = Vector2(-9.37751, 12.5)
-rotation = 0.092502
-scale = Vector2(0.796, 0.796)
-texture = ExtResource("14_fuck")
-centered = false
-
-[node name="Anim_earing" type="Sprite2D" parent="Node2D_Head_Drop/Head_Drop"]
-position = Vector2(16.2225, 6.6)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("15_fuck")
-centered = false
-
-[node name="Anim_hair" type="Sprite2D" parent="Node2D_Head_Drop/Head_Drop"]
-position = Vector2(-12.3775, -35)
-rotation = 0.144862
-scale = Vector2(0.797, 0.797)
-texture = ExtResource("16_fuck")
-centered = false
-
-[node name="Node2D_Hand_Drop" type="Node2D" parent="."]
-visible = false
-script = ExtResource("47_2fqg6")
-
-[node name="Hand_Drop" type="Node2D" parent="Node2D_Hand_Drop"]
-position = Vector2(-5, 5)
-
-[node name="Zombie_outerarm_lower" type="Sprite2D" parent="Node2D_Hand_Drop/Hand_Drop"]
-position = Vector2(-1.34418, -18)
-rotation = 0.294961
-scale = Vector2(0.791, 0.791)
-texture = ExtResource("19_fuck")
-centered = false
-
-[node name="Zombie_outerarm_hand" type="Sprite2D" parent="Node2D_Hand_Drop/Hand_Drop"]
-position = Vector2(-8.14418, -3.80001)
-rotation = 0.610865
-scale = Vector2(0.802, 0.795)
-texture = ExtResource("20_fuck")
-centered = false
-
-[node name="SFX" type="Node2D" parent="."]
-
-[node name="Chomp" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("50_s2w48")
-bus = &"SFX"
-
-[node name="Shoop" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("51_ooauv")
-bus = &"SFX"
-
-[node name="Bullet" type="Node2D" parent="SFX"]
-
-[node name="Shieldhit1" type="AudioStreamPlayer" parent="SFX/Bullet"]
-stream = ExtResource("52_7nyxu")
-bus = &"SFX"
-
-[node name="Shieldhit2" type="AudioStreamPlayer" parent="SFX/Bullet"]
-stream = ExtResource("53_0upus")
-bus = &"SFX"
-
-[node name="Splat1" type="AudioStreamPlayer" parent="SFX/Bullet"]
-stream = ExtResource("54_62v1p")
-bus = &"SFX"
-
-[node name="Splat2" type="AudioStreamPlayer" parent="SFX/Bullet"]
-stream = ExtResource("55_51mrj")
-bus = &"SFX"
-
-[node name="Splat3" type="AudioStreamPlayer" parent="SFX/Bullet"]
-stream = ExtResource("56_qtggi")
-bus = &"SFX"
 
 [node name="Dirt" type="Node2D" parent="."]
 position = Vector2(0, 58)

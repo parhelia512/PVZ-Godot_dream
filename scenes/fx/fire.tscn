@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw5nlpvfoqj5e"]
+
+[ext_resource type="Script" uid="uid://ddjr8uhv3xgci" path="res://scripts/fx/plant_effect/plant_effect_005_bomb_fire.gd" id="1_ry352"]
+[ext_resource type="Texture2D" uid="uid://cgr7dqab5jusn" path="res://assets/reanim/fire1.png" id="2_ry352"]
+[ext_resource type="Animation" uid="uid://cd1retcew0plf" path="res://animation/item/Fire/fire_done.tres" id="3_gtew8"]
+[ext_resource type="Animation" uid="uid://bts7yxj1e4ok8" path="res://animation/item/Fire/fire_flame.tres" id="4_8u4tn"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvium"]
+_data = {
+&"fire_done": ExtResource("3_gtew8"),
+&"fire_flame": ExtResource("4_8u4tn")
+}
+
+[node name="Fire" type="Node2D"]
+script = ExtResource("1_ry352")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(0, -69)
+
+[node name="Anim_flame" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_done" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Layer 1" type="Sprite2D" parent="Body"]
+position = Vector2(-45, 30.2)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_ry352")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gvium")
+}

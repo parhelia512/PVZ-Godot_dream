@@ -21,6 +21,7 @@
 [resource]
 resource_name = "CherryBomb_idle"
 length = 0.4
+loop_mode = 1
 step = 0.033333
 tracks/0/type = "value"
 tracks/0/imported = false

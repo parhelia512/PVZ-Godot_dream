@@ -7,13 +7,22 @@ var root_node : MainGameManager
 
 
 func judge_sleep():
-	root_node = get_tree().current_scene
-	## 睡眠
-	if root_node.game_para.game_BG != root_node.game_para.GameBg.FrontNight:
-		get_parent().is_sleep = true
-		animation_player.play("zzz")
-		visible = true
+	if get_tree().current_scene is MainGameManager:
+		root_node = get_tree().current_scene
+		## 睡眠
+		if root_node.game_para.game_BG != root_node.game_para.GameBg.FrontNight:
+			get_parent().is_sleep = true
+			animation_player.play("zzz")
+			visible = true
+		else:
+			get_parent().stop_sleep()
+			animation_player.stop()
+			visible = false
 	else:
 		get_parent().stop_sleep()
 		animation_player.stop()
 		visible = false
+
+
+func immediate_hide_zzz():
+	visible = false

@@ -26,8 +26,7 @@ func _init_random_frame():
 	var random_frame = randi_range(0,4)
 	tombstone.frame = random_frame
 	mound.frame = random_frame
-	SoundManager.play_sfx("GravestoneRumble")
-	
+	SoundManager.play_other_SFX("gravestone_rumble")
 
 ## 初始化墓碑
 func _init_tombstone():

@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://cu0wuqktyhssa"]
 
 [ext_resource type="Animation" uid="uid://eg5i0srekcuo" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_explode.tres" id="1_anim"]
-[ext_resource type="Script" uid="uid://b7vg4ofxajdtb" path="res://scripts/character/plant/003_cherry_bomb.gd" id="1_fj2s8"]
+[ext_resource type="Script" uid="uid://b7vg4ofxajdtb" path="res://scripts/character/plant/plant_003_cherry_bomb.gd" id="1_fj2s8"]
 [ext_resource type="Animation" uid="uid://b2a3f5y4dudyi" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_idle.tres" id="2_anim"]
 [ext_resource type="Texture2D" uid="uid://dvuugtbourjhs" path="res://assets/reanim/CherryBomb_leftstem.png" id="2_ocibd"]
 [ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_w6qmx"]
@@ -23,9 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://fh1tkc18o3qe" path="res://assets/reanim/CherryBomb_leaf1tip.png" id="18_qmxga"]
 [ext_resource type="Texture2D" uid="uid://ysajcyiwrdnk" path="res://assets/image/particles/ExplosionPowie.png" id="20_fj2s8"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="20_xru78"]
-[ext_resource type="Script" uid="uid://uv71i8wk2job" path="res://scripts/fx/bomb_effect/001_bomb_effect_cherry_bomb.gd" id="21_gijk3"]
+[ext_resource type="Script" uid="uid://uv71i8wk2job" path="res://scripts/fx/plant_effect/plant_effect_001_bomb_cherry.gd" id="21_gijk3"]
 [ext_resource type="Texture2D" uid="uid://lr726nfj8o4l" path="res://assets/image/particles/bullet/DoomShroom_Explosion_Top.png" id="21_qg3or"]
-[ext_resource type="AudioStream" uid="uid://dwjo8pcmj0gjr" path="res://assets/audio/SFX/plant/cherrybomb.ogg" id="24_xulih"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q5e28"]
 _data = {
@@ -41,10 +40,15 @@ animation = &"CherryBomb_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qg3or"]
 advance_mode = 2
+advance_expression = "is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ocibd"]
 advance_mode = 2
-advance_expression = "is_bomb"
+advance_expression = "is_bomb and not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xru78"]
+advance_mode = 2
+advance_expression = "not is_idle and is_bomb"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fj2s8"]
 states/CherryBomb_explode/node = SubResource("AnimationNodeAnimation_q5e28")
@@ -52,7 +56,8 @@ states/CherryBomb_explode/position = Vector2(400, 148)
 states/CherryBomb_idle/node = SubResource("AnimationNodeAnimation_fj2s8")
 states/CherryBomb_idle/position = Vector2(394, 58)
 states/Start/position = Vector2(177, 87)
-transitions = ["Start", "CherryBomb_idle", SubResource("AnimationNodeStateMachineTransition_qg3or"), "CherryBomb_idle", "CherryBomb_explode", SubResource("AnimationNodeStateMachineTransition_ocibd")]
+transitions = ["Start", "CherryBomb_idle", SubResource("AnimationNodeStateMachineTransition_qg3or"), "CherryBomb_idle", "CherryBomb_explode", SubResource("AnimationNodeStateMachineTransition_ocibd"), "Start", "CherryBomb_explode", SubResource("AnimationNodeStateMachineTransition_xru78")]
+graph_offset = Vector2(77, 36)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_fj2s8"]
 
@@ -133,15 +138,10 @@ scale_curve = SubResource("CurveTexture_me3ek")
 color = Color(0.917647, 0.756863, 0, 1)
 alpha_curve = SubResource("CurveTexture_svbgh")
 
-[node name="CherryBomb" type="Node2D" node_paths=PackedStringArray("SFX_bomb")]
+[node name="CherryBomb" type="Node2D"]
 script = ExtResource("1_fj2s8")
-SFX_bomb = NodePath("Cherrybomb")
 plant_condition = ExtResource("2_w6qmx")
 no_blink = true
-
-[node name="Cherrybomb" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("24_xulih")
-bus = &"SFX"
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2(-42, -45)

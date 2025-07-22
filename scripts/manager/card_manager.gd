@@ -89,7 +89,7 @@ func init_CardChooser():
 
 ## 游戏选卡阶段时，卡片被点击
 func _on_card_click(card:Card):
-	card.get_node('Tap').play()
+	SoundManager.play_other_SFX("tap")
 	# 如果card被选择，取消选取，后面的card向前移动
 	if card.is_choosed:
 		card.is_choosed = false
@@ -102,7 +102,7 @@ func _on_card_click(card:Card):
 	# 如果没被选取，放在最后一位
 	else:
 		if len(cards) >= max_choosed_card_num:
-			SoundManager.play_sfx("Card/Error")
+			SoundManager.play_other_SFX("buzzer")
 			return
 		else:
 			card.is_choosed = true
@@ -146,10 +146,12 @@ func card_disconnect_card():
 
 
 ## 系统预选卡
-func pre_choosed_card(card:Card, target_parent):
+func pre_choosed_card(card:Card, target_parent, is_test:=false):
 	card.get_parent().remove_child(card)
 	target_parent.add_child(card)
 	card.position = Vector2.ZERO
+	if is_test:
+		card.card_change_cool_time(0)
 
 #endregion
 
@@ -168,12 +170,12 @@ func card_signal_connect():
 
 
 ## 初始化系统预选卡
-func init_pre_choosed_card(card_type_list:Array[Global.PlantType]):
+func init_pre_choosed_card(card_type_list:Array[Global.PlantType], is_test:=false):
 	for i:Global.PlantType in card_type_list:
 		var card:Card = cards_in_chooser[i].card
 		card.is_choosed = true
 		cards.append(card)
-		pre_choosed_card(card, cards_placeholder[len(cards)-1])
+		pre_choosed_card(card, cards_placeholder[len(cards)-1], is_test)
 	## 预选卡断开鼠标点击信号
 	card_disconnect_card()
 
@@ -200,3 +202,24 @@ func move_card_bar(is_appeal:bool, appeal_time:= 0.2):
 ## 植物卡槽取消置顶
 func card_bar_and_shovel_z_index_100():
 	card_bar_and_shovel.z_index = 100
+
+
+## 开始游戏按钮
+func _on_start_game_button_pressed() -> void:
+	main_game.cheeosed_card_start_game()
+	
+	Global.selected_cards.clear()
+	for card:Card in cards:
+		Global.selected_cards.append(card.card_type)
+	
+	Global.save_selected_cards()
+
+
+
+## 重选上次卡片
+func _on_re_card_button_pressed() -> void:
+	Global.load_selected_cards()
+	for i in Global.selected_cards:
+		if cards_in_chooser[i].card.is_choosed:
+			continue
+		cards_in_chooser[i].card.card_click.emit(cards_in_chooser[i].card)
