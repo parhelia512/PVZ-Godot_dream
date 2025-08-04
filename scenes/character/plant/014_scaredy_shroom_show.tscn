@@ -1,0 +1,236 @@
+[gd_scene load_steps=40 format=3 uid="uid://bspyfnhj4mh11"]
+
+[ext_resource type="Script" uid="uid://ct7o2l5si8jdh" path="res://scripts/garden/Plant/plant_shroom_garden.gd" id="1_4sxpr"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="4_pttxt"]
+[ext_resource type="Texture2D" uid="uid://d1ync1uai7er" path="res://assets/reanim/ScaredyShroom_head_inner.png" id="5_u7oed"]
+[ext_resource type="Texture2D" uid="uid://btr2esyduvxjn" path="res://assets/reanim/ScaredyShroom_stem.png" id="6_dlfl0"]
+[ext_resource type="Texture2D" uid="uid://dmc0tn8f0rcd5" path="res://assets/reanim/ScaredyShroom_eye2.png" id="7_s54nc"]
+[ext_resource type="Texture2D" uid="uid://cj53l4356v4lt" path="res://assets/reanim/ScaredyShroom_mouth.png" id="9_k0ttx"]
+[ext_resource type="Texture2D" uid="uid://bmomuy6csllx2" path="res://assets/reanim/ScaredyShroom_lips.png" id="10_lsxt4"]
+[ext_resource type="Texture2D" uid="uid://bhy6v2sefb34e" path="res://assets/reanim/ScaredyShroom_eye1.png" id="11_fy2t5"]
+[ext_resource type="Texture2D" uid="uid://4jhqxlj4kfll" path="res://assets/reanim/ScaredyShroom_head.png" id="12_xd62g"]
+[ext_resource type="Texture2D" uid="uid://b1ju30d8vymd8" path="res://assets/reanim/ScaredyShroom_eyebrow1.png" id="14_lndyc"]
+[ext_resource type="Texture2D" uid="uid://ciqsgbjvs6q4g" path="res://assets/reanim/ScaredyShroom_eyebrow2.png" id="15_bpjl1"]
+[ext_resource type="Texture2D" uid="uid://yjc7pkf5hdn2" path="res://assets/image/particles/bullet/PuffShroom_puff1.png" id="17_ve8is"]
+[ext_resource type="Animation" uid="uid://bb1fbfe1fqcco" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_grow.tres" id="18_0wcj4"]
+[ext_resource type="PackedScene" uid="uid://dmenla6ro7cn0" path="res://scenes/garden/sleep_shroom_garden.tscn" id="19_4sxpr"]
+[ext_resource type="Animation" uid="uid://n2bc4c5ootw2" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_idle.tres" id="19_mfdob"]
+[ext_resource type="Animation" uid="uid://c0rscs7awmh6t" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_scared.tres" id="20_m2xnn"]
+[ext_resource type="Animation" uid="uid://cu4gugoc8ey8" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_scaredidle.tres" id="21_72dfh"]
+[ext_resource type="Animation" uid="uid://wl32oegoyf56" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_shooting.tres" id="22_pyrum"]
+[ext_resource type="Animation" uid="uid://cxl6ver7rvf52" path="res://animation/character/plant/014_scaredy_shroom/ScaredyShroom_sleep.tres" id="23_phqna"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ftdw2"]
+_data = {
+&"ScaredyShroom_grow": ExtResource("18_0wcj4"),
+&"ScaredyShroom_idle": ExtResource("19_mfdob"),
+&"ScaredyShroom_scared": ExtResource("20_m2xnn"),
+&"ScaredyShroom_scaredidle": ExtResource("21_72dfh"),
+&"ScaredyShroom_shooting": ExtResource("22_pyrum"),
+&"ScaredyShroom_sleep": ExtResource("23_phqna")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_inx5s"]
+animation = &"ScaredyShroom_shooting"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_y05nn"]
+fadein_time = 0.3
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fn8k4"]
+animation = &"ScaredyShroom_grow"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_03gk8"]
+animation = &"ScaredyShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ilb0t"]
+animation = &"ScaredyShroom_scared"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1b8ck"]
+animation = &"ScaredyShroom_scaredidle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_megrr"]
+animation = &"ScaredyShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oxht4"]
+advance_mode = 2
+advance_expression = "not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_und8k"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6yjsh"]
+advance_mode = 2
+advance_expression = "is_scared"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mi268"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sk62e"]
+advance_mode = 2
+advance_expression = "not is_scared"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ftdw2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_megrr"]
+advance_mode = 2
+advance_expression = "is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4sxpr"]
+advance_mode = 2
+advance_expression = "is_sleep"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iwvsu"]
+states/End/position = Vector2(991, 100)
+states/ScaredyShroom_grow/node = SubResource("AnimationNodeAnimation_fn8k4")
+states/ScaredyShroom_grow/position = Vector2(789, 180)
+states/ScaredyShroom_idle/node = SubResource("AnimationNodeAnimation_03gk8")
+states/ScaredyShroom_idle/position = Vector2(503, 169)
+states/ScaredyShroom_scared/node = SubResource("AnimationNodeAnimation_ilb0t")
+states/ScaredyShroom_scared/position = Vector2(511, 281)
+states/ScaredyShroom_scaredidle/node = SubResource("AnimationNodeAnimation_1b8ck")
+states/ScaredyShroom_scaredidle/position = Vector2(797, 281)
+states/ScaredyShroom_sleep/node = SubResource("AnimationNodeAnimation_megrr")
+states/ScaredyShroom_sleep/position = Vector2(479, 78)
+transitions = ["Start", "ScaredyShroom_sleep", SubResource("AnimationNodeStateMachineTransition_oxht4"), "ScaredyShroom_sleep", "ScaredyShroom_idle", SubResource("AnimationNodeStateMachineTransition_und8k"), "ScaredyShroom_idle", "ScaredyShroom_scared", SubResource("AnimationNodeStateMachineTransition_6yjsh"), "ScaredyShroom_scared", "ScaredyShroom_scaredidle", SubResource("AnimationNodeStateMachineTransition_mi268"), "ScaredyShroom_scaredidle", "ScaredyShroom_grow", SubResource("AnimationNodeStateMachineTransition_sk62e"), "ScaredyShroom_grow", "ScaredyShroom_idle", SubResource("AnimationNodeStateMachineTransition_ftdw2"), "Start", "ScaredyShroom_idle", SubResource("AnimationNodeStateMachineTransition_megrr"), "ScaredyShroom_idle", "ScaredyShroom_sleep", SubResource("AnimationNodeStateMachineTransition_4sxpr")]
+graph_offset = Vector2(122, 55)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vxwj0"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_r2lu0"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3psyq"]
+graph_offset = Vector2(-398.388, 57.649)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_inx5s")
+nodes/Animation/position = Vector2(-300, 360)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_y05nn")
+nodes/OneShot/position = Vector2(200, 160)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_iwvsu")
+nodes/StateMachine/position = Vector2(-180, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_r2lu0")
+nodes/TimeScale/position = Vector2(420, 160)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_vxwj0")
+"nodes/TimeScale 2/position" = Vector2(0, 340)
+nodes/output/position = Vector2(640, 160)
+node_connections = [&"OneShot", 0, &"StateMachine", &"OneShot", 1, &"TimeScale 2", &"TimeScale", 0, &"OneShot", &"TimeScale 2", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="ScaredyShroom" type="Node2D"]
+script = ExtResource("1_4sxpr")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-34.2289, -75.1447)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(33, 73)
+scale = Vector2(0.790698, 0.666667)
+texture = ExtResource("4_pttxt")
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_head_inner" type="Sprite2D" parent="Body"]
+position = Vector2(20.98, 29.38)
+scale = Vector2(0.8376, 0.742)
+texture = ExtResource("5_u7oed")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(27.6, 38.04)
+scale = Vector2(0.8, 0.746)
+texture = ExtResource("6_dlfl0")
+centered = false
+
+[node name="Anim_eye2" type="Sprite2D" parent="Body"]
+position = Vector2(39.4, 34.38)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_s54nc")
+centered = false
+
+[node name="ScaredyShroom_eye_big2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(38.5, 45.08)
+rotation = 0.100182
+scale = Vector2(1.6088, 0.8)
+skew = -0.100182
+texture = ExtResource("9_k0ttx")
+centered = false
+
+[node name="ScaredyShroom_lips" type="Sprite2D" parent="Body"]
+position = Vector2(43.84, 42.8)
+rotation = 0.0753982
+scale = Vector2(0.8, 0.7622)
+texture = ExtResource("10_lsxt4")
+centered = false
+
+[node name="Anim_eye1" type="Sprite2D" parent="Body"]
+position = Vector2(33.4, 36.08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_fy2t5")
+centered = false
+
+[node name="ScaredyShroom_eye_big1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(3.68, 10.92)
+scale = Vector2(0.8486, 0.7622)
+texture = ExtResource("12_xd62g")
+centered = false
+
+[node name="ScaredyShroom_head2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_eyebrow1" type="Sprite2D" parent="Body"]
+position = Vector2(28.3, 33.82)
+rotation = 0.0617848
+scale = Vector2(1.0174, 0.7994)
+texture = ExtResource("14_lndyc")
+centered = false
+
+[node name="ScaredyShroom_eyebrow2" type="Sprite2D" parent="Body"]
+position = Vector2(39.3, 30.34)
+rotation = 0.113796
+scale = Vector2(0.999, 0.999)
+texture = ExtResource("15_bpjl1")
+centered = false
+
+[node name="ScaredyShroom_sweat2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_sweat1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="PuffShroomPuff1" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(53, 49)
+scale = Vector2(0.5, 0.592593)
+texture = ExtResource("17_ve8is")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ftdw2")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_3psyq")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/TimeScale/scale = 1.0
+"parameters/TimeScale 2/scale" = 2.0
+
+[node name="SleepShroomGarden" parent="." instance=ExtResource("19_4sxpr")]

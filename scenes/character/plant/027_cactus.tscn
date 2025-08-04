@@ -1,0 +1,296 @@
+[gd_scene load_steps=46 format=3 uid="uid://c76g4vjv5dac0"]
+
+[ext_resource type="Texture2D" uid="uid://c4id572fbtjcy" path="res://assets/reanim/Cactus_flower.png" id="0_fuck"]
+[ext_resource type="Script" uid="uid://cqcgwqyr07y4v" path="res://scripts/character/plant/plant_027_cactus.gd" id="1_cgxss"]
+[ext_resource type="Texture2D" uid="uid://r4y81035oofv" path="res://assets/reanim/Cactus_flower_top.png" id="1_fuck"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_w2ulu"]
+[ext_resource type="Animation" uid="uid://cegq7c7ee3bmy" path="res://animation/character/plant/027_cactus/Cactus_idle.tres" id="2_anim"]
+[ext_resource type="Texture2D" uid="uid://c3f83wivxssqn" path="res://assets/reanim/Cactus_arm2_2.png" id="2_fuck"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_jk8ux"]
+[ext_resource type="PackedScene" uid="uid://cyrc2fut2h1u4" path="res://scenes/bullet/007_bullet_cactus.tscn" id="2_o2wf1"]
+[ext_resource type="Animation" uid="uid://cpi52n3bnf7a4" path="res://animation/character/plant/027_cactus/Cactus_shooting.tres" id="3_anim"]
+[ext_resource type="Animation" uid="uid://b7gk2j4eajulu" path="res://animation/character/plant/027_cactus/Cactus_rise.tres" id="4_anim"]
+[ext_resource type="Animation" uid="uid://dgygdw3pxpvfn" path="res://animation/character/plant/027_cactus/Cactus_idlehigh.tres" id="5_anim"]
+[ext_resource type="Texture2D" uid="uid://c384ifvkckv2d" path="res://assets/reanim/Cactus_arm2_1.png" id="5_fuck"]
+[ext_resource type="Texture2D" uid="uid://db2piucw744ly" path="res://assets/reanim/Cactus_blink2.png" id="5_tsfcj"]
+[ext_resource type="Animation" uid="uid://cjnf8plrqkeln" path="res://animation/character/plant/027_cactus/Cactus_shootinghigh.tres" id="6_anim"]
+[ext_resource type="Texture2D" uid="uid://cr1uypy7w05pj" path="res://assets/reanim/Cactus_body_overlay.png" id="6_fuck"]
+[ext_resource type="Animation" uid="uid://cjffkc3jqsd1c" path="res://animation/character/plant/027_cactus/Cactus_lower.tres" id="7_anim"]
+[ext_resource type="Texture2D" uid="uid://ju1655nhscjp" path="res://assets/reanim/Cactus_body1.png" id="8_fuck"]
+[ext_resource type="Texture2D" uid="uid://tmjoaki8edq" path="res://assets/reanim/Cactus_arm1_2.png" id="9_fuck"]
+[ext_resource type="Texture2D" uid="uid://081jwea20nvr" path="res://assets/reanim/Cactus_arm1_1.png" id="10_fuck"]
+[ext_resource type="Texture2D" uid="uid://ks8bci2cs54t" path="res://assets/reanim/Cactus_mouth.png" id="11_fuck"]
+[ext_resource type="Texture2D" uid="uid://e6qqqcdsskg1" path="res://assets/reanim/Cactus_lips.png" id="12_fuck"]
+[ext_resource type="Texture2D" uid="uid://dync776p2d0w7" path="res://assets/reanim/Cactus_blink1.png" id="13_fuck"]
+[ext_resource type="Texture2D" uid="uid://spfd63h0e5vv" path="res://assets/image/projectile/ProjectileCactus.png" id="15_o2wf1"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1mso"]
+_data = {
+&"Cactus_idle": ExtResource("2_anim"),
+&"Cactus_idlehigh": ExtResource("5_anim"),
+&"Cactus_lower": ExtResource("7_anim"),
+&"Cactus_rise": ExtResource("4_anim"),
+&"Cactus_shooting": ExtResource("3_anim"),
+&"Cactus_shootinghigh": ExtResource("6_anim")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k2d6r"]
+animation = &"Cactus_shootinghigh"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s682d"]
+animation = &"Cactus_idlehigh"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_kddwg"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_l5n13"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qsbeo"]
+graph_offset = Vector2(-36.6694, 116.405)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_s682d")
+nodes/Animation/position = Vector2(286.671, 112.736)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_k2d6r")
+"nodes/Animation 2/position" = Vector2(100, 380)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_kddwg")
+nodes/OneShot/position = Vector2(560, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_l5n13")
+nodes/TimeScale/position = Vector2(360, 320)
+nodes/output/position = Vector2(800, 180)
+node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"TimeScale", &"TimeScale", 0, &"Animation 2", &"output", 0, &"OneShot"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d6vb1"]
+animation = &"Cactus_shooting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5b508"]
+animation = &"Cactus_idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_78ljg"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xswiq"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hpmc0"]
+graph_offset = Vector2(-74.7, 68.9)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_5b508")
+nodes/Animation/position = Vector2(194.872, 136.893)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_d6vb1")
+"nodes/Animation 2/position" = Vector2(0, 360)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_78ljg")
+nodes/OneShot/position = Vector2(440, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_xswiq")
+nodes/TimeScale/position = Vector2(231.913, 330.155)
+nodes/output/position = Vector2(660, 180)
+node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"TimeScale", &"TimeScale", 0, &"Animation 2", &"output", 0, &"OneShot"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5xufi"]
+animation = &"Cactus_lower"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ro40r"]
+animation = &"Cactus_rise"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvo62"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2djsr"]
+advance_mode = 2
+advance_expression = "is_rise"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mlldu"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xyl7h"]
+advance_mode = 2
+advance_expression = "not is_rise"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cbv5h"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ibdui"]
+states/BlendTree/node = SubResource("AnimationNodeBlendTree_hpmc0")
+states/BlendTree/position = Vector2(402, 65)
+"states/BlendTree 2/node" = SubResource("AnimationNodeBlendTree_qsbeo")
+"states/BlendTree 2/position" = Vector2(402, 237)
+states/Cactus_lower/node = SubResource("AnimationNodeAnimation_5xufi")
+states/Cactus_lower/position = Vector2(500, 152)
+states/Cactus_rise/node = SubResource("AnimationNodeAnimation_ro40r")
+states/Cactus_rise/position = Vector2(351, 152)
+transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_pvo62"), "BlendTree", "Cactus_rise", SubResource("AnimationNodeStateMachineTransition_2djsr"), "Cactus_rise", "BlendTree 2", SubResource("AnimationNodeStateMachineTransition_mlldu"), "BlendTree 2", "Cactus_lower", SubResource("AnimationNodeStateMachineTransition_xyl7h"), "Cactus_lower", "BlendTree", SubResource("AnimationNodeStateMachineTransition_cbv5h")]
+graph_offset = Vector2(90, 40)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_5mthj"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ngnd7"]
+graph_offset = Vector2(-31.6537, 35.3255)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ibdui")
+nodes/StateMachine/position = Vector2(80, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_5mthj")
+nodes/TimeScale/position = Vector2(480, 100)
+nodes/output/position = Vector2(700, 140)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgxss"]
+size = Vector2(50, 60)
+
+[node name="Cactus" type="Node2D" node_paths=PackedStringArray("bullet_position", "blink_sprite")]
+script = ExtResource("1_cgxss")
+bullet_scene = ExtResource("2_o2wf1")
+bullet_position = NodePath("Body/Projectile")
+plant_condition = ExtResource("2_jk8ux")
+blink_sprite = NodePath("Body/Cactus_blink2")
+blink_sprite_texture = Array[Texture]([ExtResource("13_fuck"), ExtResource("5_tsfcj")])
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-36, -46)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(36, 70)
+texture = ExtResource("1_w2ulu")
+
+[node name="Cactus_flower" type="Sprite2D" parent="Body"]
+position = Vector2(9.44491, 0.138922)
+scale = Vector2(0.829994, 0.815108)
+skew = -0.08017
+texture = ExtResource("0_fuck")
+centered = false
+
+[node name="Cactus_floer_top" type="Sprite2D" parent="Body"]
+position = Vector2(19.9335, -3.51677)
+rotation = -0.088604
+scale = Vector2(0.799, 0.811275)
+texture = ExtResource("1_fuck")
+centered = false
+
+[node name="Cactus_floer_top2" type="Sprite2D" parent="Body"]
+position = Vector2(15.0778, 1.56647)
+rotation = -0.088604
+scale = Vector2(0.499389, 0.507054)
+texture = ExtResource("1_fuck")
+centered = false
+
+[node name="Cactus_floer_top3" type="Sprite2D" parent="Body"]
+position = Vector2(15.4557, -3.43353)
+rotation = -0.088604
+scale = Vector2(0.549389, 0.557443)
+texture = ExtResource("1_fuck")
+centered = false
+
+[node name="Cactus_arm2_2" type="Sprite2D" parent="Body"]
+position = Vector2(52, 43.7557)
+rotation = 0.107897
+scale = Vector2(0.805443, 0.811886)
+skew = -0.107897
+texture = ExtResource("2_fuck")
+centered = false
+
+[node name="Cactus_body3" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Cactus_body2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Cactus_arm2_1" type="Sprite2D" parent="Body"]
+position = Vector2(56.1108, 31.6557)
+rotation = 0.0875382
+scale = Vector2(0.8, 0.811275)
+texture = ExtResource("5_fuck")
+centered = false
+
+[node name="Body_overlay" type="Sprite2D" parent="Body"]
+position = Vector2(17.4, 64.5)
+scale = Vector2(0.8, 0.643)
+texture = ExtResource("6_fuck")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(9.5, 6.63353)
+scale = Vector2(0.8, 0.811886)
+texture = ExtResource("8_fuck")
+centered = false
+
+[node name="Cactus_arm1_2" type="Sprite2D" parent="Body"]
+position = Vector2(2.7, 41.9832)
+rotation = -0.0520571
+scale = Vector2(0.801611, 0.811886)
+skew = 0.0520571
+texture = ExtResource("9_fuck")
+centered = false
+
+[node name="Cactus_arm1_1" type="Sprite2D" parent="Body"]
+position = Vector2(-11.7108, 18.5886)
+rotation = -0.0696038
+scale = Vector2(0.8, 0.811275)
+texture = ExtResource("10_fuck")
+centered = false
+
+[node name="Cactus_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(48.5, 24.6168)
+rotation = 0.0611697
+scale = Vector2(0.801611, 0.823551)
+skew = -0.0611697
+texture = ExtResource("11_fuck")
+centered = false
+
+[node name="Cactus_lips" type="Sprite2D" parent="Body"]
+position = Vector2(51.1054, 19.5389)
+rotation = 0.0646607
+scale = Vector2(0.8, 0.811275)
+texture = ExtResource("12_fuck")
+centered = false
+
+[node name="Cactus_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(24, 18)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_fuck")
+centered = false
+
+[node name="Cactus_blink2" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(24, 17.3097)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_fuck")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body"]
+visible = false
+texture = ExtResource("15_o2wf1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s1mso")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_ngnd7")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/StateMachine/BlendTree/OneShot/active = false
+parameters/StateMachine/BlendTree/OneShot/internal_active = false
+parameters/StateMachine/BlendTree/OneShot/request = 0
+parameters/StateMachine/BlendTree/TimeScale/scale = 3.0
+"parameters/StateMachine/BlendTree 2/OneShot/active" = false
+"parameters/StateMachine/BlendTree 2/OneShot/internal_active" = false
+"parameters/StateMachine/BlendTree 2/OneShot/request" = 0
+"parameters/StateMachine/BlendTree 2/TimeScale/scale" = 3.0
+parameters/TimeScale/scale = 1.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(800, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cgxss")

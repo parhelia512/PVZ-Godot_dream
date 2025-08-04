@@ -10,7 +10,7 @@ func judge_sleep():
 	if get_tree().current_scene is MainGameManager:
 		root_node = get_tree().current_scene
 		## 睡眠
-		if root_node.game_para.game_BG != root_node.game_para.GameBg.FrontNight:
+		if root_node.game_para.is_day:
 			get_parent().is_sleep = true
 			animation_player.play("zzz")
 			visible = true

@@ -32,7 +32,7 @@ func start_attack_loop():
 	if blink_sprite:
 		## 避免攻击时眨眼
 		blink_sprite.visible = false
-
+	
 	attack_timer.start()
 
 # 停止攻击,
@@ -55,7 +55,10 @@ func judge_ray_zomebie():
 		return true
 	return false
 
-
+## 攻击时停止眨眼
+func attack_stop_blink():
+	if blink_sprite:
+		blink_sprite.visible = false
 
 func _process(delta):
 	# 每帧检查射线是否碰到僵尸
@@ -63,6 +66,7 @@ func _process(delta):
 		if not is_attack:
 			is_attack = true
 			is_blink = false
+			attack_stop_blink()
 			## 如果没有这个等待时间，大喷菇概率隐身，不清楚原因
 			await get_tree().create_timer(randf_range(0.5, 1)).timeout
 			## 攻击一次，并启动计时器循环触发攻击

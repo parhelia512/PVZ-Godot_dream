@@ -1,0 +1,108 @@
+[gd_scene load_steps=20 format=3 uid="uid://cs1ot0ud8ffq6"]
+
+[ext_resource type="Script" uid="uid://ct7o2l5si8jdh" path="res://scripts/garden/Plant/plant_shroom_garden.gd" id="1_j6ie0"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_p3vnd"]
+[ext_resource type="Texture2D" uid="uid://dmch2r8l3fn1c" path="res://assets/reanim/HypnoShroom_eye1.png" id="4_8r5yp"]
+[ext_resource type="Texture2D" uid="uid://cbgu3a2jxkthd" path="res://assets/reanim/HypnoShroom_body.png" id="4_ywiwh"]
+[ext_resource type="Texture2D" uid="uid://bm4iskcgxt1lx" path="res://assets/reanim/HypnoShroom_eye2.png" id="6_tya0c"]
+[ext_resource type="Texture2D" uid="uid://c3tp56xwnaj8k" path="res://assets/reanim/HypnoShroom_head.png" id="6_uo8xr"]
+[ext_resource type="Animation" uid="uid://dty7dbaeyuw0t" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_idle.tres" id="8_ccq28"]
+[ext_resource type="PackedScene" uid="uid://dmenla6ro7cn0" path="res://scenes/garden/sleep_shroom_garden.tscn" id="9_p3vnd"]
+[ext_resource type="Animation" uid="uid://30e20p4vcyww" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_sleep.tres" id="9_q45uj"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ih1jw"]
+_data = {
+&"HypnoShroom_idle": ExtResource("8_ccq28"),
+&"HypnoShroom_sleep": ExtResource("9_q45uj")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xmls6"]
+animation = &"HypnoShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lusfa"]
+animation = &"HypnoShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hrt0k"]
+advance_mode = 2
+advance_expression = "not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1dxyp"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lusfa"]
+advance_mode = 2
+advance_expression = "is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j6ie0"]
+advance_mode = 2
+advance_expression = "is_sleep"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7ns8a"]
+states/HypnoShroom_idle/node = SubResource("AnimationNodeAnimation_xmls6")
+states/HypnoShroom_idle/position = Vector2(406, 175)
+states/HypnoShroom_sleep/node = SubResource("AnimationNodeAnimation_lusfa")
+states/HypnoShroom_sleep/position = Vector2(411, 52)
+transitions = ["Start", "HypnoShroom_sleep", SubResource("AnimationNodeStateMachineTransition_hrt0k"), "HypnoShroom_sleep", "HypnoShroom_idle", SubResource("AnimationNodeStateMachineTransition_1dxyp"), "Start", "HypnoShroom_idle", SubResource("AnimationNodeStateMachineTransition_lusfa"), "HypnoShroom_idle", "HypnoShroom_sleep", SubResource("AnimationNodeStateMachineTransition_j6ie0")]
+graph_offset = Vector2(11, 7)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0ou06"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5dss5"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_7ns8a")
+nodes/StateMachine/position = Vector2(40, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0ou06")
+nodes/TimeScale/position = Vector2(362, 83)
+nodes/output/position = Vector2(580, 120)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[node name="HypnoShroom" type="Node2D"]
+script = ExtResource("1_j6ie0")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-37, -73.7882)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("3_p3vnd")
+
+[node name="Layer 1" type="Sprite2D" parent="Body"]
+position = Vector2(20.4771, 36.5672)
+scale = Vector2(0.8, 0.786213)
+skew = -0.0232895
+texture = ExtResource("4_ywiwh")
+centered = false
+
+[node name="Layer 3" type="Sprite2D" parent="Body"]
+position = Vector2(44.5099, 61.6065)
+rotation = 3.33895
+scale = Vector2(0.625818, 0.625818)
+texture = ExtResource("4_8r5yp")
+centered = false
+
+[node name="Layer 2" type="Sprite2D" parent="Body"]
+position = Vector2(8.60335, 4.62452)
+rotation = -0.0505558
+scale = Vector2(0.8, 0.777984)
+texture = ExtResource("6_uo8xr")
+centered = false
+
+[node name="Layer 4" type="Sprite2D" parent="Body"]
+position = Vector2(55.1721, 57.1213)
+rotation = -3.33721
+scale = Vector2(0.799721, 0.799721)
+texture = ExtResource("6_tya0c")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ih1jw")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_5dss5")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="SleepShroomGarden" parent="." instance=ExtResource("9_p3vnd")]

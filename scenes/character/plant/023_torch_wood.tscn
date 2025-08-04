@@ -11,36 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://cwhpp4e3mm63u" path="res://assets/reanim/Torchwood_eyes1.png" id="6_fuck"]
 [ext_resource type="Texture2D" uid="uid://c3chyllw8wp1c" path="res://assets/reanim/Torchwood_fire1a.png" id="7_r0ogu"]
 
-[sub_resource type="Animation" id="Animation_rh1mc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Torchwood_blink:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(30.2522, 41.5129)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Torchwood_blink:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.737, 0.787)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ytarc"]
 _data = {
-&"RESET": SubResource("Animation_rh1mc"),
 &"Torchwood_idle": ExtResource("1_anim")
 }
 
@@ -62,7 +34,10 @@ node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 size = Vector2(50, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fehhe"]
-size = Vector2(71, 35)
+size = Vector2(71, 47.8918)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rh1mc"]
+size = Vector2(70.2796, 64.6994)
 
 [node name="TorchWood" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
 script = ExtResource("1_x6pvl")
@@ -85,49 +60,49 @@ visible = false
 centered = false
 
 [node name="Layer 35" type="Sprite2D" parent="Body"]
-self_modulate = Color(1, 1, 1, 0.998988)
-position = Vector2(39.7194, 29.8539)
+self_modulate = Color(1, 1, 1, 0.448808)
+position = Vector2(32.7, 7.21886)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Layer 33" type="Sprite2D" parent="Body"]
-self_modulate = Color(1, 1, 1, 0.35033)
-position = Vector2(42.7, 8.01105)
+self_modulate = Color(1, 1, 1, 0.02)
+position = Vector2(55.1, -4.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Layer 34" type="Sprite2D" parent="Body"]
-self_modulate = Color(1, 1, 1, 0.0201653)
-position = Vector2(39.7, -7.2936)
+self_modulate = Color(1, 1, 1, 0.26586)
+position = Vector2(58.5, -2.03446)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Torchwood_fire1" type="Sprite2D" parent="Body"]
-position = Vector2(15.7995, -3.3)
-scale = Vector2(0.736064, 0.874005)
+position = Vector2(18.098, -9.52748)
+scale = Vector2(0.711984, 0.986023)
 texture = ExtResource("7_r0ogu")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(6.4, 30.3997)
-scale = Vector2(0.732999, 0.680005)
+position = Vector2(6.9255, 28.3235)
+scale = Vector2(0.722745, 0.711275)
 texture = ExtResource("4_fuck")
 centered = false
 
 [node name="Torchwood_mouth" type="Sprite2D" parent="Body"]
-position = Vector2(22.0001, 43.0999)
+position = Vector2(22.851, 42.749)
 rotation = -0.006981
-scale = Vector2(0.777996, 0.896988)
+scale = Vector2(0.74998, 0.82094)
 skew = 0.006981
 texture = ExtResource("5_fuck")
 centered = false
 
 [node name="Torchwood_blink" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(30.2522, 41.5129)
+position = Vector2(30.2917, 39.356)
 scale = Vector2(0.737, 0.787)
 texture = ExtResource("6_fuck")
 centered = false
@@ -159,5 +134,13 @@ input_pickable = false
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2(-0.5, 0.5)
+position = Vector2(0.0793228, -3.5553)
 shape = SubResource("RectangleShape2D_fehhe")
+
+[node name="Area2D3" type="Area2D" parent="."]
+z_index = 1000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(0, -20.5263)
+rotation = 0.822521
+shape = SubResource("RectangleShape2D_rh1mc")

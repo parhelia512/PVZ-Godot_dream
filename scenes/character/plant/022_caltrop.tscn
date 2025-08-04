@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://08kyo8yacaqg"]
+[gd_scene load_steps=26 format=3 uid="uid://08kyo8yacaqg"]
 
 [ext_resource type="Texture2D" uid="uid://djsyco71dq21c" path="res://assets/reanim/Caltrop_body.png" id="0_fuck"]
 [ext_resource type="Animation" uid="uid://b5e22xmdjw0hk" path="res://animation/character/plant/022_caltrop/Caltrop_attack.tres" id="1_anim"]
@@ -13,38 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://dsvk38sshl42f" path="res://assets/reanim/Caltrop_horn4.png" id="4_fuck"]
 [ext_resource type="Texture2D" uid="uid://b4dihaqonj4k4" path="res://assets/reanim/Caltrop_blink1.png" id="5_fuck"]
 
-[sub_resource type="Animation" id="Animation_l5i5t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Anim_blink:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.8, 0.959999)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Anim_blink:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(19.5, 58)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xhn8r"]
 _data = {
 &"Caltrop_attack": ExtResource("1_anim"),
-&"Caltrop_idle": ExtResource("2_anim"),
-&"RESET": SubResource("Animation_l5i5t")
+&"Caltrop_idle": ExtResource("2_anim")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_70i3s"]
@@ -124,43 +96,43 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(-1.26039, 45.6007)
-scale = Vector2(0.815208, 0.769182)
+position = Vector2(-0.236587, 44.2366)
+scale = Vector2(0.79561, 0.809658)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Caltrop_horn1" type="Sprite2D" parent="Body"]
-position = Vector2(6.43896, 47.1409)
-rotation = -0.0761487
-scale = Vector2(0.799, 0.772383)
+position = Vector2(8.45122, 44.9732)
+rotation = 0.0122601
+scale = Vector2(0.8, 0.809658)
 texture = ExtResource("1_fuck")
 centered = false
 
 [node name="Caltrop_horn2" type="Sprite2D" parent="Body"]
-position = Vector2(22.7993, 42.6208)
-rotation = -0.0716039
-scale = Vector2(0.8, 0.788993)
+position = Vector2(24.1756, 40.961)
+rotation = 0.0122601
+scale = Vector2(0.8, 0.809658)
 texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Caltrop_horn3" type="Sprite2D" parent="Body"]
-position = Vector2(46.1805, 43.2201)
-rotation = 0.0541391
-scale = Vector2(0.8, 0.8)
+position = Vector2(45.1366, 42.6488)
+rotation = -0.0137923
+scale = Vector2(0.8, 0.809658)
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="Caltrop_horn4" type="Sprite2D" parent="Body"]
-position = Vector2(57.0805, 49.9)
-rotation = 0.0384203
-scale = Vector2(0.799, 0.799)
+position = Vector2(56.3244, 49.5366)
+rotation = -0.010727
+scale = Vector2(0.8, 0.809658)
 texture = ExtResource("4_fuck")
 centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(19.5, 58)
-scale = Vector2(0.8, 0.959999)
+position = Vector2(19.2419, 60.319)
+scale = Vector2(0.802545, 0.825758)
 texture = ExtResource("5_fuck")
 centered = false
 

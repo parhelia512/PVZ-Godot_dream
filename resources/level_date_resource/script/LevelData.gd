@@ -8,6 +8,7 @@ enum GameBg{
 	FrontDay,
 	FrontNight,
 	Pool,
+	Fog,
 }
 
 ## 背景图
@@ -15,6 +16,8 @@ var GameBgTextureMap = {
 	GameBg.FrontDay: preload("res://assets/image/background/background1.jpg"),
 	GameBg.FrontNight: preload("res://assets/image/background/background2.jpg"),
 	GameBg.Pool: preload("res://assets/image/background/background3.jpg"),
+	GameBg.Fog: preload("res://assets/image/background/background4.jpg"),
+	
 }
 #endregion
 
@@ -41,6 +44,8 @@ enum GameBGM {
 	FrontDay,
 	FrontNight,
 	Pool,
+	Fog,
+	Roof,
 	
 	MiniGame,
 	
@@ -51,6 +56,8 @@ var  GameBGMMap = {
 	GameBGM.FrontDay: "res://assets/audio/BGM/front_day.mp3",
 	GameBGM.FrontNight: "res://assets/audio/BGM/front_night.mp3",
 	GameBGM.Pool: "res://assets/audio/BGM/pool.mp3",
+	GameBGM.Fog: "res://assets/audio/BGM/fog.mp3",
+	GameBGM.Roof: "res://assets/audio/BGM/roof.mp3",
 	
 	GameBGM.MiniGame: "res://assets/audio/BGM/mini_game.mp3"
 }
@@ -90,6 +97,14 @@ enum CardMode{
 @export var game_BG:GameBg = GameBg.FrontDay
 ## 游戏背景音乐
 @export var game_BGM:GameBGM = GameBGM.FrontDay
+
+## 是否有雾
+@export var is_fog:bool = false
+## 是否为白天
+@export var is_day:bool = true
+## 是否天降阳光,传送带没有
+@export var is_day_sun:bool = true
+
 #endregion
 
 #region 关卡流程
@@ -102,6 +117,9 @@ enum CardMode{
 @export var have_card_bar := true
 ## 是否可以选择卡片,传送带不可选择
 @export var can_choosed_card :bool = true
+## 戴夫对话资源
+@export var crazy_dave_dialog:CrazyDaveDialogResource
+
 #endregion
 
 
@@ -135,8 +153,6 @@ enum CardMode{
 ## 开始阳光数量
 @export var start_sun : int = 50
 
-## 是否天降阳光,传送带没有
-@export var is_day_sun:bool = true
 ## 预选卡片列表、预选卡片不能取消,传送带模式为开局时出现的卡片
 @export var pre_choosed_card_list:Array[Global.PlantType] = []
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c3i1fsr5dh5u"]
+[gd_scene load_steps=56 format=3 uid="uid://c3i1fsr5dh5u"]
 
 [ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_1cadh"]
 [ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_tb84p"]
@@ -8,11 +8,13 @@
 [ext_resource type="Script" uid="uid://dhkfw0onmxcyf" path="res://scripts/camera/main_game_camera.gd" id="6_idx7g"]
 [ext_resource type="PackedScene" uid="uid://ba7yefjge3rjc" path="res://scenes/manager/card_manager.tscn" id="8_tito8"]
 [ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="17_jqwbj"]
+[ext_resource type="Script" uid="uid://cmnt7djyt1387" path="res://scripts/main_game_item/pool.gd" id="20_vbg8d"]
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="21_1i1rg"]
 [ext_resource type="Script" uid="uid://b2rst408m72au" path="res://scripts/manager/hand_manager.gd" id="22_radjy"]
 [ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="23_d5pu6"]
 [ext_resource type="Script" uid="uid://duv8spyw6f44n" path="res://scripts/manager/zombie_choose_row_system.gd" id="24_s3gvi"]
 [ext_resource type="Script" uid="uid://0num78yxy82x" path="res://scripts/manager/zombie_manager_in_mini_game_hammer_zombie.gd" id="25_5avpj"]
+[ext_resource type="PackedScene" uid="uid://bs55ei6xiuugg" path="res://scenes/item/game_scenes_item/fog.tscn" id="25_g67dc"]
 [ext_resource type="PackedScene" uid="uid://brbdbxg2tocla" path="res://scenes/ui/flag_progress_bar.tscn" id="26_6n78b"]
 [ext_resource type="Texture2D" uid="uid://cvydoge11mp4" path="res://assets/image/background/background3.jpg" id="33_uat7e"]
 [ext_resource type="Script" uid="uid://c8vlhy0axw8nc" path="res://scripts/ui/main_game_ui/area_2d_home.gd" id="34_ecxi8"]
@@ -34,7 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="53_gn6xc"]
 [ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="54_7kyoe"]
 [ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="55_on5oa"]
-[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="56_vrsxx"]
+[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://data/PVZ_theme.tres" id="56_vrsxx"]
 [ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="57_havwu"]
 [ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="58_sj5t7"]
 [ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="59_dxs2x"]
@@ -63,7 +65,7 @@ _limits = [0.0, 1.0, 0.0, 2.0]
 _data = [Vector2(0, 0), 0.0, 1.68265, 0, 0, Vector2(0.469136, 0.786517), 0.0, 0.0, 0, 0, Vector2(2, 0), -0.417135, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_12i41"]
+[sub_resource type="CurveTexture" id="CurveTexture_g67dc"]
 curve = SubResource("Curve_h068g")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1cadh"]
@@ -80,7 +82,7 @@ radial_velocity_max = 0.999978
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.6
-alpha_curve = SubResource("CurveTexture_12i41")
+alpha_curve = SubResource("CurveTexture_g67dc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tb84p"]
 particle_flag_disable_z = true
@@ -96,7 +98,7 @@ radial_velocity_max = 0.999978
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.6
-alpha_curve = SubResource("CurveTexture_12i41")
+alpha_curve = SubResource("CurveTexture_g67dc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_idx7g"]
 particle_flag_disable_z = true
@@ -111,7 +113,7 @@ radial_velocity_min = -2.23517e-05
 radial_velocity_max = 0.999978
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
-alpha_curve = SubResource("CurveTexture_12i41")
+alpha_curve = SubResource("CurveTexture_g67dc")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub7c8"]
 size = Vector2(662, 134)
@@ -126,9 +128,10 @@ bgm_choose_card = ExtResource("2_tb84p")
 mode_column = false
 
 [node name="PlantCells" type="Node2D" parent="."]
-z_index = 200
+z_index = 395
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlantCells"]
+z_index = 10
 layout_direction = 3
 offset_left = -768.0
 offset_top = 85.0
@@ -182,6 +185,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PlantCells"]
+z_index = 20
 layout_direction = 3
 offset_left = -768.0
 offset_top = 176.0
@@ -235,6 +239,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PlantCells"]
+z_index = 30
 layout_direction = 3
 offset_left = -768.0
 offset_top = 286.0
@@ -297,6 +302,7 @@ size_flags_vertical = 3
 plant_cell_type = 1
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="PlantCells"]
+z_index = 40
 layout_direction = 3
 offset_left = -768.0
 offset_top = 364.0
@@ -359,6 +365,7 @@ size_flags_vertical = 3
 plant_cell_type = 1
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="PlantCells"]
+z_index = 50
 layout_direction = 3
 offset_left = -768.0
 offset_top = 446.0
@@ -412,6 +419,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="PlantCells"]
+z_index = 60
 layout_direction = 3
 offset_left = -768.0
 offset_top = 525.0
@@ -603,6 +611,7 @@ position = Vector2(-563, 304)
 texture = ExtResource("42_4y1g8")
 
 [node name="Pool" type="Node2D" parent="Background"]
+script = ExtResource("20_vbg8d")
 
 [node name="PoolBase" type="Sprite2D" parent="Background/Pool"]
 position = Vector2(-85, 357)
@@ -642,6 +651,9 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Pool/PoolArea2D"]
 shape = SubResource("RectangleShape2D_ub7c8")
+
+[node name="Fog" parent="Background" instance=ExtResource("25_g67dc")]
+visible = false
 
 [node name="TemporaryPlants" type="Node2D" parent="."]
 z_index = 900

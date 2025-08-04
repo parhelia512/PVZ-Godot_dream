@@ -18,10 +18,6 @@ var _curr_character :CharacterBase
 var curr_zombie_row_type = ZombieRow.ZombieRowType.Land
 ## 僵尸所属波次
 @export var curr_wave:int = -1
-## 僵尸受击音效是否为铁器防具 一类防具
-@export var be_bullet_SFX_is_shield_first := false
-## 僵尸受击音效是否为铁器防具 二类防具
-@export var be_bullet_SFX_is_shield_second := false
 
 #endregion
 
@@ -68,6 +64,8 @@ var curr_zombie_row_type = ZombieRow.ZombieRowType.Land
 ## 一类防具受击音效(僵尸本体没有受击音效，本体被击中音效为子弹音效)
 @export var arm_1_SFX: SoundManagerClass.TypeZombieBeAttackSFX
 
+## 一类防具是否为铁器，与磁力菇交互
+@export var is_iron_armor_1 := false 
 
 @export_subgroup("二类防具状态")
 @export var curr_armor_2_hp_status := 1
@@ -81,6 +79,14 @@ var curr_zombie_row_type = ZombieRow.ZombieRowType.Land
 @export var arm_2_drop: Node2D
 ## 二类防具受击音效
 @export var arm_2_SFX: SoundManagerClass.TypeZombieBeAttackSFX
+
+## 二类防具是否为铁器，与磁力菇交互
+@export var is_iron_armor_2 := false 
+
+
+@export_subgroup("是否有铁器道具：矿工")
+@export var is_iron_item := false
+@export var iron_item_sprite : Sprite2D
 
 #endregion
 
@@ -138,6 +144,15 @@ var be_hypnotized_color_res := Color(1, 0.5, 1)
 @export var swimming_appear : Array[Sprite2D]
 
 #endregion
+
+#region 掉落相关
+@export_group("掉落相关")
+## 掉落金币的概率
+@export var drop_coin_rate := 0.3
+## 掉落银币、金币、钻石的比例（要求和为1）
+@export var drop_coin_silver_glod_diamond_rate := [0.5,0.4,0.1]
+## 掉落花园植物概率
+@export var drop_garden_plant_rate := 0.004
 
 
 func _ready() -> void:
@@ -308,8 +323,6 @@ func _judge_status_armor_2():
 		curr_armor_2_hp_status = 4
 		armor_2_sprite2d.visible = false
 		
-		## 二类防具音效改变
-		be_bullet_SFX_is_shield_second = false
 		arm2_drop()
 		var res_attack = -armor_second_curr_hp
 		armor_second_curr_hp = 0
@@ -348,8 +361,6 @@ func _judge_status_armor_1():
 		curr_armor_1_hp_status = 4
 		armor_1_sprite2d.visible = false
 		
-		## 一类防具音效改变
-		be_bullet_SFX_is_shield_first = false
 		arm1_drop()
 		var res_attack = -armor_first_curr_hp
 		armor_first_curr_hp = 0
@@ -697,6 +708,9 @@ func flip_zombie():
 #region 僵尸死亡相关
 # 删除僵尸
 func delete_zombie():
+	## 如果还没删除碰撞器，先删除碰撞器
+	if not area2d_free:
+		_delete_area2d()
 	self.queue_free()
 
 
@@ -736,7 +750,22 @@ func _delete_area2d():
 		
 		zombie_dead.emit(self)
 		area2d.queue_free()
-	
+		
+		drop_coin()
+		drop_garden_plant()
+		
+#region 僵尸掉落
+## 掉落金银钻
+func drop_coin():
+	var r = randf()
+	if r < drop_coin_rate:
+		Global.create_coin(drop_coin_silver_glod_diamond_rate, shadow.global_position + Vector2(0, -100))
+## 掉落花园植物
+func drop_garden_plant():
+	var r = randf()
+	if r < drop_garden_plant_rate:
+		Global.create_garden_plant(shadow.global_position + Vector2(0, -50))
+#endregion
 	
 ## 僵尸被炸死	
 func be_bomb_death():
@@ -846,4 +875,23 @@ func keep_idle():
 	## 删除展示僵尸碰撞箱
 	area2d.queue_free()
 
+#endregion
+
+#region 铁器被吸走
+## 非一类防具和非二类防具需重写该函数
+func be_remove_iron(target_iron_type:Global.IronType):
+	match target_iron_type:
+		Global.IronType.IronArmor1:
+			arm_1_drop.queue_free()
+			zombie_damaged.emit(armor_first_curr_hp, curr_wave)
+			armor_first_curr_hp = 0
+			_judge_status_armor_1()
+			
+		Global.IronType.IronArmor2:
+			arm_2_drop.queue_free()
+			zombie_damaged.emit(armor_second_curr_hp, curr_wave)
+			armor_second_curr_hp = 0
+			_judge_status_armor_2()
+			
+	updata_hp_label()
 #endregion

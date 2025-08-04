@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://4utcm656xlea"]
+
+[ext_resource type="Texture2D" uid="uid://eyoj2etiyi4k" path="res://assets/reanim/Seashroom_tentacles.png" id="1_2slcm"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_qgdii"]
+[ext_resource type="Texture2D" uid="uid://vm2queyyke4v" path="res://assets/reanim/Seashroom_body.png" id="2_qgdii"]
+[ext_resource type="Texture2D" uid="uid://dsuh2ioxrdues" path="res://assets/reanim/Seashroom_blink1.png" id="3_phela"]
+[ext_resource type="Texture2D" uid="uid://cxc288x17u2g8" path="res://assets/reanim/Seashroom_foam.png" id="4_eo41v"]
+[ext_resource type="Texture2D" uid="uid://dh2w1owgt2gqq" path="res://assets/reanim/Seashroom_head.png" id="5_brqkk"]
+[ext_resource type="Texture2D" uid="uid://q5wujowspg8i" path="res://assets/reanim/Seashroom_mouth.png" id="6_74hfw"]
+[ext_resource type="Texture2D" uid="uid://dvdfe128qav7a" path="res://assets/reanim/Seashroom_lips.png" id="7_26g38"]
+[ext_resource type="Texture2D" uid="uid://yjc7pkf5hdn2" path="res://assets/image/particles/bullet/PuffShroom_puff1.png" id="12_w24fs"]
+
+[node name="SeaShroom" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-42, -44)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(41, 61)
+scale = Vector2(0.511628, 0.444444)
+texture = ExtResource("1_qgdii")
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_sleep" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_idle_aquarium" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_shooting" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="SeaShroom_tentacles" type="Sprite2D" parent="Body"]
+position = Vector2(17.6, 52)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_2slcm")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(24, 34)
+scale = Vector2(0.738, 0.7)
+texture = ExtResource("2_qgdii")
+centered = false
+
+[node name="SeaShroom_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(41, 37.5)
+scale = Vector2(0.732, 0.7)
+texture = ExtResource("3_phela")
+centered = false
+
+[node name="SeaShroom_blink2" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(41, 37.5)
+scale = Vector2(0.732, 0.7)
+texture = ExtResource("3_phela")
+centered = false
+
+[node name="Anim_waterline" type="Sprite2D" parent="Body"]
+position = Vector2(28.4, 51)
+scale = Vector2(0.783, 0.773)
+texture = ExtResource("4_eo41v")
+centered = false
+
+[node name="SeaShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(21, 20.9)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_brqkk")
+centered = false
+
+[node name="SeahShroom_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(52, 42.3)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_74hfw")
+centered = false
+
+[node name="SeaShroom_lips" type="Sprite2D" parent="Body"]
+position = Vector2(55.8, 40.3)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_26g38")
+centered = false
+
+[node name="PuffShroomPuff1" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(58, 49)
+scale = Vector2(0.5, 0.592593)
+texture = ExtResource("12_w24fs")

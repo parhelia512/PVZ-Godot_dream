@@ -29,6 +29,11 @@ var new_plant_static_in_cell := false	# 植物是否在cell中
 @export var is_shovel:bool = false
 ## 当前铲子选择植物
 @export var plant_be_shovel_look:PlantBase
+## 当前铲子所在格子植物数量
+var curr_shovel_look_plant_num:int = 0
+
+## 格子中有多个植物时，判断新预铲除植物是否一致
+var new_plant_be_shovel_look :PlantBase
 
 ## 柱子模式 
 var new_plant_static_shadow_colum : Array 
@@ -105,7 +110,16 @@ func _process(delta: float) -> void:
 
 	if is_shovel:
 		shovel_real.global_position = get_global_mouse_position()
-		
+		## 如果有预铲植物并且当前格子有多个植物时
+		if plant_be_shovel_look and curr_shovel_look_plant_num >= 2:
+			print("当前卡槽有多个植物")
+			new_plant_be_shovel_look = curr_plant_cell.return_plant_be_shovel_look()
+			if new_plant_be_shovel_look == plant_be_shovel_look:
+				pass
+			else:
+				plant_be_shovel_look.be_shovel_look_end()
+				plant_be_shovel_look = new_plant_be_shovel_look
+				plant_be_shovel_look.be_shovel_look()
 
 # 点击卡片
 func _manage_new_plant_static(card:Card) -> void:
@@ -171,14 +185,11 @@ func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	# 创建植物
 	var new_plant :PlantBase= Global.get_plant_info(plant_type, Global.PlantInfoAttribute.PlantScenes).instantiate()
 	
-	
-	plant_cell.add_child(new_plant)
-	curr_plants.append(new_plant)
-	
 	new_plant.plant_free_signal.connect(_one_plant_free)
 	new_plant.plant_free_signal.connect(plant_cell.one_plant_free)
 	
-	plant_cell.new_plant(new_plant)
+	plant_cell.add_plant(new_plant)
+	curr_plants.append(new_plant)
 	
 	
 	var plant_start_effect_scene:Node2D
@@ -204,6 +215,7 @@ func _on_cell_mouse_enter(plant_cell:PlantCell):
 	if  curr_card:
 		## 如果是普通植物并且当前格子可以种植普通植物
 		if not new_plant_condition.is_special_plants and plant_cell.can_common_plant:
+			
 			## 如果地形当前格子地形符合 并且 当前格子对应的植物位置为空
 			if new_plant_condition.plant_condition & plant_cell.curr_condition and plant_cell.plant_in_cell[new_plant_condition.place_plant_in_cell] == null:
 				new_plant_static_in_cell = true
@@ -232,9 +244,13 @@ func _on_cell_mouse_enter(plant_cell:PlantCell):
 
 	# 如果手拿铲子
 	if is_shovel:
-		plant_be_shovel_look =  plant_cell.return_plant_be_shovel_look()
-		if plant_be_shovel_look:
+		## 获取当前格子植物数量
+		curr_shovel_look_plant_num = plant_cell.get_curr_plant_num()
+		if curr_shovel_look_plant_num >= 1:
+			plant_be_shovel_look =  plant_cell.return_plant_be_shovel_look()
 			plant_be_shovel_look.be_shovel_look()
+		
+
 
 # 鼠标移出cell
 func _on_cell_mouse_exit(plant_cell:PlantCell):

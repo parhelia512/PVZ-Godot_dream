@@ -48,6 +48,7 @@ var label_hp :Control
 var shadow: Sprite2D
 
 func _ready() -> void:
+	curr_Hp = max_hp
 	## 获取节点
 	_get_some_node()
 	## 随机初始化动画播放速度
@@ -68,7 +69,6 @@ func _ready() -> void:
 
 	# 初始化颜色
 	_update_modulate()
-	curr_Hp = max_hp
 	
 	# 血量显示
 	label_hp = Label_HP.instantiate()
@@ -195,7 +195,7 @@ func be_attacked_bullet(attack_value:int, bullet_mode : Global.AttackMode, trigg
 # 被僵尸啃咬攻击
 func be_eated(attack_value:int, zombie):
 	# 被僵尸啃咬子弹属性为真实伤害（略过2类防具，直接对1类防具和血量攻击）
-	Hp_loss(attack_value, Global.AttackMode.Real)
+	Hp_loss(attack_value, Global.AttackMode.Real, false)
 	
 
 # 掉血，子类重写
@@ -206,7 +206,7 @@ func Hp_loss(attack_value:int, bullet_mode : Global.AttackMode = Global.AttackMo
 func be_attacked_body_light():
 	body_light()
 
-## 被啃食一次
+## 被啃食一次，发光
 func be_eated_once(zombie:ZombieBase):
 	be_attacked_body_light()
 

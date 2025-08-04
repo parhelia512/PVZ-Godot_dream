@@ -2,7 +2,6 @@ extends BulletBase
 class_name BulletWallNutBowlingBig
 
 var rotation_speed = 5.0  # 旋转速度
-@onready var bullet_body: Node2D = $BulletBody
 
 func _ready() -> void:
 	super._ready()

@@ -214,3 +214,4 @@ func keep_idle():
 	super.keep_idle()
 	for z:ZombieBobsledSingle in zombies_bobsled_single:
 		z.keep_idle()
+	area_2d_2.queue_free()

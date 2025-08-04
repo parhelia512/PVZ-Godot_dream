@@ -26,6 +26,10 @@ class_name MainGameManager
 @onready var temporary_zombies: Node2D = $TemporaryZombies
 @onready var bullets: Node2D = $Bullets
 @onready var day_suns: DaySuns = $DaySuns
+var fog_node:Fog
+@onready var coin_bank: CoinBank = $CanvasLayer/CoinBank
+
+
 #endregion
 
 #region bgm
@@ -67,11 +71,21 @@ var hammer_scenes_path = "res://scenes/item/game_scenes_item/hammer.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.coin_value_label = coin_bank
+	coin_bank.visible = false
 	## 初始化游戏，游戏背景，游戏卡槽
 	_init_main_game()
 	
 	## 主游戏进程
 	main_game_progress = MainGameProgress.CHOOSE_CARD
+	## 如果有戴夫对话
+	if game_para.crazy_dave_dialog:
+		var crazy_dave:CrazyDave = SceneRegistry.CRAZY_DAVE.instantiate()
+		crazy_dave.init_dave(game_para.crazy_dave_dialog)
+		add_child(crazy_dave)
+		await crazy_dave.dave_leave_end_signal
+		crazy_dave.queue_free()
+		
 	## 如果看展示僵尸
 	if game_para.look_show_zombie:
 		## 创建展示僵尸，等待一秒移动相机
@@ -105,8 +119,8 @@ func _init_main_game():
 
 	## 初始化植物种植区域
 	hand_manager.init_plant_cells()
-	## 初始化玩家控制台
-	control_panel.init_control_panel()
+	### 初始化玩家控制台
+	#control_panel.init_control_panel()
 		
 	## 初始化小游戏场景相关物品
 	if game_para.game_mode == game_para.GameMode.MiniGame:
@@ -152,6 +166,18 @@ func _init_game_BG():
 		game_para.GameBg.Pool:
 			$Background/Area2DHome/Door/DoorDown/Background3GameoverInteriorOverlay.visible=true
 			$Background/Area2DHome/Door/DoorMask/Background3GameoverMask.visible=true
+			
+			$Background/Pool.init_pool(game_para.GameBg.Pool)
+			
+		game_para.GameBg.Fog:
+			$Background/Area2DHome/Door/DoorDown/Background4GameoverInteriorOverlay.visible=true
+			$Background/Area2DHome/Door/DoorMask/Background4GameoverMask.visible=true
+
+			$Background/Pool.init_pool(game_para.GameBg.Fog)
+	
+	if game_para.is_fog:
+		fog_node = get_node("Background/Fog")
+		fog_node.visible = true
 
 ## 初始化卡槽参数
 func _init_game_card_bar():
@@ -215,6 +241,8 @@ func cheeosed_card_start_game():
 func main_game_start():
 	## 主游戏进程阶段
 	main_game_progress = MainGameProgress.MAIN_GAME
+	if game_para.is_fog:
+		fog_node.come_back_game(5.0)
 	
 	## 删除展示僵尸
 	if game_para.look_show_zombie:

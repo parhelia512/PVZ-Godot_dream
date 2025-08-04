@@ -1,0 +1,152 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmenla6ro7cn0"]
+
+[ext_resource type="Script" uid="uid://dxaqv0oenyajs" path="res://scripts/garden/Plant/shroom_sleep_garden.gd" id="1_i33np"]
+[ext_resource type="Texture2D" uid="uid://ewujfngualde" path="res://assets/image/plant/zzz.png" id="2_col3d"]
+
+[sub_resource type="Animation" id="Animation_6pj1d"]
+resource_name = "zzz"
+length = 3.00001
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Zzz:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 2.91667, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Zzz2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.916667, 1, 1.08333, 3, 3.91667, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, true, true, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Zzz3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.38419e-07, 1, 1.91667, 2, 2.08333, 3, 4, 4.91667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, false, true, true, true, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Zzz:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 1, 2, 2.91667, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(18.8516, -20.3193), Vector2(20.3996, -21.6044), Vector2(37.4278, -35.741), Vector2(17.4496, -60.2756), Vector2(57.2891, -78.5889), Vector2(60.9109, -80.2537)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Zzz2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.76837e-07, 0.916667, 1, 1.08333, 2, 3, 3.91667, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(17.4496, -60.2756), Vector2(57.2891, -78.5889), Vector2(60.9109, -80.2537), Vector2(20.3996, -21.6044), Vector2(37.4278, -35.741), Vector2(17.4496, -60.2756), Vector2(57.2891, -78.5889), Vector2(60.9109, -80.2537)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Zzz:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 1, 2, 2.91667, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.243137), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 0.243137)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Zzz2:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(4.76837e-07, 0.916667, 1, 1.08333, 2, 3, 3.91667, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 0.243137), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 0.243137)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Zzz3:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.38419e-07, 1, 1.91667, 2, 2.08333, 3, 4, 4.91667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(37.4278, -35.741), Vector2(17.4496, -60.2756), Vector2(57.2891, -78.5889), Vector2(60.9109, -80.2537), Vector2(20.3996, -21.6044), Vector2(37.4278, -35.741), Vector2(17.4496, -60.2756), Vector2(57.2891, -78.5889), Vector2(60.9109, -80.2537)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Zzz3:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1, 1.91667, 2, 2.08333, 3, 4, 4.91667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 0.243137), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.306209), Color(1, 1, 1, 0.243137)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vonjk"]
+_data = {
+&"zzz": SubResource("Animation_6pj1d")
+}
+
+[node name="SleepShroomGarden" type="Node2D"]
+scale = Vector2(0.955, 0.955)
+script = ExtResource("1_i33np")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(5.41147, -14.0995)
+
+[node name="Zzz" type="Sprite2D" parent="Body"]
+position = Vector2(31.7135, -42.7585)
+scale = Vector2(0.119835, 0.126722)
+texture = ExtResource("2_col3d")
+
+[node name="Zzz2" type="Sprite2D" parent="Body"]
+modulate = Color(1, 1, 1, 0.459621)
+position = Vector2(24.1649, -24.7303)
+scale = Vector2(0.119835, 0.126722)
+texture = ExtResource("2_col3d")
+
+[node name="Zzz3" type="Sprite2D" parent="Body"]
+modulate = Color(1, 1, 1, 0.783519)
+position = Vector2(29.8806, -65.9898)
+scale = Vector2(0.119835, 0.126722)
+texture = ExtResource("2_col3d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vonjk")
+}

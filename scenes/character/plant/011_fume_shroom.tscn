@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cfwft4jigut7b"]
+[gd_scene load_steps=34 format=3 uid="uid://cfwft4jigut7b"]
 
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_42ykv"]
 [ext_resource type="Script" uid="uid://cyb6y7fh8ihhp" path="res://scripts/character/plant/plant_011_fume_shroom.gd" id="1_ic5q6"]
@@ -67,13 +67,17 @@ advance_expression = "not is_idle"
 advance_mode = 2
 advance_expression = "is_idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p2ylm"]
+advance_mode = 2
+advance_expression = "is_sleep"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bbrt2"]
 states/FumeShroom_idle/node = SubResource("AnimationNodeAnimation_asf73")
 states/FumeShroom_idle/position = Vector2(407, 70)
 states/FumeShroom_sleep/node = SubResource("AnimationNodeAnimation_w5mxo")
 states/FumeShroom_sleep/position = Vector2(407, 173)
 states/Start/position = Vector2(141, 125)
-transitions = ["FumeShroom_sleep", "FumeShroom_idle", SubResource("AnimationNodeStateMachineTransition_oiiue"), "Start", "FumeShroom_sleep", SubResource("AnimationNodeStateMachineTransition_ic5q6"), "Start", "FumeShroom_idle", SubResource("AnimationNodeStateMachineTransition_5pfat")]
+transitions = ["FumeShroom_sleep", "FumeShroom_idle", SubResource("AnimationNodeStateMachineTransition_oiiue"), "Start", "FumeShroom_sleep", SubResource("AnimationNodeStateMachineTransition_ic5q6"), "Start", "FumeShroom_idle", SubResource("AnimationNodeStateMachineTransition_5pfat"), "FumeShroom_idle", "FumeShroom_sleep", SubResource("AnimationNodeStateMachineTransition_p2ylm")]
 graph_offset = Vector2(12, 0)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0x3e4"]
@@ -81,7 +85,7 @@ graph_offset = Vector2(12, 0)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_djm5y"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_faeju"]
-graph_offset = Vector2(-238, 12)
+graph_offset = Vector2(-243.504, 15.4793)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_p2ylm")
 nodes/Animation/position = Vector2(-120, 300)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_6btfu")
@@ -114,13 +118,13 @@ position = Vector2(41, 70)
 texture = ExtResource("1_42ykv")
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(9.8, 38.4053)
-scale = Vector2(0.8, 0.799895)
+position = Vector2(9.8, 39.3486)
+scale = Vector2(0.8, 0.780447)
 texture = ExtResource("2_gq4uw")
 centered = false
 
 [node name="DoomShroom_eyes" type="Sprite2D" parent="Body"]
-position = Vector2(43.5, 51.0009)
+position = Vector2(43.5, 51.2743)
 scale = Vector2(0.8, 0.787)
 texture = ExtResource("4_p2ylm")
 centered = false
@@ -132,20 +136,24 @@ texture = ExtResource("4_p2ylm")
 centered = false
 
 [node name="DoomShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(5.29561, -2.68596)
-scale = Vector2(0.800105, 0.799895)
+position = Vector2(4.5095, -0.228506)
+scale = Vector2(0.819553, 0.780447)
 texture = ExtResource("4_4eul3")
 centered = false
 
 [node name="DoomShroom_spout" type="Sprite2D" parent="Body"]
-position = Vector2(67.8044, 16.4123)
-scale = Vector2(0.800105, 0.799895)
+position = Vector2(68.5905, 18.5553)
+rotation = 0.0275937
+scale = Vector2(0.820553, 0.780447)
+skew = -0.0275937
 texture = ExtResource("5_ic5q6")
 centered = false
 
 [node name="DoomShroom_tip" type="Sprite2D" parent="Body"]
-position = Vector2(74.1053, 14.2123)
-scale = Vector2(0.800105, 0.799895)
+position = Vector2(75.0486, 17.3039)
+rotation = 0.0275937
+scale = Vector2(0.820553, 0.780447)
+skew = -0.0275937
 texture = ExtResource("6_oiiue")
 centered = false
 

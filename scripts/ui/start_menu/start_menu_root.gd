@@ -4,6 +4,7 @@ class_name StartMenuRoot
 @onready var dialog: Dialog = $Dialog
 @export var bgm:AudioStream
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Cloud/AnimationPlayer.play("Idle")
@@ -17,6 +18,11 @@ func _ready() -> void:
 	Engine.time_scale = Global.time_scale
 
 
+## 花园需要浇水
+var garden_need_water:=true
+
+		
+		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -52,6 +58,10 @@ func _on_full_screen_button_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 #endregion 
 
+
+## 花园
+func _on_item_button_1_pressed() -> void:
+	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.Garden])
 
 ## 图鉴
 func _on_item_button_2_pressed() -> void:

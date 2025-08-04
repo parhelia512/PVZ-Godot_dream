@@ -39,10 +39,10 @@ script = ExtResource("1_pihfl")
 bullet_effect = NodePath("BulletEffect")
 bullet_up_type = 5
 
-[node name="PeaBulletBody" type="Sprite2D" parent="."]
+[node name="BulletBody" type="Sprite2D" parent="."]
 texture = ExtResource("2_hg162")
 
-[node name="PeaBulletShadow" type="Sprite2D" parent="."]
+[node name="BulletShadow" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(0, 50)
 texture = ExtResource("3_mlnor")
@@ -74,7 +74,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_pddgq")
 
 [node name="Area2D2" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]

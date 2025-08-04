@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://buxcqqq76ff77"]
+[gd_scene load_steps=20 format=3 uid="uid://buxcqqq76ff77"]
 
 [ext_resource type="Texture2D" uid="uid://cbgu3a2jxkthd" path="res://assets/reanim/HypnoShroom_body.png" id="0_fuck"]
 [ext_resource type="Animation" uid="uid://dty7dbaeyuw0t" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_idle.tres" id="1_anim"]
@@ -7,8 +7,7 @@
 [ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_hrt0k"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_lusfa"]
 [ext_resource type="Texture2D" uid="uid://c3tp56xwnaj8k" path="res://assets/reanim/HypnoShroom_head.png" id="3_fuck"]
-[ext_resource type="Texture2D" uid="uid://dmch2r8l3fn1c" path="res://assets/reanim/HypnoShroom_eye1.png" id="5_hrt0k"]
-[ext_resource type="Texture2D" uid="uid://bm4iskcgxt1lx" path="res://assets/reanim/HypnoShroom_eye2.png" id="7_1dxyp"]
+[ext_resource type="Texture2D" uid="uid://yvo3ejjv80nt" path="res://assets/reanim/HypnoShroom_sleepeye.png" id="5_lusfa"]
 [ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="9_hrt0k"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ih1jw"]
@@ -69,31 +68,30 @@ position = Vector2(41, 70)
 texture = ExtResource("2_lusfa")
 
 [node name="Layer 1" type="Sprite2D" parent="Body"]
-position = Vector2(18.3349, 38.0101)
-scale = Vector2(0.8, 0.758649)
-skew = -0.0786293
+position = Vector2(21.1808, 36.5576)
+scale = Vector2(0.814345, 0.786847)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Layer 3" type="Sprite2D" parent="Body"]
-position = Vector2(40.5548, 63.9801)
-rotation = 3.74785
-scale = Vector2(0.745104, 0.745104)
-texture = ExtResource("5_hrt0k")
+position = Vector2(35.1808, 50.8384)
+rotation = 6.28318
+scale = Vector2(0.796153, 0.667039)
+texture = ExtResource("5_lusfa")
 centered = false
 
 [node name="Layer 2" type="Sprite2D" parent="Body"]
-position = Vector2(2.34478, 11.6803)
-rotation = -0.162756
-scale = Vector2(0.799, 0.732698)
+position = Vector2(11.9, -0.253698)
+scale = Vector2(0.798, 0.815345)
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="Layer 4" type="Sprite2D" parent="Body"]
-position = Vector2(54.46, 54.4499)
-rotation = -3.7461
-scale = Vector2(0.799, 0.799)
-texture = ExtResource("7_1dxyp")
+position = Vector2(54.3192, 49.3384)
+rotation = -3.48093
+scale = Vector2(0.499768, 0.513424)
+skew = -3.16455
+texture = ExtResource("5_lusfa")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

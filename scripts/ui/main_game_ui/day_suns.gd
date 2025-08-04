@@ -40,14 +40,14 @@ func spawn_sun():
 		add_child(new_sun)
 		curr_sun_sum_value += new_sun.sun_value
 		# 控制阳光下落
-		var tween = get_tree().create_tween()
+		new_sun.spawn_sun_tween = get_tree().create_tween()
 		new_sun.position = Vector2(randf_range(sun_x_min, sun_x_max), sun_y_ori)
 		var target_y = randf_range(sun_y_min, sun_y_max)
 		var distance = float(abs(target_y - sun_y_ori))
 		var duration = distance / sun_y_speed
-		tween.tween_property(new_sun, "position:y", target_y, duration)
+		new_sun.spawn_sun_tween.tween_property(new_sun, "position:y", target_y, duration)
 		
-		tween.finished.connect(new_sun.on_sun_tween_finished)
+		new_sun.spawn_sun_tween.finished.connect(new_sun.on_sun_tween_finished)
 		
 
 		

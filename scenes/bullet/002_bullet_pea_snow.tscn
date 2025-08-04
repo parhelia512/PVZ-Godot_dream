@@ -105,10 +105,10 @@ texture = ExtResource("3_5e53v")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_q3utr")
 
-[node name="PeaBulletBody" type="Sprite2D" parent="."]
+[node name="BulletBody" type="Sprite2D" parent="."]
 texture = ExtResource("2_pg88q")
 
-[node name="PeaBulletShadow" type="Sprite2D" parent="."]
+[node name="BulletShadow" type="Sprite2D" parent="."]
 position = Vector2(0, 50)
 texture = ExtResource("3_jsxne")
 hframes = 2

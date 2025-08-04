@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 
 Global="*res://scripts/autoload/global.gd"
 SoundManager="*res://scenes/manager/sound_manager.tscn"
+SceneRegistry="*res://scripts/autoload/scene_registry.gd"
 
 [display]
 
@@ -28,6 +29,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="GodotPVZ2025"
+
+[editor]
+
+movie_writer/movie_file="F:/000GodotPVZ/movie/movie"
 
 [editor_plugins]
 
@@ -54,6 +59,8 @@ Shovel_F={
 2d_physics/layer_9="Caltrop"
 2d_physics/layer_10="UpBulletPlant"
 2d_physics/layer_11="ZombieInPoolDown"
+2d_physics/layer_12="ZombieInSky"
+2d_physics/layer_13="ZombieInGroundDown"
 
 [rendering]
 

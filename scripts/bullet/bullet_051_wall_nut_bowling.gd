@@ -2,7 +2,6 @@ extends BulletBase
 class_name BulletWallNutBowling
 
 var rotation_speed = 5.0  # 旋转速度
-@onready var bullet_body: Node2D = $BulletBody
 var zombie_manager:ZombieManager
 var y_every_lane:Array[float]
 var first_attack_end := false	## 第一次攻击是否完成

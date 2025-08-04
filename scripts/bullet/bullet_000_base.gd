@@ -1,5 +1,9 @@
 extends Node2D
 class_name BulletBase
+## Area2d为子弹碰撞区域，用于检测是否与僵尸碰撞
+## Area2d2为子弹升级碰撞区域，用于检测是否与升级子弹植物碰撞
+## Area2d3为子弹溅射碰撞区域，用于检测子弹破碎后的溅射到的敌人
+
 ## 直线移动直线基类
 @export_group("子弹基础属性")
 ## 是否已攻击
@@ -31,6 +35,10 @@ var screen_rect: Rect2
 ## 子弹行属性
 var bullet_lane :int = -1
 
+## 子弹本体节点
+@onready var bullet_body: Node2D = $BulletBody
+
+
 @export_group("子弹升级相关")
 ## 子弹上次升级的植物，寒冰豌豆变成的豌豆子弹无法被上次升级的火炬树桩升级
 var bullet_up_plant_last :PlantBase
@@ -44,10 +52,12 @@ func _ready() -> void:
 	screen_rect = get_viewport_rect().grow(500)
 		
 ## 初始化子弹属性
-func init_bullet(lane:int, start_pos:Vector2):
-	## 子弹行是十进制，
+func init_bullet(lane:int, start_pos:Vector2, direction:= Vector2.RIGHT):
+	## 子弹行是
 	bullet_lane = lane
 	self.start_pos = start_pos
+	self.direction = direction
+	bullet_body.rotation = direction.angle()
 
 
 func _process(delta: float) -> void:
@@ -124,18 +134,18 @@ func _on_area_2d_2_area_entered(area: Area2D) -> void:
 		if bullet_up_plant_last != bullet_up_plant:
 			bullet_up_plant_last = bullet_up_plant
 			call_deferred("create_new_bullet_up", bullet_up_type)
-		
+
 
 ## 创建升级后的子弹
 func create_new_bullet_up(new_bullet_up_type:Global.BulletType):
 	var new_bullet_up_scenes = Global.get_bullet_scenes(new_bullet_up_type)
 	## 子弹升级后更新行属性，上次升级的火炬树桩
 	var bullet_up :BulletBase = new_bullet_up_scenes.instantiate()
-	## 初始化子弹属性
-	bullet_up.init_bullet(bullet_lane, start_pos)
 	bullet_up.bullet_up_plant_last = bullet_up_plant_last
 	get_parent().add_child(bullet_up)
 	bullet_up.global_position = global_position
+	## 初始化子弹属性
+	bullet_up.init_bullet(bullet_lane, start_pos, direction)
 	
 	queue_free()
 	

@@ -1,0 +1,103 @@
+[gd_scene load_steps=15 format=3 uid="uid://uadfjuk5tquv"]
+
+[ext_resource type="Script" uid="uid://16dpfpm5gjlm" path="res://scripts/garden/Plant/plant_garden.gd" id="1_edpxi"]
+[ext_resource type="Texture2D" uid="uid://b4dihaqonj4k4" path="res://assets/reanim/Caltrop_blink1.png" id="3_tcu3y"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="5_uixgt"]
+[ext_resource type="Texture2D" uid="uid://djsyco71dq21c" path="res://assets/reanim/Caltrop_body.png" id="6_phg8e"]
+[ext_resource type="Texture2D" uid="uid://bt8vfd40soar2" path="res://assets/reanim/Caltrop_horn1.png" id="7_2wdf0"]
+[ext_resource type="Texture2D" uid="uid://fa60cdkuf7oe" path="res://assets/reanim/Caltrop_horn2.png" id="8_2ttav"]
+[ext_resource type="Texture2D" uid="uid://dbjgn3in4at66" path="res://assets/reanim/Caltrop_horn3.png" id="9_01p5p"]
+[ext_resource type="Texture2D" uid="uid://dsvk38sshl42f" path="res://assets/reanim/Caltrop_horn4.png" id="10_ocaqh"]
+[ext_resource type="Animation" uid="uid://b5e22xmdjw0hk" path="res://animation/character/plant/022_caltrop/Caltrop_attack.tres" id="11_75d6h"]
+[ext_resource type="Animation" uid="uid://7fxwqolj20m8" path="res://animation/character/plant/022_caltrop/Caltrop_idle.tres" id="12_hxbet"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhn8r"]
+_data = {
+&"Caltrop_attack": ExtResource("11_75d6h"),
+&"Caltrop_idle": ExtResource("12_hxbet")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_edpxi"]
+animation = &"Caltrop_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_525yu"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vstgu"]
+graph_offset = Vector2(-100, -34)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_edpxi")
+nodes/Animation/position = Vector2(160, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_525yu")
+nodes/TimeScale/position = Vector2(420, 100)
+nodes/output/position = Vector2(600, 140)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="Caltrop" type="Node2D"]
+script = ExtResource("1_edpxi")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-39.2711, -69.8435)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(38, 68)
+scale = Vector2(1.22093, 0.902778)
+texture = ExtResource("5_uixgt")
+
+[node name="Anim_attack" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(0.427178, 42.7304)
+scale = Vector2(0.77888, 0.849663)
+texture = ExtResource("6_phg8e")
+centered = false
+
+[node name="Caltrop_horn1" type="Sprite2D" parent="Body"]
+position = Vector2(9.71196, 42.9456)
+rotation = 0.0615038
+scale = Vector2(0.8, 0.849087)
+skew = -0.000739551
+texture = ExtResource("7_2wdf0")
+centered = false
+
+[node name="Caltrop_horn2" type="Sprite2D" parent="Body"]
+position = Vector2(24.9848, 38.7456)
+rotation = 0.0582793
+scale = Vector2(0.8, 0.849087)
+texture = ExtResource("8_2ttav")
+centered = false
+
+[node name="Caltrop_horn3" type="Sprite2D" parent="Body"]
+position = Vector2(44.1728, 41.1728)
+rotation = -0.0754668
+scale = Vector2(0.8, 0.849087)
+texture = ExtResource("9_01p5p")
+centered = false
+
+[node name="Caltrop_horn4" type="Sprite2D" parent="Body"]
+position = Vector2(55.2728, 48.1728)
+rotation = -0.0632498
+scale = Vector2(0.8, 0.849087)
+texture = ExtResource("10_ocaqh")
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(18.5, 59.1152)
+scale = Vector2(0.816163, 0.938218)
+texture = ExtResource("3_tcu3y")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xhn8r")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_vstgu")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0

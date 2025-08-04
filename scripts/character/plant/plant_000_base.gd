@@ -12,6 +12,8 @@ var bombs: Node2D
 @export var plant_condition : ResourcePlantCondition
 ## 行和列
 @export var row_col:Vector2i
+## 当前植物所在植物格子
+var plant_cell:PlantCell
 
 @export_group("植物眨眼相关， no_blink表示没有眨眼功能")
 ## 植物没有眨眼功能
@@ -57,15 +59,20 @@ func _ready() -> void:
 			# 连接 timeout 信号到函数
 			blink_timer.timeout.connect(_on_blink_timer_timeout)
 
+
+## 获取主游戏场景中的一些节点
 func get_main_game_node():
 	curr_scene = get_tree().current_scene
 	if curr_scene is MainGameManager:
 		bullets = get_tree().current_scene.get_node("Bullets")
 		bombs = get_tree().current_scene.get_node("Bombs")
 	
+	
 ## 植物初始化相关
-func init_plant(row_col:Vector2i) -> void:
+func init_plant(row_col:Vector2i, plant_cell:PlantCell) -> void:
 	self.row_col = row_col
+	self.plant_cell = plant_cell
+	area_2d.global_position = plant_cell.plant_area_2d_position.global_position
 	
 	
 #region 眨眼相关
@@ -98,11 +105,15 @@ func _update_modulate():
 
 # 被铲子威胁
 func be_shovel_look():
+	if Global.plant_be_shovel_front:
+		z_index += 1
 	be_shovel_look_color = Color(2, 2, 2)
 	_update_modulate()
 	
 # 被铲子威胁结束
 func be_shovel_look_end():
+	if Global.plant_be_shovel_front:
+		z_index -= 1
 	be_shovel_look_color = Color(1, 1, 1)
 	_update_modulate()
 #endregion
@@ -113,23 +124,36 @@ func judge_status():
 	if curr_Hp <= 0:
 		_plant_free()
 
-## 代替受伤，同一个格子内，有保护壳，保护壳代替掉血,睡莲重写
-func replace_attack(attack_value:int,zombie:ZombieBase) -> bool:
+func get_replace_attack_plant()->PlantBase:
 	## 如果不是保护壳
 	if plant_condition.place_plant_in_cell != Global.PlacePlantInCell.Shell:
-		var plant_cell:PlantCell = get_parent()
 		if plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]:
-			plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell].be_eated(attack_value, zombie)
-			return true
-	return false
+			return plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]
 	
+	return null
+	
+		
 # 重写父类被僵尸啃咬攻击
 func be_eated(attack_value:int, zombie:ZombieBase):
+	## 判断是否有能代替受伤的植物
+	var replace_attack_plant:PlantBase = get_replace_attack_plant()
+	if replace_attack_plant:
+		replace_attack_plant.be_eated(attack_value, zombie)
 	## 如果没有能替其掉血的
-	if not replace_attack(attack_value, zombie):
-		# 被僵尸啃咬子弹属性为真实伤害（略过2类防具，直接对1类防具和血量攻击）
+	else:
+		# 被僵尸啃咬伤害类型为真实伤害（略过2类防具，直接对1类防具和血量攻击）
 		Hp_loss(attack_value, Global.AttackMode.Real)
-	
+
+
+func be_eated_once(zombie:ZombieBase):
+	## 判断是否有能代替受伤的植物
+	var replace_attack_plant:PlantBase = get_replace_attack_plant()
+	if replace_attack_plant:
+		replace_attack_plant.be_attacked_body_light()
+	## 如果没有能替其掉血的
+	else:
+		be_attacked_body_light()
+		
 
 
 #重写父类血量变化
@@ -139,7 +163,8 @@ func Hp_loss(attack_value:int, bullet_mode : Global.AttackMode = Global.AttackMo
 	label_hp.get_node('Label').text = str(curr_Hp)
 
 	judge_status()
-	
+
+
 	
 #endregion
 
@@ -157,6 +182,7 @@ func be_shovel_kill():
 ## 被压扁
 func be_flattened(zombie:ZombieBase):
 	## 被压扁改变形状和位置
+	curr_Hp = 0
 	var global_position_shaodw:Vector2 = shadow.global_position
 	body.scale.y = 0.5
 	var now_global_position_shaodw:Vector2 = shadow.global_position

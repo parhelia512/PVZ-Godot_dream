@@ -18,13 +18,17 @@ class_name CardManager
 var current_tween_id := {}
 
 @export_group("卡槽相关")
-@export var cards_in_chooser : Array[CardInSeedChooser] = []
+@export var cards_in_chooser : Dictionary = {}
 ## 选择卡片
 @export var cards : Array[Card] = []
 ## 卡槽占位节点
 @export var cards_placeholder:Array = []
 @onready var card_placeholder_ori: TextureRect = $CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori
 var max_choosed_card_num:int
+
+const card_in_seed_chooser = preload("res://scenes/ui/card_in_seed_chooser.tscn")
+## 收集的阳光最终移动位置
+@onready var marker_2d_sun_target: Marker2D = $CardBarAndShovel/Marker2DSunTarget
 
 #region 阳光相关
 @export_group("阳光")
@@ -77,14 +81,14 @@ func init_CardChooser():
 	# 加载场景文件
 	var card_chooser_placeholder = grid_container.get_children()
 
-	for i in Global.curr_plant:
-		var card_in_seed_chooser: CardInSeedChooser = Global.card_in_seed_chooser.instantiate()
-		card_chooser_placeholder[i].add_child(card_in_seed_chooser)
+	for i:int in Global.curr_plant.size():
+		var card_in_seed_chooser: CardInSeedChooser = card_in_seed_chooser.instantiate()
+		card_chooser_placeholder[int(Global.curr_plant[i])].add_child(card_in_seed_chooser)
 		
-		card_in_seed_chooser.card_init(i)
+		card_in_seed_chooser.card_init(Global.curr_plant[i])
 		card_in_seed_chooser.card.card_click.connect(_on_card_click)
 
-		cards_in_chooser.append(card_in_seed_chooser) 
+		cards_in_chooser[Global.curr_plant[i]] = card_in_seed_chooser
 
 
 ## 游戏选卡阶段时，卡片被点击
@@ -142,9 +146,10 @@ func move_card_to(card:Card, target_parent):
 ## 卡片断开连接，游戏开始后修改点击信号连接
 func card_disconnect_card():
 	for card in cards:
-		card.card_click.disconnect(_on_card_click)
+		if card.card_click.is_connected(_on_card_click):
+			card.card_click.disconnect(_on_card_click)
 
-
+			
 ## 系统预选卡
 func pre_choosed_card(card:Card, target_parent, is_test:=false):
 	card.get_parent().remove_child(card)
@@ -171,8 +176,8 @@ func card_signal_connect():
 
 ## 初始化系统预选卡
 func init_pre_choosed_card(card_type_list:Array[Global.PlantType], is_test:=false):
-	for i:Global.PlantType in card_type_list:
-		var card:Card = cards_in_chooser[i].card
+	for plant_type:Global.PlantType in card_type_list:
+		var card:Card = cards_in_chooser[plant_type].card
 		card.is_choosed = true
 		cards.append(card)
 		pre_choosed_card(card, cards_placeholder[len(cards)-1], is_test)
@@ -219,7 +224,7 @@ func _on_start_game_button_pressed() -> void:
 ## 重选上次卡片
 func _on_re_card_button_pressed() -> void:
 	Global.load_selected_cards()
-	for i in Global.selected_cards:
-		if cards_in_chooser[i].card.is_choosed:
+	for plant_type:Global.PlantType in Global.selected_cards:
+		if cards_in_chooser[plant_type].card.is_choosed:
 			continue
-		cards_in_chooser[i].card.card_click.emit(cards_in_chooser[i].card)
+		cards_in_chooser[plant_type].card.card_click.emit(cards_in_chooser[plant_type].card)

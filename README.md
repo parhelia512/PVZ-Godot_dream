@@ -6,7 +6,7 @@
 欢迎各位大佬在本开源项目基础上，完成属于自己的 PVZ 同人改版之梦！
 
 
-**考虑到版权问题，将资源文件删除。**
+**考虑到版权问题，将原版相关资源文件删除。**
 
 有对本项目感兴趣的大佬，欢迎大家进qq群 (1046565016) 交流
 
@@ -21,22 +21,7 @@
 
 
 ## 游戏开发相关
-### 植物僵尸动画
-使用[R2Ga_PVZ](#r2ga_pvz)将植物大战僵尸的动画文件转换为Godot游戏引擎所支持的动画格式。
-
-僵尸动画：使用插件[anim_delet_track](#anim_delet_track)将不需要的的轨道删除，主要是删除删除僵尸胳膊和头相关的visible轨道，僵尸掉手或掉头时使用代码控制visible。
-
-植物动画：植物射击时眨眼和idle时眨眼节点不同，由于射击时眨眼动画需要使用visible轨道，使用插件[anim_player_refactor](#anim_player_refactor)将idle时的眨眼节点visible轨道删除，使用代码控制植物眨眼。
-
-
-### 子弹攻击碎片溅射
-- 创建GPUParticles2D
-- texture(GPUParticles2D) 添加子弹碎片图集
-- material(CnavasItem) 添加CanvasItemMaterial
-	- 修改对应的articles_anim_h_frames和particles_anim_v_frames
-- process_material(GPUParticles2D) 添加ParticleProcessMaterial
-	- 修改Display-Animation-Offset
-- 修改粒子特效相关属性（初始方向，重力加速度，时间缩放）
+[基于本项目开发pvz同人改版必看内容（./docs/开发相关.md）](./docs/开发相关.md)
 
 ### 插件
 #### [anim_player_refactor](https://github.com/poohcom1/godot-animation-player-refactor)  
@@ -64,21 +49,30 @@ Godot插件，一键删除目录下所有动画资源文件的被选择轨道。
 
 - [pvz的基础知识 (https://zhuanlan.zhihu.com/p/45170276)](https://zhuanlan.zhihu.com/p/45170276)
 
-## 📄 开源协议说明
-尊重PVZ原版版权，禁止商用。
 
-本项目为个人学习用途的《植物大战僵尸》重置作品，仅供学习与研究使用。  
-原作《植物大战僵尸》的游戏名称、角色、音乐、图像及相关内容的版权归 **PopCap Games** 及其母公司 **Electronic Arts（EA）** 所有。
+## 📜 许可协议：Custom Non-Commercial License
 
+本项目为《植物大战僵尸》复刻的学习作品，仅供个人学习与研究使用。  
+原作《植物大战僵尸》的游戏名称、角色、音乐、图像等内容的版权归 **PopCap Games** 及其母公司 **Electronic Arts（EA）** 所有，  
+本项目不用于任何商业目的，也不构成对原作版权的挑战或侵犯。
 
-**本项目完全免费，禁止任何形式的商业化发布与传播**。
+本项目采用自定义非商用许可协议，**禁止任何形式的商业用途**，其余条款与 MIT 协议一致，简要如下：
 
-本项目所包含的 **源代码部分为原创**，并基于 [MIT 开源许可证](./LICENSE) 发布，允许他人自由使用、修改和再分发。但请注意：
+### ✅ 允许
 
-- 请勿将本项目用于任何商业用途；
-- 若版权方提出异议，我们将无条件配合下架相关内容。
+- 个人学习与研究；
+- 学术研究与教学用途；
+- 《植物大战僵尸》相关的非营利改编、同人创作。
 
-本项目仅用于学习目的，**禁止商业部署**。
+### ❌ 禁止
+
+- 商业公司或组织内部使用；
+- 将本项目作为产品或服务的一部分进行销售、收费分发或在线提供；
+- 用于 SaaS、API 服务、BaaS 等直接或间接商业用途。
+
+---
+
+🔗 完整许可条款请查看 [LICENSE 文件](./LICENSE)
 
 
 ## 🙌 致谢

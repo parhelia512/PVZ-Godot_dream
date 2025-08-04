@@ -1,0 +1,157 @@
+[gd_scene load_steps=24 format=3 uid="uid://djx300tx2setf"]
+
+[ext_resource type="Script" uid="uid://ck6yyarqy5k55" path="res://scripts/garden/034_flower_pot_show.gd" id="1_1vbfo"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_jgwvk"]
+[ext_resource type="Texture2D" uid="uid://bwfn6y0jaj71l" path="res://assets/image/particles/Glow_particle2.png" id="2_k5pd3"]
+[ext_resource type="Texture2D" uid="uid://b33sfy5gcqrg1" path="res://assets/reanim/Pot_glow.png" id="3_4rkaw"]
+[ext_resource type="Texture2D" uid="uid://crfkwhoa72j5w" path="res://assets/reanim/Pot_water_top_glow.png" id="4_f5rwk"]
+[ext_resource type="Texture2D" uid="uid://1kbfcfjfc6ri" path="res://assets/reanim/Pot_stem.png" id="4_g5ymu"]
+[ext_resource type="Texture2D" uid="uid://clwvntcysv04j" path="res://assets/reanim/Pot_leaf1.png" id="5_a5ly7"]
+[ext_resource type="Texture2D" uid="uid://bdfonjr6km5kt" path="res://assets/reanim/Pot_leaf2.png" id="6_7s7y3"]
+[ext_resource type="Texture2D" uid="uid://cpuhiwnvj34aw" path="res://assets/reanim/Pot_bottom.png" id="6_k5pd3"]
+[ext_resource type="Animation" uid="uid://gm80836k87vo" path="res://animation/character/plant/034_flower_pot/Pot_idle.tres" id="8_c47ib"]
+[ext_resource type="Animation" uid="uid://bxl4tn5ge1opm" path="res://animation/character/plant/034_flower_pot/Pot_waterplants.tres" id="9_0wp38"]
+[ext_resource type="Texture2D" uid="uid://bjmbxk07m4w1b" path="res://assets/reanim/Pot_top.png" id="10_4rkaw"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wm6jt"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 40.0
+emission_ring_cone_angle = 90.0
+radial_velocity_min = 20.0
+radial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e78dw"]
+_data = {
+&"Pot_idle": ExtResource("8_c47ib"),
+&"Pot_waterplants": ExtResource("9_0wp38")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tq4ka"]
+animation = &"Pot_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ef148"]
+animation = &"Pot_waterplants"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pogj5"]
+advance_mode = 2
+advance_expression = "not is_water"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdd5l"]
+advance_mode = 2
+advance_expression = "is_water
+"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2opxt"]
+advance_mode = 2
+advance_expression = "not is_water"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3rrs8"]
+advance_mode = 2
+advance_expression = "is_water"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1a5du"]
+states/Pot_idle/node = SubResource("AnimationNodeAnimation_tq4ka")
+states/Pot_idle/position = Vector2(348, 58)
+states/Pot_waterplants/node = SubResource("AnimationNodeAnimation_ef148")
+states/Pot_waterplants/position = Vector2(365, 180)
+transitions = ["Start", "Pot_idle", SubResource("AnimationNodeStateMachineTransition_pogj5"), "Pot_idle", "Pot_waterplants", SubResource("AnimationNodeStateMachineTransition_mdd5l"), "Pot_waterplants", "Pot_idle", SubResource("AnimationNodeStateMachineTransition_2opxt"), "Start", "Pot_waterplants", SubResource("AnimationNodeStateMachineTransition_3rrs8")]
+graph_offset = Vector2(-62, 33)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7wp4x"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_at866"]
+graph_offset = Vector2(-26, 67)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_1a5du")
+nodes/StateMachine/position = Vector2(40, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7wp4x")
+nodes/TimeScale/position = Vector2(340, 140)
+nodes/output/position = Vector2(540, 160)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[node name="FlowerPot" type="Node2D" node_paths=PackedStringArray("down_plant_container")]
+script = ExtResource("1_1vbfo")
+down_plant_container = NodePath("DownPlantContainer")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+amount = 38
+texture = ExtResource("2_k5pd3")
+process_material = SubResource("ParticleProcessMaterial_wm6jt")
+
+[node name="Body" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(-41, -69.3527)
+
+[node name="PotGlow" type="Sprite2D" parent="Body"]
+position = Vector2(41.1659, 42.9309)
+scale = Vector2(0.835, 0.835)
+texture = ExtResource("3_4rkaw")
+
+[node name="PotGlow2" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(41.1146, 39.7844)
+scale = Vector2(0.84, 0.84)
+texture = ExtResource("4_f5rwk")
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(40, 62)
+texture = ExtResource("2_jgwvk")
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_zengarden" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_waterplants" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Pot_bottom" type="Sprite2D" parent="Body"]
+position = Vector2(13.5, 55.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_k5pd3")
+centered = false
+
+[node name="Pot_stem" type="Sprite2D" parent="Body"]
+position = Vector2(24, 10.9)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_g5ymu")
+centered = false
+
+[node name="Pot_leaf1" type="Sprite2D" parent="Body"]
+position = Vector2(27, 7.8)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_a5ly7")
+centered = false
+
+[node name="Pot_leaf2" type="Sprite2D" parent="Body"]
+position = Vector2(17.6, 9.3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_7s7y3")
+centered = false
+
+[node name="Pot_top" type="Sprite2D" parent="Body"]
+position = Vector2(7.2, 13.3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_4rkaw")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e78dw")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_at866")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="DownPlantContainer" type="Node2D" parent="."]

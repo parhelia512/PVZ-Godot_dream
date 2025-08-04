@@ -52,7 +52,7 @@ position = Vector2(-8, 0)
 texture = ExtResource("2_qsf5v")
 process_material = SubResource("ParticleProcessMaterial_mmpy7")
 
-[node name="PuffBulletBody" type="Sprite2D" parent="."]
+[node name="BulletBody" type="Sprite2D" parent="."]
 scale = Vector2(0.625, 0.666667)
 texture = ExtResource("3_8bcht")
 

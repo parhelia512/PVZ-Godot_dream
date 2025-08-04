@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://mcad1jl5d1ui"]
+[gd_scene load_steps=32 format=3 uid="uid://mcad1jl5d1ui"]
 
 [ext_resource type="Texture2D" uid="uid://bwevuvs5nnwfx" path="res://assets/image/ui/ui_challenge/Challenge_Background.jpg" id="1_77tr5"]
 [ext_resource type="Script" uid="uid://jru6xfv7g4f1" path="res://scripts/choose_level/02_chooes_level.gd" id="1_qbhvk"]
@@ -22,6 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://qtifu6lsmq6x" path="res://assets/reanim/hammer_1.png" id="13_ddvl6"]
 [ext_resource type="Texture2D" uid="uid://dweon5ml8otw5" path="res://assets/reanim/Hammer_2.png" id="14_a108d"]
 [ext_resource type="Resource" uid="uid://d06li2axn7r16" path="res://resources/level_date_resource/mode_adventure/adventure_03_pool.tres" id="15_umhll"]
+[ext_resource type="Texture2D" uid="uid://dwva3w3r5kjvb" path="res://assets/image/Almanac/Almanac_GroundNightPool.jpg" id="16_5nyce"]
+[ext_resource type="PackedScene" uid="uid://4utcm656xlea" path="res://scenes/character/plant/025_sea_shroom_static.tscn" id="17_dw7cd"]
+[ext_resource type="Resource" uid="uid://b0r3pbho2r7o7" path="res://resources/level_date_resource/mode_adventure/adventure_04_fog.tres" id="17_k1h2l"]
 [ext_resource type="Resource" uid="uid://c8yt6n65ponc6" path="res://resources/level_date_resource/mode_minigame/minigame_01_bowling.tres" id="17_syrok"]
 [ext_resource type="Resource" uid="uid://3mvuumsl5v6c" path="res://resources/level_date_resource/mode_minigame/minigame_02_hammer_zombie.tres" id="21_0w6wv"]
 
@@ -278,6 +281,73 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 
+[node name="Panel" type="Panel" parent="BG/GridContainer/TextureRect4"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 73.0
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ddvl6")
+
+[node name="TextureRect" type="TextureRect" parent="BG/GridContainer/TextureRect4/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.683
+offset_top = -59.9414
+offset_right = 141.317
+offset_bottom = 140.059
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("16_5nyce")
+
+[node name="SeaShroom" parent="BG/GridContainer/TextureRect4/Panel/TextureRect" instance=ExtResource("17_dw7cd")]
+position = Vector2(94.0402, 103.121)
+scale = Vector2(0.89, 0.89)
+
+[node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -60.0
+offset_right = 59.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qbhvk")
+texture_pressed = ExtResource("4_5ankq")
+texture_focused = ExtResource("3_qbhvk")
+script = ExtResource("6_5ankq")
+curr_sences = 3
+curr_level_data_game_para = ExtResource("17_k1h2l")
+
+[node name="Label" type="Label" parent="BG/GridContainer/TextureRect4/TextureButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 82.0
+offset_right = 89.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "迷雾"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TextureRect5" type="TextureRect" parent="BG/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
@@ -450,6 +520,17 @@ texture = ExtResource("2_7vy8i")
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 
+[node name="Control" type="Control" parent="BG/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect9" type="TextureRect" parent="BG/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_7vy8i")
+
+[node name="TextureRect10" type="TextureRect" parent="BG/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_7vy8i")
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -461,8 +542,14 @@ offset_right = 77.0
 offset_bottom = 72.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 6
 theme_override_font_sizes/font_size = 36
-text = "冒险模式"
+text = "冒 险 模 式"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -498,6 +585,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="BG/GridContainer/TextureRect/TextureButton" to="BG/GridContainer/TextureRect/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="BG/GridContainer/TextureRect2/TextureButton" to="BG/GridContainer/TextureRect2/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="BG/GridContainer/TextureRect3/TextureButton" to="BG/GridContainer/TextureRect3/TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="BG/GridContainer/TextureRect4/TextureButton" to="BG/GridContainer/TextureRect4/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="BG/GridContainer/TextureRect5/TextureButton" to="BG/GridContainer/TextureRect5/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="BG/GridContainer/TextureRect6/TextureButton" to="BG/GridContainer/TextureRect6/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="back_start_menu"]

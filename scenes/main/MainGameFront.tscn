@@ -38,7 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="47_o6s5l"]
 [ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="48_rxugl"]
 [ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="49_0v4g6"]
-[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="50_3njud"]
+[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://data/PVZ_theme.tres" id="50_3njud"]
 [ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="51_p10a3"]
 [ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="52_wi4nn"]
 [ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="53_pfdkh"]
@@ -60,9 +60,10 @@ bgm_choose_card = ExtResource("2_3jvaj")
 mode_column = false
 
 [node name="PlantCells" type="Node2D" parent="."]
-z_index = 200
+z_index = 395
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlantCells"]
+z_index = 10
 layout_direction = 3
 offset_left = -776.0
 offset_top = 82.0
@@ -116,6 +117,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PlantCells"]
+z_index = 20
 layout_direction = 3
 offset_left = -776.0
 offset_top = 181.0
@@ -168,6 +170,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PlantCells"]
+z_index = 30
 layout_direction = 3
 offset_left = -776.0
 offset_top = 281.0
@@ -220,6 +223,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="PlantCells"]
+z_index = 40
 layout_direction = 3
 offset_left = -776.0
 offset_top = 380.0
@@ -272,6 +276,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="PlantCells"]
+z_index = 50
 layout_direction = 3
 offset_left = -776.0
 offset_top = 478.0

@@ -2,8 +2,6 @@ extends BulletBase
 class_name BulletWallNutBowlingBomb
 
 var rotation_speed = 5.0  # 旋转速度
-@onready var bullet_body: Node2D = $BulletBody
-
 @onready var area_2d_2: Area2D = $Area2D2
 
 func _ready() -> void:

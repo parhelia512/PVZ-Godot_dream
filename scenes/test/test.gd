@@ -1,9 +1,19 @@
 extends Node2D
 
+@onready var almanac_ground_pool: Sprite2D = $AlmanacGroundPool
+@onready var almanac_ground_roof: Sprite2D = $AlmanacGroundRoof
+@onready var control: Control = $Control
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var scene = preload("res://scenes/manager/dancer_manager.tscn")
-	print(scene is PackedScene)  # 应该是 true
-	var inst = scene.instantiate()
-	print(inst)  # 应该是 Node2D（或 DancerManager 实例）
+	print("移动前位置", almanac_ground_pool.position)
+	print("移动前全局位置", almanac_ground_pool.global_position)
+	remove_child(almanac_ground_pool)
+	control.add_child(almanac_ground_pool)
+	
+	print("移动后位置", almanac_ground_pool.position)
+	print("移动后全局位置", almanac_ground_pool.global_position)
+	
+	

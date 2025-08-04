@@ -46,17 +46,18 @@ func spawn_sun():
 		# 控制阳光下落
 		var tween = create_tween()
 		new_sun.global_position = sun.global_position
-		
+
 		var center_y : float = -15
 		var target_y : float = 45
 		tween.tween_property(new_sun, "position:y", center_y, 0.3).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(new_sun, "position:y", target_y, 0.6).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 		
-		var tween2 = create_tween()
-		tween2.tween_property(new_sun, "position:x", randf_range(-30, 30), 0.9).as_relative()
+		new_sun.spawn_sun_tween = get_tree().create_tween()
+		new_sun.spawn_sun_tween.set_parallel()
+		new_sun.spawn_sun_tween.tween_subtween(tween)
+		new_sun.spawn_sun_tween.tween_property(new_sun, "position:x", randf_range(-30, 30), 0.9).as_relative()
 		
-
-		tween2.finished.connect(new_sun.on_sun_tween_finished)
+		new_sun.spawn_sun_tween.finished.connect(new_sun.on_sun_tween_finished)
 		
 
 

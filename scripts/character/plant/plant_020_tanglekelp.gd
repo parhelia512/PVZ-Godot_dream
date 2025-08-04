@@ -33,7 +33,6 @@ func start_grap_zombie(target_zombie:ZombieBase):
 func grap_in_pool(target_zombie:ZombieBase):
 	grap.activate_it_to_grap_zombie(target_zombie)
 	await get_tree().create_timer(0.3).timeout
-	var plant_cell:PlantCell = get_parent()
 	# 水花
 	var splash:Splash = Global.splash_pool_scenes.instantiate()
 	plant_cell.add_child(splash)

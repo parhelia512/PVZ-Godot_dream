@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://dc1xvxus2co66"]
+[gd_scene load_steps=81 format=3 uid="uid://dc1xvxus2co66"]
 
 [ext_resource type="Script" uid="uid://dkbq8o27gtu37" path="res://scripts/ui/start_menu/start_menu_root.gd" id="1_2isde"]
 [ext_resource type="Texture2D" uid="uid://cd1em7514pqef" path="res://assets/image/ui/ui_start_menu/SelectorScreen_BG.jpg" id="1_s2p02"]
@@ -42,26 +42,34 @@
 [ext_resource type="Texture2D" uid="uid://cl31cxpwg5y84" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Almanac.png" id="31_sxpcx"]
 [ext_resource type="Texture2D" uid="uid://b2fq50reclr1l" path="res://assets/image/ui/ui_start_menu/SelectorScreen_AlmanacHighlight.png" id="32_ortyp"]
 [ext_resource type="BitMap" uid="uid://dmojvwlyh8417" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Almanac_Mask.png" id="33_qniwh"]
-[ext_resource type="Texture2D" uid="uid://xsu0epbjdx8o" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Store.png" id="34_vm1rv"]
-[ext_resource type="Texture2D" uid="uid://c7hm6tgjy1fbs" path="res://assets/image/ui/ui_start_menu/SelectorScreen_StoreHighlight.png" id="35_xll4c"]
-[ext_resource type="BitMap" uid="uid://cra43htuprgvi" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Store_Mask.png" id="36_2isde"]
 [ext_resource type="Texture2D" uid="uid://bfh5eibilmn11" path="res://assets/image/ui/ui_start_menu/SelectorScreen_BG_Left.png" id="37_at8of"]
+[ext_resource type="Texture2D" uid="uid://54rpfashjbpk" path="res://assets/image/garden/plantspeechbubble.png" id="41_l67l0"]
+[ext_resource type="Script" uid="uid://i4n5co3domph" path="res://scripts/start_menu/garden_water_flag.gd" id="42_lvy6c"]
+[ext_resource type="Texture2D" uid="uid://ce2m54cahv50v" path="res://assets/image/garden/waterdrop.png" id="43_sa52e"]
+[ext_resource type="PackedScene" uid="uid://cmrhicx0325" path="res://scenes/item/store_enter_key.tscn" id="44_phwvq"]
+[ext_resource type="Texture2D" uid="uid://bilk171gldfxp" path="res://assets/reanim/PotatoMine_rock3.png" id="44_wymjr"]
+[ext_resource type="Texture2D" uid="uid://bjkgc0td8i23h" path="res://assets/reanim/sprout_body.png" id="45_ojqr6"]
 [ext_resource type="Texture2D" uid="uid://cjcxcoyiynd74" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Leaves.png" id="46_i4128"]
+[ext_resource type="Texture2D" uid="uid://ck7klwgfbu35w" path="res://assets/reanim/sprout_body1.png" id="46_ito2j"]
 [ext_resource type="Texture2D" uid="uid://cts63qpxp3gme" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Leaf1.png" id="47_2k56d"]
+[ext_resource type="Texture2D" uid="uid://kigsuqanr648" path="res://assets/reanim/sprout_body2.png" id="47_nu6d8"]
 [ext_resource type="Texture2D" uid="uid://cbb7ey5xtmefw" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Leaf2.png" id="48_10pji"]
+[ext_resource type="Texture2D" uid="uid://co2k82lctyh32" path="res://assets/reanim/PotatoMine_rock1.png" id="48_altii"]
 [ext_resource type="Texture2D" uid="uid://x5esr2uunpao" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Leaf3.png" id="49_8optn"]
 [ext_resource type="Texture2D" uid="uid://c620ijywrq2sl" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Leaf4.png" id="50_sch2t"]
 [ext_resource type="Texture2D" uid="uid://rq2ssd2a40lc" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Leaf5.png" id="51_63h8x"]
 [ext_resource type="Texture2D" uid="uid://nufi5fifmvu1" path="res://assets/image/ui/ui_start_menu/SelectorScreen_WoodSign1.png" id="52_63h8x"]
 [ext_resource type="Texture2D" uid="uid://up3tsdg4wlss" path="res://assets/image/ui/ui_start_menu/SelectorScreen_WoodSign2.png" id="53_ry5e1"]
+[ext_resource type="FontFile" uid="uid://dqb8lum530s2f" path="res://assets/fonts/方正少儿_GBK.ttf" id="54_343qg"]
 [ext_resource type="Texture2D" uid="uid://b0b3qkcasp6py" path="res://assets/image/ui/ui_start_menu/SelectorScreen_WoodSign2_press.png" id="54_yl4bl"]
 [ext_resource type="BitMap" uid="uid://mu5gublnox4q" path="res://assets/image/ui/ui_start_menu/SelectorScreen_WoodSign2_Mask.png" id="55_31n4o"]
 [ext_resource type="Texture2D" uid="uid://bttkqw7l87kyw" path="res://assets/image/ui/ui_start_menu/SelectorScreen_WoodSign3.png" id="56_b7wor"]
 [ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="57_ry5e1"]
-[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="59_e0j7q"]
+[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://data/PVZ_theme.tres" id="59_e0j7q"]
 [ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="60_343qg"]
 [ext_resource type="Script" uid="uid://batxx0jfofa74" path="res://scripts/ui/start_menu/start_menu_option_dialog.gd" id="61_pnpk5"]
 [ext_resource type="Texture2D" uid="uid://blge6mwmus5fv" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2.png" id="62_5qe3w"]
+[ext_resource type="PackedScene" uid="uid://5v0fdtao52jl" path="res://scenes/main/control_canvas_layer.tscn" id="62_e0j7q"]
 [ext_resource type="BitMap" uid="uid://bhg7gejfpw036" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2_mask.png" id="63_xxpiq"]
 
 [sub_resource type="Animation" id="Animation_xll4c"]
@@ -1245,6 +1253,8 @@ _data = {
 &"RESET": SubResource("Animation_yl4bl")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_343qg"]
+
 [sub_resource type="Animation" id="Animation_63h8x"]
 resource_name = "Idle"
 length = 2.0
@@ -1475,8 +1485,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -360.0
-offset_top = -350.0
+offset_top = -329.0
 offset_right = 360.0
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_jjhxv")
@@ -1486,9 +1497,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -340.0
+offset_top = -299.0
 offset_right = 476.0
-offset_bottom = 340.0
+offset_bottom = 381.0
 grow_vertical = 2
 texture = ExtResource("37_at8of")
 
@@ -1500,8 +1511,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -730.0
-offset_top = -563.0
-offset_bottom = -3.0
+offset_top = -45.0
+offset_bottom = 515.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("2_j2mjb")
@@ -1524,6 +1535,7 @@ offset_top = 14.0
 offset_right = -58.0
 offset_bottom = 160.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("3_jrmm2")
 texture_pressed = ExtResource("4_qq5l0")
 texture_hover = ExtResource("4_qq5l0")
@@ -1540,6 +1552,7 @@ offset_top = 119.0
 offset_right = -61.0
 offset_bottom = 265.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("7_udhvq")
 texture_pressed = ExtResource("8_kfgfy")
 texture_hover = ExtResource("8_kfgfy")
@@ -1556,6 +1569,7 @@ offset_top = 209.0
 offset_right = -57.0
 offset_bottom = 355.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("10_intoo")
 texture_pressed = ExtResource("11_kjwot")
 texture_hover = ExtResource("11_kjwot")
@@ -1572,6 +1586,7 @@ offset_top = 283.0
 offset_right = -62.0
 offset_bottom = 429.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("13_f134t")
 texture_pressed = ExtResource("14_614ej")
 texture_hover = ExtResource("14_614ej")
@@ -1648,6 +1663,7 @@ offset_left = 12.0
 offset_top = 62.0
 offset_right = 93.0
 offset_bottom = 95.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("22_fkqsy")
 texture_pressed = ExtResource("23_c836s")
 texture_hover = ExtResource("23_c836s")
@@ -1659,6 +1675,7 @@ offset_left = 100.0
 offset_top = 98.0
 offset_right = 149.0
 offset_bottom = 124.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("24_2ir4x")
 texture_pressed = ExtResource("25_0it6s")
 texture_hover = ExtResource("25_0it6s")
@@ -1670,6 +1687,7 @@ offset_left = 168.0
 offset_top = 85.0
 offset_right = 218.0
 offset_bottom = 116.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("26_0sp34")
 texture_pressed = ExtResource("27_jjhxv")
 texture_hover = ExtResource("27_jjhxv")
@@ -1695,11 +1713,115 @@ offset_left = 43.0
 offset_top = -16.0
 offset_right = 234.0
 offset_bottom = 147.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("28_0sp34")
 texture_pressed = ExtResource("29_jjhxv")
 texture_hover = ExtResource("29_jjhxv")
 texture_click_mask = ExtResource("30_3w04d")
 script = ExtResource("5_j2mjb")
+
+[node name="GardenConditionFlag" type="TextureRect" parent="BG_Right/Item/TextureButton"]
+layout_mode = 0
+offset_left = 102.371
+offset_top = 32.2858
+offset_right = 152.371
+offset_bottom = 82.2858
+texture = ExtResource("41_l67l0")
+script = ExtResource("42_lvy6c")
+
+[node name="Water" type="TextureRect" parent="BG_Right/Item/TextureButton/GardenConditionFlag"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.5
+offset_top = -17.1651
+offset_right = 8.5
+offset_bottom = 7.8349
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_sa52e")
+
+[node name="Sprout" type="TextureRect" parent="BG_Right/Item/TextureButton/GardenConditionFlag"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.5
+offset_top = -17.1651
+offset_right = 8.5
+offset_bottom = 7.8349
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rock" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(6.52679, 18.9344)
+rotation = 0.261799
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("44_wymjr")
+centered = false
+
+[node name="Sprout" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+visible = false
+position = Vector2(33.2, 46.6)
+scale = Vector2(0.8, 0.753)
+texture = ExtResource("45_ojqr6")
+centered = false
+
+[node name="Layer 26" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(1.7254, 2.78324)
+rotation = 0.0200588
+scale = Vector2(0.798502, 0.688042)
+skew = 0.0636601
+texture = ExtResource("46_ito2j")
+centered = false
+
+[node name="Layer 27" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(6.47423, 2.98323)
+rotation = 0.0575554
+scale = Vector2(0.804995, 0.789507)
+skew = 0.171805
+texture = ExtResource("47_nu6d8")
+centered = false
+
+[node name="Rock1" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(0.326798, 25.9344)
+rotation = -2.09265
+scale = Vector2(0.424, 0.424)
+texture = ExtResource("44_wymjr")
+centered = false
+
+[node name="Rock2" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(7.4268, 18.8344)
+scale = Vector2(0.382, 0.359)
+texture = ExtResource("44_wymjr")
+centered = false
+
+[node name="Rock3" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(2.52679, 20.4344)
+rotation = 0.261799
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("44_wymjr")
+centered = false
+
+[node name="Rock4" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(7.82679, 21.2344)
+rotation = 0.261799
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("44_wymjr")
+centered = false
+
+[node name="Rock5" type="Sprite2D" parent="BG_Right/Item/TextureButton/GardenConditionFlag/Sprout"]
+position = Vector2(3.5268, 25.2344)
+rotation = -1.83085
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("48_altii")
+centered = false
 
 [node name="TextureButton2" type="TextureButton" parent="BG_Right/Item"]
 layout_mode = 0
@@ -1714,17 +1836,12 @@ texture_hover = ExtResource("32_ortyp")
 texture_click_mask = ExtResource("33_qniwh")
 script = ExtResource("5_j2mjb")
 
-[node name="TextureButton3" type="TextureButton" parent="BG_Right/Item"]
+[node name="StoreEnterKey" parent="BG_Right/Item" instance=ExtResource("44_phwvq")]
 layout_mode = 0
-offset_left = 282.0
-offset_top = 42.0
-offset_right = 412.0
-offset_bottom = 131.0
-texture_normal = ExtResource("34_vm1rv")
-texture_pressed = ExtResource("35_xll4c")
-texture_hover = ExtResource("35_xll4c")
-texture_click_mask = ExtResource("36_2isde")
-script = ExtResource("5_j2mjb")
+offset_left = 281.32
+offset_top = 42.5599
+offset_right = 351.32
+offset_bottom = 83.5599
 
 [node name="Leaf" type="Control" parent="BG_Right"]
 layout_mode = 1
@@ -1844,8 +1961,8 @@ speed_scale = 0.1
 [node name="WoodSign" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 47.0
+offset_top = -249.0
 offset_right = 351.0
-offset_bottom = 249.0
 
 [node name="TextureRect" type="TextureRect" parent="WoodSign"]
 layout_mode = 0
@@ -1853,13 +1970,33 @@ offset_right = 293.0
 offset_bottom = 150.0
 texture = ExtResource("52_63h8x")
 
-[node name="Label" type="Label" parent="WoodSign/TextureRect"]
-layout_mode = 0
-offset_left = 126.0
-offset_top = 94.0
-offset_right = 175.0
-offset_bottom = 117.0
+[node name="Panel" type="Panel" parent="WoodSign/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.5
+offset_top = 86.1205
+offset_right = 123.5
+offset_bottom = 126.12
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_343qg")
+
+[node name="Label" type="Label" parent="WoodSign/TextureRect/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("54_343qg")
+theme_override_font_sizes/font_size = 20
 text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureButton" parent="WoodSign"]
 layout_mode = 0
@@ -1867,6 +2004,7 @@ offset_left = 4.0
 offset_top = 140.0
 offset_right = 295.0
 offset_bottom = 211.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("53_ry5e1")
 texture_pressed = ExtResource("54_yl4bl")
 texture_hover = ExtResource("54_yl4bl")
@@ -1924,7 +2062,7 @@ offset_bottom = 29.5
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-theme_type_variation = &"MenuLabel"
+theme_type_variation = &"Label2"
 text = "音乐"
 
 [node name="HSlider" type="HSlider" parent="StartMenuOptionDialog/Option/Music"]
@@ -1950,7 +2088,7 @@ offset_bottom = 63.5
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-theme_type_variation = &"MenuLabel"
+theme_type_variation = &"Label2"
 text = "音效"
 
 [node name="HSlider" type="HSlider" parent="StartMenuOptionDialog/Option/SoundEffect"]
@@ -1982,7 +2120,7 @@ offset_top = -13.5
 offset_right = 137.0
 offset_bottom = 14.5
 grow_vertical = 2
-theme_type_variation = &"MenuLabel"
+theme_type_variation = &"Label2"
 text = "全屏"
 
 [node name="CheckButton" type="CheckButton" parent="StartMenuOptionDialog/Option/FullScreen"]
@@ -2012,6 +2150,7 @@ offset_right = 181.0
 offset_bottom = -2.5
 grow_horizontal = 2
 grow_vertical = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("62_5qe3w")
 texture_pressed = ExtResource("62_5qe3w")
 texture_click_mask = ExtResource("63_xxpiq")
@@ -2025,6 +2164,106 @@ offset_right = 279.0
 offset_bottom = 82.0
 theme_override_font_sizes/font_size = 50
 text = "返回游戏"
+vertical_alignment = 1
+
+[node name="Button4" type="BaseButton" parent="StartMenuOptionDialog"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 3
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 124.0
+offset_top = 247.0
+offset_right = 301.0
+offset_bottom = 287.0
+grow_horizontal = 1
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 2
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("5_j2mjb")
+metadata/_custom_type_script = "uid://parybxg7tb1k"
+
+[node name="Panel" type="Panel" parent="StartMenuOptionDialog/Button4"]
+modulate = Color(0.93845, 0.93845, 0.93845, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"PanelButtonBG"
+
+[node name="Label" type="Label" parent="StartMenuOptionDialog/Button4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "选项设置"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" parent="StartMenuOptionDialog/Button4" instance=ExtResource("62_e0j7q")]
+visible = false
 
 [node name="Dialog_Help" parent="." instance=ExtResource("57_ry5e1")]
 visible = false
@@ -2057,17 +2296,17 @@ offset_right = 174.0
 offset_bottom = 151.0
 text = "没做"
 
-[connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_menu_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_menu_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Menu/Button2" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Menu/Button3" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Menu/Button4" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Option/TextureButton" to="." method="_on_option_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Option/TextureButton2" to="." method="_on_option_button_2_pressed"]
 [connection signal="pressed" from="BG_Right/Option/TextureButton3" to="." method="_on_option_button_3_pressed"]
-[connection signal="pressed" from="BG_Right/Item/TextureButton" to="Dialog" method="appear_dialog"]
+[connection signal="pressed" from="BG_Right/Item/TextureButton" to="." method="_on_item_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Item/TextureButton2" to="." method="_on_item_button_2_pressed"]
-[connection signal="pressed" from="BG_Right/Item/TextureButton3" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="WoodSign/TextureRect2" to="Dialog" method="appear_dialog"]
 [connection signal="toggled" from="StartMenuOptionDialog/Option/FullScreen/CheckButton" to="." method="_on_full_screen_button_toggled"]
 [connection signal="pressed" from="StartMenuOptionDialog/Return" to="StartMenuOptionDialog" method="return_button_pressed"]
+[connection signal="pressed" from="StartMenuOptionDialog/Button4" to="StartMenuOptionDialog/Button4/CanvasLayer" method="appear_canvas_layer_control"]

@@ -81,7 +81,7 @@ func acitvate_it(control_x:float = 0):
 func move_parent_to_be_sibling():
 	call_deferred("_deferred_move_parent")
 	
-# 从僵尸中删除
+# 从僵尸中删除，修改其父节点为僵尸父节点
 func _deferred_move_parent():
 	var parent := get_parent()
 	if parent == null:
@@ -100,7 +100,6 @@ func _deferred_move_parent():
 	# 恢复位置
 	global_position = global_pos
 	
-	print(global_position)
 	
 func fade_and_delete():
 	var tween = create_tween()

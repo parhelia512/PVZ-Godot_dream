@@ -8,8 +8,8 @@ class_name ThreePeater
 @export var bullet_border_compensation := 0
 
 
-func init_plant(row_col:Vector2i) -> void:
-	super.init_plant(row_col)
+func init_plant(row_col:Vector2i, plant_cell:PlantCell) -> void:
+	super.init_plant(row_col, plant_cell)
 	_judge_position_bullet_position()
 
 
@@ -18,6 +18,11 @@ func _on_blink_timer_timeout():
 	if is_blink:
 		for blink_sprite in blink_sprite_list:
 			do_blink(blink_sprite)
+			
+## 攻击时停止眨眼
+func attack_stop_blink():
+	for blink_sprite in blink_sprite_list:
+		blink_sprite.visible = false
 
 
 func judge_ray_zomebie():
@@ -66,7 +71,6 @@ func _create_bullte(await_time:float, i:int=1, change_y_target:bool=false):
 	
 ## 根据位置决定子弹偏移：边路补偿
 func _judge_position_bullet_position():
-	var plant_cell:PlantCell = get_parent()
 	var hand_manager :HandManager = get_tree().current_scene.get_node("Manager/HandManager")
 	if row_col.x == 0:
 		bullet_border_compensation = 1

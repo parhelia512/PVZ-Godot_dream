@@ -1,0 +1,334 @@
+[gd_scene load_steps=36 format=3 uid="uid://ikt6uaaihe4c"]
+
+[ext_resource type="Script" uid="uid://16dpfpm5gjlm" path="res://scripts/garden/Plant/plant_garden.gd" id="1_eqdru"]
+[ext_resource type="Texture2D" uid="uid://b20h77g62nvj3" path="res://assets/reanim/ThreePeater_blink1.png" id="4_erly1"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="6_rkv5g"]
+[ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="7_i0khf"]
+[ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="8_5pbq3"]
+[ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="9_tdnqf"]
+[ext_resource type="Texture2D" uid="uid://bw2pvvmcjf1mb" path="res://assets/reanim/ThreePeater_stem3.png" id="10_d6sdr"]
+[ext_resource type="Texture2D" uid="uid://d0leur1vjn341" path="res://assets/reanim/ThreePeater_stem1.png" id="11_csrwc"]
+[ext_resource type="Texture2D" uid="uid://dtult3nryexps" path="res://assets/reanim/ThreePeater_stem2.png" id="12_txaad"]
+[ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="13_gf17e"]
+[ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="14_5uudn"]
+[ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="15_gtokg"]
+[ext_resource type="Texture2D" uid="uid://i81mtytc2pod" path="res://assets/reanim/ThreePeater_headleaf1.png" id="16_prj2h"]
+[ext_resource type="Texture2D" uid="uid://xcqhwarudb01" path="res://assets/reanim/ThreePeater_head.png" id="17_xjcsa"]
+[ext_resource type="Texture2D" uid="uid://806ya6s6keow" path="res://assets/reanim/ThreePeater_mouth.png" id="18_7q2al"]
+[ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="19_syvll"]
+[ext_resource type="Texture2D" uid="uid://bvcab6e1lqyff" path="res://assets/reanim/ThreePeater_headleaf3.png" id="20_y5303"]
+[ext_resource type="Texture2D" uid="uid://ctjycabm2oguh" path="res://assets/reanim/ThreePeater_headleaf2.png" id="21_oj5vo"]
+[ext_resource type="Animation" uid="uid://dowrxeqdeb36i" path="res://animation/character/plant/019_ThreePeater/ThreePeater_head_idle1.tres" id="22_eruyy"]
+[ext_resource type="Animation" uid="uid://bc85ohfa4cjt1" path="res://animation/character/plant/019_ThreePeater/ThreePeater_head_idle2.tres" id="23_yledw"]
+[ext_resource type="Animation" uid="uid://djf2nlkoiiygk" path="res://animation/character/plant/019_ThreePeater/ThreePeater_head_idle3.tres" id="24_8ylyq"]
+[ext_resource type="Animation" uid="uid://pgifsnter0wg" path="res://animation/character/plant/019_ThreePeater/ThreePeater_idle.tres" id="25_3f2en"]
+[ext_resource type="Animation" uid="uid://bd46gjj4qupxd" path="res://animation/character/plant/019_ThreePeater/ThreePeater_shooting1.tres" id="26_kw2s7"]
+[ext_resource type="Animation" uid="uid://cd60ddcjfheug" path="res://animation/character/plant/019_ThreePeater/ThreePeater_shooting2.tres" id="27_5387s"]
+[ext_resource type="Animation" uid="uid://bjebn2uedwhsr" path="res://animation/character/plant/019_ThreePeater/ThreePeater_shooting3.tres" id="28_kndnk"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oqttt"]
+_data = {
+&"ThreePeater_head_idle1": ExtResource("22_eruyy"),
+&"ThreePeater_head_idle2": ExtResource("23_yledw"),
+&"ThreePeater_head_idle3": ExtResource("24_8ylyq"),
+&"ThreePeater_idle": ExtResource("25_3f2en"),
+&"ThreePeater_shooting1": ExtResource("26_kw2s7"),
+&"ThreePeater_shooting2": ExtResource("27_5387s"),
+&"ThreePeater_shooting3": ExtResource("28_kndnk")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_luqsa"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_5syfs"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_pcukl"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yu1lk"]
+animation = &"ThreePeater_head_idle1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qqmcl"]
+animation = &"ThreePeater_head_idle2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hn045"]
+animation = &"ThreePeater_head_idle3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbqbg"]
+animation = &"ThreePeater_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_s5y76"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5jnb8"]
+graph_offset = Vector2(-313.123, -105.897)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_pcukl")
+nodes/Add2/position = Vector2(240, 40)
+"nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_luqsa")
+"nodes/Add2 2/position" = Vector2(-40, 360)
+"nodes/Add2 3/node" = SubResource("AnimationNodeAdd2_5syfs")
+"nodes/Add2 3/position" = Vector2(-340, 400)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_bbqbg")
+nodes/Animation/position = Vector2(-100, -40)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_yu1lk")
+"nodes/Animation 2/position" = Vector2(-420, 200)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_qqmcl")
+"nodes/Animation 3/position" = Vector2(-660, 360)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_hn045")
+"nodes/Animation 4/position" = Vector2(-620, 540)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_s5y76")
+nodes/TimeScale/position = Vector2(493.534, 104.935)
+nodes/output/position = Vector2(660, 140)
+node_connections = [&"Add2", 0, &"Animation", &"Add2", 1, &"Add2 2", &"Add2 2", 0, &"Animation 2", &"Add2 2", 1, &"Add2 3", &"Add2 3", 0, &"Animation 3", &"Add2 3", 1, &"Animation 4", &"TimeScale", 0, &"Add2", &"output", 0, &"TimeScale"]
+
+[node name="ThreePeater" type="Node2D"]
+script = ExtResource("1_eqdru")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41.9737, -68.6052)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("6_rkv5g")
+
+[node name="Backleaf" type="Sprite2D" parent="Body"]
+position = Vector2(27.5, 55.3253)
+scale = Vector2(0.599506, 0.452988)
+texture = ExtResource("7_i0khf")
+centered = false
+
+[node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(24.2747, 56.4506)
+rotation = -0.0714523
+scale = Vector2(0.641012, 0.515)
+texture = ExtResource("8_5pbq3")
+centered = false
+
+[node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(48.4169, 55.1253)
+rotation = 0.103436
+scale = Vector2(0.64541, 0.491326)
+texture = ExtResource("9_tdnqf")
+centered = false
+
+[node name="ThreePeater_stem3" type="Sprite2D" parent="Body"]
+position = Vector2(22.8241, 20.1073)
+rotation = 0.0735776
+scale = Vector2(0.64, 0.653686)
+texture = ExtResource("10_d6sdr")
+centered = false
+
+[node name="ThreePeater_stem1" type="Sprite2D" parent="Body"]
+position = Vector2(32.8253, 41.9506)
+rotation = -0.0324253
+scale = Vector2(0.64, 0.668567)
+skew = 0.156806
+texture = ExtResource("11_csrwc")
+centered = false
+
+[node name="ThreePeater_stem2" type="Sprite2D" parent="Body"]
+position = Vector2(15.7241, 35.777)
+rotation = -0.0973173
+scale = Vector2(0.639916, 0.611471)
+skew = -0.162924
+texture = ExtResource("12_txaad")
+centered = false
+
+[node name="Frontleaf" type="Sprite2D" parent="Body"]
+position = Vector2(21.9916, 55.8169)
+scale = Vector2(0.585253, 0.509494)
+texture = ExtResource("13_gf17e")
+centered = false
+
+[node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(56.4337, 56.6169)
+rotation = -0.100767
+scale = Vector2(0.684145, 0.541831)
+texture = ExtResource("14_5uudn")
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(19.5, 61.2253)
+rotation = 0.0574083
+scale = Vector2(0.589482, 0.557506)
+texture = ExtResource("15_gtokg")
+centered = false
+
+[node name="Anim_head1" type="Sprite2D" parent="Body"]
+position = Vector2(56.3169, 51.1422)
+centered = false
+
+[node name="Node2D" type="Node2D" parent="Body/Anim_head1"]
+position = Vector2(-51.3189, -51.1473)
+
+[node name="ThreePeater_head1_leaf1" type="Sprite2D" parent="Body/Anim_head1/Node2D"]
+position = Vector2(41.3, 37.5349)
+rotation = -0.0101531
+scale = Vector2(0.797916, 0.797916)
+texture = ExtResource("16_prj2h")
+centered = false
+
+[node name="Anim_face1" type="Sprite2D" parent="Body/Anim_head1/Node2D"]
+position = Vector2(46.9674, 34.6253)
+rotation = 0.0564801
+scale = Vector2(0.639, 0.647892)
+skew = -0.00479464
+texture = ExtResource("17_xjcsa")
+centered = false
+
+[node name="ThreePeater_head1_blink" type="Sprite2D" parent="Body/Anim_head1/Node2D"]
+visible = false
+position = Vector2(58.9, 38.9)
+rotation = 0.256563
+scale = Vector2(0.707, 0.626)
+texture = ExtResource("4_erly1")
+centered = false
+
+[node name="ThreePeater_head1_blink2" type="Sprite2D" parent="Body/Anim_head1/Node2D"]
+visible = false
+position = Vector2(56.7904, 37.3501)
+rotation = 0.0909449
+scale = Vector2(0.707, 0.626)
+texture = ExtResource("4_erly1")
+centered = false
+
+[node name="ThreePeater_mouth1" type="Sprite2D" parent="Body/Anim_head1/Node2D"]
+position = Vector2(63.5096, 28.5012)
+rotation = 0.0548822
+scale = Vector2(0.639, 0.649073)
+skew = -0.00319676
+texture = ExtResource("18_7q2al")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body/Anim_head1/Node2D"]
+visible = false
+position = Vector2(75.1682, 45.4086)
+texture = ExtResource("19_syvll")
+
+[node name="Anim_head3" type="Sprite2D" parent="Body"]
+position = Vector2(24.7326, 21.4157)
+centered = false
+
+[node name="Node2D" type="Node2D" parent="Body/Anim_head3"]
+position = Vector2(-20.4577, -22.2722)
+
+[node name="ThreePeater_head3_leaf3" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+position = Vector2(13.5916, 15.2482)
+rotation = 0.168202
+scale = Vector2(0.798084, 0.798084)
+texture = ExtResource("20_y5303")
+centered = false
+
+[node name="ThreePeater_head3_leaf2" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+position = Vector2(10.4337, 10.8398)
+rotation = 0.148202
+scale = Vector2(0.798084, 0.798084)
+texture = ExtResource("21_oj5vo")
+centered = false
+
+[node name="ThreePeater_head3_leaf1" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+position = Vector2(8.36745, 9.09649)
+rotation = -0.0417288
+scale = Vector2(0.798084, 0.798084)
+texture = ExtResource("16_prj2h")
+centered = false
+
+[node name="Anim_face3" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+position = Vector2(14.9916, 5.99883)
+scale = Vector2(0.64, 0.637119)
+texture = ExtResource("17_xjcsa")
+centered = false
+
+[node name="ThreePeater_head3_blink" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+visible = false
+position = Vector2(24.5, 8.8)
+rotation = 0.022689
+scale = Vector2(0.684, 0.683)
+texture = ExtResource("4_erly1")
+centered = false
+
+[node name="ThreePeater_head3_blink2" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+visible = false
+position = Vector2(24.2427, 7.70132)
+rotation = 0.022689
+scale = Vector2(0.684, 0.683)
+texture = ExtResource("4_erly1")
+centered = false
+
+[node name="ThreePeater_mouth3" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+position = Vector2(31.7747, 0.140984)
+rotation = 0.00799124
+scale = Vector2(0.64, 0.62718)
+texture = ExtResource("18_7q2al")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body/Anim_head3/Node2D"]
+visible = false
+position = Vector2(43.359, 12.1988)
+texture = ExtResource("19_syvll")
+
+[node name="Anim_head2" type="Sprite2D" parent="Body"]
+position = Vector2(29.241, 36.1518)
+centered = false
+
+[node name="Node2D" type="Node2D" parent="Body/Anim_head2"]
+position = Vector2(-34.1467, -35.2009)
+
+[node name="ThreePeater_head2_leaf2" type="Sprite2D" parent="Body/Anim_head2/Node2D"]
+position = Vector2(27.541, 22.2012)
+rotation = 0.410324
+scale = Vector2(0.798, 0.77541)
+texture = ExtResource("21_oj5vo")
+centered = false
+
+[node name="ThreePeater_head2_leaf1" type="Sprite2D" parent="Body/Anim_head2/Node2D"]
+position = Vector2(26.4916, 19.8927)
+rotation = 0.262915
+scale = Vector2(0.798084, 0.77541)
+texture = ExtResource("16_prj2h")
+centered = false
+
+[node name="Anim_face2" type="Sprite2D" parent="Body/Anim_head2/Node2D"]
+position = Vector2(33, 16.959)
+rotation = 0.266299
+scale = Vector2(0.640831, 0.656977)
+skew = -0.0124909
+texture = ExtResource("17_xjcsa")
+centered = false
+
+[node name="ThreePeater_mouth2" type="Sprite2D" parent="Body/Anim_head2/Node2D"]
+position = Vector2(50.3, 13.2012)
+rotation = 0.266299
+scale = Vector2(0.640831, 0.660808)
+skew = -0.0156872
+texture = ExtResource("18_7q2al")
+centered = false
+
+[node name="ThreePeater_head2_blink" type="Sprite2D" parent="Body/Anim_head2/Node2D"]
+visible = false
+position = Vector2(41.6, 21.6)
+rotation = 0.29147
+scale = Vector2(0.696, 0.752)
+skew = -0.0244346
+texture = ExtResource("4_erly1")
+centered = false
+
+[node name="ThreePeater_head2_blink2" type="Sprite2D" parent="Body/Anim_head2/Node2D"]
+visible = false
+position = Vector2(41.6456, 21.0092)
+rotation = 0.29147
+scale = Vector2(0.696, 0.752)
+skew = -0.0244346
+texture = ExtResource("4_erly1")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oqttt")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_5jnb8")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+"parameters/Add2 2/add_amount" = 1.0
+"parameters/Add2 3/add_amount" = 1.0
+parameters/TimeScale/scale = 1.0

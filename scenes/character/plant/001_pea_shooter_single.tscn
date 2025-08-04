@@ -50,6 +50,7 @@ fadeout_time = 0.3
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_05k0c"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7t3eh"]
+graph_offset = Vector2(-1.57326, 31.5514)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_qgupn")
 nodes/Add2/position = Vector2(533.519, 220.122)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_i6sxg")
@@ -86,84 +87,86 @@ position = Vector2(41, 70)
 texture = ExtResource("2_4n12f")
 
 [node name="Backleaf" type="Sprite2D" parent="Body"]
-position = Vector2(27.6, 54.4426)
-scale = Vector2(0.583853, 0.490082)
+position = Vector2(27.5068, 55.2796)
+scale = Vector2(0.598659, 0.454886)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
-position = Vector2(24.9574, 54.7853)
-rotation = 0.0407997
-scale = Vector2(0.605918, 0.515)
+position = Vector2(24.3136, 56.3591)
+rotation = -0.0654511
+scale = Vector2(0.639182, 0.515)
 texture = ExtResource("1_fuck")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(47.7213, 54.1639)
-rotation = 0.0250362
-scale = Vector2(0.665934, 0.513934)
+position = Vector2(48.3796, 54.9864)
+rotation = 0.0994448
+scale = Vector2(0.646477, 0.492545)
 texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body"]
-position = Vector2(38.7705, 50)
-rotation = 0.308095
-scale = Vector2(0.561213, 0.657721)
-skew = -0.109555
+position = Vector2(39.6523, 49.2864)
+rotation = 0.35827
+scale = Vector2(0.561932, 0.713431)
+skew = -0.125863
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body"]
-position = Vector2(35.8984, 36.7426)
-rotation = 0.251271
-scale = Vector2(0.569639, 0.839803)
-skew = -0.0777955
+position = Vector2(36.7114, 36.9864)
+rotation = 0.267671
+scale = Vector2(0.562136, 0.829954)
+skew = -0.0783019
 texture = ExtResource("4_fuck")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body"]
-position = Vector2(22.1787, 55.6639)
-scale = Vector2(0.581853, 0.514721)
+position = Vector2(22.0068, 55.7864)
+scale = Vector2(0.584727, 0.510409)
 texture = ExtResource("5_fuck")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(56.0853, 56.7213)
-rotation = -0.124948
-scale = Vector2(0.702524, 0.542787)
+position = Vector2(56.3727, 56.5932)
+rotation = -0.104877
+scale = Vector2(0.687431, 0.542068)
 texture = ExtResource("6_fuck")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
-position = Vector2(19.4361, 60.9639)
-rotation = 0.0926729
-scale = Vector2(0.618295, 0.552279)
+position = Vector2(19.1204, 61.0796)
+rotation = 0.0638228
+scale = Vector2(0.612545, 0.556591)
 texture = ExtResource("7_fuck")
 centered = false
 
 [node name="Anim_stem" type="Sprite2D" parent="Body"]
-position = Vector2(41.3131, 43.1853)
+position = Vector2(42.0318, 43.4727)
 centered = false
 
 [node name="stem_correct" type="Node2D" parent="Body/Anim_stem"]
 position = Vector2(-37.6, -48.7)
 
 [node name="Anim_sprout" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(7.65737, 25.3787)
-rotation = -0.249123
-scale = Vector2(0.76305, 0.796)
+position = Vector2(8.17955, 22.4682)
+rotation = -0.0334773
+scale = Vector2(0.798068, 0.798068)
 texture = ExtResource("8_fuck")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(19.2, 12.8279)
-scale = Vector2(0.555, 0.572869)
+position = Vector2(19.3932, 13.2727)
+scale = Vector2(0.555, 0.562409)
 texture = ExtResource("9_fuck")
 centered = false
 
 [node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(52.5, 12.7279)
-scale = Vector2(0.555, 0.572869)
+position = Vector2(52.5932, 13.3591)
+rotation = -0.0621981
+scale = Vector2(0.556932, 0.565682)
+skew = 0.0621981
 texture = ExtResource("10_fuck")
 centered = false
 
@@ -173,7 +176,7 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
 visible = false
-position = Vector2(38.0088, 19.5779)
+position = Vector2(38.0088, 20.0092)
 scale = Vector2(0.555, 0.555)
 texture = ExtResource("19_05k0c")
 centered = false

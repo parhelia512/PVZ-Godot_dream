@@ -137,6 +137,9 @@ offset_right = 227.0
 offset_bottom = -4.0
 theme_override_constants/separation = 0
 
+[node name="Marker2DSunTarget" type="Marker2D" parent="CardBarAndShovel"]
+position = Vector2(40, 35)
+
 [node name="CardBarBg" type="PanelContainer" parent="CardBarAndShovel"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_x628s")

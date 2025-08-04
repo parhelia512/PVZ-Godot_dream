@@ -93,8 +93,7 @@ scale_min = 0.8
 anim_offset_max = 1.0
 
 [node name="Tombstone" type="Node2D"]
-z_index = 150
-z_as_relative = false
+z_index = -2
 script = ExtResource("1_34xhw")
 zombie_candidate_list = Array[int]([0, 2, 4])
 

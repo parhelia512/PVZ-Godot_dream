@@ -1,0 +1,333 @@
+[gd_scene load_steps=45 format=3 uid="uid://ch4fg6iqpwjqo"]
+
+[ext_resource type="Script" uid="uid://bh3f4o11c6h4t" path="res://scripts/character/plant/plant_029_split_pea.gd" id="1_77wf1"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_xdqs7"]
+[ext_resource type="PackedScene" uid="uid://dd8wl34s7myh6" path="res://scenes/bullet/001_bullet_pea.tscn" id="2_4t5aw"]
+[ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="2_77wf1"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="3_pwy2v"]
+[ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="3_ueddu"]
+[ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="4_3u5n5"]
+[ext_resource type="Texture2D" uid="uid://b2h6wuvxt68vx" path="res://assets/reanim/PeaShooter_blink2.png" id="5_5ty33"]
+[ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="5_b61mc"]
+[ext_resource type="Texture2D" uid="uid://bu8g84fe1ni48" path="res://assets/reanim/PeaShooter_stalk_top.png" id="6_5ty33"]
+[ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="7_4t5aw"]
+[ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="8_pwy2v"]
+[ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="9_q54ul"]
+[ext_resource type="Texture2D" uid="uid://b00drwni3ja82" path="res://assets/reanim/PeaShooter_Head.png" id="10_wb3vi"]
+[ext_resource type="Texture2D" uid="uid://txlm4fwvygkx" path="res://assets/reanim/PeaShooter_mouth.png" id="11_batim"]
+[ext_resource type="Texture2D" uid="uid://gxmu788oywxk" path="res://assets/reanim/Splitpea_head.png" id="12_orwl7"]
+[ext_resource type="Texture2D" uid="uid://dp8034ogayq0f" path="res://assets/reanim/PeaShooter_blink1.png" id="13_ip4xs"]
+[ext_resource type="Texture2D" uid="uid://dgigsil3n5prk" path="res://assets/reanim/PeaShooter_eyebrow.png" id="14_ofcqp"]
+[ext_resource type="Animation" uid="uid://q7dxwst27jof" path="res://animation/character/plant/029_split_pea/SplitPea_head_idle.tres" id="15_xtuyr"]
+[ext_resource type="Animation" uid="uid://b6qtnu27vy03g" path="res://animation/character/plant/029_split_pea/SplitPea_idle.tres" id="16_8bwx2"]
+[ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="17_b61mc"]
+[ext_resource type="Animation" uid="uid://cjdntixs87bgb" path="res://animation/character/plant/029_split_pea/SplitPea_shooting.tres" id="17_hpnhx"]
+[ext_resource type="Animation" uid="uid://cli2tfwg0bwes" path="res://animation/character/plant/029_split_pea/SplitPea_splitpea_idle.tres" id="18_j3qc1"]
+[ext_resource type="Animation" uid="uid://mc37nycpoy73" path="res://animation/character/plant/029_split_pea/SplitPea_splitpea_shooting.tres" id="19_muog1"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7b08x"]
+_data = {
+&"SplitPea_head_idle": ExtResource("15_xtuyr"),
+&"SplitPea_idle": ExtResource("16_8bwx2"),
+&"SplitPea_shooting": ExtResource("17_hpnhx"),
+&"SplitPea_splitpea_idle": ExtResource("18_j3qc1"),
+&"SplitPea_splitpea_shooting": ExtResource("19_muog1")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_xdqs7"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_yqw6s"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5oo36"]
+animation = &"SplitPea_head_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lh7ud"]
+animation = &"SplitPea_splitpea_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_amsta"]
+animation = &"SplitPea_shooting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2p1tm"]
+animation = &"SplitPea_idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_77wf1"]
+sync = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8jypp"]
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdqs7"]
+animation = &"SplitPea_splitpea_shooting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_77wf1"]
+animation = &"SplitPea_splitpea_shooting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ueddu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3u5n5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b61mc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5ty33"]
+states/SplitPea_splitpea_shooting/node = SubResource("AnimationNodeAnimation_77wf1")
+states/SplitPea_splitpea_shooting/position = Vector2(394, 110)
+"states/SplitPea_splitpea_shooting 2/node" = SubResource("AnimationNodeAnimation_xdqs7")
+"states/SplitPea_splitpea_shooting 2/position" = Vector2(674, 110)
+transitions = ["Start", "SplitPea_splitpea_shooting", SubResource("AnimationNodeStateMachineTransition_ueddu"), "SplitPea_splitpea_shooting", "SplitPea_splitpea_shooting 2", SubResource("AnimationNodeStateMachineTransition_3u5n5"), "SplitPea_splitpea_shooting 2", "End", SubResource("AnimationNodeStateMachineTransition_b61mc")]
+graph_offset = Vector2(56, -4)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_636kj"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ueddu"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_tibmi"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_636kj"]
+graph_offset = Vector2(-560.219, -86.7227)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_yqw6s")
+nodes/Add2/position = Vector2(180, 180)
+"nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_xdqs7")
+"nodes/Add2 2/position" = Vector2(-140, 40)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2p1tm")
+nodes/Animation/position = Vector2(-120, 520)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5oo36")
+"nodes/Animation 2/position" = Vector2(-720, -260)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_lh7ud")
+"nodes/Animation 3/position" = Vector2(-940, 300)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_amsta")
+"nodes/Animation 4/position" = Vector2(-920, 0)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_8jypp")
+nodes/OneShot/position = Vector2(-420, -200)
+"nodes/OneShot 2/node" = SubResource("AnimationNodeOneShot_77wf1")
+"nodes/OneShot 2/position" = Vector2(-420, 300)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_5ty33")
+nodes/StateMachine/position = Vector2(-960, 560)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_tibmi")
+nodes/TimeScale/position = Vector2(440, 140)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_636kj")
+"nodes/TimeScale 2/position" = Vector2(-660, 20)
+"nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_ueddu")
+"nodes/TimeScale 3/position" = Vector2(-600, 460)
+nodes/output/position = Vector2(680, 180)
+node_connections = [&"Add2", 0, &"Add2 2", &"Add2", 1, &"Animation", &"Add2 2", 0, &"OneShot", &"Add2 2", 1, &"OneShot 2", &"OneShot", 0, &"Animation 2", &"OneShot", 1, &"TimeScale 2", &"OneShot 2", 0, &"Animation 3", &"OneShot 2", 1, &"TimeScale 3", &"TimeScale", 0, &"Add2", &"TimeScale 2", 0, &"Animation 4", &"TimeScale 3", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ueddu"]
+size = Vector2(50, 60)
+
+[node name="SplitPea" type="Node2D" node_paths=PackedStringArray("bullet_position_back", "blink_sprite_list", "bullet_position")]
+script = ExtResource("1_77wf1")
+bullet_position_back = NodePath("Body/Anim_idle/stem_correct/Projectile2")
+blink_sprite_list = [NodePath("Body/Anim_idle/stem_correct/Anim_blink"), NodePath("Body/Anim_idle/stem_correct/Anim_SplitPea_blink")]
+bullet_scene = ExtResource("2_4t5aw")
+bullet_position = NodePath("Body/Anim_idle/stem_correct/Projectile")
+plant_condition = ExtResource("3_pwy2v")
+blink_sprite_texture = Array[Texture]([ExtResource("13_ip4xs"), ExtResource("5_5ty33")])
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-38, -48)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(40, 70)
+texture = ExtResource("1_xdqs7")
+
+[node name="Backleaf" type="Sprite2D" parent="Body"]
+position = Vector2(27.7, 53.5082)
+scale = Vector2(0.565163, 0.532133)
+texture = ExtResource("2_77wf1")
+centered = false
+
+[node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(25, 54.2082)
+rotation = 0.0158503
+scale = Vector2(0.572785, 0.540755)
+texture = ExtResource("3_ueddu")
+centered = false
+
+[node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(47.4, 53.3082)
+rotation = 0.00712387
+scale = Vector2(0.595653, 0.540755)
+texture = ExtResource("4_3u5n5")
+centered = false
+
+[node name="Stalk_bottom" type="Sprite2D" parent="Body"]
+position = Vector2(36.8163, 51.3837)
+rotation = 0.0923229
+scale = Vector2(0.557541, 0.601734)
+skew = -0.0321276
+texture = ExtResource("5_b61mc")
+centered = false
+
+[node name="Stalk_top" type="Sprite2D" parent="Body"]
+position = Vector2(32.2704, 39.6562)
+rotation = 0.0842559
+scale = Vector2(0.557, 0.75164)
+skew = -0.0327872
+texture = ExtResource("6_5ty33")
+centered = false
+
+[node name="Frontleaf" type="Sprite2D" parent="Body"]
+position = Vector2(22.5459, 54.8541)
+scale = Vector2(0.564622, 0.540755)
+texture = ExtResource("7_4t5aw")
+centered = false
+
+[node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(55.9459, 56.2082)
+rotation = -0.0647721
+scale = Vector2(0.628683, 0.550918)
+texture = ExtResource("8_pwy2v")
+centered = false
+
+[node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
+position = Vector2(19.4541, 61.1459)
+rotation = 0.0601951
+scale = Vector2(0.586489, 0.550918)
+texture = ExtResource("9_q54ul")
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(38.4622, 44.5807)
+centered = false
+
+[node name="stem_correct" type="Node2D" parent="Body/Anim_idle"]
+position = Vector2(-37.6, -49.7)
+
+[node name="Anim_shooting" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="Anim_head_idle" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(19.3541, 13.7347)
+scale = Vector2(0.555, 0.556897)
+texture = ExtResource("10_wb3vi")
+centered = false
+
+[node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(52.6, 13.6807)
+scale = Vector2(0.555, 0.556897)
+texture = ExtResource("11_batim")
+centered = false
+
+[node name="Anim_splitpea_idle" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+centered = false
+
+[node name="Anim_splitpea_shooting" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="SplitPea_head" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(-1.6, 12.0592)
+scale = Vector2(0.559, 0.617275)
+texture = ExtResource("12_orwl7")
+centered = false
+
+[node name="SplitPea_mouth" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(3.04592, 13.1592)
+rotation = 3.04134
+scale = Vector2(0.467082, 0.490489)
+skew = -3.06177
+texture = ExtResource("11_batim")
+centered = false
+
+[node name="Idle_shoot_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="Idle_SplitPea_shoot_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(37.8469, 20.0592)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("13_ip4xs")
+centered = false
+
+[node name="Anim_SplitPea_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(14.5765, 18.3296)
+rotation = -3.12414
+scale = Vector2(0.448, -0.492)
+skew = -0.0122178
+texture = ExtResource("13_ip4xs")
+centered = false
+
+[node name="SplitPea_eyebrows" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(18.6, 12.7429)
+rotation = 3.14159
+scale = Vector2(0.8, 0.8)
+skew = -3.14159
+texture = ExtResource("14_ofcqp")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(60.9452, 30.6411)
+texture = ExtResource("17_b61mc")
+
+[node name="Projectile2" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(-8.70906, 27.2513)
+texture = ExtResource("17_b61mc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7b08x")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_636kj")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+"parameters/Add2 2/add_amount" = 1.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+"parameters/OneShot 2/active" = false
+"parameters/OneShot 2/internal_active" = false
+"parameters/OneShot 2/request" = 0
+parameters/TimeScale/scale = 1.0
+"parameters/TimeScale 2/scale" = 3.0
+"parameters/TimeScale 3/scale" = 3.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(800, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+rotation = 3.14159
+target_position = Vector2(800, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ueddu")

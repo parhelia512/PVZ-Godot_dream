@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8kjty24jlswe"]
+
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="1_h851o"]
+[ext_resource type="Texture2D" uid="uid://h5yqjc7mrtnq" path="res://assets/reanim/Starfruit_body.png" id="2_vsc7v"]
+[ext_resource type="Texture2D" uid="uid://h7nxedbfin5i" path="res://assets/reanim/Starfruit_smile.png" id="3_wgwb4"]
+[ext_resource type="Texture2D" uid="uid://wf2x5qqmfvn4" path="res://assets/reanim/Starfruit_leaf.png" id="4_yr14b"]
+[ext_resource type="Texture2D" uid="uid://c0vuf4cwcahb" path="res://assets/reanim/Starfruit_stem.png" id="5_5o1bb"]
+[ext_resource type="Texture2D" uid="uid://uv0xujpwswfl" path="res://assets/reanim/Starfruit_eyes1.png" id="6_2qoqj"]
+
+[node name="StarFruit" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-40, -40)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(41, 54)
+texture = ExtResource("1_h851o")
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_shoot" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(4.46611, 8.8449)
+scale = Vector2(0.679568, 0.723882)
+texture = ExtResource("2_vsc7v")
+centered = false
+
+[node name="Starfruit_mouth" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Starfruit_smile" type="Sprite2D" parent="Body"]
+position = Vector2(34.622, 34.989)
+scale = Vector2(0.679568, 0.723882)
+texture = ExtResource("3_wgwb4")
+centered = false
+
+[node name="Starfruit_leaf" type="Sprite2D" parent="Body"]
+position = Vector2(29.1212, 2.38981)
+rotation = 0.199074
+scale = Vector2(0.680678, 0.719882)
+skew = 0.0220974
+texture = ExtResource("4_yr14b")
+centered = false
+
+[node name="Starfruit_stem" type="Sprite2D" parent="Body"]
+position = Vector2(30.1441, 4.91185)
+scale = Vector2(0.655355, 0.796738)
+texture = ExtResource("5_5o1bb")
+centered = false
+
+[node name="Starfruit_eyes" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(29.2, 25.8)
+scale = Vector2(0.706, 0.714)
+texture = ExtResource("6_2qoqj")
+centered = false

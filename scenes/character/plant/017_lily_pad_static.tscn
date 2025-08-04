@@ -6,7 +6,7 @@
 scale = Vector2(0.5, 0.5)
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2(-43, -45)
+position = Vector2(-40, -44)
 
 [node name="Anim_idle" type="Sprite2D" parent="Body"]
 position = Vector2(-0.2, 5.5)

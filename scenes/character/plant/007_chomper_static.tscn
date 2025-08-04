@@ -24,7 +24,7 @@
 scale = Vector2(0.4, 0.4)
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2(-43, -45)
+position = Vector2(-30, -50)
 
 [node name="Chomper_groundleaf4" type="Sprite2D" parent="Body"]
 position = Vector2(32.872, 62.96)

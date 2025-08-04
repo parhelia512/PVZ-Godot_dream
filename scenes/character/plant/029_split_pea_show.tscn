@@ -1,0 +1,302 @@
+[gd_scene load_steps=41 format=3 uid="uid://ba3h4mumwpqqj"]
+
+[ext_resource type="Script" uid="uid://16dpfpm5gjlm" path="res://scripts/garden/Plant/plant_garden.gd" id="1_mqq0i"]
+[ext_resource type="Texture2D" uid="uid://dp8034ogayq0f" path="res://assets/reanim/PeaShooter_blink1.png" id="4_6nn8y"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="6_o11ev"]
+[ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="7_fb1tv"]
+[ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="8_bsl0e"]
+[ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="9_5k4yy"]
+[ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="10_3q5cf"]
+[ext_resource type="Texture2D" uid="uid://bu8g84fe1ni48" path="res://assets/reanim/PeaShooter_stalk_top.png" id="11_2pq2w"]
+[ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="12_5baj7"]
+[ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="13_7knjk"]
+[ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="14_qkbdf"]
+[ext_resource type="Texture2D" uid="uid://b00drwni3ja82" path="res://assets/reanim/PeaShooter_Head.png" id="15_elhue"]
+[ext_resource type="Texture2D" uid="uid://txlm4fwvygkx" path="res://assets/reanim/PeaShooter_mouth.png" id="16_wnxpq"]
+[ext_resource type="Texture2D" uid="uid://gxmu788oywxk" path="res://assets/reanim/Splitpea_head.png" id="17_5xlvr"]
+[ext_resource type="Texture2D" uid="uid://dgigsil3n5prk" path="res://assets/reanim/PeaShooter_eyebrow.png" id="18_kytew"]
+[ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="19_lfa11"]
+[ext_resource type="Animation" uid="uid://q7dxwst27jof" path="res://animation/character/plant/029_split_pea/SplitPea_head_idle.tres" id="20_2c6th"]
+[ext_resource type="Animation" uid="uid://b6qtnu27vy03g" path="res://animation/character/plant/029_split_pea/SplitPea_idle.tres" id="21_kjgbj"]
+[ext_resource type="Animation" uid="uid://cjdntixs87bgb" path="res://animation/character/plant/029_split_pea/SplitPea_shooting.tres" id="22_j1lwj"]
+[ext_resource type="Animation" uid="uid://cli2tfwg0bwes" path="res://animation/character/plant/029_split_pea/SplitPea_splitpea_idle.tres" id="23_057li"]
+[ext_resource type="Animation" uid="uid://mc37nycpoy73" path="res://animation/character/plant/029_split_pea/SplitPea_splitpea_shooting.tres" id="24_rrita"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7b08x"]
+_data = {
+&"SplitPea_head_idle": ExtResource("20_2c6th"),
+&"SplitPea_idle": ExtResource("21_kjgbj"),
+&"SplitPea_shooting": ExtResource("22_j1lwj"),
+&"SplitPea_splitpea_idle": ExtResource("23_057li"),
+&"SplitPea_splitpea_shooting": ExtResource("24_rrita")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_xdqs7"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_yqw6s"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5oo36"]
+animation = &"SplitPea_head_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lh7ud"]
+animation = &"SplitPea_splitpea_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_amsta"]
+animation = &"SplitPea_shooting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2p1tm"]
+animation = &"SplitPea_idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_77wf1"]
+sync = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8jypp"]
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdqs7"]
+animation = &"SplitPea_splitpea_shooting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_77wf1"]
+animation = &"SplitPea_splitpea_shooting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ueddu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3u5n5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b61mc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5ty33"]
+states/SplitPea_splitpea_shooting/node = SubResource("AnimationNodeAnimation_77wf1")
+states/SplitPea_splitpea_shooting/position = Vector2(394, 110)
+"states/SplitPea_splitpea_shooting 2/node" = SubResource("AnimationNodeAnimation_xdqs7")
+"states/SplitPea_splitpea_shooting 2/position" = Vector2(674, 110)
+transitions = ["Start", "SplitPea_splitpea_shooting", SubResource("AnimationNodeStateMachineTransition_ueddu"), "SplitPea_splitpea_shooting", "SplitPea_splitpea_shooting 2", SubResource("AnimationNodeStateMachineTransition_3u5n5"), "SplitPea_splitpea_shooting 2", "End", SubResource("AnimationNodeStateMachineTransition_b61mc")]
+graph_offset = Vector2(56, -4)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_636kj"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ueddu"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_tibmi"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_636kj"]
+graph_offset = Vector2(-446.625, -21.1498)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_yqw6s")
+nodes/Add2/position = Vector2(180, 180)
+"nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_xdqs7")
+"nodes/Add2 2/position" = Vector2(-140, 40)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2p1tm")
+nodes/Animation/position = Vector2(-120, 520)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5oo36")
+"nodes/Animation 2/position" = Vector2(-720, -260)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_lh7ud")
+"nodes/Animation 3/position" = Vector2(-940, 300)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_amsta")
+"nodes/Animation 4/position" = Vector2(-920, 0)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_8jypp")
+nodes/OneShot/position = Vector2(-420, -200)
+"nodes/OneShot 2/node" = SubResource("AnimationNodeOneShot_77wf1")
+"nodes/OneShot 2/position" = Vector2(-420, 300)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_5ty33")
+nodes/StateMachine/position = Vector2(-960, 560)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_tibmi")
+nodes/TimeScale/position = Vector2(440, 140)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_636kj")
+"nodes/TimeScale 2/position" = Vector2(-660, 20)
+"nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_ueddu")
+"nodes/TimeScale 3/position" = Vector2(-600, 460)
+nodes/output/position = Vector2(680, 180)
+node_connections = [&"Add2", 0, &"Add2 2", &"Add2", 1, &"Animation", &"Add2 2", 0, &"OneShot", &"Add2 2", 1, &"OneShot 2", &"OneShot", 0, &"Animation 2", &"OneShot", 1, &"TimeScale 2", &"OneShot 2", 0, &"Animation 3", &"OneShot 2", 1, &"TimeScale 3", &"TimeScale", 0, &"Add2", &"TimeScale 2", 0, &"Animation 4", &"TimeScale 3", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[node name="SplitPea" type="Node2D"]
+script = ExtResource("1_mqq0i")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41.7255, -73.4578)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(40, 70)
+texture = ExtResource("6_o11ev")
+
+[node name="Backleaf" type="Sprite2D" parent="Body"]
+position = Vector2(27.6687, 53.694)
+scale = Vector2(0.56788, 0.52624)
+texture = ExtResource("7_fb1tv")
+centered = false
+
+[node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(24.9, 54.2627)
+rotation = 0.0201873
+scale = Vector2(0.57782, 0.536493)
+texture = ExtResource("8_bsl0e")
+centered = false
+
+[node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(47.3627, 53.4627)
+rotation = 0.0103675
+scale = Vector2(0.607206, 0.536493)
+texture = ExtResource("9_5k4yy")
+centered = false
+
+[node name="Stalk_bottom" type="Sprite2D" parent="Body"]
+position = Vector2(36.8253, 51.212)
+rotation = 0.0835886
+scale = Vector2(0.557313, 0.632339)
+skew = -0.0281574
+texture = ExtResource("10_3q5cf")
+centered = false
+
+[node name="Stalk_top" type="Sprite2D" parent="Body"]
+position = Vector2(32.1567, 40.1107)
+rotation = 0.0767128
+scale = Vector2(0.557, 0.734125)
+skew = -0.0300082
+texture = ExtResource("11_2pq2w")
+centered = false
+
+[node name="Frontleaf" type="Sprite2D" parent="Body"]
+position = Vector2(22.5687, 54.8627)
+scale = Vector2(0.56394, 0.54212)
+texture = ExtResource("12_5baj7")
+centered = false
+
+[node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(56.0687, 56.1)
+rotation = -0.0588172
+scale = Vector2(0.622086, 0.551373)
+texture = ExtResource("13_7knjk")
+centered = false
+
+[node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
+position = Vector2(19.5, 61.2373)
+rotation = 0.055431
+scale = Vector2(0.58376, 0.551373)
+texture = ExtResource("14_qkbdf")
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+position = Vector2(38.394, 44.9674)
+centered = false
+
+[node name="stem_correct" type="Node2D" parent="Body/Anim_idle"]
+position = Vector2(-37.6, -49.7)
+
+[node name="Anim_shooting" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="Anim_head_idle" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(19.3313, 14.1987)
+scale = Vector2(0.555, 0.551893)
+texture = ExtResource("15_elhue")
+centered = false
+
+[node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(52.7373, 14.1987)
+rotation = 0.0575279
+scale = Vector2(0.557747, 0.549833)
+skew = -0.0575279
+texture = ExtResource("16_wnxpq")
+centered = false
+
+[node name="Anim_splitpea_idle" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+centered = false
+
+[node name="Anim_splitpea_shooting" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="SplitPea_head" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(-1.6, 13.748)
+rotation = -0.0263667
+scale = Vector2(0.559687, 0.609326)
+skew = 0.0263667
+texture = ExtResource("17_5xlvr")
+centered = false
+
+[node name="SplitPea_mouth" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(2.36266, 14.3721)
+rotation = 2.85902
+scale = Vector2(0.47406, 0.475232)
+skew = -2.93045
+texture = ExtResource("16_wnxpq")
+centered = false
+
+[node name="Idle_shoot_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="Idle_SplitPea_shoot_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(37.7711, 20.2867)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("4_6nn8y")
+centered = false
+
+[node name="Anim_SplitPea_blink" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(14.6867, 19.9734)
+rotation = -3.12414
+scale = Vector2(0.448, -0.492)
+skew = -0.0122178
+texture = ExtResource("4_6nn8y")
+centered = false
+
+[node name="SplitPea_eyebrows" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+position = Vector2(18.6, 15.7987)
+rotation = 3.14159
+scale = Vector2(0.8, 0.8)
+skew = -3.14159
+texture = ExtResource("18_kytew")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(60.9452, 30.6411)
+texture = ExtResource("19_lfa11")
+
+[node name="Projectile2" type="Sprite2D" parent="Body/Anim_idle/stem_correct"]
+visible = false
+position = Vector2(-8.70906, 27.2513)
+texture = ExtResource("19_lfa11")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7b08x")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_636kj")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+"parameters/Add2 2/add_amount" = 1.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+"parameters/OneShot 2/active" = false
+"parameters/OneShot 2/internal_active" = false
+"parameters/OneShot 2/request" = 0
+parameters/TimeScale/scale = 1.0
+"parameters/TimeScale 2/scale" = 3.0
+"parameters/TimeScale 3/scale" = 3.0

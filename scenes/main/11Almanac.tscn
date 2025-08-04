@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://colkdhubp27eq"]
+[gd_scene load_steps=24 format=3 uid="uid://colkdhubp27eq"]
 
 [ext_resource type="Script" uid="uid://b16fmyyjt3mej" path="res://scripts/Almanac/main_almanac.gd" id="1_fstyb"]
+[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://data/PVZ_theme.tres" id="1_pt714"]
 [ext_resource type="Texture2D" uid="uid://dwpq6yo6ma8wc" path="res://assets/image/Almanac/Almanac_IndexBack.jpg" id="2_db05o"]
 [ext_resource type="PackedScene" uid="uid://dulx8ig3l2wwf" path="res://scenes/character/plant/002_sun_flower.tscn" id="3_r56a8"]
 [ext_resource type="Texture2D" uid="uid://cxg73c4c5e3mw" path="res://assets/image/ui/ui_card/SeedChooser_Button.png" id="4_ikq35"]
@@ -32,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_pt714")
 script = ExtResource("1_fstyb")
 
 [node name="StartPage" type="TextureRect" parent="."]
@@ -42,17 +44,17 @@ texture = ExtResource("2_db05o")
 
 [node name="Label" type="Label" parent="StartPage"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -93.0
-offset_top = -269.0
-offset_right = 72.0
-offset_bottom = -223.0
+offset_left = -81.0
+offset_top = 28.0
+offset_right = 84.0
+offset_bottom = 74.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_color = Color(0.77084, 0.770839, 0.770839, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 33
@@ -104,6 +106,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "查看植物"
 
 [node name="Panel2" type="Panel" parent="StartPage"]
@@ -154,6 +157,7 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0.917647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "查看僵尸"
 
 [node name="PlantPage" type="TextureRect" parent="."]
@@ -412,7 +416,11 @@ custom_minimum_size = Vector2(255.42, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.156863, 0.196078, 0.352941, 1)
 theme_override_colors/font_outline_color = Color(0.156863, 0.196078, 0.352941, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
 text = "豌豆射手，你的第一道防线，发射豌豆攻击僵尸"
@@ -428,7 +436,11 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
 theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
 text = "伤害: "
@@ -439,7 +451,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
 theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
 text = "中等"
@@ -551,7 +567,12 @@ custom_minimum_size = Vector2(255, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.533333, 0.196078, 0.666667, 1)
 theme_override_colors/font_outline_color = Color(0.533333, 0.196078, 0.666667, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
 autowrap_mode = 2
@@ -561,7 +582,11 @@ custom_minimum_size = Vector2(255, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
 theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
 text = "一棵植物，怎么能如此快地生长，并发射如此多的豌豆呢？豌豆射手说：“努力工作，奉献自己，加上一份阳光，高纤维和二氧化碳均衡搭配，这种健康早餐让一切管成可能。”"
@@ -581,6 +606,10 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
 theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
@@ -590,6 +619,10 @@ text = "花费: "
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
 theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
@@ -608,6 +641,10 @@ size_flags_vertical = 4
 layout_mode = 2
 theme_override_colors/font_color = Color(0.560784, 0.262745, 0.105882, 1)
 theme_override_colors/font_outline_color = Color(0.560784, 0.262745, 0.105882, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
@@ -617,6 +654,10 @@ text = "冷却时间: "
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0.141176, 0.113725, 1)
 theme_override_colors/font_outline_color = Color(0.835294, 0.141176, 0.113725, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 13
@@ -640,13 +681,18 @@ texture_click_mask = ExtResource("17_2p4k2")
 script = ExtResource("11_pn30t")
 
 [node name="Label" type="Label" parent="PlantPage/ReturnButton"]
+layout_mode = 0
 offset_left = 53.0
 offset_top = 5.0
 offset_right = 117.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(0.164706, 0.164706, 0.352941, 1)
 theme_override_colors/font_outline_color = Color(0.164706, 0.164706, 0.352941, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 16
 text = "图鉴索引"
@@ -672,6 +718,10 @@ offset_right = 61.0
 offset_bottom = 27.0
 theme_override_colors/font_color = Color(0.164706, 0.164706, 0.352941, 1)
 theme_override_colors/font_outline_color = Color(0.164706, 0.164706, 0.352941, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("12_jlxhy")
 theme_override_font_sizes/font_size = 16

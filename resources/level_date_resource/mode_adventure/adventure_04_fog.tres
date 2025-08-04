@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://b0r3pbho2r7o7"]
+
+[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://resources/level_date_resource/script/LevelData.gd" id="1_82lxo"]
+
+[resource]
+script = ExtResource("1_82lxo")
+game_mode = 0
+adventure_game_level = 2
+mini_game_level = 0
+game_sences = 3
+game_BG = 3
+game_BGM = 3
+is_fog = true
+is_day = false
+is_day_sun = false
+look_show_zombie = true
+card_mode = 0
+have_card_bar = true
+can_choosed_card = true
+is_zombie_spawn = true
+max_wave = 30
+zombie_refresh_types = Array[int]([0, 2, 3, 4, 7, 5, 14, 6])
+zombie_multy = 1
+init_tombstone_num = 0
+create_tombston_in_flag_wave = false
+max_choosed_card_num = 10
+start_sun = 50
+pre_choosed_card_list = Array[int]([])
+card_type = Array[int]([])
+card_type_probability = Array[int]([])
+card_type_start_list = Array[int]([])
+metadata/_custom_type_script = "uid://bjt3l56exxmdw"

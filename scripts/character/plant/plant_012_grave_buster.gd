@@ -4,7 +4,6 @@ class_name GraveBuster
 @export var is_eat_grave := false
 @onready var gpu_particles_2d: GPUParticles2D = $Body/GPUParticles2D
 
-var plant_cell : PlantCell
 
 func _ready() -> void:
 	super._ready()
@@ -18,7 +17,6 @@ func start_eat_grave():
 	## 播放音效
 	SoundManager.play_plant_SFX(Global.PlantType.GraveBuster, &"GraveBusterChomp")
 	
-	plant_cell = get_parent()
 	plant_cell.start_tombstone()
 
 	await get_tree().create_timer(0.5).timeout

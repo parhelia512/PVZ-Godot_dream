@@ -55,7 +55,6 @@ func jump_up_start():
 
 ## 跳入水中判断
 func judge_jump_pool():
-	var plant_cell:PlantCell = get_parent()
 	## 如果地形为睡莲或者水
 	if plant_cell.curr_condition & 8 or  plant_cell.curr_condition & 16:
 		

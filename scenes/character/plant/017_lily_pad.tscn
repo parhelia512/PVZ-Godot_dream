@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://blmc1ixchtx4y"]
+[gd_scene load_steps=13 format=3 uid="uid://blmc1ixchtx4y"]
 
 [ext_resource type="Script" uid="uid://cw5vocd7hroh8" path="res://scripts/character/plant/plant_017_lily_pad.gd" id="1_36qgt"]
 [ext_resource type="Texture2D" uid="uid://cbhaawnc37cwe" path="res://assets/reanim/LilyPad_body.png" id="1_yqhr1"]
@@ -8,37 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://blj21d64csfsk" path="res://assets/reanim/LilyPad_blink2.png" id="4_beokx"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="5_beokx"]
 
-[sub_resource type="Animation" id="Animation_beokx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Anim_blink:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.735294, 0.695652)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Anim_blink:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(46, 50)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gmjy2"]
 _data = {
-&"LilyPad_idle": ExtResource("2_3puwi"),
-&"RESET": SubResource("Animation_beokx")
+&"LilyPad_idle": ExtResource("2_3puwi")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3puwi"]
@@ -58,14 +30,16 @@ node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqhr1"]
 size = Vector2(50, 60)
 
-[node name="LilyPad" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
+[node name="LilyPad" type="Node2D" node_paths=PackedStringArray("down_plant_container", "blink_sprite")]
 script = ExtResource("1_36qgt")
+down_plant_container = NodePath("DownPlantContainer")
+plant_up_position = Vector2(0, 10)
 plant_condition = ExtResource("2_akhdm")
 blink_sprite = NodePath("Body/Anim_blink")
 blink_sprite_texture = Array[Texture]([ExtResource("3_1lygi"), ExtResource("4_beokx")])
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2(-41, -43)
+position = Vector2(-40, -44)
 
 [node name="shadow" type="Sprite2D" parent="Body"]
 visible = false
@@ -104,3 +78,5 @@ input_pickable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_yqhr1")
+
+[node name="DownPlantContainer" type="Node2D" parent="."]

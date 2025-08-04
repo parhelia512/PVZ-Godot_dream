@@ -1,0 +1,2 @@
+extends PlantDownBase
+class_name FlowerPot

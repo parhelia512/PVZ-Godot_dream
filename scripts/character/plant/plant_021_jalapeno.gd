@@ -41,7 +41,7 @@ func _bomb_fire():
 		fire_new.z_as_relative = false
 		
 		plant_cell.add_child(fire_new)
-		fire_new.global_position = plant_cell.plant_position.global_position
+		fire_new.global_position = plant_cell.plant_cell_down.global_position
 		fire_new.activate_bomb_effect()
 
 	## 等待一帧后，删除冰道，与雪橇车小队交互需要

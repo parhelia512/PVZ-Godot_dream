@@ -42,7 +42,7 @@ var total_prob = 0
 
 ## 植物种植完成后重新开始计时器信号
 signal restart_timer_card_plant_end
-
+const card = preload("res://scenes/ui/card.tscn")
 #region 初始化
 ## main_game调用
 func init_conveyor_belt_card_bar(card_type :Array[Global.PlantType], card_type_probability :Array[int], card_type_start_list :Array[Global.PlantType]):
@@ -127,7 +127,7 @@ func create_new_card():
 	else:
 		new_card_type = _get_random_card_by_probability()
 	
-	var new_card:Card = Global.card.instantiate()
+	var new_card:Card = card.instantiate()
 	card_area.add_child(new_card)
 	new_card.card_init_conveyor_belt(new_card_type)
 	new_card.position = card_position.position

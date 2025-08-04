@@ -33,10 +33,10 @@ size = Vector2(50, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxf8y"]
 size = Vector2(65, 55)
 
-[node name="TallNut" type="Node2D" node_paths=PackedStringArray("anim_face")]
+[node name="TallNut" type="Node2D" node_paths=PackedStringArray("change_status_body")]
 script = ExtResource("1_30n4e")
 face_damaged = Array[Texture2D]([ExtResource("2_uxf8y"), ExtResource("3_urga3")])
-anim_face = NodePath("Body/Anim_idle")
+change_status_body = NodePath("Body/Anim_idle")
 plant_condition = ExtResource("2_khj7b")
 no_blink = true
 max_hp = 8000
@@ -50,9 +50,9 @@ scale = Vector2(1.22093, 0.902778)
 texture = ExtResource("3_dgm8j")
 
 [node name="Anim_idle" type="Sprite2D" parent="Body"]
-position = Vector2(0.588832, -35.4927)
-rotation = 0.0102774
-scale = Vector2(0.809184, 0.802223)
+position = Vector2(-0.429792, -36.3837)
+rotation = -0.00250067
+scale = Vector2(0.802865, 0.811702)
 texture = ExtResource("1_dgm8j")
 centered = false
 

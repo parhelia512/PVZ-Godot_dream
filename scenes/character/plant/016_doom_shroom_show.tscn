@@ -1,0 +1,114 @@
+[gd_scene load_steps=21 format=3 uid="uid://br5swg7y21jj7"]
+
+[ext_resource type="Script" uid="uid://ct7o2l5si8jdh" path="res://scripts/garden/Plant/plant_shroom_garden.gd" id="1_i4e3m"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_kvol8"]
+[ext_resource type="Texture2D" uid="uid://cdtfyduah2ly" path="res://assets/reanim/DoomShroom_body.png" id="4_hx7kc"]
+[ext_resource type="Texture2D" uid="uid://bpjmr3sk4my7i" path="res://assets/reanim/DoomShroom_head1.png" id="5_ufxu5"]
+[ext_resource type="PackedScene" uid="uid://dmenla6ro7cn0" path="res://scenes/garden/sleep_shroom_garden.tscn" id="8_dtk8t"]
+[ext_resource type="Animation" uid="uid://ddwy4t6dlipi2" path="res://animation/character/plant/016_doom_shroom/DoomShroom_explode.tres" id="9_8xlu1"]
+[ext_resource type="Animation" uid="uid://bdiplwnh2kbon" path="res://animation/character/plant/016_doom_shroom/DoomShroom_idle.tres" id="10_jhji2"]
+[ext_resource type="Animation" uid="uid://d36brwlaso680" path="res://animation/character/plant/016_doom_shroom/DoomShroom_sleep.tres" id="11_ivx0e"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rjiww"]
+_data = {
+&"DoomShroom_explode": ExtResource("9_8xlu1"),
+&"DoomShroom_idle": ExtResource("10_jhji2"),
+&"DoomShroom_sleep": ExtResource("11_ivx0e")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dc52l"]
+animation = &"DoomShroom_explode"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_puei7"]
+animation = &"DoomShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k2ghs"]
+animation = &"DoomShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_74em3"]
+advance_mode = 2
+advance_expression = "is_bomb and not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xi7k7"]
+advance_mode = 2
+advance_expression = "not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rcrem"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h4mhh"]
+advance_mode = 2
+advance_expression = "is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dtk8t"]
+advance_mode = 2
+advance_expression = "is_sleep"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fmcth"]
+states/DoomShroom_explode/node = SubResource("AnimationNodeAnimation_dc52l")
+states/DoomShroom_explode/position = Vector2(658, 174)
+states/DoomShroom_idle/node = SubResource("AnimationNodeAnimation_puei7")
+states/DoomShroom_idle/position = Vector2(396, 174)
+states/DoomShroom_sleep/node = SubResource("AnimationNodeAnimation_k2ghs")
+states/DoomShroom_sleep/position = Vector2(396, 76)
+states/Start/position = Vector2(154, 76)
+transitions = ["DoomShroom_idle", "DoomShroom_explode", SubResource("AnimationNodeStateMachineTransition_74em3"), "Start", "DoomShroom_sleep", SubResource("AnimationNodeStateMachineTransition_xi7k7"), "DoomShroom_sleep", "DoomShroom_idle", SubResource("AnimationNodeStateMachineTransition_rcrem"), "Start", "DoomShroom_idle", SubResource("AnimationNodeStateMachineTransition_h4mhh"), "DoomShroom_idle", "DoomShroom_sleep", SubResource("AnimationNodeStateMachineTransition_dtk8t")]
+graph_offset = Vector2(27, 34)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_k2ghs"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xi7k7"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_fmcth")
+nodes/StateMachine/position = Vector2(40, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_k2ghs")
+nodes/TimeScale/position = Vector2(420, 100)
+nodes/output/position = Vector2(600, 120)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[node name="DoomShroom" type="Node2D"]
+script = ExtResource("1_i4e3m")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-40.201, -73.3899)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(38, 70)
+texture = ExtResource("3_kvol8")
+
+[node name="DoomShroom_body" type="Sprite2D" parent="Body"]
+position = Vector2(17.1816, 39.8095)
+scale = Vector2(0.797007, 0.80381)
+texture = ExtResource("4_hx7kc")
+centered = false
+
+[node name="DoomShroom_head1" type="Sprite2D" parent="Body"]
+position = Vector2(0.108853, 3.24623)
+scale = Vector2(0.797823, 0.804354)
+texture = ExtResource("5_ufxu5")
+centered = false
+
+[node name="DoomShroom_head2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="DoomShroom_head3" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="DoomShroom_sleepinghead" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rjiww")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_xi7k7")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="SleepShroomGarden" parent="." instance=ExtResource("8_dtk8t")]

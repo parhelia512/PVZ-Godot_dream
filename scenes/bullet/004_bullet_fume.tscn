@@ -13,7 +13,7 @@ bullet_mode = 1
 trigger_be_attack_SFX = false
 max_distance = 350.0
 
-[node name="PuffBulletBody" type="Sprite2D" parent="."]
+[node name="BulletBody" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.625, 0.666667)
 texture = ExtResource("2_fkqdm")

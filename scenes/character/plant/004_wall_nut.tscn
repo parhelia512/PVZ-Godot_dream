@@ -52,10 +52,10 @@ node_connections = [&"TimeScale", 0, &"AnimationNodeStateMachine", &"output", 0,
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrlnw"]
 size = Vector2(50, 60)
 
-[node name="WallNut" type="Node2D" node_paths=PackedStringArray("anim_face", "blink_sprite")]
+[node name="WallNut" type="Node2D" node_paths=PackedStringArray("change_status_body", "blink_sprite")]
 script = ExtResource("1_k6qa0")
 face_damaged = Array[Texture2D]([ExtResource("2_w5ly5"), ExtResource("3_yfchq")])
-anim_face = NodePath("Body/Anim_face")
+change_status_body = NodePath("Body/Anim_face")
 plant_condition = ExtResource("4_87jv5")
 blink_sprite = NodePath("Body/Anim_blink_twice")
 blink_sprite_texture = Array[Texture]([ExtResource("7_nyqmn"), ExtResource("5_nyqmn")])
@@ -76,23 +76,22 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(4.53702, 7.15764)
-rotation = -0.0347201
-scale = Vector2(0.7, 0.696107)
-skew = 0.00128563
+position = Vector2(5.65567, 5.40257)
+rotation = -0.0174757
+scale = Vector2(0.7, 0.707126)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Anim_blink_twitch" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(27.8317, 36.5578)
+position = Vector2(28.4848, 36.1006)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_vxn41")
 centered = false
 
 [node name="Anim_blink_twice" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(26.6317, 22.5578)
+position = Vector2(27.2848, 22.1006)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_nyqmn")
 centered = false

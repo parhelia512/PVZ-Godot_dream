@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5rixddqwgp0t"]
+
+[ext_resource type="Script" uid="uid://16dpfpm5gjlm" path="res://scripts/garden/Plant/plant_garden.gd" id="1_id5hg"]
+[ext_resource type="Texture2D" uid="uid://cwhpp4e3mm63u" path="res://assets/reanim/Torchwood_eyes1.png" id="3_3leto"]
+[ext_resource type="Texture2D" uid="uid://cg0kmdqyqdiu1" path="res://assets/reanim/Torchwood_fire1b.png" id="4_id5hg"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="5_ovivs"]
+[ext_resource type="Texture2D" uid="uid://bxf2w1rk7r03s" path="res://assets/reanim/Torchwood_spark.png" id="6_rx5db"]
+[ext_resource type="Texture2D" uid="uid://dejh82cbf5y5q" path="res://assets/reanim/Torchwood_body.png" id="8_ou1ch"]
+[ext_resource type="Texture2D" uid="uid://dskdfdfajmrkk" path="res://assets/reanim/Torchwood_mouth.png" id="9_84qkx"]
+[ext_resource type="Animation" uid="uid://ccowvoaw57mbe" path="res://animation/character/plant/023_torch_wood/Torchwood_idle.tres" id="10_kw08p"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ytarc"]
+_data = {
+&"Torchwood_idle": ExtResource("10_kw08p")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j55gq"]
+animation = &"Torchwood_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x6pvl"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_shvw3"]
+graph_offset = Vector2(-110.7, -52)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_j55gq")
+nodes/Animation/position = Vector2(40, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_x6pvl")
+nodes/TimeScale/position = Vector2(260, 100)
+nodes/output/position = Vector2(460, 120)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="TorchWood" type="Node2D"]
+script = ExtResource("1_id5hg")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-42, -70.0145)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("5_ovivs")
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Layer 35" type="Sprite2D" parent="Body"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.02)
+position = Vector2(58.5, -14.7)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_rx5db")
+centered = false
+
+[node name="Layer 33" type="Sprite2D" parent="Body"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.02)
+position = Vector2(32.7, -12.7)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_rx5db")
+centered = false
+
+[node name="Layer 34" type="Sprite2D" parent="Body"]
+self_modulate = Color(1, 1, 1, 0.544229)
+position = Vector2(39.7, 12.5478)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_rx5db")
+centered = false
+
+[node name="Torchwood_fire1" type="Sprite2D" parent="Body"]
+position = Vector2(16.0642, -8.27811)
+scale = Vector2(0.732055, 0.96198)
+texture = ExtResource("4_id5hg")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(6.62139, 29.3144)
+scale = Vector2(0.727786, 0.69607)
+texture = ExtResource("8_ou1ch")
+centered = false
+
+[node name="Torchwood_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(22.3428, 42.8786)
+rotation = -0.006981
+scale = Vector2(0.76393, 0.858433)
+skew = 0.006981
+texture = ExtResource("9_84qkx")
+centered = false
+
+[node name="Torchwood_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(30.2771, 40.1506)
+scale = Vector2(0.737, 0.787)
+texture = ExtResource("3_3leto")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ytarc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_shvw3")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0

@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="8_avrp1"]
 [ext_resource type="Texture2D" uid="uid://r5dfpn7vwmsb" path="res://assets/reanim/Zombie_bobsled_outerleg_foot2.png" id="9_m1ar8"]
 [ext_resource type="Texture2D" uid="uid://btbf0qrhq3cq3" path="res://assets/reanim/Zombie_bobsled_outerleg_foot1.png" id="10_ednj1"]
-[ext_resource type="Texture2D" uid="uid://bo21tgjclapyd" path="res://assets/reanim/Zombie_bobsled_innerarm_hand.png" id="10_ndkkq"]
+[ext_resource type="Texture2D" uid="uid://dbaj7kjake4dw" path="res://assets/reanim/Zombie_bobsled_innerarm_hand2.png" id="10_ndkkq"]
 [ext_resource type="Texture2D" uid="uid://caygtc1obvhm4" path="res://assets/reanim/Zombie_bobsled_outerleg_lower.png" id="11_l6c0y"]
 [ext_resource type="Texture2D" uid="uid://bjegvw88beopj" path="res://assets/reanim/Zombie_bobsled_outerleg_upper.png" id="12_0nh27"]
 [ext_resource type="Texture2D" uid="uid://db5qju8swnl8" path="res://assets/reanim/Zombie_bobsled_newhead.png" id="13_2ur8u"]
@@ -1261,7 +1261,7 @@ texture = ExtResource("2_ndkkq")
 position = Vector2(-45, -86)
 
 [node name="_ground" type="Sprite2D" parent="Body"]
-position = Vector2(-36.721, 110.1)
+position = Vector2(-40.8382, 110.1)
 centered = false
 
 [node name="shadow" type="Sprite2D" parent="Body"]
@@ -1269,139 +1269,132 @@ position = Vector2(49, 130)
 texture = ExtResource("8_avrp1")
 
 [node name="Zombie_dolphinrider_innerarm_lower" type="Sprite2D" parent="Body"]
-position = Vector2(26.8, 73.2)
-rotation = 2.16944
-scale = Vector2(0.773, 0.929)
-skew = -0.162315
+position = Vector2(16.1789, 74.1691)
+rotation = 0.7134
+scale = Vector2(0.795, 1.00908)
 texture = ExtResource("1_ialpx")
 centered = false
 
 [node name="Zombie_dolphinrider_innerarm_hand" type="Sprite2D" parent="Body"]
-position = Vector2(11.9, 59.3)
-rotation = 1.85529
-scale = Vector2(0.762, 0.762)
+position = Vector2(-18.5, 89.1)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_ndkkq")
 centered = false
 
 [node name="Zombie_dolphinrider_innerarm_upper" type="Sprite2D" parent="Body"]
-position = Vector2(19.4, 55.8)
-rotation = 0.219911
-scale = Vector2(0.773, 1.007)
-skew = -0.109955
+position = Vector2(23.2732, 62.0903)
+rotation = 0.592206
+scale = Vector2(0.795, 0.933252)
 texture = ExtResource("3_tps2g")
 centered = false
 
 [node name="Zombie_dolphinrider_innerleg_lower" type="Sprite2D" parent="Body"]
-position = Vector2(26.2, 105.3)
-rotation = -0.624828
-scale = Vector2(0.797, 0.797)
+position = Vector2(44.8097, 98.2789)
+rotation = -0.331584
+scale = Vector2(0.798, 0.917715)
 texture = ExtResource("4_uht17")
 centered = false
 
 [node name="Zombie_dolphinrider_innerleg_foot" type="Sprite2D" parent="Body"]
-position = Vector2(29.3, 118.3)
-rotation = -0.024435
-scale = Vector2(0.799, 0.799)
+position = Vector2(44.6618, 118.621)
+rotation = -0.00275303
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("5_7kr2o")
 centered = false
 
 [node name="Zombie_dolphinrider_innerleg_upper" type="Sprite2D" parent="Body"]
-position = Vector2(43.5, 70.5)
-rotation = 0.464258
-scale = Vector2(0.717, 0.797)
+position = Vector2(35.2325, 72.6732)
+rotation = -0.355849
+scale = Vector2(0.718789, 0.799789)
+skew = -0.0825407
 texture = ExtResource("6_7yoq5")
 centered = false
 
 [node name="Zombie_dolphinrider_body2" type="Sprite2D" parent="Body"]
-position = Vector2(36, 71.2)
-rotation = -0.198968
-scale = Vector2(0.819, 0.933)
+position = Vector2(42.0732, 65.7577)
+rotation = 0.177924
+scale = Vector2(0.803634, 0.886)
+skew = -0.114383
 texture = ExtResource("7_uh2xs")
 centered = false
 
 [node name="Zombie_dolphinrider_body1" type="Sprite2D" parent="Body"]
-position = Vector2(19.1, 44.6)
-rotation = -0.050615
-scale = Vector2(0.798, 0.798)
+position = Vector2(16.6406, 44.8959)
+rotation = -0.0710484
+scale = Vector2(0.803, 0.797)
+skew = -0.116199
 texture = ExtResource("8_122kk")
 centered = false
 
 [node name="Zombie_dolphinrider_outerleg_foot2" type="Sprite2D" parent="Body"]
-position = Vector2(44.4, 126.9)
-rotation = -0.181514
-scale = Vector2(0.798, 0.738)
+position = Vector2(28.2708, 121.892)
+rotation = -0.232173
+scale = Vector2(0.796211, 0.736211)
 texture = ExtResource("9_m1ar8")
 centered = false
 
 [node name="Zombie_dolphinrider_outerleg_foot1" type="Sprite2D" parent="Body"]
-position = Vector2(54.8, 128.3)
-rotation = 5.56586
+position = Vector2(38.5651, 120.211)
+rotation = 5.92739
 scale = Vector2(0.797, 0.797)
 texture = ExtResource("10_ednj1")
 centered = false
 
 [node name="Zombie_dolphinrider_outerleg_lower" type="Sprite2D" parent="Body"]
-position = Vector2(40.3, 107.8)
-rotation = -0.558505
-scale = Vector2(0.796, 0.938)
+position = Vector2(34.9846, 100.096)
+rotation = -0.130347
+scale = Vector2(0.797, 0.797)
 skew = 6.28144
 texture = ExtResource("11_l6c0y")
 centered = false
 
 [node name="Zombie_dolphinrider_outerleg_upper" type="Sprite2D" parent="Body"]
-position = Vector2(48.5, 76.8)
-rotation = 0.267035
-scale = Vector2(0.798, 0.825)
+position = Vector2(52.5, 76.2154)
+rotation = 0.581833
+scale = Vector2(0.799789, 0.791805)
+skew = 0.065187
 texture = ExtResource("12_0nh27")
 centered = false
 
 [node name="Zombie_outerarm_lowereating" type="Sprite2D" parent="Body"]
-position = Vector2(59.9, 63.1)
-rotation = 0.670206
-scale = Vector2(0.766, 0.814)
 centered = false
 
 [node name="Anim_head1" type="Sprite2D" parent="Body"]
-position = Vector2(-8.2, 19.9)
-rotation = -0.029671
-scale = Vector2(0.796, 0.796)
+position = Vector2(-6.1057, 17.8211)
+rotation = 0.0803846
+scale = Vector2(0.798, 0.798)
 texture = ExtResource("13_2ur8u")
 centered = false
 
 [node name="Anim_head2" type="Sprite2D" parent="Body"]
-position = Vector2(3.21878e-06, 51.8)
-rotation = -0.00349103
-scale = Vector2(0.872, 0.794)
-skew = -0.0733034
+position = Vector2(0.725191, 53.7634)
+rotation = -0.0200076
+scale = Vector2(0.797, 0.797)
 texture = ExtResource("14_edogj")
 centered = false
 
 [node name="Zombie_outerarm_handeating" type="Sprite2D" parent="Body"]
-position = Vector2(44, 72.4)
-rotation = 0.642281
-scale = Vector2(0.76, 0.76)
-texture = ExtResource("18_4dwai")
 centered = false
 
 [node name="Zombie_outerarm_lower" type="Sprite2D" parent="Body"]
-position = Vector2(63.9, 92.1)
-rotation = 0.748746
-scale = Vector2(0.783, 0.832)
-skew = 6.28319
+position = Vector2(31.9, 71.5268)
+rotation = 0.987317
+scale = Vector2(0.839211, 1.04298)
+skew = 5.9512
 texture = ExtResource("15_q1427")
 centered = false
 
 [node name="Zombie_outerarm_hand" type="Sprite2D" parent="Body"]
-position = Vector2(49.9, 87.9)
-rotation = 0.87441
-scale = Vector2(0.782, 0.782)
+position = Vector2(-6.3, 91.3)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("18_4dwai")
 centered = false
 
 [node name="Zombie_dolphinrider_outerarm_upper" type="Sprite2D" parent="Body"]
-position = Vector2(41.5, 51.5)
-rotation = 0.0575961
-scale = Vector2(0.774, 0.774)
+position = Vector2(47.2309, 53.6423)
+rotation = 1.51364
+scale = Vector2(0.939, 0.799)
+skew = -0.127409
 texture = ExtResource("17_k0foj")
 centered = false
 

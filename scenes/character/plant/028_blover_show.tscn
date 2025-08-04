@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=3 uid="uid://kin5un8w8ea3"]
+
+[ext_resource type="Script" uid="uid://16dpfpm5gjlm" path="res://scripts/garden/Plant/plant_garden.gd" id="1_vjq5t"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="3_3kxss"]
+[ext_resource type="Texture2D" uid="uid://cphyi585kac3c" path="res://assets/reanim/Blover_dirt_back.png" id="4_ec4wa"]
+[ext_resource type="Texture2D" uid="uid://du4g4ioiybxm5" path="res://assets/reanim/Blover_stem2.png" id="5_mko1x"]
+[ext_resource type="Texture2D" uid="uid://s4quydbbcbox" path="res://assets/reanim/Blover_stem1.png" id="6_wpysr"]
+[ext_resource type="Texture2D" uid="uid://p0gjyfmwmgbi" path="res://assets/reanim/Blover_dirt_front.png" id="7_1pscw"]
+[ext_resource type="Texture2D" uid="uid://cqprf536gm6xf" path="res://assets/reanim/Blover_petal.png" id="8_eojf2"]
+[ext_resource type="Texture2D" uid="uid://jgwwt6mqsswi" path="res://assets/reanim/Blover_head.png" id="8_vjq5t"]
+[ext_resource type="Animation" uid="uid://dfbime8s6x1lg" path="res://animation/character/plant/028_blover/Blover_blow.tres" id="10_8ep5d"]
+[ext_resource type="Animation" uid="uid://xfhk6bi0nn0g" path="res://animation/character/plant/028_blover/Blover_idle.tres" id="11_k8loe"]
+[ext_resource type="Animation" uid="uid://c1ljxjgesp5ko" path="res://animation/character/plant/028_blover/Blover_loop.tres" id="12_mmwc3"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sb6j3"]
+_data = {
+&"Blover_blow": ExtResource("10_8ep5d"),
+&"Blover_idle": ExtResource("11_k8loe"),
+&"Blover_loop": ExtResource("12_mmwc3")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i2vxv"]
+animation = &"Blover_idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_veju4"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oyuui"]
+graph_offset = Vector2(-215.612, -29.1653)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_i2vxv")
+nodes/Animation/position = Vector2(100, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_veju4")
+nodes/TimeScale/position = Vector2(380, 120)
+nodes/output/position = Vector2(620, 160)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="Blover" type="Node2D"]
+script = ExtResource("1_vjq5t")
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-37, -66.5789)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(40, 70)
+texture = ExtResource("3_3kxss")
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_loop" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blow" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Blover_dirt_back" type="Sprite2D" parent="Body"]
+position = Vector2(37.6, 65.1692)
+scale = Vector2(0.773616, 0.849461)
+texture = ExtResource("4_ec4wa")
+centered = false
+
+[node name="Blover_stem2" type="Sprite2D" parent="Body"]
+position = Vector2(27.2769, 48.8692)
+rotation = -0.0586698
+scale = Vector2(0.799, 1.02846)
+skew = -0.0908908
+texture = ExtResource("5_mko1x")
+centered = false
+
+[node name="Blover_stem1" type="Sprite2D" parent="Body"]
+position = Vector2(23.6616, 35.1616)
+rotation = -0.115594
+scale = Vector2(0.804615, 0.853384)
+skew = -0.0201381
+texture = ExtResource("6_wpysr")
+centered = false
+
+[node name="Blover_dirt_front" type="Sprite2D" parent="Body"]
+position = Vector2(36.5308, 67.5692)
+scale = Vector2(0.773616, 0.849461)
+texture = ExtResource("7_1pscw")
+centered = false
+
+[node name="Blover_petals" type="Sprite2D" parent="Body"]
+position = Vector2(14.8385, -19.6154)
+texture = ExtResource("8_eojf2")
+centered = false
+
+[node name="Blover_petals2" type="Sprite2D" parent="Body"]
+position = Vector2(1.0385, 60.6539)
+rotation = 4.18879
+texture = ExtResource("8_eojf2")
+centered = false
+
+[node name="Blover_petals3" type="Sprite2D" parent="Body"]
+position = Vector2(78.8385, 29.7846)
+rotation = 2.0944
+texture = ExtResource("8_eojf2")
+centered = false
+
+[node name="Blover_head" type="Sprite2D" parent="Body"]
+position = Vector2(15.077, 12.1692)
+scale = Vector2(0.797, 0.797)
+texture = ExtResource("8_vjq5t")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sb6j3")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_oyuui")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0

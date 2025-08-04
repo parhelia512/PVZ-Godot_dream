@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bt07br5ypejyq"]
+[gd_scene load_steps=31 format=3 uid="uid://bt07br5ypejyq"]
 
 [ext_resource type="Script" uid="uid://xmlolyqvbiue" path="res://scripts/character/plant/plant_010_sun_shroom.gd" id="1_dmoof"]
 [ext_resource type="PackedScene" uid="uid://f0wyiq6h4jnl" path="res://scenes/item/game_scenes_item/sun.tscn" id="2_hwl54"]
@@ -16,60 +16,8 @@
 [ext_resource type="Animation" uid="uid://cswajbnwiqpv0" path="res://animation/character/plant/010_sun_shroom/SunShroom_sleep.tres" id="9_6qegl"]
 [ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="11_2m7o2"]
 
-[sub_resource type="Animation" id="Animation_qx6q8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body/shadow:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(41, 61)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/shadow:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/shadow:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.796914, 0.736522)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Body/shadow:skew")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6h3r7"]
 _data = {
-&"RESET": SubResource("Animation_qx6q8"),
 &"SunShroom_bigidle": ExtResource("5_57mnc"),
 &"SunShroom_bigsleep": ExtResource("6_veen5"),
 &"SunShroom_grow": ExtResource("7_56678"),
@@ -157,8 +105,8 @@ scale = Vector2(0.796914, 0.736522)
 texture = ExtResource("5_2je2o")
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(24.8376, 43.6706)
-scale = Vector2(0.587953, 0.495588)
+position = Vector2(26.3, 41.2)
+scale = Vector2(0.54, 0.54)
 texture = ExtResource("5_5cx50")
 centered = false
 
@@ -171,15 +119,15 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body"]
 visible = false
-position = Vector2(34.1918, 46.8706)
-scale = Vector2(0.619035, 0.563)
+position = Vector2(34.6, 44.8)
+scale = Vector2(0.563, 0.563)
 texture = ExtResource("4_veen5")
 centered = false
 
 [node name="SunShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(15.6212, 17.1118)
+position = Vector2(18.8, 9.7)
 rotation = 0.07854
-scale = Vector2(0.582412, 0.448176)
+scale = Vector2(0.54, 0.54)
 texture = ExtResource("7_oyc14")
 centered = false
 

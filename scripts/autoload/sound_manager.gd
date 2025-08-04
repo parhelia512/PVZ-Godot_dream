@@ -5,6 +5,7 @@ enum Bus {MASTER, BGM, SFX}
 
 @onready var bgm_play: AudioStreamPlayer = $BGMPlay
 @onready var sfx_all: Node = $SFXAll
+@onready var crazy_dave_player: AudioStreamPlayer = $SFXAll/CrazyDavePlayer
 
 func _ready() -> void:
 	Global.load_config()
@@ -141,7 +142,57 @@ const SFXPlantMap := {
 	},
 	Global.PlantType.TorchWood:{
 	},
-	Global.PlantType.TallNut:{
+	
+	Global.PlantType.SeaShroom:{
+	},
+	Global.PlantType.Plantern:{
+	},
+	Global.PlantType.Cactus:{
+	},
+	Global.PlantType.Blover:{
+		&"blover": preload("res://assets/audio/SFX/plant/blover.ogg")
+	},
+	Global.PlantType.SplitPea:{
+	},
+	Global.PlantType.StarFruit:{
+	},
+	Global.PlantType.Pumpkin:{
+	},
+	Global.PlantType.MagnetShroom:{
+	},
+	
+	Global.PlantType.CabbagePult:{
+	},
+	Global.PlantType.FlowerPot:{
+	},
+	Global.PlantType.CornPult:{
+	},
+	Global.PlantType.CoffeeBean:{
+	},
+	Global.PlantType.Garlic:{
+	},
+	Global.PlantType.UmbrellaLeaf:{
+	},
+	Global.PlantType.MariGold:{
+	},
+	Global.PlantType.MelonPult:{
+	},
+	
+	Global.PlantType.GatlingPea:{
+	},
+	Global.PlantType.TwinSunFlower:{
+	},
+	Global.PlantType.GloomShroom:{
+	},
+	Global.PlantType.Cattail:{
+	},
+	Global.PlantType.WinterMelon:{
+	},
+	Global.PlantType.GoldMagnet:{
+	},
+	Global.PlantType.SpikeRock:{
+	},
+	Global.PlantType.CobCannon:{
 	}
 }
 
@@ -198,6 +249,34 @@ const SFXZombieMap := {
 	},
 }
 
+## 戴夫音效字典
+const SFXCarzyDaveMap := {
+	## 一秒左右
+	&"crazydaveshort" : [
+		preload("res://assets/audio/SFX/carzy/crazydaveshort1.ogg"), 
+		preload("res://assets/audio/SFX/carzy/crazydaveshort2.ogg"), 
+		preload("res://assets/audio/SFX/carzy/crazydaveshort3.ogg")
+	],
+	## 两秒左右
+	&"crazydavelong" : [
+		preload("res://assets/audio/SFX/carzy/crazydavelong1.ogg"),
+		preload("res://assets/audio/SFX/carzy/crazydavelong2.ogg"),
+		preload("res://assets/audio/SFX/carzy/crazydavelong3.ogg")
+	],
+	## 三秒左右
+	&"crazydaveextralong" : [
+		preload("res://assets/audio/SFX/carzy/crazydaveextralong1.ogg"),
+		preload("res://assets/audio/SFX/carzy/crazydaveextralong2.ogg"),
+		preload("res://assets/audio/SFX/carzy/crazydaveextralong3.ogg")
+	],
+	&"crazydavecrazy" : [
+		preload("res://assets/audio/SFX/carzy/crazydavecrazy.ogg")
+	],
+	&"crazydavescream" : [
+		preload("res://assets/audio/SFX/carzy/crazydavescream2.ogg"), 
+		preload("res://assets/audio/SFX/carzy/crazydavescream.ogg")
+	],
+}
 
 # 音效对象池实现
 var sfx_bullet_pool = []
@@ -260,6 +339,13 @@ func play_zombie_SFX(zombie_type:Global.ZombieType, option:StringName):
 		sfx_resource = SFXZombieMap[zombie_type][option]
 	play_sfx_with_pool(sfx_resource)
 
+## 播放戴夫音效
+func play_crazy_dave_SFX(option:StringName):
+	var sfx_array: Array = SFXCarzyDaveMap[option] 
+
+	var sfx_selected = sfx_array.pick_random()
+	crazy_dave_player.stream = sfx_selected
+	crazy_dave_player.play()
 
 #endregion
 
@@ -278,6 +364,8 @@ const SFXOtherMap := {
 	&"pause": preload("res://assets/audio/SFX/button/pause.ogg"),
 	## 点击阳光
 	&"points": preload("res://assets/audio/SFX/button/points.ogg"),
+	## 点击金币
+	&"coin":preload("res://assets/audio/SFX/item/coin.ogg"),
 	
 	##-------------------------- 卡片相关 --------------------------
 	&"buzzer":preload("res://assets/audio/SFX/card_and_shovel/buzzer.ogg"),
@@ -321,9 +409,17 @@ const SFXOtherMap := {
 	## -------- 锤子 --------
 	&"swing": preload("res://assets/audio/SFX/item/swing.ogg"),
 	&"bonk": preload("res://assets/audio/SFX/item/bonk.ogg"),
+	## -------- 花园 -----------
+	&"prize": preload("res://assets/audio/SFX/garden/prize.ogg"),
+	
+	##-------------------------- 花园相关 --------------------------
+	&"watering":preload("res://assets/audio/SFX/garden/watering.ogg"),
+	&"fertilizer":preload("res://assets/audio/SFX/garden/fertilizer.ogg"),
+	&"bugspray":preload("res://assets/audio/SFX/garden/bugspray.ogg"),
+	&"phonograph":preload("res://assets/audio/SFX/garden/phonograph.ogg"),
+	&"wakeup": preload("res://assets/audio/SFX/garden/wakeup.ogg"),
 	
 }
-
 ## 播放其它相关音效
 func play_other_SFX(option:StringName):
 	var sfx_resource: AudioStream

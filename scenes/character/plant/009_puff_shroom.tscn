@@ -53,14 +53,14 @@ states/PuffShroom_idle/position = Vector2(422, 51)
 states/PuffShroom_sleep/node = SubResource("AnimationNodeAnimation_rexsj")
 states/PuffShroom_sleep/position = Vector2(422, 176)
 transitions = ["PuffShroom_sleep", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_kf1mc"), "Start", "PuffShroom_sleep", SubResource("AnimationNodeStateMachineTransition_tm5gy"), "Start", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_mc8sy")]
-graph_offset = Vector2(51, -2)
+graph_offset = Vector2(74, -34)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7p5dm"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3gdsv"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_77dap"]
-graph_offset = Vector2(-461.398, 59.2404)
+graph_offset = Vector2(-375.48, 220.161)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_54vaa")
 nodes/Animation/position = Vector2(-540, 420)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_jxqfk")
@@ -105,32 +105,32 @@ visible = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body"]
-position = Vector2(29.3, 47.4922)
-scale = Vector2(0.44, 0.414594)
+position = Vector2(29.3, 47.3986)
+scale = Vector2(0.44, 0.417715)
 texture = ExtResource("6_2hw4s")
 centered = false
 
 [node name="PuffShroom_stem" type="Sprite2D" parent="Body"]
-position = Vector2(47.6, 51.6922)
-scale = Vector2(0.45, 0.424594)
+position = Vector2(47.6, 51.5986)
+scale = Vector2(0.45, 0.427715)
 texture = ExtResource("7_hlrmg")
 centered = false
 
 [node name="PuffShroom_tip" type="Sprite2D" parent="Body"]
-position = Vector2(49.4, 49.2922)
+position = Vector2(49.4, 49.1986)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("8_ukjud")
 centered = false
 
 [node name="PuffShroom_head" type="Sprite2D" parent="Body"]
-position = Vector2(21.9719, 30.0484)
-scale = Vector2(0.449922, 0.416235)
+position = Vector2(22.0343, 29.83)
+scale = Vector2(0.448986, 0.419043)
 texture = ExtResource("9_nsn87")
 centered = false
 
 [node name="PuffShroom_eyes" type="Sprite2D" parent="Body"]
-position = Vector2(43.9, 49.7922)
-scale = Vector2(0.44, 0.465562)
+position = Vector2(43.9, 49.6986)
+scale = Vector2(0.44, 0.464314)
 texture = ExtResource("4_6bex2")
 centered = false
 
@@ -159,7 +159,7 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.0
-"parameters/TimeScale 2/scale" = 1.0
+"parameters/TimeScale 2/scale" = 2.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(250, 0)

@@ -10,3 +10,6 @@ script = ExtResource("1_yi7ou")
 bus = &"BGM"
 
 [node name="SFXAll" type="Node" parent="."]
+
+[node name="CrazyDavePlayer" type="AudioStreamPlayer" parent="SFXAll"]
+bus = &"SFX"
