@@ -1,8 +1,19 @@
 extends Node
 ## 散落的加载场景
 
+#region  主游戏场景相关预加载场景
+
+## 雾
+const FOG = preload("res://scenes/item/game_scenes_item/fog.tscn")
+
+#endregion
 ## 花园植物格子
 var PLANT_CELL_GARDEN:PackedScene= load("res://scenes/garden/plant_cell_garden.tscn")
+## 花园需求气泡
+var GARDEN_SPEECH_BUBBLE = load("res://scenes/garden/garden_speech_bubble.tscn")
+## 花园花盆
+const GARDEN_FLOWER_POT = preload("res://scenes/garden/garden_flower_pot.tscn")
+
 
 ## 戴夫
 var CRAZY_DAVE:PackedScene = load("res://scenes/crazy_dave/crazy_dave.tscn")
@@ -15,3 +26,35 @@ const COIN_DIAMOND:PackedScene = preload("res://scenes/item/game_scenes_item/dro
 const COIN_GOLD:PackedScene = preload("res://scenes/item/game_scenes_item/drop/coin_gold.tscn")
 const COIN_SILVER:PackedScene = preload("res://scenes/item/game_scenes_item/drop/coin_silver.tscn")
 const PRESENT:PackedScene = preload("res://scenes/item/game_scenes_item/drop/present.tscn")
+
+## 备选卡片
+const CARD_CANDIDATE_CONTAINER = preload("res://scenes/ui/all_cards/card_candidate_container.tscn")
+## 植物种植特效
+const PLANT_START_EFFECT = preload("res://scenes/item/game_scenes_item/plant_effect/plant_start_effect.tscn")
+const PLANT_START_EFFECT_WATER = preload("res://scenes/item/game_scenes_item/plant_effect/plant_start_effect_water.tscn")
+
+## 坑洞
+const DOOM_SHROOM_CRATER = preload("res://scenes/fx/doom_shroom_crater.tscn")
+
+## 墓碑
+const TOMBSTONE = preload("res://scenes/item/game_scenes_item/tombstone.tscn")
+
+
+## 冰冻僵尸特效
+const ICE_EFFECT = preload("res://scenes/fx/ice_effect.tscn")
+
+## 舞王管理器
+var JACKSON_MANAGER = load("res://scenes/character/components/jackson_manager.tscn")
+
+## 奖杯
+const TROPHY = preload("res://scenes/ui/trophy.tscn")
+
+## 泳池水花场景
+const SPLASH = preload("res://scenes/item/game_scenes_item/splash.tscn")
+## 火焰特效(火爆辣椒\火焰豌豆)
+const FIRE = preload("res://scenes/fx/fire.tscn")
+
+## 阳光
+var SUN = load("res://scenes/item/game_scenes_item/sun.tscn")
+## 天降阳光节点
+const DAY_SUNS_MANAGER = preload("res://scenes/manager/day_suns_manager.tscn")

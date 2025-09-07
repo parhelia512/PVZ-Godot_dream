@@ -1,2 +1,0 @@
-extends PVZButtonBase
-class_name ReCardButton

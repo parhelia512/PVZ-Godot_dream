@@ -7,7 +7,7 @@ var ori_move_speed:float
 #region 游泳相关
 
 ## 碰到僵尸
-var is_zombie: bool = false 
+var is_zombie: bool = false
 
 @export_group("游泳相关")
 @export var is_water := false
@@ -21,56 +21,53 @@ var is_zombie: bool = false
 func _ready() -> void:
 	super._ready()
 	ori_move_speed = move_speed
-	
+
 
 func _on_area_entered(area: Area2D) -> void:
-	var parent_node = area.get_parent()
-	
-	if parent_node is ZombieBase:  
+	var owner_node = area.owner
+	if owner_node is Zombie000Base:
 
-		if lane == parent_node.lane:
+		if lane == owner_node.lane:
 			if not is_moving:
 				is_moving = true
 				SoundManager.play_other_SFX("pool_cleaner")
 				animation_player.play("PoolCleaner_land")
-				
-			parent_node.be_pool_mowered_run()
+
+			owner_node.character_death_disappear()
 			move_speed = ori_move_speed / 4
 			is_zombie = true
-			
-	elif parent_node.name =="Pool":
+
+	elif owner_node.name =="Pool":
 		print("小推车碰撞到泳池")
 		start_swim()
-		
-	
-func _on_area_exited(area: Area2D) -> void:
 
-	var parent_node = area.get_parent()
-	if parent_node is ZombieBase:  
+
+func _on_area_exited(area: Area2D) -> void:
+	var owner_node = area.owner
+	if owner_node is Zombie000Base:
 		pass
-		
-	elif parent_node.name =="Pool":
+
+	elif owner_node.name =="Pool":
 		print("小推车碰离开泳池")
 		end_swim()
-		
+
 func suck_end():
 	move_speed = ori_move_speed
 	is_zombie = false
-	
+
 #region 水池游泳
-	
+
 func start_swim():
 	# 水花
-	var splash = Global.splash_pool_scenes.instantiate()
+	var splash = SceneRegistry.SPLASH.instantiate()
 	get_parent().add_child(splash)
 	splash.global_position = global_position
 	is_water = true
-	
+
 func end_swim():
 	# 水花
-	var splash = Global.splash_pool_scenes.instantiate()
-	get_parent().add_child(splash)
+	var splash = SceneRegistry.SPLASH.instantiate()
+	get_parent().add_child.call_deferred(splash)
 	splash.global_position = global_position
 	is_water = false
-	
 #endregion

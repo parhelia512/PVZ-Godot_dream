@@ -11,12 +11,12 @@ var sell_plant_cell :PlantCellGarden
 var plant_cell_give_dave:PlantCellGarden
 
 const price_from_stage = {
-	PlantGarden.GrowthStage.Sprout: 1500,
-	PlantGarden.GrowthStage.Small: 3000,
-	PlantGarden.GrowthStage.Medium: 5000,
-	PlantGarden.GrowthStage.Large: 8000,
-	PlantGarden.GrowthStage.Perfect: 8000,
-	
+	GardenManager.E_GrowthStage.Sprout: 1500,
+	GardenManager.E_GrowthStage.Small: 3000,
+	GardenManager.E_GrowthStage.Medium: 5000,
+	GardenManager.E_GrowthStage.Large: 8000,
+	GardenManager.E_GrowthStage.Perfect: 8000,
+
 }
 @onready var crazy_dave: CrazyDave = $DaveCanvasLayer/CrazyDave
 
@@ -26,7 +26,7 @@ func use_it():
 	choosed_plant_data = curr_plant_cell.get_curr_plant()
 	sell_plant_cell = curr_plant_cell
 	curr_plant_cell.free_curr_plant()
-	
+
 	curr_plant_price = price_from_stage[choosed_plant_data["curr_growth_stage"]]
 
 	dave_dialog.dialog_detail_list[0].text = "我给你$" + str(curr_plant_price) + "换你这棵植物！"
@@ -40,24 +40,24 @@ func use_it():
 	crazy_dave.is_activate = true
 	crazy_dave.visible = true
 	deactivate_it()
-	
+
 	## 戴夫离开
-	await crazy_dave.dave_leave_end_signal
+	await crazy_dave.signal_dave_leave_end
 	crazy_dave.visible = false
 	choosed_plant_data = {}
 	curr_plant_price = 0
 	sell_plant_cell = null
-	
-	
+
+
 ## 同意售卖
 func sell_agree():
 	Global.coin_value += curr_plant_price
 	print("当前金币：", Global.coin_value)
-	
+
 	print(plant_cell_give_dave.global_position)
 	plant_cell_give_dave.queue_free()
 ## 不同意售卖
 func sell_disagree():
 	sell_plant_cell.init_curr_plant_cell(choosed_plant_data)
-	
+
 	plant_cell_give_dave.queue_free()

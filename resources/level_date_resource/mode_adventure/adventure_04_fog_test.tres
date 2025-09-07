@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://5jjodcugifuk"]
 
-[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://resources/level_date_resource/script/LevelData.gd" id="1_w0hwk"]
+[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level_data.gd" id="1_w0hwk"]
 
 [resource]
 script = ExtResource("1_w0hwk")
@@ -14,19 +14,32 @@ is_fog = true
 is_day = false
 is_day_sun = true
 look_show_zombie = false
-card_mode = 0
-have_card_bar = true
 can_choosed_card = true
-is_zombie_spawn = false
+monster_mode = 0
+zombie_multy = 1
 max_wave = 30
 zombie_refresh_types = Array[int]([4, 7, 6])
-zombie_multy = 6
+zombie_multy_hammer = 1
+max_wave_hammer_zombie = 10
+speed_zombie_init = 1.0
+speed_zombie_add = 0.15
+speed_zombie_max = 2.0
+is_have_tombston = false
 init_tombstone_num = 0
-create_tombston_in_flag_wave = false
+card_mode = 0
+have_card_bar = true
 max_choosed_card_num = 10
 start_sun = 12275
-pre_choosed_card_list = Array[int]([22, 25, 27, 26, 29, 30, 33, 20, 8, 16])
-card_type = Array[int]([])
-card_type_probability = Array[int]([])
-card_type_start_list = Array[int]([])
+pre_choosed_card_list = Array[int]([0, 18, 27, 26, 29, 30, 32, 20, 8, 16])
+pre_choosed_card_list_zombie = Array[int]([5])
+all_card_plant_type_probability = Dictionary[int, int]({})
+all_card_zombie_type_probability = Dictionary[int, int]({})
+start_list_card_plant_type = Array[int]([])
+start_list_card_zombie_type = Array[int]([])
+create_new_card_speed = 1.0
+is_mode_column = false
+is_bowling_stripe = false
+plant_cell_col_j = 2
+is_left_can_plant = true
+is_hammer = false
 metadata/_custom_type_script = "uid://bjt3l56exxmdw"

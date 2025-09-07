@@ -48,6 +48,7 @@ theme_override_constants/separation = 11
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "自动收集阳光"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "自动收集阳光"
 
@@ -55,6 +56,7 @@ text = "自动收集阳光"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "自动收集金币（没做）"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "自动收集金币"
 
@@ -62,6 +64,7 @@ text = "自动收集金币"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "游戏开始后，若选择植物卡片未满，将多余游戏卡槽隐藏"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "隐藏未选择植物卡槽"
 
@@ -69,6 +72,7 @@ text = "隐藏未选择植物卡槽"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "游戏全屏"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "游戏全屏"
 
@@ -76,6 +80,7 @@ text = "游戏全屏"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "显示植物血量"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "显示植物血量"
 
@@ -83,6 +88,7 @@ text = "显示植物血量"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "显示僵尸血量"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "显示僵尸血量"
 
@@ -90,6 +96,7 @@ text = "显示僵尸血量"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "鼠标移动到卡槽时，将卡槽置顶，避免选卡时卡槽被遮挡"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "焦点卡槽自动置顶"
 
@@ -97,6 +104,7 @@ text = "焦点卡槽自动置顶"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "游戏有浓雾时，选择静态或动态浓雾"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "静态浓雾"
 
@@ -108,6 +116,7 @@ theme_override_constants/separation = 11
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 tooltip_text = "铲子预铲除植物时，将该植物高亮同时在本格置顶，方便观察被铲除的植物"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "预铲除植物置顶"
 
@@ -117,6 +126,7 @@ offset_left = 550.0
 offset_top = 534.0
 offset_right = 649.0
 offset_bottom = 560.0
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_78h4s")
 texture_pressed = ExtResource("5_4s1si")

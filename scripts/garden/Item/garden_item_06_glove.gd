@@ -52,7 +52,7 @@ func update_shadow_plant_cell(curr_plant_cell_data:Dictionary):
 	if target_plant_cell and target_plant_cell.is_shadow:
 		target_plant_cell.free_curr_plant()
 		target_plant_cell.init_curr_plant_cell_shadow(choosed_plant_data)
-		
+
 
 ## 放置植物
 func lay_plant():
@@ -65,14 +65,14 @@ func lay_plant():
 
 
 func deactivate_it(is_play_sfx:=true):
-	
+
 	signal_glove_deactivate.emit()
 	glove_free_hand_plant()
 	## 当前植物格子还有植物，说明为右键取消
 	if curr_plant_cell and curr_plant_cell.plant_in_cell:
 		#curr_plant_cell.free_curr_plant()
 		curr_plant_cell.plant_cell_color_restore()
-		
+
 	if target_plant_cell:
 		target_plant_cell.shadow_fixed()
 		target_plant_cell.free_curr_plant()
@@ -95,7 +95,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if new_plant_cell != curr_plant_cell and new_plant_cell.plant_in_cell == null:
 			target_plant_cell = new_plant_cell
 			target_plant_cell.init_curr_plant_cell_shadow(choosed_plant_data)
-	
+
 ## 检测到出去的植物格子
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if not is_have_plant:
@@ -106,4 +106,4 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 			target_plant_cell.shadow_fixed()
 			target_plant_cell.free_curr_plant()
 			target_plant_cell = null
-		
+

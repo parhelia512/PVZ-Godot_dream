@@ -1,0 +1,189 @@
+[gd_scene load_steps=23 format=3 uid="uid://dqaqlnax0o5fp"]
+
+[ext_resource type="PackedScene" uid="uid://cit8bsc5op7f0" path="res://scenes/bullet/bullet_linear/bullet_000_linear_base.tscn" id="1_3qq1e"]
+[ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="2_1legp"]
+[ext_resource type="Script" uid="uid://c8d7bc8r1pi7i" path="res://scripts/bullet/bullet_1002_bowling_bomb.gd" id="2_3pp2i"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_vwbp0"]
+[ext_resource type="Texture2D" uid="uid://cpbkvykx6yq07" path="res://assets/reanim/Wallnut_twitch.png" id="3_vwbp0"]
+[ext_resource type="Texture2D" uid="uid://co3e8k6uwm4hi" path="res://assets/reanim/Wallnut_blink1.png" id="4_uyat5"]
+[ext_resource type="Script" uid="uid://l0umdgng0y2m" path="res://scripts/character/components/bomb_component/component_bomb_norm.gd" id="7_flmls"]
+[ext_resource type="Script" uid="uid://uv71i8wk2job" path="res://scripts/fx/plant_effect/plant_effect_001_bomb_cherry.gd" id="8_7aro5"]
+[ext_resource type="Texture2D" uid="uid://lr726nfj8o4l" path="res://assets/image/particles/bullet/DoomShroom_Explosion_Top.png" id="9_01xvu"]
+[ext_resource type="Texture2D" uid="uid://ysajcyiwrdnk" path="res://assets/image/particles/ExplosionPowie.png" id="10_2j0lu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwbp0"]
+radius = 30.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7m11"]
+size = Vector2(250, 200)
+
+[sub_resource type="Curve" id="Curve_gg851"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456044, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.4015, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dniyj"]
+curve = SubResource("Curve_gg851")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pqnd6"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 80.0
+emission_ring_inner_radius = 60.0
+emission_ring_cone_angle = 90.0
+angular_velocity_min = 189.47
+angular_velocity_max = 189.47
+radial_velocity_min = 30.0
+radial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_min = 0.1
+scale_max = 0.3
+alpha_curve = SubResource("CurveTexture_dniyj")
+
+[sub_resource type="Curve" id="Curve_abnoa"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.582418, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2gy5r"]
+curve = SubResource("Curve_abnoa")
+
+[sub_resource type="Curve" id="Curve_nn4ln"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.510989, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.985075), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ql0xv"]
+curve = SubResource("Curve_nn4ln")
+
+[sub_resource type="Curve" id="Curve_0trv1"]
+_data = [Vector2(0, 0.696629), 0.0, 0.0, 0, 0, Vector2(0.494505, 1), 0.0, 0.0, 0, 0, Vector2(0.972528, 0.247191), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qq8mq"]
+curve = SubResource("Curve_0trv1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vevga"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 91.64
+angular_velocity_curve = SubResource("CurveTexture_ql0xv")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_qq8mq")
+color = Color(0.917647, 0.756863, 0, 1)
+alpha_curve = SubResource("CurveTexture_2gy5r")
+
+[node name="Bullet1002BowlingBomb" instance=ExtResource("1_3qq1e")]
+script = ExtResource("2_3pp2i")
+speed = 188.0
+type_bullet_SFX = 0
+
+[node name="BulletShadow" parent="." index="0"]
+position = Vector2(0, 0)
+texture = ExtResource("2_vwbp0")
+hframes = 1
+
+[node name="Body" parent="." index="1"]
+modulate = Color(1, 0, 0.141176, 1)
+
+[node name="BodyCorrect" type="Node2D" parent="Body" index="1"]
+position = Vector2(0, -29)
+
+[node name="_ground" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
+position = Vector2(-42, -41)
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
+position = Vector2(-42, -41)
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
+position = Vector2(-38.163, -32.7476)
+rotation = -0.0454682
+scale = Vector2(0.7, 0.68937)
+texture = ExtResource("2_1legp")
+centered = false
+
+[node name="Anim_blink_twitch" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
+visible = false
+position = Vector2(-14.5894, -8.3159)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_vwbp0")
+centered = false
+
+[node name="Anim_blink_twice" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
+visible = false
+position = Vector2(-15.7894, -22.3159)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_uyat5")
+centered = false
+
+[node name="BulletEffect" parent="." index="2"]
+is_bullet_effect = false
+
+[node name="Area2DAttack" parent="." index="3"]
+collision_layer = 72
+
+[node name="CollisionShape2D" parent="Area2DAttack" index="0"]
+position = Vector2(0, -30)
+shape = SubResource("CircleShape2D_vwbp0")
+
+[node name="Area2DUp" parent="." index="4"]
+visible = false
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="BombComponent" type="Node2D" parent="." index="5"]
+unique_name_in_owner = true
+script = ExtResource("7_flmls")
+can_attack_plant_status = 7
+can_attack_zombie_status = 31
+
+[node name="Area2DBomb" type="Area2D" parent="BombComponent" index="0"]
+collision_layer = 0
+collision_mask = 20
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BombComponent/Area2DBomb" index="0"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_o7m11")
+
+[node name="BombEffect" type="Node2D" parent="BombComponent" index="1"]
+visible = false
+position = Vector2(0, -28)
+script = ExtResource("8_7aro5")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="BombComponent/BombEffect" index="0"]
+self_modulate = Color(1, 0.109804, 0, 1)
+emitting = false
+amount = 20
+texture = ExtResource("9_01xvu")
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+collision_base_size = 0.0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_pqnd6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BombComponent/BombEffect" index="1"]
+emitting = false
+amount = 10
+texture = ExtResource("9_01xvu")
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+collision_base_size = 0.0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_vevga")
+
+[node name="Powie" type="Sprite2D" parent="BombComponent/BombEffect" index="2"]
+texture = ExtResource("10_2j0lu")

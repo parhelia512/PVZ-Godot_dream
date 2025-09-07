@@ -1,49 +1,43 @@
-extends SunFlower
-class_name SunShroom
+extends Plant000Base
+class_name Plant010SunShroom
 
-@export var is_sleep := true
-@export var is_grow := false
-@export var grow_time :float = 100
+@onready var create_sun_component: CreateSunComponent = $CreateSunComponent
 @onready var grow_timer: Timer = $GrowTimer
-@onready var sleep_shroom: ShroomSleep = $SleepShroom
 
-## 子节点SleepShroo会先更新is_sleep
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	super._ready()
-	
-	# 长大计时器
-	grow_timer.wait_time = grow_time
-	grow_timer.timeout.connect(_on_grow_timer_timeout)
+## 成长所需时间
+@export var time_grow:float = 100
+## 小阳光价值
+@export var mini_sun_value := 15
+## 正常阳光价值
+@export var norm_sun_value := 25
+
+@export_group("动画状态")
+## 成长
+@export var is_grow:=false
+
+func init_norm():
+	super()
+	grow_timer.wait_time = time_grow
 	grow_timer.start()
-
-	## 植物默认睡眠, 停止生产阳光计时器,停止长大计时器
-	production_timer.paused = true
-	grow_timer.paused = true
-	
-	## 植物默认睡眠，根据环境是否为白天判断睡眠状态
-	sleep_shroom.judge_sleep()
-	
-	
-func _on_grow_timer_timeout():
-	is_grow = true
-	sun_value = 25
-	
-	## 播放音效
-	SoundManager.play_plant_SFX(Global.PlantType.SunShroom, &"PlantGrow")
+	create_sun_component.change_sun_value(mini_sun_value)
 
 
+func init_norm_signal_connect():
+	super()
+	## 角色速度改变
+	signal_update_speed.connect(update_grow_speed)
 
-func stop_sleep():
-	is_sleep = false
-	# 开始生产阳光计时器,长大计时器
-	production_timer.paused = false
-	grow_timer.paused = false
+## 成长结束
+func _on_grow_timer_timeout() -> void:
+	self.is_grow = true
+	create_sun_component.change_sun_value(norm_sun_value)
 
+## 更新成长的速度
+func update_grow_speed(speed_factor:float):
+	if not grow_timer.is_stopped():
+		if speed_factor == 0:
+			grow_timer.paused = true
+		else:
+			grow_timer.paused = false
 
-func keep_idle():
-	super.keep_idle()
-	sleep_shroom.immediate_hide_zzz()
-	stop_sleep()
-	production_timer.stop()
-	grow_timer.stop()
+			grow_timer.start(grow_timer.time_left / speed_factor)

@@ -1,5 +1,5 @@
-extends PlantDownBase
-class_name LilyPad
+extends Plant000DownBase
+class_name Plant017LilyPad
 
 
 func _ready() -> void:
@@ -14,16 +14,16 @@ func tween_up_and_down():
 
 	# 向上移动
 	tween.tween_property(
-		self, 
-		"position:y", 
-		position.y - 5, 
+		self,
+		"position:y",
+		position.y - 5,
 		2 + randf()
 	).set_ease(Tween.EASE_IN_OUT)
 
 	# 向上移动（返回原点）
 	tween.tween_property(
-		self, 
-		"position:y", 
-		position.y , 
+		self,
+		"position:y",
+		position.y ,
 		2 + randf()
 	).set_ease(Tween.EASE_IN_OUT)

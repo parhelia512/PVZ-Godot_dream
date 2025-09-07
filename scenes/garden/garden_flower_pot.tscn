@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://djx300tx2setf"]
 
-[ext_resource type="Script" uid="uid://ck6yyarqy5k55" path="res://scripts/garden/034_flower_pot_show.gd" id="1_1vbfo"]
+[ext_resource type="Script" uid="uid://ck6yyarqy5k55" path="res://scripts/garden/garden_flower_pot.gd" id="1_1vbfo"]
 [ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_jgwvk"]
 [ext_resource type="Texture2D" uid="uid://bwfn6y0jaj71l" path="res://assets/image/particles/Glow_particle2.png" id="2_k5pd3"]
 [ext_resource type="Texture2D" uid="uid://b33sfy5gcqrg1" path="res://assets/reanim/Pot_glow.png" id="3_4rkaw"]
@@ -73,72 +73,78 @@ nodes/TimeScale/position = Vector2(340, 140)
 nodes/output/position = Vector2(540, 160)
 node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
 
-[node name="FlowerPot" type="Node2D" node_paths=PackedStringArray("down_plant_container")]
+[node name="GardenFlowerPot" type="Node2D" node_paths=PackedStringArray("down_plant_container")]
 script = ExtResource("1_1vbfo")
 down_plant_container = NodePath("DownPlantContainer")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
+position = Vector2(0, -41)
 amount = 38
 texture = ExtResource("2_k5pd3")
 process_material = SubResource("ParticleProcessMaterial_wm6jt")
 
 [node name="Body" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(-41, -69.3527)
 
-[node name="PotGlow" type="Sprite2D" parent="Body"]
+[node name="BodyCorrect" type="Node2D" parent="Body"]
+position = Vector2(-41, -65)
+
+[node name="PotGlow" type="Sprite2D" parent="Body/BodyCorrect"]
 position = Vector2(41.1659, 42.9309)
 scale = Vector2(0.835, 0.835)
 texture = ExtResource("3_4rkaw")
 
-[node name="PotGlow2" type="Sprite2D" parent="Body"]
+[node name="PotGlow2" type="Sprite2D" parent="Body/BodyCorrect"]
 visible = false
 position = Vector2(41.1146, 39.7844)
 scale = Vector2(0.84, 0.84)
 texture = ExtResource("4_f5rwk")
 
-[node name="shadow" type="Sprite2D" parent="Body"]
+[node name="shadow" type="Sprite2D" parent="Body/BodyCorrect"]
 position = Vector2(40, 62)
 texture = ExtResource("2_jgwvk")
 
-[node name="Anim_idle" type="Sprite2D" parent="Body"]
+[node name="Anim_idle" type="Sprite2D" parent="Body/BodyCorrect"]
 centered = false
 
-[node name="Anim_zengarden" type="Sprite2D" parent="Body"]
+[node name="Anim_zengarden" type="Sprite2D" parent="Body/BodyCorrect"]
 visible = false
 centered = false
 
-[node name="Anim_waterplants" type="Sprite2D" parent="Body"]
+[node name="Anim_waterplants" type="Sprite2D" parent="Body/BodyCorrect"]
 visible = false
 centered = false
 
-[node name="Pot_bottom" type="Sprite2D" parent="Body"]
-position = Vector2(13.5, 55.1)
-scale = Vector2(0.8, 0.8)
+[node name="Pot_bottom" type="Sprite2D" parent="Body/BodyCorrect"]
+position = Vector2(13.5, 53.4382)
+scale = Vector2(0.8, 0.878024)
 texture = ExtResource("6_k5pd3")
 centered = false
 
-[node name="Pot_stem" type="Sprite2D" parent="Body"]
-position = Vector2(24, 10.9)
-scale = Vector2(0.8, 0.8)
+[node name="Pot_stem" type="Sprite2D" parent="Body/BodyCorrect"]
+position = Vector2(23.7483, 11.0483)
+rotation = -0.141903
+scale = Vector2(0.799483, 0.799483)
 texture = ExtResource("4_g5ymu")
 centered = false
 
-[node name="Pot_leaf1" type="Sprite2D" parent="Body"]
-position = Vector2(27, 7.8)
-scale = Vector2(0.8, 0.8)
+[node name="Pot_leaf1" type="Sprite2D" parent="Body/BodyCorrect"]
+position = Vector2(28.3, 7.44493)
+rotation = 0.213107
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("5_a5ly7")
 centered = false
 
-[node name="Pot_leaf2" type="Sprite2D" parent="Body"]
-position = Vector2(17.6, 9.3)
-scale = Vector2(0.8, 0.8)
+[node name="Pot_leaf2" type="Sprite2D" parent="Body/BodyCorrect"]
+position = Vector2(17.1517, 11.5966)
+rotation = -0.219245
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("6_7s7y3")
 centered = false
 
-[node name="Pot_top" type="Sprite2D" parent="Body"]
-position = Vector2(7.2, 13.3)
+[node name="Pot_top" type="Sprite2D" parent="Body/BodyCorrect"]
+position = Vector2(7.2, 12.3449)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_4rkaw")
 centered = false
@@ -155,3 +161,4 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
 [node name="DownPlantContainer" type="Node2D" parent="."]
+position = Vector2(0, -0.955069)

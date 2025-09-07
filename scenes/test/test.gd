@@ -17,3 +17,5 @@ func _ready() -> void:
 	print("移动后全局位置", almanac_ground_pool.global_position)
 	
 	
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	prints("检测到区域2")

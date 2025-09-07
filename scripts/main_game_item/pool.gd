@@ -18,7 +18,7 @@ func init_pool(game_bg:ResourceLevelData.GameBg):
 		ResourceLevelData.GameBg.Pool:
 			pool_base.texture = POOL_BASE
 			pool.texture = POOL
-			
+
 		ResourceLevelData.GameBg.Fog:
 			pool_base.texture = POOL_BASE_NIGHT
 			pool.texture = POOL_NIGHT

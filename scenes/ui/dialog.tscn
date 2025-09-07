@@ -14,6 +14,7 @@ script = ExtResource("1_p8gb2")
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 313.0
+mouse_filter = 1
 theme_type_variation = &"PanelDialogBG"
 
 [node name="PVZButton" type="BaseButton" parent="."]
@@ -72,7 +73,7 @@ focus_neighbor_bottom = NodePath("")
 focus_next = NodePath("")
 focus_previous = NodePath("")
 focus_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 mouse_force_pass_scroll_events = true
 mouse_default_cursor_shape = 0
 theme = null

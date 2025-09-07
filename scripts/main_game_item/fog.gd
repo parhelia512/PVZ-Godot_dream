@@ -29,7 +29,9 @@ func _ready() -> void:
 	init_static_fog(static_fog)
 	change_fog_type()
 	global_position.x = end_global_positon_x
-	
+
+	Global.signal_fog_is_static.connect(change_fog_type)
+
 ## 修改雾的种类
 func change_fog_type():
 	if Global.fog_is_static:
@@ -48,7 +50,6 @@ func _process(delta: float) -> void:
 		else:
 			update_fog_dynamic()
 
-	
 func add_fog_clearer(fog_clearer:Area2D):
 	fog_clearers.append(fog_clearer)
 	if Global.fog_is_static:
@@ -63,40 +64,38 @@ func del_fog_clearer(fog_clearer:Area2D):
 	else:
 		update_fog_dynamic()
 
-
-
 ## 根据fog_clearers数组更新迷雾
 func update_fog_dynamic():
 	var centers = []
 	var sizes = []
 	var rotations = []
 	var collision_shapes = []
-	
+
 	for node in fog_clearers:
 		var shape_node := node.get_node_or_null("CollisionShape2D")
 		if shape_node and shape_node.shape:
 			collision_shapes.append(shape_node)
-	
+
 	for i in range(min(collision_shapes.size(), 8)):
 		var shape_node = collision_shapes[i]
 		var shape = shape_node.shape
 		var global_pos = shape_node.global_position
 		var local_pos = dynamic_fog.make_canvas_position_local(global_pos)
 		var uv = local_pos / dynamic_fog.size
-		
+
 		if shape is RectangleShape2D:
 			centers.append(uv)
 			# 将矩形尺寸转换为UV空间比例
 			var size_uv = shape.extents / dynamic_fog.size  # extents是半宽高
 			sizes.append(size_uv)
 			rotations.append(shape_node.global_rotation)
-	
+
 	# 填满剩余，避免数组长度不够
 	while centers.size() < 8:
 		centers.append(Vector2(-10, -10))  # 放到UV外面无效
 		sizes.append(Vector2.ZERO)
 		rotations.append(0.0)
-	
+
 	dynamic_fog.material.set_shader_parameter("rect_centers", centers)
 	dynamic_fog.material.set_shader_parameter("rect_sizes", sizes)
 	dynamic_fog.material.set_shader_parameter("rect_rotations", rotations)
@@ -166,7 +165,7 @@ func update_fog_static():
 				var global_points = []
 				for p in local_points:
 					global_points.append(shape_node.global_transform * p)
-				
+
 				# 判断是否与雾相交
 				if Geometry2D.intersect_polygons(fog_poly, global_points).size() > 0:
 					is_overlapping = true
@@ -178,8 +177,6 @@ func update_fog_static():
 		else:
 			fog_sprite.visible = true
 
-
-
 ## 被吹散
 func be_flow_away():
 	## 先停止计时器，避免在等待间隙计时完成
@@ -190,18 +187,17 @@ func be_flow_away():
 	## 使用tween吹散迷雾
 	var tween :Tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position:x", end_global_positon_x, 0.5)
-	is_move = true 
+	is_move = true
 	## 吹散后, 开始计时
 	await tween.finished
 	is_move = false
 	blover_end_timer.start()
 
-
 ## 回到主游戏界面
 func come_back_game(duration:float):
 	tween_come_back = get_tree().create_tween()
 	tween_come_back.tween_property(self, "global_position:x", start_global_positon_x, duration)
-	is_move = true 
+	is_move = true
 	await tween_come_back.finished
 	is_move = false
 

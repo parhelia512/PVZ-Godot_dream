@@ -1,14 +1,9 @@
-extends WallNut
-class_name TallNut
+extends Plant000Base
+class_name Plant024TallNut
 
 
-## 检测正在跳跃的撑杆跳或海豚僵尸
-func _on_area_2d_2_area_entered(area: Area2D) -> void:
-	var zombie:ZombieBase = area.get_parent()
-	if zombie is ZombiePoleVaulter:
-		var zombie_pole = zombie as ZombiePoleVaulter
-		zombie_pole.jump_be_stop(self)
-	elif zombie is ZombieDolphinrider:
-		var zombie_dolphinrider = zombie as ZombieDolphinrider
-		if not zombie_dolphinrider.is_dolphinrider:
-			zombie_dolphinrider.jump_be_stop(self)
+
+func _on_area_2d_stop_jump_area_entered(area: Area2D) -> void:
+	var zombie:Zombie000Base = area.owner
+	if zombie.curr_be_attack_status == Zombie000Base.E_BeAttackStatusZombie.IsJump:
+		zombie.jump_be_stop(self)

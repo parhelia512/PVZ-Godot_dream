@@ -1,2 +1,0 @@
-extends ZombieCone
-class_name ZombieBucket

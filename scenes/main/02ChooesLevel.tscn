@@ -6,26 +6,26 @@
 [ext_resource type="Texture2D" uid="uid://bnwwtx66naab1" path="res://assets/image/ui/ui_challenge/Challenge_Window.png" id="3_qbhvk"]
 [ext_resource type="Texture2D" uid="uid://vwk4r0yu588v" path="res://assets/image/ui/ui_challenge/Challenge_Window_Highlight.png" id="4_5ankq"]
 [ext_resource type="Texture2D" uid="uid://hb4b6ujaahoc" path="res://assets/image/Almanac/Almanac_GroundDay.jpg" id="5_2o48a"]
+[ext_resource type="PackedScene" uid="uid://cfc5vrs1dcy0j" path="res://scenes/character/plant/plant_001_pea_shooter_single.tscn" id="5_k1h2l"]
 [ext_resource type="Script" uid="uid://cnagiy3yxjooh" path="res://scripts/choose_level/chooes_level_button.gd" id="6_5ankq"]
-[ext_resource type="PackedScene" uid="uid://cc56wstwe4f2m" path="res://scenes/character/plant/001_pea_shooter_single_static.tscn" id="6_y0ybt"]
 [ext_resource type="Texture2D" uid="uid://bvp2j68muqgm8" path="res://assets/image/Almanac/Almanac_GroundNight.jpg" id="7_7gy53"]
-[ext_resource type="PackedScene" uid="uid://l2p51ejr4l2i" path="res://scenes/character/plant/009_puff_shroom_static.tscn" id="8_c1hwb"]
 [ext_resource type="Resource" uid="uid://cdcg662one7df" path="res://resources/level_date_resource/mode_adventure/adventure_01_day.tres" id="9_ykbb6"]
-[ext_resource type="PackedScene" uid="uid://m7dhqeju3er4" path="res://scenes/character/plant/051_wall_nut_bowling_static.tscn" id="11_7gy53"]
 [ext_resource type="Texture2D" uid="uid://bx8xtt6oantp1" path="res://assets/image/Almanac/Almanac_GroundPool.jpg" id="11_ddvl6"]
+[ext_resource type="PackedScene" uid="uid://prux5sri4p8i" path="res://scenes/character/plant/plant_009_puff.tscn" id="11_k1h2l"]
 [ext_resource type="Texture2D" uid="uid://xc3kqag3vqlq" path="res://assets/image/ui/ui_level/Almanac_CloseButton.png" id="11_y0ybt"]
 [ext_resource type="Texture2D" uid="uid://bqtnl31pv3rv3" path="res://assets/reanim/Hammer_3.png" id="12_1i0xb"]
 [ext_resource type="Texture2D" uid="uid://c82uuprowr5d" path="res://assets/image/ui/ui_level/Almanac_CloseButtonHighlight.png" id="12_7gy53"]
 [ext_resource type="Resource" uid="uid://r8eb38jjjno7" path="res://resources/level_date_resource/mode_adventure/adventure_02_night.tres" id="12_43bok"]
-[ext_resource type="PackedScene" uid="uid://emo1ok1dv5kg" path="res://scenes/character/plant/017_lily_pad_static.tscn" id="12_a108d"]
 [ext_resource type="BitMap" uid="uid://bc7yq02xscrlr" path="res://assets/image/ui/ui_level/Almanac_CloseButton_Mask.png" id="13_c1hwb"]
 [ext_resource type="Texture2D" uid="uid://qtifu6lsmq6x" path="res://assets/reanim/hammer_1.png" id="13_ddvl6"]
 [ext_resource type="Texture2D" uid="uid://dweon5ml8otw5" path="res://assets/reanim/Hammer_2.png" id="14_a108d"]
+[ext_resource type="PackedScene" uid="uid://w2cplfosy68e" path="res://scenes/character/plant/plant_017_lily_pad.tscn" id="14_dw7cd"]
 [ext_resource type="Resource" uid="uid://d06li2axn7r16" path="res://resources/level_date_resource/mode_adventure/adventure_03_pool.tres" id="15_umhll"]
 [ext_resource type="Texture2D" uid="uid://dwva3w3r5kjvb" path="res://assets/image/Almanac/Almanac_GroundNightPool.jpg" id="16_5nyce"]
-[ext_resource type="PackedScene" uid="uid://4utcm656xlea" path="res://scenes/character/plant/025_sea_shroom_static.tscn" id="17_dw7cd"]
+[ext_resource type="PackedScene" uid="uid://dvtg44jen3lb6" path="res://scenes/character/plant/plant_025_sea_shroom.tscn" id="17_i3mhq"]
 [ext_resource type="Resource" uid="uid://b0r3pbho2r7o7" path="res://resources/level_date_resource/mode_adventure/adventure_04_fog.tres" id="17_k1h2l"]
 [ext_resource type="Resource" uid="uid://c8yt6n65ponc6" path="res://resources/level_date_resource/mode_minigame/minigame_01_bowling.tres" id="17_syrok"]
+[ext_resource type="PackedScene" uid="uid://bjdufdnu8jj62" path="res://scenes/character/plant/plant_004_wall_nut.tscn" id="19_k1h2l"]
 [ext_resource type="Resource" uid="uid://3mvuumsl5v6c" path="res://resources/level_date_resource/mode_minigame/minigame_02_hammer_zombie.tres" id="21_0w6wv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i0xb"]
@@ -103,8 +103,10 @@ grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_2o48a")
 
-[node name="PeaShooterSingle" parent="BG/GridContainer/TextureRect/Panel" instance=ExtResource("6_y0ybt")]
-position = Vector2(47, 35.869)
+[node name="Plant001PeaShooterSingle" parent="BG/GridContainer/TextureRect/Panel/TextureRect" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("5_k1h2l")]
+position = Vector2(85.8333, 88.115)
+node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
+character_init_type = 1
 
 [node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect"]
 layout_mode = 1
@@ -172,8 +174,10 @@ grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_7gy53")
 
-[node name="PuffShroom" parent="BG/GridContainer/TextureRect2/Panel" instance=ExtResource("8_c1hwb")]
-position = Vector2(46, 38)
+[node name="Plant009Puff" parent="BG/GridContainer/TextureRect2/Panel/TextureRect" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("11_k1h2l")]
+position = Vector2(87.5, 90.8333)
+node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
+character_init_type = 1
 
 [node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect2"]
 layout_mode = 1
@@ -241,9 +245,10 @@ grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("11_ddvl6")
 
-[node name="LilyPad" parent="BG/GridContainer/TextureRect3/Panel/TextureRect" instance=ExtResource("12_a108d")]
-position = Vector2(93.4249, 110.063)
-scale = Vector2(0.7, 0.7)
+[node name="Plant017LilyPad" parent="BG/GridContainer/TextureRect3/Panel/TextureRect" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("14_dw7cd")]
+position = Vector2(98.6383, 129.902)
+node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
+character_init_type = 1
 
 [node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect3"]
 layout_mode = 1
@@ -312,9 +317,10 @@ grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("16_5nyce")
 
-[node name="SeaShroom" parent="BG/GridContainer/TextureRect4/Panel/TextureRect" instance=ExtResource("17_dw7cd")]
-position = Vector2(94.0402, 103.121)
-scale = Vector2(0.89, 0.89)
+[node name="Plant025SeaShroom" parent="BG/GridContainer/TextureRect4/Panel/TextureRect" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("17_i3mhq")]
+position = Vector2(93.6383, 116.569)
+node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
+character_init_type = 1
 
 [node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect4"]
 layout_mode = 1
@@ -383,8 +389,10 @@ grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_2o48a")
 
-[node name="WallNutBowling" parent="BG/GridContainer/TextureRect5/Panel" instance=ExtResource("11_7gy53")]
-position = Vector2(48.0861, 37.2077)
+[node name="Plant004WallNut" parent="BG/GridContainer/TextureRect5/Panel/TextureRect" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("19_k1h2l")]
+position = Vector2(90.6627, 96.0242)
+node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
+character_init_type = 1
 
 [node name="TextureButton" type="TextureButton" parent="BG/GridContainer/TextureRect5"]
 layout_mode = 1

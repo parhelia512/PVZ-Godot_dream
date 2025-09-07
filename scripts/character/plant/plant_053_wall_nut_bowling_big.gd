@@ -1,2 +1,0 @@
-extends WallNutBowlingBomb
-class_name WallNutBowlingBig

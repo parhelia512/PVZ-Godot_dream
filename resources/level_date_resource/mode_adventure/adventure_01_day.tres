@@ -1,66 +1,6 @@
-[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=11 format=3 uid="uid://cdcg662one7df"]
+[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://cdcg662one7df"]
 
-[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://resources/level_date_resource/script/LevelData.gd" id="1_ma3wb"]
-[ext_resource type="Script" uid="uid://7qucqjvdq78q" path="res://resources/crazy_dave_resource/script/crazy_dave_dialog_detail_resource.gd" id="1_otur6"]
-[ext_resource type="Script" uid="uid://dlfnh7fjqyil6" path="res://resources/crazy_dave_resource/script/crazy_dave_dialog_resource.gd" id="2_c2g31"]
-
-[sub_resource type="Resource" id="Resource_vhaoc"]
-script = ExtResource("1_otur6")
-text = "你好，我亲爱的邻居"
-is_crazy = false
-is_hand = false
-is_choosed = false
-metadata/_custom_type_script = "uid://7qucqjvdq78q"
-
-[sub_resource type="Resource" id="Resource_s1py6"]
-script = ExtResource("1_otur6")
-text = "我是疯狂的戴夫"
-is_crazy = false
-is_hand = false
-is_choosed = false
-metadata/_custom_type_script = "uid://7qucqjvdq78q"
-
-[sub_resource type="Resource" id="Resource_jvra5"]
-script = ExtResource("1_otur6")
-text = "因为我要疯掉了"
-is_crazy = true
-is_hand = false
-is_choosed = false
-metadata/_custom_type_script = "uid://7qucqjvdq78q"
-
-[sub_resource type="Resource" id="Resource_8ar3i"]
-script = ExtResource("1_otur6")
-text = "守好你自己的房子"
-is_crazy = false
-is_hand = false
-is_choosed = false
-metadata/_custom_type_script = "uid://7qucqjvdq78q"
-
-[sub_resource type="Resource" id="Resource_otur6"]
-script = ExtResource("1_otur6")
-text = "僵尸进家吃掉的是你的脑子，不要在喊什么\"戴夫~接客~\"了"
-is_crazy = true
-is_hand = false
-is_choosed = false
-metadata/_custom_type_script = "uid://7qucqjvdq78q"
-
-[sub_resource type="Resource" id="Resource_c2g31"]
-script = ExtResource("1_otur6")
-text = "最后，祝你好运"
-is_crazy = false
-is_hand = false
-is_choosed = false
-metadata/_custom_type_script = "uid://7qucqjvdq78q"
-
-[sub_resource type="Resource" id="Resource_xhpc0"]
-script = ExtResource("2_c2g31")
-dialog_detail_list = Array[ExtResource("1_otur6")]([SubResource("Resource_vhaoc"), SubResource("Resource_s1py6"), SubResource("Resource_jvra5"), SubResource("Resource_8ar3i"), SubResource("Resource_otur6"), SubResource("Resource_c2g31")])
-dialog_detail_long_time_idle_list = Array[ExtResource("1_otur6")]([])
-is_enter_up = false
-is_grab = false
-is_long_time_dave = false
-hand_show_item_path = ""
-metadata/_custom_type_script = "uid://dlfnh7fjqyil6"
+[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level_data.gd" id="1_ma3wb"]
 
 [resource]
 script = ExtResource("1_ma3wb")
@@ -74,20 +14,32 @@ is_fog = false
 is_day = true
 is_day_sun = true
 look_show_zombie = true
+can_choosed_card = true
+monster_mode = 1
+zombie_multy = 1
+max_wave = 30
+zombie_refresh_types = Array[int]([1, 2, 3, 4])
+zombie_multy_hammer = 1
+max_wave_hammer_zombie = 10
+speed_zombie_init = 1.0
+speed_zombie_add = 0.15
+speed_zombie_max = 2.0
+is_have_tombston = false
+init_tombstone_num = 0
 card_mode = 0
 have_card_bar = true
-can_choosed_card = true
-crazy_dave_dialog = SubResource("Resource_xhpc0")
-is_zombie_spawn = true
-max_wave = 30
-zombie_refresh_types = Array[int]([0, 2, 3, 4])
-zombie_multy = 1
-init_tombstone_num = 0
-create_tombston_in_flag_wave = false
 max_choosed_card_num = 10
 start_sun = 50
 pre_choosed_card_list = Array[int]([])
-card_type = Array[int]([])
-card_type_probability = Array[int]([])
-card_type_start_list = Array[int]([])
+pre_choosed_card_list_zombie = Array[int]([])
+all_card_plant_type_probability = Dictionary[int, int]({})
+all_card_zombie_type_probability = Dictionary[int, int]({})
+start_list_card_plant_type = Array[int]([])
+start_list_card_zombie_type = Array[int]([])
+create_new_card_speed = 1.0
+is_mode_column = false
+is_bowling_stripe = false
+plant_cell_col_j = 2
+is_left_can_plant = true
+is_hammer = false
 metadata/_custom_type_script = "uid://bjt3l56exxmdw"

@@ -1,32 +1,36 @@
-extends PlantBase
-class_name TorchWood
-## 子弹使用自己的方法升级
+extends Plant000Base
+class_name Plant023TorchWood
 
-## 雾相关
-var fog_node:Fog
-@onready var area_2d_3: Area2D = $Area2D3
+## 当前升级的子弹
+var curr_bullet_up :Array[Bullet000Base] = []
+## 子弹根节点
+var bullets:Node2D
 
+func init_norm() -> void:
+	super()
+	var main_game:MainGameManager = get_tree().current_scene
+	bullets = main_game.bullets
 
-func _ready() -> void:
-	super._ready()
-	if fog_node:
-		## 要等待一帧后，不然会有偏移，不知道为什么
-		await get_tree().process_frame
-		fog_node.add_fog_clearer(area_2d_3)
+## 子弹进入升级区域
+func _on_area_2d_up_bullet_area_entered(area: Area2D) -> void:
+	var bullet:Bullet000Base = area.owner
+	if bullet.is_can_up:
+		if bullet.bullet_up_plant_type == plant_type:
+			_up_bullet(bullet)
 
+## 子弹离开当前区域
+func _on_area_2d_up_bullet_area_exited(area: Area2D) -> void:
+	var bullet:Bullet000Base = area.owner
+	if bullet in curr_bullet_up:
+		curr_bullet_up.erase(bullet)
 
-func get_main_game_node():
-	curr_scene = get_tree().current_scene
-	if curr_scene is MainGameManager:
-		if curr_scene.game_para.is_fog:
-			fog_node = curr_scene.get_node("Background/Fog")
+## 升级子弹
+func _up_bullet(curr_bullet:Bullet000Base):
+	if curr_bullet not in curr_bullet_up:
+		var new_bullet_up = curr_bullet.create_new_bullet_up()
 
-# 植物死亡
-func _plant_free():
-	plant_free_signal.emit(self)
-	
-	if fog_node:
-		fog_node.del_fog_clearer(area_2d_3)
+		curr_bullet_up.append(new_bullet_up)
 
-	self.queue_free()
-	
+		bullets.call_deferred("add_child", new_bullet_up)
+		curr_bullet.queue_free()
+

@@ -1,2 +1,0 @@
-extends PuffShroom
-class_name SeaShroom

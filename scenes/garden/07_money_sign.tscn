@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bma7kou87taa5" path="res://assets/image/garden/Zen_MoneySign.png" id="1_a55wt"]
 [ext_resource type="Script" uid="uid://mnhn2ihvr6ts" path="res://scripts/garden/Item/garden_item_07_money_sign.gd" id="1_atxcp"]
-[ext_resource type="Script" uid="uid://7qucqjvdq78q" path="res://resources/crazy_dave_resource/script/crazy_dave_dialog_detail_resource.gd" id="2_iopsr"]
-[ext_resource type="Script" uid="uid://dlfnh7fjqyil6" path="res://resources/crazy_dave_resource/script/crazy_dave_dialog_resource.gd" id="3_dgja6"]
+[ext_resource type="Script" uid="uid://7qucqjvdq78q" path="res://scripts/resources/crazy_dave_dialog_detail_resource.gd" id="2_iopsr"]
+[ext_resource type="Script" uid="uid://dlfnh7fjqyil6" path="res://scripts/resources/crazy_dave_dialog_resource.gd" id="3_dgja6"]
 [ext_resource type="PackedScene" uid="uid://dsxyx35geqj23" path="res://scenes/crazy_dave/crazy_dave.tscn" id="6_oclsb"]
 
 [sub_resource type="Resource" id="Resource_v0ynm"]

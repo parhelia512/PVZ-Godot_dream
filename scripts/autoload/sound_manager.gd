@@ -1,7 +1,7 @@
 extends Node
 class_name SoundManagerClass
 
-enum Bus {MASTER, BGM, SFX} 
+enum Bus {MASTER, BGM, SFX}
 
 @onready var bgm_play: AudioStreamPlayer = $BGMPlay
 @onready var sfx_all: Node = $SFXAll
@@ -10,8 +10,8 @@ enum Bus {MASTER, BGM, SFX}
 func _ready() -> void:
 	Global.load_config()
 	Global.save_config()
-	
-	
+
+
 #region 播放音乐和音效
 func play_bgm(stream: AudioStream):
 	bgm_play.stream = stream
@@ -24,21 +24,21 @@ func play_bgm(stream: AudioStream):
  然后就懒得改了，干脆就这么用了
 """
 
-## 僵尸防具受击音效种类
-enum TypeZombieBeAttackSFX{
+## 僵尸受击音效种类
+enum TypeBeAttackSFX{
 	Null,		## 无声音
 	Plastic,	## 塑料
 	Shield		## 铁器
 }
 
 ## 僵尸受击音效资源字典
-const SFXZombieBeAttackMap := {
-	TypeZombieBeAttackSFX.Null: null,
-	TypeZombieBeAttackSFX.Plastic: [
+const SFXBeAttackMap := {
+	TypeBeAttackSFX.Null: null,
+	TypeBeAttackSFX.Plastic: [
 		preload("res://assets/audio/SFX/bullet/plastichit.ogg"),
 		preload("res://assets/audio/SFX/bullet/plastichit2.ogg")
 	],
-	TypeZombieBeAttackSFX.Shield: [
+	TypeBeAttackSFX.Shield: [
 		preload("res://assets/audio/SFX/bullet/shieldhit1.ogg"),
 		preload("res://assets/audio/SFX/bullet/shieldhit2.ogg")
 	],
@@ -49,7 +49,7 @@ enum TypeBulletSFX{
 	Null,		## 无声音
 	Pea,		## 豌豆
 	PeaFire,	## 火焰豌豆
-	
+
 	Bowling = 51,		## 保龄球
 }
 
@@ -64,12 +64,12 @@ const SFXBulletMap := {
 	TypeBulletSFX.PeaFire: [
 		preload("res://assets/audio/SFX/bullet/firepea.ogg"),
 	],
-	
+
 	TypeBulletSFX.Bowling: [
 		preload("res://assets/audio/SFX/bullet/bowlingimpact.ogg"),
 		preload("res://assets/audio/SFX/bullet/bowlingimpact2.ogg"),
 	],
-	
+
 }
 
 ## 植物音效字典
@@ -82,11 +82,11 @@ const SFXPlantMap := {
 	},
 	Global.PlantType.SunFlower:{
 		&"Throw":preload("res://assets/audio/SFX/plant/throw1.ogg"),
-		
+
 	},
 	Global.PlantType.CherryBomb:{
 		&"CherryBomb":preload("res://assets/audio/SFX/plant/cherrybomb.ogg"),
-		
+
 	},
 	Global.PlantType.WallNut:{
 	},
@@ -142,7 +142,7 @@ const SFXPlantMap := {
 	},
 	Global.PlantType.TorchWood:{
 	},
-	
+
 	Global.PlantType.SeaShroom:{
 	},
 	Global.PlantType.Plantern:{
@@ -160,7 +160,7 @@ const SFXPlantMap := {
 	},
 	Global.PlantType.MagnetShroom:{
 	},
-	
+
 	Global.PlantType.CabbagePult:{
 	},
 	Global.PlantType.FlowerPot:{
@@ -177,7 +177,7 @@ const SFXPlantMap := {
 	},
 	Global.PlantType.MelonPult:{
 	},
-	
+
 	Global.PlantType.GatlingPea:{
 	},
 	Global.PlantType.TwinSunFlower:{
@@ -253,8 +253,8 @@ const SFXZombieMap := {
 const SFXCarzyDaveMap := {
 	## 一秒左右
 	&"crazydaveshort" : [
-		preload("res://assets/audio/SFX/carzy/crazydaveshort1.ogg"), 
-		preload("res://assets/audio/SFX/carzy/crazydaveshort2.ogg"), 
+		preload("res://assets/audio/SFX/carzy/crazydaveshort1.ogg"),
+		preload("res://assets/audio/SFX/carzy/crazydaveshort2.ogg"),
 		preload("res://assets/audio/SFX/carzy/crazydaveshort3.ogg")
 	],
 	## 两秒左右
@@ -273,7 +273,7 @@ const SFXCarzyDaveMap := {
 		preload("res://assets/audio/SFX/carzy/crazydavecrazy.ogg")
 	],
 	&"crazydavescream" : [
-		preload("res://assets/audio/SFX/carzy/crazydavescream2.ogg"), 
+		preload("res://assets/audio/SFX/carzy/crazydavescream2.ogg"),
 		preload("res://assets/audio/SFX/carzy/crazydavescream.ogg")
 	],
 }
@@ -289,7 +289,7 @@ func play_sfx_with_pool(sfx_resource: AudioStream) -> AudioStreamPlayer:
 			player = p
 			break
 
-	
+
 	# 如果没有可用播放器，创建新的
 	if not player:
 		player = AudioStreamPlayer.new()
@@ -308,15 +308,15 @@ func _on_sfx_finished(player: AudioStreamPlayer):
 	player.stop()
 
 ## 播放僵尸受击音效
-func play_be_attack_SFX(type_bullet_zombie_sfx:TypeZombieBeAttackSFX):
-	var sfx_array: Array = SFXZombieBeAttackMap[type_bullet_zombie_sfx] 
+func play_be_attack_SFX(type_bullet_zombie_sfx:TypeBeAttackSFX):
+	var sfx_array: Array = SFXBeAttackMap[type_bullet_zombie_sfx]
 
 	var sfx_selected = sfx_array.pick_random()
 	play_sfx_with_pool(sfx_selected)
 
 ## 播放子弹攻击音效
 func play_bullet_attack_SFX(type_bullet_sfx:TypeBulletSFX):
-	var sfx_array: Array = SFXBulletMap[type_bullet_sfx] 
+	var sfx_array: Array = SFXBulletMap[type_bullet_sfx]
 
 	var sfx_selected = sfx_array.pick_random()
 	play_sfx_with_pool(sfx_selected)
@@ -329,7 +329,7 @@ func play_plant_SFX(plant_type:Global.PlantType, option:StringName):
 	else:
 		sfx_resource = SFXPlantMap[plant_type][option]
 	play_sfx_with_pool(sfx_resource)
-	
+
 ## 播放僵尸相关音效
 func play_zombie_SFX(zombie_type:Global.ZombieType, option:StringName):
 	var sfx_resource: AudioStream
@@ -341,7 +341,7 @@ func play_zombie_SFX(zombie_type:Global.ZombieType, option:StringName):
 
 ## 播放戴夫音效
 func play_crazy_dave_SFX(option:StringName):
-	var sfx_array: Array = SFXCarzyDaveMap[option] 
+	var sfx_array: Array = SFXCarzyDaveMap[option]
 
 	var sfx_selected = sfx_array.pick_random()
 	crazy_dave_player.stream = sfx_selected
@@ -356,7 +356,7 @@ const SFXOtherMap := {
 	&"gravebutton": preload("res://assets/audio/SFX/button/gravebutton.ogg"),
 	## 鼠标进入开始菜单
 	&"bleep":preload("res://assets/audio/SFX/button/bleep.ogg"),
-	## 
+	##
 	&"tap":preload("res://assets/audio/SFX/button/tap.ogg"),
 	## 选项按钮
 	&"buttonclick":preload("res://assets/audio/SFX/button/buttonclick.ogg"),
@@ -366,13 +366,13 @@ const SFXOtherMap := {
 	&"points": preload("res://assets/audio/SFX/button/points.ogg"),
 	## 点击金币
 	&"coin":preload("res://assets/audio/SFX/item/coin.ogg"),
-	
+
 	##-------------------------- 卡片相关 --------------------------
 	&"buzzer":preload("res://assets/audio/SFX/card_and_shovel/buzzer.ogg"),
 	&"seedlift":preload("res://assets/audio/SFX/card_and_shovel/seedlift.ogg"),
 	&"shovel":preload("res://assets/audio/SFX/card_and_shovel/shovel.ogg"),
 	&"tap2":preload("res://assets/audio/SFX/card_and_shovel/tap2.ogg"),
-	
+
 	##-------------------------- 进度相关 --------------------------
 	## 汽笛音效
 	&"siren": preload("res://assets/audio/SFX/progress/siren.ogg"),
@@ -390,8 +390,8 @@ const SFXOtherMap := {
 	&"scream":preload("res://assets/audio/SFX/progress/scream.ogg"),
 	## 获胜音效
 	&"winmusic":preload("res://assets/audio/SFX/progress/winmusic.ogg"),
-	
-	
+
+
 	##-------------------------- 主游戏场景物品相关 --------------------------
 	## 墓碑生成
 	&"gravestone_rumble":preload("res://assets/audio/SFX/zombie/gravestone_rumble.ogg"),
@@ -411,14 +411,14 @@ const SFXOtherMap := {
 	&"bonk": preload("res://assets/audio/SFX/item/bonk.ogg"),
 	## -------- 花园 -----------
 	&"prize": preload("res://assets/audio/SFX/garden/prize.ogg"),
-	
+
 	##-------------------------- 花园相关 --------------------------
 	&"watering":preload("res://assets/audio/SFX/garden/watering.ogg"),
 	&"fertilizer":preload("res://assets/audio/SFX/garden/fertilizer.ogg"),
 	&"bugspray":preload("res://assets/audio/SFX/garden/bugspray.ogg"),
 	&"phonograph":preload("res://assets/audio/SFX/garden/phonograph.ogg"),
 	&"wakeup": preload("res://assets/audio/SFX/garden/wakeup.ogg"),
-	
+
 }
 ## 播放其它相关音效
 func play_other_SFX(option:StringName):
@@ -440,14 +440,14 @@ func setup_ui_start_menu_sound(node:Node, is_menu_button:=false):
 	if node is BaseButton:
 		var button := node
 		button.mouse_entered.connect(play_other_SFX.bind("bleep"))
-		
+
 		if is_menu_button:
 			button.button_down.connect(play_other_SFX.bind("gravebutton"))
 		else:
 			if not button.button_down.is_connected(play_other_SFX):
 				button.button_down.connect(play_other_SFX.bind("tap"))
 
-				
+
 	for child in node.get_children():
 		## 如果是Menu或者其上面的节点为Menu
 		if child.name == "Menu" or is_menu_button:
@@ -463,11 +463,11 @@ func setup_ui_main_game_sound(node:Node):
 			node.pressed.connect(play_other_SFX.bind("buttonclick"))
 		else:
 			node.button_down.connect(play_other_SFX.bind("gravebutton"))
-			
+
 			if node.name == "Return":
 				node.pressed.connect(play_other_SFX.bind("buttonclick"))
-		
-		
+
+
 	for child in node.get_children():
 		setup_ui_main_game_sound(child)
 #endregion
@@ -475,9 +475,9 @@ func setup_ui_main_game_sound(node:Node):
 #region 音量大小调整
 func get_volum(bus_index:int):
 	var db := AudioServer.get_bus_volume_db(bus_index)
-	
+
 	return db_to_linear(db)
-	
+
 func set_volume(bus_index:int, v:float) ->void:
 	var db := linear_to_db(v)
 	AudioServer.set_bus_volume_db(bus_index, db)

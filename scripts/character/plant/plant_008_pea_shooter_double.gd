@@ -1,2 +1,0 @@
-extends PeaShooterSingle
-class_name PeaShooterDouble

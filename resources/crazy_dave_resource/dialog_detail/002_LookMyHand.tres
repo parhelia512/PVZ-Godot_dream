@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CrazyDaveDialogDetailResource" load_steps=2 format=3 uid="uid://fiospxsoyr78"]
 
-[ext_resource type="Script" uid="uid://7qucqjvdq78q" path="res://resources/crazy_dave_resource/script/crazy_dave_dialog_detail_resource.gd" id="1_mloj5"]
+[ext_resource type="Script" uid="uid://7qucqjvdq78q" path="res://scripts/resources/crazy_dave_dialog_detail_resource.gd" id="1_mloj5"]
 
 [resource]
 script = ExtResource("1_mloj5")

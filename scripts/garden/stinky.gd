@@ -1,7 +1,7 @@
 extends Node2D
 class_name Stinky
 
-#TODO: 暂时先不写蜗牛了，感觉蜗牛好麻烦
+# TODO: 暂时先不写蜗牛了，感觉蜗牛好麻烦
 
 
 # Called when the node enters the scene tree for the first time.

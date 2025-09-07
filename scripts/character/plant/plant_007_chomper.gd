@@ -1,65 +1,78 @@
-extends PlantBase
-class_name Chomper
+extends Plant000Base
+class_name Plant007Chomper
 
-@export var is_strat_eat := false
-@export var is_eating := false
-@export var is_end_eat := false
-# 咀嚼时间
+@onready var attack_ray_component: AttackRayComponent = $AttackRayComponent
+
+## 咀嚼时间计时器
+@onready var chew_timer: Timer = $ChewTimer
+## 啃咬伤害
+@export var eat_attack:int = 1800
+## 咀嚼时间
 @export var eat_CD :float = 5
 
-# 检测射线
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
-
-# 咀嚼僵尸计时器
-@onready var timer: Timer = $Timer
-
-
-func _ready() -> void:
-	super._ready()
-	# timer初始化，大嘴花咀嚼计时器
-	timer.wait_time = eat_CD
-	timer.one_shot = true  # 单次执行
-	timer.timeout.connect(_eat_end)  # 无参数
-	
-
-# 检测是否有僵尸
-func _process(delta):
-	# 每帧检查射线是否碰到僵尸
-	if ray_cast_2d.is_colliding():
-		if not is_strat_eat:
-			is_strat_eat = true
-		
-	else:
-		if is_strat_eat:
-			is_strat_eat = false
+@export_group("动画状态")
+## 是否啃咬
+@export var is_bite := false
+## 是否咀嚼
+@export var is_chewing = false
 
 
-# 大嘴花吃掉僵尸
+func init_norm() -> void:
+	super()
+	## 咀嚼计时器
+	chew_timer.wait_time = eat_CD
+
+func init_norm_signal_connect():
+	super()
+	signal_update_speed.connect(owner_update_speed)
+	attack_ray_component.signal_can_attack.connect(change_is_attack.bind(true))
+
+## 速度改变
+func owner_update_speed(speed_product:float):
+	if not chew_timer.is_stopped():
+		if speed_product == 0:
+			chew_timer.paused = true
+		else:
+			chew_timer.paused = false
+			chew_timer.start(chew_timer.time_left / speed_product)
+
+	chew_timer.wait_time = eat_CD / speed_product
+
+## 改变是否正在攻击,即攻击范围内是否有敌人
+func change_is_attack(is_attack:bool):
+	if is_attack:
+		## 不在咀嚼状态,并且不在啃咬状态
+		if not is_chewing and not is_bite:
+			is_bite = true
+
+## 咀嚼完成
+func _on_chew_timer_timeout() -> void:
+	is_chewing = false
+#endregion
+
+#region 动画轨道调用
+## 吞咽动画结束
+func swallow_end():
+	if is_instance_valid(attack_ray_component.enemy_can_be_attacked):
+		is_bite = true
+
+## 啃咬动画结束
+func bite_end():
+	is_bite = false
+	## 如果没有啃咬到僵尸
+	if not is_chewing:
+		if is_instance_valid(attack_ray_component.enemy_can_be_attacked):
+			is_bite = true
+#endregion
+
+## 大嘴花吃一次僵尸,动画调用
 func _eat_zombie():
-	# SFX 大嘴花吃僵尸
 	## 播放音效
 	SoundManager.play_plant_SFX(Global.PlantType.Chomper, &"BigChomp")
-	
-	if ray_cast_2d.is_colliding():
-		var collider = ray_cast_2d.get_collider()
-		#如果有僵尸
-		if collider != null:
-			var parent :ZombieBase= collider.get_parent()
+	## 如果有僵尸
+	if is_instance_valid(attack_ray_component.enemy_can_be_attacked):
+		var zombie :Zombie000Base = attack_ray_component.enemy_can_be_attacked
+		zombie.be_chomper_eat(eat_attack)
+		chew_timer.start()
 
-			if not parent.area2d_free:
-				parent.disappear_death()
-				is_eating = true
-			
-				is_end_eat = false
-				timer.start()
-			else:
-				is_eating = false
-			
-	else :
-		is_eating = false
-
-# 大嘴花吃完一次
-func _eat_end():
-	is_end_eat = true
-	
-	
+		is_chewing = true

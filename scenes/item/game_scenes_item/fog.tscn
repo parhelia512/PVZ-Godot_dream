@@ -38,7 +38,7 @@ shader_parameter/rect_perturb_scale = 10.0
 shader_parameter/rect_perturb_speed = 0.1
 
 [node name="Fog" type="Node2D"]
-z_index = 700
+z_index = 800
 script = ExtResource("1_iu47h")
 
 [node name="StaticFog" type="Node2D" parent="."]

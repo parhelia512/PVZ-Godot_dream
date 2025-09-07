@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="22_aho5g"]
 [ext_resource type="PackedScene" uid="uid://02r6pim88mbc" path="res://scenes/garden/07_money_sign.tscn" id="23_24spt"]
 [ext_resource type="Texture2D" uid="uid://b6cln5l56plwn" path="res://assets/reanim/tree_bg.jpg" id="25_aho5g"]
-[ext_resource type="PackedScene" uid="uid://b2xxhep8oyipk" path="res://scenes/item/coin_bank.tscn" id="26_aho5g"]
+[ext_resource type="PackedScene" uid="uid://b2xxhep8oyipk" path="res://scenes/item/coin_bank_label.tscn" id="26_aho5g"]
 [ext_resource type="PackedScene" uid="uid://buvouxkkc7wot" path="res://scenes/garden/08_wheel_barrow.tscn" id="26_qgitf"]
 [ext_resource type="PackedScene" uid="uid://cmrhicx0325" path="res://scenes/item/store_enter_key.tscn" id="27_13fw2"]
 
@@ -388,7 +388,7 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -69.0
+offset_left = -90.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 40.0
@@ -501,7 +501,7 @@ position = Vector2(560.5, -124)
 visible = false
 position = Vector2(633.5, -125)
 
-[node name="CoinBank" parent="CanvasLayer" instance=ExtResource("26_aho5g")]
+[node name="CoinBankLabel" parent="CanvasLayer" instance=ExtResource("26_aho5g")]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -510,6 +510,7 @@ offset_top = -56.0
 offset_right = 364.0
 offset_bottom = -56.0
 grow_vertical = 0
+auto_hide = null
 
 [node name="StoreEnterKey" parent="CanvasLayer" instance=ExtResource("27_13fw2")]
 anchors_preset = 1

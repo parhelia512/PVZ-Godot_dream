@@ -28,25 +28,25 @@ func _input(event):
 		## 如果是鼠标右键
 		elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 			deactivate_it()
-				
+
 
 ## 鼠标点击ui图标按钮，激活该物品
 func activete_it():
 	if not garden_manager:
 		garden_manager = get_tree().current_scene
-	
+
 	## 如果存在植物并且植物种植类型为陆地
 	if is_have_plant:
 		var curr_plant_condition:int = choosed_plant_data["curr_plant_condition"]
 		## 植物种植类型为陆地并且为水族馆场景
-		if curr_plant_condition & 2 and garden_manager.curr_bg_type == GardenManager.GardenBgType.Aquarium:
-		
+		if curr_plant_condition & 2 and garden_manager.curr_bg_type == GardenManager.E_GardenBgType.Aquarium:
+
 			print("当前植物不可以种在水中")
 			var reminder_info :ReminderInformation =  SceneRegistry.REMINDER_INFORMATION.instantiate()
-			
+
 			get_tree().current_scene.add_child(reminder_info)
 			reminder_info._init_info(["在这你只能种水生植物，这是在水下！"])
-			
+
 			deactivate_it()
 			return
 	signal_wheel_barrow_activate.emit()
@@ -80,7 +80,7 @@ func use_it():
 	curr_plant_cell.free_curr_plant()
 	curr_plant_cell = null
 	deactivate_it()
-	
+
 func lay_plant():
 	_lay_success()
 
@@ -91,7 +91,7 @@ func _lay_success():
 	plant_cell_garden_in_button.free_curr_plant()
 	choosed_plant_data = {}
 	deactivate_it()
-	
+
 func _lay_fail():
 	deactivate_it()
 	curr_plant_cell.shadow_fixed()
@@ -102,7 +102,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if not is_have_plant:
 		super._on_area_2d_area_entered(area)
 	else:
-		var new_plant_cell:PlantCellGarden = area.get_parent()
+		var new_plant_cell:PlantCellGarden = area.owner
 		if new_plant_cell.plant_in_cell == null:
 			#print("进入格子初始化格子虚影")
 			curr_plant_cell = new_plant_cell
@@ -114,10 +114,10 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	if not is_have_plant:
 		super._on_area_2d_area_exited(area)
 	else:
-		var new_plant_cell:PlantCellGarden = area.get_parent()
+		var new_plant_cell:PlantCellGarden = area.owner
 		if curr_plant_cell == new_plant_cell:
 			curr_plant_cell.shadow_fixed()
 			curr_plant_cell.free_curr_plant()
 			curr_plant_cell = null
-		
-		
+
+

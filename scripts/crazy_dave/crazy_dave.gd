@@ -30,11 +30,11 @@ class_name CrazyDave
 ## 鼠标点击跳过的对话id
 @export var mouse_skip_talk_id :int = -1
 ## 当前对话的id
-@export var curr_talk_id :int = 0 
+@export var curr_talk_id :int = 0
 ## 是否为疯言疯语
 @export var is_crazy := false
 ## 手上展示物品的容器节点，展示物品放置在该节点下
-@export var hand_container: Node2D 
+@export var hand_container: Node2D
 ## 选项节点
 @onready var choose_node: Control = $ChooseNode
 ## 选项题目
@@ -49,7 +49,7 @@ var start_long_time_dave := false
 ## 说话结束信号
 signal talk_end_signal
 ## 戴夫离场信号，离场动画最后发射该信号
-signal dave_leave_end_signal
+signal signal_dave_leave_end
 ## 当前外部触发对话的id
 var curr_external_trigger_talk_id
 
@@ -69,11 +69,11 @@ func start_dialog():
 			## 等待鼠标点击一次
 			await dave_dialog_mouse_press_panel.signal_dave_dialog_press
 			mouse_skip_talk_id = curr_talk_id
-		
+
 		## 讲完话之后隐藏对话气泡
 		bubble_2.visible = false
 		dave_dialog_mouse_press_panel.visible = false
-		
+
 		if not dialog_resource.is_long_time_dave:
 			is_activate = false
 			bubble_2.visible = false
@@ -86,10 +86,10 @@ func start_dialog():
 			timer_long_time_idle.timeout.connect(long_time_idle_auto_dialog)
 			## 启动长时间idle检测计时器
 			timer_long_time_idle.start()
-	
+
 	else:
 		is_activate = false
-	
+
 #region 选项同意与否,button信号连接
 func choose_agree():
 	signal_agree_choose.emit()
@@ -101,7 +101,7 @@ func choose_disagree():
 	dave_dialog_mouse_press_panel.signal_dave_dialog_press.emit()
 	choose_node.visible = false
 #endregion
-	
+
 
 ## 外部调用对话,如：描述商品，鼠标移动到商品上出现
 func external_trigger_dialog(dialog_detail:CrazyDaveDialogDetailResource):
@@ -134,14 +134,14 @@ func long_time_idle_auto_dialog():
 			## 讲完话之后隐藏对话气泡,重新开始计时器
 			bubble_2.visible = false
 			timer_long_time_idle.start()
-	
+
 
 
 ## 说完当前这段话，动画调用
 func _talk_end():
 	is_idle = true
 	talk_end_signal.emit()
-	
+
 ## 手持物品时说完当前这段话，动画调用
 func _talk_end_is_hand():
 	is_idle = true
@@ -152,8 +152,8 @@ func _talk_end_is_hand():
 ## 商店戴夫描述商品
 func long_time_dave_start_dialog():
 	timer_long_time_idle.stop()
-	
-	
+
+
 
 ## 播放指定主题的对话气泡内容
 ## 功能说明：
@@ -162,12 +162,12 @@ func once_dialog(dialog_detail:CrazyDaveDialogDetailResource) -> int:
 	curr_talk_id += 1
 	if bubble_2.visible == false:
 		bubble_2.visible = true
-	
+
 	speech_text_label.text = dialog_detail.text
 	_speech_anim_from_dialog_detail(dialog_detail)
 	if dialog_detail.is_choosed:
 		choose_node.visible = true
-	
+
 	return curr_talk_id
 
 ## 根据说话的文本，计算使用什么动画
@@ -205,10 +205,10 @@ func init_dave(dialog_resource:CrazyDaveDialogResource, hand_node:Node = null) -
 		get_node(dialog_resource.hand_show_item_path).visible = true
 	if hand_node:
 		hand_container.add_child(hand_node)
-		
+
 	## 第一句话是否手持物品
 	self.is_hand = dialog_resource.dialog_detail_list[0].is_hand
-		
+
 	self.is_enter_up = dialog_resource.is_enter_up
 	self.is_grab = dialog_resource.is_grab
 
@@ -218,7 +218,7 @@ func reset_dave(dialog_resource:CrazyDaveDialogResource, hand_node:Node = null) 
 	animation_tree.set("parameters/playback", null)  # 断开当前播放
 	animation_tree.active = false  # 停止播放
 	animation_tree.active = true   # 重启播放
-	
+
 	## 是否为激活状态，false戴夫退出
 	is_activate = true
 	## 戴夫是否为idle状态，idle状态下，动画循环播放，需要等待用户点击
@@ -228,7 +228,7 @@ func reset_dave(dialog_resource:CrazyDaveDialogResource, hand_node:Node = null) 
 	## 鼠标点击跳过的对话id
 	mouse_skip_talk_id = -1
 	## 当前对话的id
-	curr_talk_id = 0 
+	curr_talk_id = 0
 	## 是否为疯言疯语
 	is_crazy = false
 	## 开始长时间存在（戴夫开局讲完开场白之后）
@@ -237,4 +237,4 @@ func reset_dave(dialog_resource:CrazyDaveDialogResource, hand_node:Node = null) 
 
 ## 戴夫离场
 func dave_leave_end():
-	dave_leave_end_signal.emit()
+	signal_dave_leave_end.emit()

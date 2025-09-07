@@ -21,7 +21,7 @@ func judge_garden_condition():
 		visible = false
 	
 func _judge_need_water() -> bool:
-	for i in range(GardenManager.GardenBgType.size()):
+	for i in range(GardenManager.E_GardenBgType.size()):
 		## 背景种类
 		var curr_bg_data = Global.garden_data.get("第"+str(i)+"类背景", {})
 		for j in range(Global.garden_data["num_bg_page_"+str(i)]):

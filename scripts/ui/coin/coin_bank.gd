@@ -1,5 +1,5 @@
 extends Control
-class_name CoinBank
+class_name CoinBankLabel
 
 ## 是否自动隐藏
 @export var auto_hide := true
@@ -16,7 +16,7 @@ func update_label():
 	label_coin_value.text = "$" + Global.format_number_with_commas(Global.coin_value)
 	if auto_hide:
 		timer_auto_hide.start()
-		
+
 
 func _on_timer_auto_hide_timeout() -> void:
 	visible = false

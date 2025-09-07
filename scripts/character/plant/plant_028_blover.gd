@@ -1,26 +1,20 @@
-extends PlantBase
-class_name Blover
+extends Plant000Base
+class_name Plant028Blover
 
+## 三叶草吹的时间
+@export var blover_time:float = 2.0
 
-var fog_node:Fog
+var is_blow_away_once:=false
 
-func _ready():
-	super._ready()
-	if not is_idle:
-		SoundManager.play_plant_SFX(Global.PlantType.Blover, "blover")
-		await get_tree().create_timer(2.0).timeout
-		
-		_plant_free()
+func init_norm():
+	super()
+	await get_tree().create_timer(blover_time).timeout
+	hp_component.Hp_loss_death()
 
-
-func get_main_game_node():
-	curr_scene = get_tree().current_scene
-	if curr_scene is MainGameManager:
-		if curr_scene.game_para.is_fog:
-			fog_node = curr_scene.get_node("Background/Fog")
-
-
-## 吹散迷雾，动画中调用
+## 吹散迷雾
 func blow_away_fog():
-	if fog_node:
-		fog_node.be_flow_away()
+	if is_blow_away_once:
+		return
+	is_blow_away_once = true
+	if is_instance_valid(MainGameDate.fog_node):
+		MainGameDate.fog_node.be_flow_away()

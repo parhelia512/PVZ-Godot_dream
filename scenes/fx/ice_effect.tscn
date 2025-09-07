@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2y2ygq62yaag"]
 
-[ext_resource type="Script" uid="uid://cc2pukv2rh1pk" path="res://scripts/fx/plant_effect/plant_effect_003_ice_effect.gd" id="1_q33bu"]
+[ext_resource type="Script" uid="uid://cc2pukv2rh1pk" path="res://scripts/main_game_item/ice_zombie_effect.gd" id="1_q33bu"]
 [ext_resource type="Texture2D" uid="uid://b8wyfl4uolim5" path="res://assets/image/main_game_item/icetrap.png" id="2_pnb1i"]
 [ext_resource type="Texture2D" uid="uid://dsfa44kvaul2b" path="res://assets/image/main_game_item/icetrap2.png" id="3_oux6n"]
 [ext_resource type="Texture2D" uid="uid://ce5qywnpuq2ob" path="res://assets/image/particles/icetrap_particles.png" id="4_05hx1"]
@@ -29,18 +29,15 @@ script = ExtResource("1_q33bu")
 
 [node name="Icetrap" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(9, 35)
 texture = ExtResource("2_pnb1i")
 
 [node name="Icetrap2" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(8, 36)
 texture = ExtResource("3_oux6n")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = 1
 material = SubResource("CanvasItemMaterial_81wjr")
-position = Vector2(7, 39)
 emitting = false
 amount = 10
 texture = ExtResource("4_05hx1")

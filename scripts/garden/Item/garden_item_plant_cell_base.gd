@@ -1,7 +1,6 @@
 extends ItemBase
 class_name ItemPlantCellBase
 
-
 ## 当前选择的植物格子
 var curr_plant_cell :PlantCellGarden
 
@@ -23,14 +22,14 @@ func _input(event):
 ## 判断当前是否有植物格子
 func judge_is_curr_plant_cell() -> bool:
 	return curr_plant_cell != null and curr_plant_cell.plant_in_cell
-	
+
 ## 检测到进入的植物格子
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	curr_plant_cell = area.get_parent()
+	curr_plant_cell = area.owner
 	curr_plant_cell.plant_cell_light()
 
 ## 检测到出去的植物格子,每个格子不连在一起
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	var new_plant_cell:PlantCellGarden = area.get_parent()
+	var new_plant_cell:PlantCellGarden = area.owner
 	new_plant_cell.plant_cell_color_restore()
 	curr_plant_cell = null

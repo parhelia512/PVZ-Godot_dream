@@ -32,7 +32,7 @@ func _ready() -> void:
 	judge_can_get_goods()
 	## 连接金币改变信号
 	Global.coin_value_change.connect(judge_can_get_goods)
-	
+
 ## 判断是否卖的起,是否有商品
 func judge_can_get_goods():
 	## 如果当前金币买不起
@@ -68,7 +68,7 @@ func comfirm_get_this_goods():
 	else:
 		Global.coin_value -= price
 		get_one_goods()
-	
+
 ## 获得该商品的作用，子类重写
 func get_one_goods():
 	pass

@@ -1,77 +1,61 @@
-extends PlantBase
-class_name Squash
+extends Plant000Base
+class_name Plant018Squash
 
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
-@onready var area_2d_2: Area2D = $Area2D2
+@onready var area_2d_squash_attack: Area2D = $Area2DSquashAttack
+@onready var attack_ray_component: AttackRayComponentSquash = $AttackRayComponent
 
+## 可以攻击的敌人状态
+@export_flags("1 正常", "2 悬浮", "4 地刺") var can_attack_plant_status:int = 5
+@export_flags("1 正常", "2 跳跃", "4 水下", "8 空中", "16 地下") var can_attack_zombie_status:int = 1
+
+@export_group("动画状态")
 @export var is_attack: bool = false
 @export var is_right:bool = true
-@export var is_jump := false
+var target_x
 
-## 目标僵尸位置
-var target_position_x:float
-## 窝瓜原始y
-var ori_position_y:float
+func init_norm_signal_connect():
+	super()
+	attack_ray_component.signal_can_attack.connect(attack_start)
 
-## 攻击冷却时间计时器
-var attack_timer:Timer
+## 开始攻击
+func attack_start():
+	if not is_attack:
+		SoundManager.play_plant_SFX(Global.PlantType.Squash, "SquashHmm")
+		is_attack = true
+		target_x = attack_ray_component.enemy_can_be_attacked.global_position.x
+		is_right = target_x > global_position.x
 
-func _ready():
-	super._ready()
-
-
-func _process(delta):
-	# 每帧检查射线是否碰到僵尸
-	if ray_cast_2d.get_collider():
-		var zombie :ZombieBase = ray_cast_2d.get_collider().get_parent()
-		if not is_jump:
-			target_position_x = zombie.global_position.x
-		if not is_attack:
-			is_attack = true
-			judge_zombie_right_or_left(zombie)
-
-			
-			
-## 判断僵尸在自己左边还是右边
-func judge_zombie_right_or_left(zombie:ZombieBase):
-	SoundManager.play_plant_SFX(Global.PlantType.Squash, "SquashHmm")
-	if zombie.global_position.x > global_position.x:
-		is_right = true
-	else:
-		is_right = false
-	
-	area_2d.queue_free()
-
-
-## 开始起跳
+## 开始跳跃
 func jump_up_start():
-	is_jump = true
-	ori_position_y = global_position.y
-	z_index = 415 + row_col.x * 10 
+	be_attacked_box_component.queue_free()
+	z_index = 415 + row_col.x * 10
 	z_as_relative = false
-	
+
 	var tween:Tween = create_tween()
-	tween.tween_property(self, "global_position:x", target_position_x, 0.3).set_ease(Tween.EASE_IN)
+	if not is_instance_valid(attack_ray_component.enemy_can_be_attacked):
+		tween.tween_property(self, "global_position:x", attack_ray_component.enemy_can_be_attacked.global_position.x, 0.3).set_ease(Tween.EASE_IN)
+	else:
+		tween.tween_property(self, "global_position:x", target_x, 0.3).set_ease(Tween.EASE_IN)
+
+## 压扁所有范围内可攻击僵尸
+func squash_all_area_zombie():
+	var areas = area_2d_squash_attack.get_overlapping_areas()
+	for area in areas:
+		var zombie:Zombie000Base = area.owner
+		## 如果为同一行僵尸
+		if zombie.lane == row_col.x:
+			if zombie.curr_be_attack_status & can_attack_zombie_status:
+				zombie.be_squash()
 
 ## 跳入水中判断
 func judge_jump_pool():
 	## 如果地形为睡莲或者水
 	if plant_cell.curr_condition & 8 or  plant_cell.curr_condition & 16:
-		
-		# 水花
-		var splash:Splash = Global.splash_pool_scenes.instantiate()
+
+		## 水花
+		var splash:Splash = SceneRegistry.SPLASH.instantiate()
 		plant_cell.add_child(splash)
-		splash.global_position = Vector2(target_position_x, plant_cell.global_position.y + 20)
+		splash.global_position = Vector2(global_position.x,plant_cell.global_position.y + 20)
 		splash.z_as_relative = z_as_relative
 		splash.z_index = z_index
-		_plant_free()
-		
-
-func _squash_all_area_zombie():
-	var areas = area_2d_2.get_overlapping_areas()
-	for area in areas:
-		var zombie:ZombieBase = area.get_parent()
-		## 如果为同一行僵尸
-		if zombie.lane == row_col.x:
-			zombie.disappear_death()
-	
+		character_death()

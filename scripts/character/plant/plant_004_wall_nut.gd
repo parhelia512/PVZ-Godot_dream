@@ -1,17 +1,9 @@
-extends PlantBase
-class_name WallNut
+extends Plant000Base
+class_name Plant004WallNut
 
-@export var face_damaged : Array[Texture2D]
-@export var change_status_body: Sprite2D
-@export var hp_status := 1
+@onready var hp_stage_change_component: HpStageChangeComponent = $HpStageChangeComponent
 
-
-func judge_status():
-	super.judge_status()
-
-	if curr_Hp <= max_hp / 3 and hp_status < 3:
-		change_status_body.texture = face_damaged[1]
-		hp_status = 3
-	elif curr_Hp <= max_hp * 2 / 3 and hp_status < 2:
-		change_status_body.texture = face_damaged[0]
-		hp_status = 2
+func init_norm_signal_connect():
+	super()
+	## 连接信号
+	hp_component.signal_hp_loss.connect(hp_stage_change_component.judge_body_change)
