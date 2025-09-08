@@ -224,9 +224,10 @@ func save_selected_cards():
 	save_json(data, SelectedCardsPath)
 
 func load_selected_cards():
+
 	var data = load_json(SelectedCardsPath) as Dictionary
 		# 加载数据
-	selected_cards = data["selected_cards"]
+	selected_cards = data.get("selected_cards", {})
 
 #endregion
 

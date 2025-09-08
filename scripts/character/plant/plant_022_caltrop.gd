@@ -21,7 +21,7 @@ func _attack_once():
 	for enemy:Character000Base in attack_ray_component.all_ray_area_enenies_can_be_attacked[0]:
 		if enemy is Zombie000Base:
 			var zombie = enemy as Zombie000Base
-			zombie.be_attacked_bullet(attack_value, Global.AttackMode.Real)
+			zombie.be_attacked_bullet(attack_value, Global.AttackMode.Real, false, true)
 
 ## 被压扁
 ## [character:Character000Base] 发动攻击的角色

@@ -90,7 +90,7 @@ func _on_area_2d_attack_area_entered(area: Area2D) -> void:
 ## 对敌人造成伤害
 func _attack_enemy(enemy:Character000Base):
 	## 攻击敌人
-	enemy.be_attacked_bullet(attack_value, bullet_mode, trigger_be_attack_sfx)
+	enemy.be_attacked_bullet(attack_value, bullet_mode, false, trigger_be_attack_sfx)
 
 ## 攻击一次
 func attack_once(enemy:Character000Base):

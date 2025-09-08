@@ -139,6 +139,7 @@ func init_norm():
 ## 初始化展示角色
 func init_show():
 	is_show = true
+	is_idle = true
 	be_attacked_box_component.call_deferred("queue_free")
 
 ## 初始化花园角色

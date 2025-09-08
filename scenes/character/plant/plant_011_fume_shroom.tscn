@@ -122,8 +122,8 @@ position = Vector2(-36, -59)
 scale = Vector2(0.9, 0.9)
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(9.8, 39.5394)
-scale = Vector2(0.8, 0.776313)
+position = Vector2(9.8, 38.0474)
+scale = Vector2(0.8, 0.806314)
 texture = ExtResource("2_5mc0d")
 centered = false
 
@@ -133,30 +133,30 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
 visible = false
-position = Vector2(43, 50.6999)
+position = Vector2(43, 50)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_bbimx")
 centered = false
 
 [node name="DoomShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(4.3505, 0.248498)
-scale = Vector2(0.823687, 0.776313)
+position = Vector2(5.67885, -4.54167)
+scale = Vector2(0.79016, 0.815417)
 texture = ExtResource("4_0qv5g")
 centered = false
 
 [node name="DoomShroom_spout" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(68.7495, 18.9687)
-rotation = 0.0331441
-scale = Vector2(0.824687, 0.776313)
-skew = -0.0331441
+position = Vector2(67.4212, 15.1109)
+rotation = -0.020754
+scale = Vector2(0.79116, 0.815417)
+skew = 0.020754
 texture = ExtResource("5_47ii7")
 centered = false
 
 [node name="DoomShroom_tip" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(75.2394, 17.9081)
-rotation = 0.0331441
-scale = Vector2(0.824687, 0.776313)
-skew = -0.0331441
+position = Vector2(73.6211, 12.1795)
+rotation = -0.020754
+scale = Vector2(0.79116, 0.815417)
+skew = 0.020754
 texture = ExtResource("6_h5tkg")
 centered = false
 

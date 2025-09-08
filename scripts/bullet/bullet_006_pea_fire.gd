@@ -29,5 +29,5 @@ func _spatter_all_area_zombie(direct_hit_enemy:Character000Base):
 	else:
 		var damage_per_enemy: int = clampi(40 / all_splatter_enemy.size(), 1, 13)
 		for enemy:Character000Base in all_splatter_enemy:
-			enemy.be_attacked_bullet(damage_per_enemy, Global.AttackMode.Penetration, false)
+			enemy.be_attacked_bullet(damage_per_enemy, Global.AttackMode.Penetration, false, false)
 

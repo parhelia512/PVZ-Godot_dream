@@ -43,7 +43,7 @@ advance_expression = "not is_sleeping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h4mhh"]
 advance_mode = 2
-advance_expression = "not is_sleepingh"
+advance_expression = "not is_sleeping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vckfh"]
 advance_mode = 2
@@ -58,11 +58,12 @@ states/DoomShroom_sleep/node = SubResource("AnimationNodeAnimation_k2ghs")
 states/DoomShroom_sleep/position = Vector2(396, 76)
 states/Start/position = Vector2(145, 90)
 transitions = ["DoomShroom_idle", "DoomShroom_explode", SubResource("AnimationNodeStateMachineTransition_74em3"), "Start", "DoomShroom_sleep", SubResource("AnimationNodeStateMachineTransition_xi7k7"), "DoomShroom_sleep", "DoomShroom_idle", SubResource("AnimationNodeStateMachineTransition_rcrem"), "Start", "DoomShroom_idle", SubResource("AnimationNodeStateMachineTransition_h4mhh"), "DoomShroom_idle", "DoomShroom_sleep", SubResource("AnimationNodeStateMachineTransition_vckfh")]
-graph_offset = Vector2(30, -41)
+graph_offset = Vector2(68, -9)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_k2ghs"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tjrwq"]
+graph_offset = Vector2(-38, 31)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_fmcth")
 nodes/StateMachine/position = Vector2(40, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_k2ghs")
@@ -1578,20 +1579,21 @@ _data = {
 [node name="Plant016DoomShroom" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("1_uubea")]
 script = ExtResource("2_tjrwq")
 plant_type = 16
+is_sleep_in_day = true
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-39, -72)
 
 [node name="DoomShroom_body" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(17.1681, 39.8412)
-scale = Vector2(0.797505, 0.803176)
+position = Vector2(17.6345, 38.831)
+scale = Vector2(0.781965, 0.822793)
 texture = ExtResource("2_55ivw")
 centered = false
 
 [node name="DoomShroom_head1" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(0.0907329, 3.30512)
-scale = Vector2(0.798185, 0.803629)
+position = Vector2(0.634492, 1.47928)
+scale = Vector2(0.78731, 0.825966)
 texture = ExtResource("3_oiu6n")
 centered = false
 
@@ -1613,19 +1615,26 @@ sleep_influence_components = [NodePath("../BombComponent")]
 [node name="BlinkComponent" parent="." index="8"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 libraries = {
 &"": SubResource("AnimationLibrary_rjiww")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_tjrwq")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="BombComponent" type="Node2D" parent="." index="11"]
+[node name="AnimationTree2" type="AnimationTree" parent="." index="12"]
+deterministic = false
+tree_root = SubResource("AnimationNodeBlendTree_tjrwq")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="BombComponent" type="Node2D" parent="." index="13"]
 unique_name_in_owner = true
 script = ExtResource("7_enwho")
 can_attack_plant_status = 7

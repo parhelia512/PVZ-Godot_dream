@@ -86,7 +86,6 @@ graph_offset = Vector2(50, -52)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rikvi"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fw6sg"]
-graph_offset = Vector2(122, 34)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ebjf4")
 nodes/StateMachine/position = Vector2(280, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_rikvi")
@@ -103,7 +102,7 @@ is_grow = false
 plant_type = 10
 is_sleep_in_day = true
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
-speech_influence_components = [NodePath("CreateSunComponent"), null]
+speech_influence_components = [NodePath("CreateSunComponent")]
 
 [node name="Shadow" parent="." index="0"]
 scale = Vector2(0.796914, 0.736522)
@@ -142,7 +141,7 @@ centered = false
 position = Vector2(42, 36)
 
 [node name="SleepComponent" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
-sleep_influence_components = [NodePath("../CreateSunComponent"), NodePath("../CreateSunComponent")]
+sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../CreateSunComponent")]
 
 [node name="BlinkComponent" parent="." index="8"]
 all_blink_body_change = Array[ExtResource("7_dmd1b")]([SubResource("Resource_vdr6k")])

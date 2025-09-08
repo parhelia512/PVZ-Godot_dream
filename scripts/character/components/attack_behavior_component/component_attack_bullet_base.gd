@@ -48,7 +48,7 @@ func owner_update_speed(speed_product:float):
 func attack_start():
 	super()
 	## 先随机等待一段时间调用一次攻击
-	await get_tree().create_timer(randf_range(0, bullet_attack_cd_timer.wait_time)).timeout
+	await get_tree().create_timer(randf_range(0, bullet_attack_cd_timer.wait_time/3)).timeout
 	if is_attack and bullet_attack_cd_timer.is_stopped():
 		_on_bullet_attack_cd_timer_timeout()
 		bullet_attack_cd_timer.start()
