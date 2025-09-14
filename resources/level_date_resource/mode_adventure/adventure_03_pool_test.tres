@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://bxc0eb18y8ahj"]
+[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://bw5m4wyshmv8w"]
 
-[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://resources/level_date_resource/script/LevelData.gd" id="1_bme8i"]
+[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level_data.gd" id="1_bme8i"]
 
 [resource]
 script = ExtResource("1_bme8i")
@@ -10,21 +10,42 @@ mini_game_level = 0
 game_sences = 3
 game_BG = 2
 game_BGM = 2
-look_show_zombie = false
+is_fog = false
+is_day = false
+is_day_sun = false
+look_show_zombie = true
+can_choosed_card = true
+monster_mode = 1
+zombie_multy = 16
+max_wave = 10
+zombie_refresh_types = Array[int]([1])
+zombie_multy_hammer = 1
+max_wave_hammer_zombie = 10
+speed_zombie_init = 1.0
+speed_zombie_add = 0.15
+speed_zombie_max = 2.0
+is_have_tombston = false
+init_tombstone_num = 0
 card_mode = 0
 have_card_bar = true
-can_choosed_card = false
-is_zombie_spawn = true
-max_wave = 10
-zombie_refresh_types = Array[int]([14])
-zombie_multy = 2
-init_tombstone_num = 0
-create_tombston_in_flag_wave = false
 max_choosed_card_num = 10
-start_sun = 50000
-is_day_sun = true
-pre_choosed_card_list = Array[int]([18, 6, 19, 20, 21, 22, 23, 7, 17, 16])
-card_type = Array[int]([])
-card_type_probability = Array[int]([])
-card_type_start_list = Array[int]([])
+start_sun = 9000
+pre_choosed_card_list_plant = Array[int]([0, 0, 32, 24, 19, 15, 6])
+pre_choosed_card_list_zombie = Array[int]([19, 20, 0, 0, 0, 0, 0, 0])
+all_card_plant_type_probability = Dictionary[int, int]({})
+all_card_zombie_type_probability = Dictionary[int, int]({})
+start_list_card_plant_type = Array[int]([])
+start_list_card_zombie_type = Array[int]([])
+create_new_card_speed = 1.0
+is_mode_column = true
+is_shovel = true
+is_bowling_stripe = false
+plant_cell_col_j = 2
+plant_cell_can_use = Dictionary[String, bool]({
+"left_can_plant": true,
+"left_can_zombie": true,
+"right_can_plant": true,
+"right_can_zombie": true
+})
+is_hammer = false
 metadata/_custom_type_script = "uid://bjt3l56exxmdw"

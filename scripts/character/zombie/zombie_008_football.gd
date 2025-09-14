@@ -1,2 +1,0 @@
-extends ZombieBase
-class_name ZombieFootball

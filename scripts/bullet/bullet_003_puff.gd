@@ -1,2 +1,0 @@
-extends BulletBase
-class_name BulletPuff

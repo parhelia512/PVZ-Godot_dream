@@ -42,12 +42,12 @@ func _on_select_file():
 
 func _on_select_anim_folder():
 	var dialog = FileDialog.new()
-	dialog.access = FileDialog.ACCESS_RESOURCES  
+	dialog.access = FileDialog.ACCESS_RESOURCES
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-	
+
 	var full_path = anim_path_option.text
 	dialog.current_dir = full_path
-	
+
 	dialog.dir_selected.connect(func(path):
 		var fixed_path = path
 		if not fixed_path.ends_with("/"):
@@ -59,7 +59,7 @@ func _on_select_anim_folder():
 
 func _on_select_asset_folder():
 	var dialog = FileDialog.new()
-	dialog.access = FileDialog.ACCESS_RESOURCES  
+	dialog.access = FileDialog.ACCESS_RESOURCES
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
 	dialog.dir_selected.connect(func(path):
 		var fixed_path = path
@@ -75,7 +75,7 @@ func _add_to_history(key: String, path: String, option: OptionButton):
 	cfg.load(CONFIG_PATH)
 
 	var history := cfg.get_value("paths", key + "_history", [])
-	
+
 
 	# 移除重复项
 	if path in history:
@@ -138,10 +138,10 @@ func _on_run_exe():
 
 	var output = []
 	var exit_code = OS.execute(exe_path, args, output)  # 参数4是数组，接收输出
-	
+
 	for line in output:
 		print(line)
-		
+
 	if exit_code != 0:
 		push_error("运行失败，错误码：" + str(exit_code))
 	else:

@@ -7,7 +7,6 @@ class_name MainGameMenuOptionDialog
 @onready var sound_h_slider: HSlider = $Option/VBoxContainer/SoundEffect/HSlider
 @onready var time_scale_h_slider: HSlider = $Option/VBoxContainer/TimeScale/HSlider
 @onready var time_sacle_label: Label = $Option/VBoxContainer/TimeScale/Label
-@onready var main_game: MainGameManager = $"../../.."
 
 
 func _ready() -> void:
@@ -19,18 +18,16 @@ func _ready() -> void:
 	time_sacle_signal(time_scale_h_slider)
 	time_sacle_label.text = "倍速 " + str(Global.time_scale) + " 倍"
 
-	
+
 func musci_sound_signal(h_slider: HSlider, bus_index):
-	
 	h_slider.value = SoundManager.get_volum(bus_index)
 	h_slider.value_changed.connect(func (v:float):
 		SoundManager.set_volume(bus_index, v)
 		Global.save_config()
 	)
-		
+
 
 func time_sacle_signal(h_slider: HSlider):
-	
 	h_slider.value_changed.connect(func (v:float):
 		Global.time_scale = v
 		time_sacle_label.text = "倍速 " + str(Global.time_scale) + " 倍"
@@ -45,49 +42,40 @@ func appear_menu():
 	SoundManager.play_other_SFX("pause")
 
 	visible = true
-	#mouse_filter = Control.MOUSE_FILTER_STOP 
+	#mouse_filter = Control.MOUSE_FILTER_STOP
 
 ## 关闭菜单
 func return_button_pressed():
 	await get_tree().create_timer(0.1).timeout
 	SoundManager.play_other_SFX("pause")
 	visible = false
-	
-	if main_game.main_game_progress == main_game.MainGameProgress.GAME_OVER:
+
+	if MainGameDate.main_game_progress == MainGameManager.E_MainGameProgress.GAME_OVER:
 		return
 	get_tree().paused = false
 	#mouse_filter = Control.MOUSE_FILTER_IGNORE
-	## 如果有锤子
-	if main_game.hammer:
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
 
 
 ## 图鉴
 func encyclopedia():
 	_unrealized()
-	
+
 ## 重新开始
 func resume_game():
+	EventBus.push_event("change_is_mouse_visibel_on_hammer", true)
+
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 	Global.time_scale = 1.0
 	Engine.time_scale = Global.time_scale
-	
-	
 
 ## 返回主菜单
 func return_main_menu():
+	EventBus.push_event("change_is_mouse_visibel_on_hammer", true)
 	get_tree().paused = false
 	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.StartMenu])
 
 ## 功能未实现
 func _unrealized():
 	dialog.appear_dialog()
-
-
-func _on_mouse_entered() -> void:
-	## 如果有锤子
-	if main_game.hammer:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

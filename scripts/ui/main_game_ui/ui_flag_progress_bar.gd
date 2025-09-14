@@ -12,7 +12,7 @@ var chase_value: float = 0.0
 ## 小僵尸头表示进度条
 @onready var mini_zombie: TextureRect = $MiniZombie
 ## 旗帜
-@onready var flag: Control = $Flag
+@onready var flag: FlagProgressBarFlag = $Flag
 
 ## 小僵尸的起始位置
 var start_minizombie :float = 142
@@ -43,18 +43,18 @@ func create_flag(flag_num:int):
 	# 计算总距离
 	var total_distance = start_flag - end_flag
 	#var segment_length_wave = total_distance / (flag_num * 10 - 1)
-	
+
 	# 计算每个分段的结束位置
 	for i in range(1, flag_num+1):  # 1到10
 		var end_pos = start_flag - total_distance * ((i*10.0-1)/(flag_num * 10.0-1))
 
 		var flag_new : FlagProgressBarFlag = flag.duplicate()
-		
+
 		add_child(flag_new)
 		move_child(flag_new, 1)
 		flag_arr.append(flag_new)
 		flag_new.position.x = end_pos
-	
+
 	## 删除原始的flag
 	flag.queue_free()
 
@@ -66,17 +66,16 @@ func init_flag_from_wave(wave_num:int):
 	create_flag(flag_num)
 
 
-# 设置真实进度
+## 设置真实进度
 func set_progress(value: float, flag_i:int = -1):
 	real_value = clamp(value, 0.0, 100.0)
-	
+
 	if flag_i != -1:
 		flag_arr[flag_i].up_flag()
 
 
-## 设置每秒进度增加	
+## 设置每秒进度增加
 func set_progress_add_every_sec(add_value:float):
-	
 	var value = real_value + add_value
 	real_value = clamp(value, 0.0, 100.0)
 
@@ -87,7 +86,7 @@ func _process(delta):
 	if abs(chase_value - real_value) > 0.1:
 		# 计算追赶速度 (每秒10单位)
 		var speed = 10.0 * delta
-		
+
 		if chase_value < real_value:
 			chase_value = min(chase_value + speed, real_value)
 		else:
@@ -98,22 +97,12 @@ func _process(delta):
 		texture_progress_bar.value = chase_value
 		curr_minizombie = start_minizombie + chase_value * (end_minizombie - start_minizombie) * 0.01
 		mini_zombie.position.x = curr_minizombie
-		
-		#if curr_minizombie <= flag_arr[curr_flag_i].position.x - 6:
-			#flag_arr[curr_flag_i].up_flag()
-			#curr_flag_i += 1
-		
+
 	else:
 		# 如果非常接近，直接设为相等
 		if chase_value != real_value:
 			chase_value = real_value
-			
+
 			texture_progress_bar.value = chase_value
 			curr_minizombie = start_minizombie + chase_value * (end_minizombie - start_minizombie) * 0.01
 			mini_zombie.position.x = curr_minizombie
-		
-	
-			#if curr_minizombie <= flag_arr[curr_flag_i].position.x - 6:
-				#flag_arr[curr_flag_i].up_flag()
-				#curr_flag_i += 1
-	

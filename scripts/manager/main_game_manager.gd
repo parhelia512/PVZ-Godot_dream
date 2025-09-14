@@ -1,16 +1,19 @@
 extends Node2D
 class_name MainGameManager
 
+## 游戏时测试方便修改阳光数
+@export var test_change_sun_value := 9999:
+	set(value):
+		test_change_sun_value = value
+		EventBus.push_event("test_change_sun_value", [value])
 
 #region 游戏管理器
-@onready var manager: Node2D = $Manager
-@onready var hand_manager: HandManager = $Manager/HandManager
-@onready var zombie_manager: ZombieManager = $Manager/ZombieManager
-@onready var card_manager: CardManager = $Camera2D/CardManager
-## 传送带卡槽
-@onready var conveyor_belt: ConveyorBelt = $Camera2D/CardManager/ConveyorBelt
-## 控制台
-@onready var control_panel: ControlCanvasLayer = $CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4/CanvasLayer
+@onready var manager: Node = %Manager
+@onready var card_manager: CardManager = %CardManager
+@onready var hand_manager: HandManager = %HandManager
+@onready var zombie_manager: ZombieManager = %ZombieManager
+@onready var game_item_manager: GameItemManager = %GameItemManager
+@onready var plant_cell_manager: PlantCellManager = %PlantCellManager
 #endregion
 
 #region UI元素、相机
@@ -19,13 +22,33 @@ class_name MainGameManager
 #endregion
 
 #region 游戏主元素
-@onready var background: Sprite2D = $Background
-@onready var plant_cells: Node2D = $PlantCells
-@onready var temporary_plants: Node2D = $TemporaryPlants
-@onready var zombies: Node2D = $Zombies
-@onready var temporary_zombies: Node2D = $TemporaryZombies
-@onready var bullets: Node2D = $Bullets
-@onready var day_suns: DaySuns = $DaySuns
+@onready var background: MainGameBackGround = %Background
+
+## 将对应子弹\爆炸\阳光放到对应节点下,更新至MainGameDate中
+@onready var bullets: Node2D = %Bullets
+@onready var bombs: Node2D = %Bombs
+@onready var suns: Node2D = %Suns
+
+@onready var coin_bank_label: CoinBankLabel = $CanvasLayer/CoinBankLabel
+## 卡槽
+@onready var card_slot_root: CardSlotRoot = %CardSlotRoot
+## 僵尸进家panel
+@onready var panel_zombie_go_home: Panel = %PanelZombieGoHome
+
+#endregion
+
+#region 锤子进入节点鼠标显示
+## 鼠标是否一致显示,当有锤子时
+var is_mouse_visibel_on_hammer:bool = false
+@onready var node_mouse_appear_have_hammer:Array[Control] = [
+	## 卡槽
+	%CardSlotRoot,
+	## 菜单
+	$CanvasLayer/All_UI/MainGameMenuButton,
+	$CanvasLayer/All_UI/MainGameMenuOptionDialog,
+	$CanvasLayer/All_UI/Dialog
+]
+
 #endregion
 
 #region bgm
@@ -33,250 +56,227 @@ class_name MainGameManager
 @export var bgm_main_game: AudioStream
 #endregion
 
-#region 设置
-@export_group("游戏设置")
-## 柱子模式
-@export var mode_column := true
-#endregion
 
 #region 主游戏运行阶段
-enum MainGameProgress{
+enum E_MainGameProgress{
 	NONE,			## 无
 	CHOOSE_CARD,	## 选卡界面
+	PREPARE,		## 准备阶段(红字)
 	MAIN_GAME,		## 游戏阶段
 	GAME_OVER		## 游戏结束阶段
 }
-
-var main_game_progress:MainGameProgress
 #endregion
 
 #region 游戏参数
 @export_group("本局游戏参数")
 @export var game_para : ResourceLevelData
 @export var is_test : bool = false
-
 #endregion
 
-@export_group("不同关卡相关物品(保龄球红线、锤子)")
-var wallnut_bowlingstripe: Sprite2D
-var hammer: Hammer
-## 锤子场景路径
-var hammer_scenes_path = "res://scenes/item/game_scenes_item/hammer.tscn"
 #endregion
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	## 初始化游戏，游戏背景，游戏卡槽
-	_init_main_game()
-	
+	MainGameDate.main_game_manager = self
+	## 订阅总线事件
+	event_bus_subscribe()
+	## 更新主游戏数据单例
+	update_main_game_date()
 	## 主游戏进程
-	main_game_progress = MainGameProgress.CHOOSE_CARD
+	MainGameDate.main_game_progress = E_MainGameProgress.CHOOSE_CARD
+	## 播放选卡bgm
+	SoundManager.play_bgm(bgm_choose_card)
+	## 先获取当前关卡参数
+	if not is_test:
+		_from_globel_get_level_para()
+	game_para.init_para()
+
+	## 初始化子管理器
+	init_manager()
+	## 连接子节点信号
+	signal_connect()
+	## 金币label初始化
+	Global.coin_value_label = coin_bank_label
+	coin_bank_label.visible = false
+	## 初始化游戏背景
+	_init_game_BG()
+
+	## 如果有戴夫对话
+	if game_para.crazy_dave_dialog:
+		var crazy_dave:CrazyDave = SceneRegistry.CRAZY_DAVE.instantiate()
+		crazy_dave.init_dave(game_para.crazy_dave_dialog)
+		add_child(crazy_dave)
+		await crazy_dave.signal_dave_leave_end
+		crazy_dave.queue_free()
+
 	## 如果看展示僵尸
 	if game_para.look_show_zombie:
 		## 创建展示僵尸，等待一秒移动相机
-		zombie_manager.show_zombie_create()
+		zombie_manager.create_prepare_show_zombies()
 		await get_tree().create_timer(1.0).timeout
-		await start_game_move_camera()
+		await camera_2d.move_look_zombie()
 		## 如果可以选卡
 		if game_para.can_choosed_card:
-			card_manager.move_card_bar(true)
-			card_manager.move_card_chooser(true)
+			card_manager.card_slot_appear_choose()
 		else:
 			await get_tree().create_timer(1.0).timeout
-			no_cheeosed_card_start_game()
+			no_choosed_card_start_game()
 	else:
-		card_appear()
 		main_game_start()
+
+## 主游戏管理器事件总线订阅
+func event_bus_subscribe():
+	## 手持锤子时，修改鼠标离开ui是否显示鼠标
+	EventBus.subscribe("change_is_mouse_visibel_on_hammer", change_is_mouse_visibel_on_hammer)
+	## 僵尸进家
+	EventBus.subscribe("zombie_go_home", on_zombie_go_home)
+	## 正常选卡结束后开始游戏
+	EventBus.subscribe("card_slot_norm_start_game", choosed_card_start_game)
+
+## 更新主游戏数据单例
+func update_main_game_date():
+	MainGameDate.bullets = bullets
+	MainGameDate.bombs = bombs
+	MainGameDate.suns = suns
 
 
 #region 游戏关卡初始化
-# 初始化游戏，本局游戏相关参数
-func _init_main_game():
-	if not is_test:
-		_from_globel_get_level_para()
-	_init_game_BG()
-	_init_game_card_bar()
-	
-	if game_para.is_zombie_spawn:
-		print("初始化僵尸管理器")
-		## 初始化僵尸管理器
-		zombie_manager.init_zombie_manager(zombies, game_para.max_wave, game_para.zombie_multy, game_para.zombie_refresh_types, game_para.create_tombston_in_flag_wave)
+## 初始化管理器
+func init_manager():
+	card_manager.init_card_manager(game_para)
+	plant_cell_manager.init_plant_cell_manager(game_para)
+	game_item_manager.init_game_item_manager(game_para)
+	hand_manager.init_hand_manager(game_para)
+	zombie_manager.init_zombie_manager(game_para)
 
-	## 初始化植物种植区域
-	hand_manager.init_plant_cells()
-	## 初始化玩家控制台
-	control_panel.init_control_panel()
-		
-	## 初始化小游戏场景相关物品
-	if game_para.game_mode == game_para.GameMode.MiniGame:
-		_init_minigame_item()
-	
-## 初始化小游戏的不同物品
-func _init_minigame_item():
-
-	match game_para.mini_game_level:
-		game_para.MiniGameLevel.Bowling:
-			wallnut_bowlingstripe = $Background/WallnutBowlingstripe
-			wallnut_bowlingstripe.visible = true
-			hand_manager.minigame_bowling_del_right_plant_cells()
-		game_para.MiniGameLevel.HammerZombie:
-			print("初始化锤子")
-			hammer = load(hammer_scenes_path).instantiate()
-			add_child(hammer)
-			
+## 子节点之间信号连接
+func signal_connect():
+	## 植物种植区域信号
+	for plant_cells_row in MainGameDate.all_plant_cells:
+		for plant_cell in plant_cells_row:
+			plant_cell = plant_cell as PlantCell
+			plant_cell.click_cell.connect(hand_manager._on_click_cell)
+			plant_cell.cell_mouse_enter.connect(hand_manager._on_cell_mouse_enter)
+			plant_cell.cell_mouse_exit.connect(hand_manager._on_cell_mouse_exit)
+	if game_para.is_hammer:
+		for ui_node:Control in node_mouse_appear_have_hammer:
+			ui_node.mouse_entered.connect(mouse_appear_have_hammer)
+			ui_node.mouse_exited.connect(mouse_disappear_have_hammer)
 
 ## 从globel中获取当前关卡
 func _from_globel_get_level_para():
 	game_para = Global.game_para
-	game_para.init_para()
-	
+
 ## 初始化游戏背景,bgm
 func _init_game_BG():
 	print(game_para.game_BGM)
 	var path_bgm_game = game_para.GameBGMMap[game_para.game_BGM]
 	bgm_main_game = load(path_bgm_game) as AudioStream
-	
-	var texture: Texture2D = game_para.GameBgTextureMap[game_para.game_BG]
-	background.texture = texture
-	
-	match game_para.game_BG:
-		game_para.GameBg.FrontDay:
-			$Background/Area2DHome/Door/DoorDown/Background1GameoverInteriorOverlay.visible=true
-			$Background/Area2DHome/Door/DoorMask/Background1GameoverMask.visible=true
-		
-		game_para.GameBg.FrontNight:
-			$Background/Area2DHome/Door/DoorDown/Background2GameoverInteriorOverlay.visible=true
-			$Background/Area2DHome/Door/DoorMask/Background2GameoverMask.visible=true
-		
-		game_para.GameBg.Pool:
-			$Background/Area2DHome/Door/DoorDown/Background3GameoverInteriorOverlay.visible=true
-			$Background/Area2DHome/Door/DoorMask/Background3GameoverMask.visible=true
 
-## 初始化卡槽参数
-func _init_game_card_bar():
-	SoundManager.play_bgm(bgm_choose_card)
-	print("卡槽模式：", str(game_para.card_mode))
-	match game_para.card_mode:
-		## 卡槽模式
-		game_para.CardMode.Norm:
-			## 删除传送带
-			conveyor_belt.queue_free()
-			## 初始化待选卡槽
-			card_manager.init_CardChooser()
-			## 初始化出战卡槽格数
-			card_manager.init_card_bar(game_para.max_choosed_card_num, game_para.start_sun)
-
-			## 初始化预选卡
-			if game_para.pre_choosed_card_list:
-				card_manager.init_pre_choosed_card(game_para.pre_choosed_card_list, is_test)
-		game_para.CardMode.ConveyorBelt:
-			conveyor_belt.init_conveyor_belt_card_bar(game_para.card_type, game_para.card_type_probability, game_para.card_type_start_list)
-
-#endregion
+	background.init_background(game_para)
 
 ## 不用选择卡片进行的流程
-func no_cheeosed_card_start_game():
+func no_choosed_card_start_game():
 	await get_tree().create_timer(2.0).timeout
 	## 相机移动回游戏场景
-	await camera_2d.move_to(Vector2(0, 0), 2)
-	card_appear()
+	await camera_2d.move_back_ori()
 	main_game_start()
-
-func card_appear():
-	## 不选卡,但是卡槽出现
-	if game_para.have_card_bar:
-		if game_para.card_mode == game_para.CardMode.Norm:
-			print("普通卡槽出现")
-			## 普通卡槽出现
-			card_manager.move_card_bar(true)
-		elif game_para.card_mode == game_para.CardMode.ConveyorBelt:
-			## 传送带卡槽出现
-			print("卡片出现")
-			conveyor_belt.move_card_chooser()
-			
+#endregion
 
 ## 选择卡片完成
-func cheeosed_card_start_game():
-	## 隐藏多余卡槽
-	card_manager.judge_disappear_add_card_bar() 
-	## 断开原本的卡片信号连接
-	card_manager.card_disconnect_card()
+func choosed_card_start_game():
 	## 隐藏待选卡槽
-	await card_manager.move_card_chooser(false)
-	
+	await card_manager.card_slot_disappear_choose()
 	## 相机移动回游戏场景
-	await camera_2d.move_to(Vector2(0, 0), 2)
-	
+	await camera_2d.move_back_ori()
 	main_game_start()
-
 
 ## 选卡结束，开始游戏
 func main_game_start():
 	## 主游戏进程阶段
-	main_game_progress = MainGameProgress.MAIN_GAME
-	
+	MainGameDate.main_game_progress = E_MainGameProgress.PREPARE
+	if game_para.is_fog:
+		MainGameDate.fog_node.come_back_game(5.0)
+
 	## 删除展示僵尸
 	if game_para.look_show_zombie:
-		zombie_manager.show_zombie_delete()
-		
+		zombie_manager.delete_prepare_show_zombies()
+
 	## 开始天降阳光
 	if game_para.is_day_sun:
-		day_suns.start_day_sun()
-		
+		var day_suns_manager = SceneRegistry.DAY_SUNS_MANAGER.instantiate()
+		manager.add_child(day_suns_manager)
+		day_suns_manager.start_day_sun()
+
+	print("生成墓碑", game_para.init_tombstone_num)
 	## 生成墓碑
 	if game_para.init_tombstone_num > 0:
-		hand_manager.create_tombstone(game_para.init_tombstone_num )	
-	
+		plant_cell_manager.create_tombstone(game_para.init_tombstone_num)
+
 	## 等待1秒红字出现
 	await get_tree().create_timer(1.0).timeout
 	await ui_remind_word.ready_set_plant()
 
-	## 红字结束，可以种植,连接卡片和铲子种植信号
-	match game_para.card_mode:
-		game_para.CardMode.Norm:
-			hand_manager.card_game_signal_connect(card_manager.cards, card_manager.shovel_bg)
-			card_manager.card_signal_connect()
-		
-			
-		game_para.CardMode.ConveyorBelt:
-			## 开始放置植物
-			conveyor_belt.start_plant()
-	
+	## 卡槽出现,若已出现,不会重复出现,更新卡槽卡片和铲子
+	if game_para.have_card_bar:
+		card_manager.card_slot_update_main_game()
+	## 主游戏进程阶段
+	MainGameDate.main_game_progress = E_MainGameProgress.MAIN_GAME
+
 	## 红字结束后一秒修改bgm
 	await get_tree().create_timer(1.0).timeout
 	SoundManager.play_bgm(bgm_main_game)
-	
-	if game_para.is_zombie_spawn:
-		# 10秒后开始刷新僵尸		
-		await get_tree().create_timer(10).timeout
-		zombie_manager.start_first_wave()
-		zombie_manager.flag_progress_bar.visible = true
-		
-	## 如果是锤僵尸模式
-	if game_para.game_mode == game_para.GameMode.MiniGame and game_para.mini_game_level == game_para.MiniGameLevel.HammerZombie:
-		zombie_manager.init_zombie_manager_in_mini_game_hammer_zombie(zombies, game_para.zombie_multy)
-	
 
-func start_game_move_camera():
-	# 移动相机查看僵尸
-	await camera_2d.move_to(Vector2(390, 0), 2)
+	zombie_manager.start_game()
 
-#region 用户控制台相关
-## 显示植物血量
-func display_plant_HP_label():
 
-	hand_manager.display_plant_HP_label()
+#region 游戏结束
+## 修改僵尸位置
+func change_zombie_position(zombie:Zombie000Base):
+	## 要删除碰撞器，不然会闪退
+	zombie.be_attacked_box_component.free()
+	zombie.get_parent().remove_child(zombie)
+	panel_zombie_go_home.add_child(zombie)
+	zombie.position = Vector2(75, 360)
 
-## 显示僵尸血量
-func display_zombie_HP_label():
-	zombie_manager.display_zombie_HP_label()
+## 僵尸进房
+func on_zombie_go_home(zombie:Zombie000Base):
 
-## 植物卡槽取消置顶
-func card_bar_and_shovel_z_index_100():
-	card_manager.card_bar_and_shovel_z_index_100()
-## 传送带卡槽
-func conveyor_belt_card_bar_z_index_100():
-	if conveyor_belt:
-		conveyor_belt.z_index = 100
+	MainGameDate.main_game_progress = E_MainGameProgress.GAME_OVER
+	card_slot_root.visible = false
+	# 游戏暂停
+	get_tree().paused = true
+	call_deferred("change_zombie_position", zombie)
+	## 如果有锤子
+	if game_item_manager.all_game_items.has(GameItemManager.E_GameItemType.Hammer):
+		game_item_manager.all_game_items[GameItemManager.E_GameItemType.Hammer].set_is_used(false)
+	await get_tree().create_timer(1).timeout
+
+	## 设置相机可以移动
+	camera_2d.process_mode = Node.PROCESS_MODE_ALWAYS
+	camera_2d.move_to(Vector2(-200, 0), 2)
+	SoundManager.play_other_SFX("losemusic")
+	await get_tree().create_timer(3).timeout
+	SoundManager.play_other_SFX("scream")
+	ui_remind_word.zombie_won_word_appear()
+
+#endregion
+
+
+#region 锤子鼠标交互
+## 锤子鼠标进入后，显示鼠标
+func mouse_appear_have_hammer():
+	## 如果有锤子
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+## 有锤子时连接该信号
+func mouse_disappear_have_hammer():
+	## 如果有锤子不显示鼠标（非重新开始、离开游戏）
+	if not is_mouse_visibel_on_hammer:
+		## 如果有锤子
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+## 点击重新开始或主菜单时，修改值，可以一直显示鼠标
+func change_is_mouse_visibel_on_hammer(value:bool):
+	if game_para.is_hammer:
+		is_mouse_visibel_on_hammer = value
+
 #endregion

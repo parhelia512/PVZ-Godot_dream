@@ -22,11 +22,11 @@ func _enter_tree() -> void:
 	get_editor_interface().get_base_control().add_child(refactor_dialogue)
 	refactor_dialogue.init(self)
 	# Create menu button
-	_add_refactor_option(func(): 
+	_add_refactor_option(func():
 		refactor_dialogue.popup_centered()
 		refactor_dialogue.reset_size()
 	)
-	
+
 
 func _exit_tree() -> void:
 	if refactor_dialogue and refactor_dialogue.is_inside_tree():
@@ -50,25 +50,25 @@ func get_anim_player() -> AnimationPlayer:
 			get_editor_interface().get_base_control(),
 			"SceneTreeEditor"
 		)
-		
+
 		if not _scene_tree_editor:
 			push_error("[Animation Refactor] Could not find scene tree editor. Please report this.")
 			return null
-			
+
 		_scene_tree = _scene_tree_editor.get_child(SCENE_TREE_IDX)
-		
+
 	if not _scene_tree:
 		push_error("[Animation Refactor] Could not find scene tree editor. Please report this.")
 		return null
-		
+
 	var found_anim := EditorUtil.find_active_anim_player(
 		get_editor_interface().get_base_control(),
 		_scene_tree
 	)
-	
+
 	if found_anim:
 		return found_anim
-	
+
 	# Get latest edited
 	return _last_anim_player
 
@@ -85,12 +85,12 @@ func _add_refactor_option(on_pressed: Callable):
 	if not anim_menu_button:
 		push_error("Could not find Animation menu button. Please report this issue.")
 		return
-	
+
 	# Remove item up to "Manage Animations..."
 	var menu_popup := anim_menu_button.get_popup()
 	var items := []
 	var count := menu_popup.item_count - 1
-	
+
 	while count >= 0 and menu_popup.get_item_id(count) != TOOL_ANIM_LIBRARY:
 		if menu_popup.is_item_separator(count):
 			items.append({})
@@ -100,13 +100,13 @@ func _add_refactor_option(on_pressed: Callable):
 				"id": menu_popup.get_item_id(count),
 				"icon": menu_popup.get_item_icon(count)
 			})
-		
+
 		menu_popup.remove_item(count)
 		count -= 1
 
 	# Add refactor item
 	menu_popup.add_icon_item(
-		base_control.get_theme_icon(&"Reload", &"EditorIcons"), 
+		base_control.get_theme_icon(&"Reload", &"EditorIcons"),
 		"Refactor",
 		TOOL_REFACTOR,
 	)
@@ -114,7 +114,7 @@ func _add_refactor_option(on_pressed: Callable):
 	# Re-add items
 	for i in range(items.size() - 1, -1, -1):
 		var item: Dictionary = items[i]
-		
+
 		if not item.is_empty():
 			menu_popup.add_shortcut(item.shortcut, item.id)
 			menu_popup.set_item_icon(menu_popup.get_item_index(item.id), item.icon)
@@ -129,9 +129,9 @@ func _add_refactor_option(on_pressed: Callable):
 func _remove_refactor_option():
 	if not anim_menu_button:
 		return
-	
+
 	var base_control := get_editor_interface().get_base_control()
-	
+
 	var menu_popup := anim_menu_button.get_popup()
 	menu_popup.remove_item(menu_popup.get_item_index(TOOL_REFACTOR))
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmrhicx0325"]
+
+[ext_resource type="Texture2D" uid="uid://xsu0epbjdx8o" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Store.png" id="1_t18el"]
+[ext_resource type="Texture2D" uid="uid://c7hm6tgjy1fbs" path="res://assets/image/ui/ui_start_menu/SelectorScreen_StoreHighlight.png" id="2_qvt2g"]
+[ext_resource type="BitMap" uid="uid://cra43htuprgvi" path="res://assets/image/ui/ui_start_menu/SelectorScreen_Store_Mask.png" id="3_utnk8"]
+[ext_resource type="Script" uid="uid://xpc2hhe2lj0t" path="res://scripts/store/store.gd" id="4_sm2qb"]
+
+[node name="StoreEnterKey" type="TextureButton"]
+offset_right = 130.0
+offset_bottom = 89.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_t18el")
+texture_pressed = ExtResource("2_qvt2g")
+texture_hover = ExtResource("2_qvt2g")
+texture_click_mask = ExtResource("3_utnk8")
+ignore_texture_size = true
+script = ExtResource("4_sm2qb")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

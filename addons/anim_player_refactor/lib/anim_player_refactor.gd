@@ -34,7 +34,7 @@ func rename_node_path(anim_player: AnimationPlayer, old: NodePath, new: NodePath
 
 func remove_node_path(anim_player: AnimationPlayer, node_path: NodePath):
 	_undo_redo.create_action("Remove node tracks", UndoRedo.MERGE_ALL, anim_player)
-	
+
 	_foreach_animation_restore(anim_player, _undo_redo, func(animation: Animation):
 		var removed_tracks = 0
 
@@ -116,7 +116,7 @@ func rename_method(anim_player, old: NodePath, new: NodePath):
 							"method": new_method,
 							"args": animation.method_track_get_params(i, j)
 						}
-						
+
 						_undo_redo.add_do_method(animation, &'track_set_key_value', i, j, method_params)
 						_undo_redo.add_undo_method(animation, &'track_set_key_value', i, j, old_method_params)
 	)
@@ -126,7 +126,7 @@ func rename_method(anim_player, old: NodePath, new: NodePath):
 
 func remove_method(anim_player: AnimationPlayer, method_path: NodePath):
 	_undo_redo.create_action("Remove method keys", UndoRedo.MERGE_ALL, anim_player)
-	
+
 	_foreach_animation_restore(anim_player, _undo_redo, func(animation: Animation):
 		for i in animation.get_track_count():
 			if (
@@ -161,7 +161,7 @@ func change_root(anim_player: AnimationPlayer, new_path: NodePath):
 			if node == null:
 				push_warning("Invalid path: %s. Skipping root change." % path)
 				continue
-			
+
 			var updated_path = str(new_root.get_path_to(node)) + ":" + path.get_concatenated_subnames()
 
 			_undo_redo.add_do_property(animation, "tracks/%d/path" % i, updated_path)
@@ -172,7 +172,7 @@ func change_root(anim_player: AnimationPlayer, new_path: NodePath):
 	_undo_redo.add_undo_property(anim_player, "root_node", anim_player.root_node)
 
 	_undo_redo.commit_action()
-	
+
 
 
 # Helper methods
@@ -193,9 +193,9 @@ static func _foreach_animation_restore(anim_player: AnimationPlayer, undo_redo: 
 		var lib := anim_player.get_animation_library(lib_name)
 		for animation_name in lib.get_animation_list():
 			var animation := lib.get_animation(animation_name)
-			
+
 			var old_anim := animation.duplicate(true)
-		
+
 			var removed_tracked = callback.call(animation)
 
 			for i in range(animation.get_track_count() - 1 - removed_tracked, -1, -1):
@@ -203,5 +203,5 @@ static func _foreach_animation_restore(anim_player: AnimationPlayer, undo_redo: 
 
 			for i in range(old_anim.get_track_count()):
 				undo_redo.add_undo_method(old_anim, &'copy_track', i, animation)
-			
+
 			undo_redo.add_undo_reference(old_anim)

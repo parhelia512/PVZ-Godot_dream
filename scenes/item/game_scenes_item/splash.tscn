@@ -524,7 +524,7 @@ _data = {
 script = ExtResource("1_p6qe5")
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2(-46, -22)
+position = Vector2(-46, -64)
 
 [node name="Splash_ring" type="Sprite2D" parent="Body"]
 position = Vector2(32.7, 57.5)
