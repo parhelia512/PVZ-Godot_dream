@@ -1,119 +1,142 @@
 extends Node2D
-class_name Bullet000Base
-
-@onready var area_2d_up: Area2D = $Area2DUp
-
-## 子弹击中特效
-@onready var bullet_effect: BulletEffect000Base = $BulletEffect
-## 子弹本体节点
-@onready var body: Node2D = $Body
-## 子弹基类
+class_name BulletBase
+## 直线移动直线基类
 @export_group("子弹基础属性")
-## 最大攻击次数(-1表示可以无限攻击)
-@export var max_attack_num:=1
-## 当前攻击次数
-var curr_attack_num:=0
+## 是否已攻击
+@export var is_attack := false
 ## 子弹伤害
 @export var attack_value := 20
 ## 子弹默认移动速度
 @export var speed: float = 300.0
 ## 子弹默认移动方向
 @export var direction: Vector2 = Vector2.RIGHT
-## 子弹伤害模式：普通，穿透，真实
+## 子弹模式：普通，穿透，真实
 @export var bullet_mode : Global.AttackMode
-## 是否触发受击音效(火焰豌豆就不触发)
-@export var trigger_be_attack_sfx := true
-## 子弹本身音效
+## 是否触发受击音效
+@export var trigger_be_attack_SFX := true
+## 子弹本身是否有音效
 @export var type_bullet_SFX :SoundManagerClass.TypeBulletSFX =  SoundManagerClass.TypeBulletSFX.Pea
+
+## 子弹击中特效
+@export var bullet_effect: Node2D
 ## 子弹移动离出生点最大距离，超过自动销毁
 @export var max_distance := 2000.0
 ## 子弹初始位置
 var start_pos: Vector2
-## 默认是否激活行属性，激活后只能攻击本行的僵尸
-@export var default_bullet_lane_activate:=true
-var bullet_lane_activate:bool
+## 超出屏幕500像素删除
+var screen_rect: Rect2 
+
+## 是否激活行属性，激活后只能攻击本行的僵尸
+@export var bullet_lane_activate:=true
 ## 子弹行属性
 var bullet_lane :int = -1
 
-@export_group("子弹攻击相关")
-## 可以攻击的敌人状态
-@export_flags("1 正常", "2 悬浮", "4 地刺") var can_attack_plant_status:int = 1
-@export_flags("1 正常", "2 跳跃", "4 水下", "8 空中", "16 地下") var can_attack_zombie_status:int = 1
-
 @export_group("子弹升级相关")
-## 是否可以升级子弹
-@export var is_can_up:=false
+## 子弹上次升级的植物，寒冰豌豆变成的豌豆子弹无法被上次升级的火炬树桩升级
+var bullet_up_plant_last :PlantBase
 ## 子弹升级需要的植物种类（升级子弹的植物需要有对应的area区域）
-@export var bullet_up_plant_type : Global.PlantType
+@export var bullet_up_plant_type : Global.PlantType = Global.PlantType.TorchWood
 ## 子弹升级种类（子弹升级后的子弹种类）
 @export var bullet_up_type:Global.BulletType
 
 func _ready() -> void:
-	body.rotation = direction.angle()
-
+	# 必须在 ready 后才能安全获取视口尺寸
+	screen_rect = get_viewport_rect().grow(500)
+		
 ## 初始化子弹属性
-func init_bullet(lane:int, start_pos:Vector2, direction:= Vector2.RIGHT, bullet_lane_activate:bool=default_bullet_lane_activate):
-	self.bullet_lane_activate = bullet_lane_activate
-	## 子弹行
-	if bullet_lane_activate:
-		self.bullet_lane = lane
+func init_bullet(lane:int, start_pos:Vector2):
+	## 子弹行是十进制，
+	bullet_lane = lane
 	self.start_pos = start_pos
-	self.direction = direction
-	position = start_pos
 
-## 子弹与敌人碰撞
-func _on_area_2d_attack_area_entered(area: Area2D) -> void:
-	var enemy:Character000Base = area.owner
-	## TODO:攻击植物子弹
-	if enemy is Plant000Base:
-		pass
-		return
-	elif enemy is Zombie000Base:
-		var zombie = enemy as Zombie000Base
-		## 如果不是可攻击状态敌人
-		if not zombie.curr_be_attack_status & can_attack_zombie_status:
-			return
-	else:
-		push_error("敌人不是植物,不是僵尸")
-	## 子弹还有攻击次数
-	if max_attack_num != -1 and curr_attack_num < max_attack_num:
-		## 如果子弹有行属性
-		if bullet_lane_activate:
-			if bullet_lane == enemy.lane:
-				attack_once(enemy)
-		else:
-			attack_once(enemy)
-	## 子弹无限穿透
-	if max_attack_num == -1:
-		attack_once(enemy)
 
-## 对敌人造成伤害
-func _attack_enemy(enemy:Character000Base):
-	## 攻击敌人
-	enemy.be_attacked_bullet(attack_value, bullet_mode, false, trigger_be_attack_sfx)
-
-## 攻击一次
-func attack_once(enemy:Character000Base):
-	curr_attack_num += 1
-	## 判断是否进入删除队列
-	if max_attack_num != -1 and curr_attack_num >= max_attack_num:
+func _process(delta: float) -> void:
+	# 每帧移动子弹
+	position += direction * speed * delta
+	
+	## 移动超过最大距离后销毁，部分子弹有限制
+	if global_position.distance_to(start_pos) > max_distance:
 		queue_free()
-	## 对敌人造成伤害
-	_attack_enemy(enemy)
+	
+	## 超过屏幕500像素销毁
+	if not screen_rect.has_point(global_position):
+		queue_free()
+
+## 改变y位置
+func change_y(target_y:float):
+	var tween = get_tree().create_tween()
+	var start_y = global_position.y
+	tween.tween_method(func(y): 
+		global_position.y = y,
+		start_y, 
+		target_y, 
+		0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+## 子弹击中僵尸
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	
+	if not is_attack:
+		var zombie :ZombieBase = area.get_parent()
+		## 如果子弹有行属性，需要判断僵尸是否在本行
+		if bullet_lane_activate:
+			## 如果僵尸在子弹攻击行
+			if bullet_lane == zombie.lane:
+				is_attack = true
+				_attack_zombie(zombie)
+		else:
+			is_attack = true
+			_attack_zombie(zombie)
+
+
+## 攻击一次僵尸
+func _attack_zombie(zombie:ZombieBase):
+	#攻击
+	zombie.be_attacked_bullet(attack_value, bullet_mode, trigger_be_attack_SFX)
 	## 是否有音效
 	if type_bullet_SFX != SoundManagerClass.TypeBulletSFX.Null:
 		SoundManager.play_bullet_attack_SFX(type_bullet_SFX)
-	## 如果有子弹特效
-	if bullet_effect.is_bullet_effect:
+	if bullet_effect:
+		bullet_effect_change_parent(bullet_effect)
 		bullet_effect.activate_bullet_effect()
+	queue_free()
+
+# 更换节点父节点
+func bullet_effect_change_parent(bullet_effect:Node2D):
+	# 保存全局变换
+	var curr_global_position = bullet_effect.global_position
+
+	# 移除并添加到bullet节点
+	bullet_effect.get_parent().remove_child(bullet_effect)
+	get_parent().add_child(bullet_effect)
+
+	# 恢复全局变换，保持位置不变
+	bullet_effect.global_position = curr_global_position
+
 
 #region 子弹升级相关
-## 创建升级后的子弹
-func create_new_bullet_up():
-	var new_bullet_up_scenes = Global.get_bullet_scenes(bullet_up_type)
-	## 子弹升级后更新行属性，上次升级的火炬树桩
-	var bullet_up :Bullet000Base = new_bullet_up_scenes.instantiate()
-	bullet_up.init_bullet(bullet_lane, position, direction, bullet_lane_activate)
+## 子弹升级需要新建area节点连接信号
+func _on_area_2d_2_area_entered(area: Area2D) -> void:
+	## 获取子弹升级植物
+	var bullet_up_plant:PlantBase = area.get_parent()
+	## 如过是火炬树桩
+	if bullet_up_plant as TorchWood:
+		## 如果不是上次的火炬树桩
+		if bullet_up_plant_last != bullet_up_plant:
+			bullet_up_plant_last = bullet_up_plant
+			call_deferred("create_new_bullet_up", bullet_up_type)
+		
 
-	return bullet_up
+## 创建升级后的子弹
+func create_new_bullet_up(new_bullet_up_type:Global.BulletType):
+	var new_bullet_up_scenes = Global.get_bullet_scenes(new_bullet_up_type)
+	## 子弹升级后更新行属性，上次升级的火炬树桩
+	var bullet_up :BulletBase = new_bullet_up_scenes.instantiate()
+	## 初始化子弹属性
+	bullet_up.init_bullet(bullet_lane, start_pos)
+	bullet_up.bullet_up_plant_last = bullet_up_plant_last
+	get_parent().add_child(bullet_up)
+	bullet_up.global_position = global_position
+	
+	queue_free()
+	
 #endregion

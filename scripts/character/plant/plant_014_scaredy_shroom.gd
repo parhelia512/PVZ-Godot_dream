@@ -1,21 +1,33 @@
-extends Plant000Base
-class_name Plant014ScaredyShroom
+extends PuffShroom
+class_name ScaredyShroom
 
-@onready var scaredy_component: ScaredyComponent = $ScaredyComponent
-
-@export_group("动画状态")
+@onready var area_2d_2: Area2D = $Area2D2
 @export var is_scared := false
 
+@export var num_zombie_in_scaredy_area := 0
+	
+	
+## 判断是否会害怕
+func judge_scared():
+	if num_zombie_in_scaredy_area <= 0 and is_scared:
+		is_scared = false
+	elif num_zombie_in_scaredy_area > 0 and not is_scared:
+		is_scared = true
+	
+# 重写攻击逻辑
+func _on_attack_timer_timeout():
+	if not is_scared:
+		animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	# 在这里调用实际攻击逻辑
 
-func init_norm_signal_connect():
-	super()
-	scaredy_component.signal_scaredy_start.connect(change_is_scared.bind(true))
-	scaredy_component.signal_scaredy_end.connect(change_is_scared.bind(false))
 
-	for component:ComponentBase in scaredy_component.scaredy_influence_components:
-		scaredy_component.signal_scaredy_start.connect(component.disable_component.bind(ComponentBase.E_IsEnableFactor.Scaredy))
-		scaredy_component.signal_scaredy_end.connect(component.enable_component.bind(ComponentBase.E_IsEnableFactor.Scaredy))
-
-## 害怕组件信号发射改变植物害怕状态
-func change_is_scared(is_scared:bool):
-	self.is_scared = is_scared
+## 检测有僵尸进入
+func _on_area_2d_2_area_entered(area: Area2D) -> void:
+	num_zombie_in_scaredy_area += 1
+	judge_scared()
+	
+	
+func _on_area_2d_2_area_exited(area: Area2D) -> void:
+	num_zombie_in_scaredy_area -= 1
+	judge_scared()
+	

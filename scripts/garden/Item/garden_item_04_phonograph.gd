@@ -1,2 +1,0 @@
-extends ItemPlantNeedBase
-class_name Phonograph

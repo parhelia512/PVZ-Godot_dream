@@ -1,0 +1,162 @@
+[gd_scene load_steps=20 format=3 uid="uid://c638xelguj7pr"]
+
+[ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="3_kx3hj"]
+[ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="4_87sx8"]
+[ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="5_j37pr"]
+[ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="6_5ut15"]
+[ext_resource type="Texture2D" uid="uid://bu8g84fe1ni48" path="res://assets/reanim/PeaShooter_stalk_top.png" id="7_7mmkp"]
+[ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="8_1g6gx"]
+[ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="9_ylo2o"]
+[ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="10_jws8m"]
+[ext_resource type="Texture2D" uid="uid://dtjl52p7idhjd" path="res://assets/reanim/PeaShooter_headleaf_farthest.png" id="11_r4kal"]
+[ext_resource type="Texture2D" uid="uid://x5uxjnl5pjv0" path="res://assets/reanim/PeaShooter_headleaf_3rdfarthest.png" id="12_s35u4"]
+[ext_resource type="Texture2D" uid="uid://bg6jfo6oyycgu" path="res://assets/reanim/PeaShooter_headleaf_nearest.png" id="13_i18gq"]
+[ext_resource type="Texture2D" uid="uid://c0vcsly6styrh" path="res://assets/reanim/PeaShooter_headleaf_tip_bottom.png" id="14_8gkq2"]
+[ext_resource type="Texture2D" uid="uid://dlc340bi4qii1" path="res://assets/reanim/PeaShooter_headleaf_2rdfarthest.png" id="15_ytaw1"]
+[ext_resource type="Texture2D" uid="uid://dt6l5yuvca65" path="res://assets/reanim/PeaShooter_headleaf_tip_top.png" id="16_bqmoi"]
+[ext_resource type="Texture2D" uid="uid://b00drwni3ja82" path="res://assets/reanim/PeaShooter_Head.png" id="17_drv6e"]
+[ext_resource type="Texture2D" uid="uid://txlm4fwvygkx" path="res://assets/reanim/PeaShooter_mouth.png" id="18_46sed"]
+[ext_resource type="Texture2D" uid="uid://dp8034ogayq0f" path="res://assets/reanim/PeaShooter_blink1.png" id="19_c64n2"]
+[ext_resource type="Texture2D" uid="uid://dgigsil3n5prk" path="res://assets/reanim/PeaShooter_eyebrow.png" id="20_w4fxo"]
+[ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="21_angmq"]
+
+[node name="PeaShooterDouble" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-43, -45)
+
+[node name="Backleaf" type="Sprite2D" parent="Body"]
+position = Vector2(27.6, 54.896)
+scale = Vector2(0.59088, 0.47376)
+texture = ExtResource("3_kx3hj")
+centered = false
+
+[node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(24.604, 55.54)
+rotation = -0.0115194
+scale = Vector2(0.62176, 0.515)
+texture = ExtResource("4_87sx8")
+centered = false
+
+[node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(47.996, 54.592)
+rotation = 0.0614355
+scale = Vector2(0.65664, 0.50416)
+texture = ExtResource("5_j37pr")
+centered = false
+
+[node name="Stalk_bottom" type="Sprite2D" parent="Body"]
+position = Vector2(38.636, 49.048)
+rotation = 0.256005
+scale = Vector2(0.56048, 0.74444)
+skew = -0.0901986
+texture = ExtResource("6_5ut15")
+centered = false
+
+[node name="Stalk_top" type="Sprite2D" parent="Body"]
+position = Vector2(34.876, 36.696)
+rotation = 0.209579
+scale = Vector2(0.56504, 0.8508)
+skew = -0.0768641
+texture = ExtResource("7_7mmkp")
+centered = false
+
+[node name="Frontleaf" type="Sprite2D" parent="Body"]
+position = Vector2(22.152, 55.496)
+scale = Vector2(0.57892, 0.5186)
+texture = ExtResource("8_1g6gx")
+centered = false
+
+[node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(55.74, 56.5)
+rotation = -0.146328
+scale = Vector2(0.71844, 0.54404)
+texture = ExtResource("9_ylo2o")
+centered = false
+
+[node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
+position = Vector2(19.504, 60.592)
+rotation = 0.123918
+scale = Vector2(0.62416, 0.54788)
+texture = ExtResource("10_jws8m")
+centered = false
+
+[node name="Anim_stem" type="Sprite2D" parent="Body"]
+position = Vector2(40.528, 42.944)
+centered = false
+
+[node name="stem_correct" type="Node2D" parent="Body/Anim_stem"]
+position = Vector2(-37.6, -48.7)
+
+[node name="Idle_headleaf_farthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(12.9, 38.1)
+rotation = -0.338594
+scale = Vector2(0.547, 0.501)
+skew = -0.0837757
+texture = ExtResource("11_r4kal")
+centered = false
+
+[node name="Idle_headleaf_3rdfarthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(22.6, 17.7)
+scale = Vector2(0.555, 0.493)
+texture = ExtResource("12_s35u4")
+centered = false
+
+[node name="Idle_headleaf_2ndfarthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(11.1, 29.1)
+scale = Vector2(0.555, 0.493)
+texture = ExtResource("13_i18gq")
+centered = false
+
+[node name="Idle_headleaf_tip_bottom" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(6.2, 33.1)
+scale = Vector2(0.555, 0.493)
+texture = ExtResource("14_8gkq2")
+centered = false
+
+[node name="Idle_headleaf_nearest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(17, 18.4)
+scale = Vector2(0.527, 0.513)
+texture = ExtResource("15_ytaw1")
+centered = false
+
+[node name="Idle_headleaf_tip_top" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(13, 18.4)
+scale = Vector2(0.527, 0.513)
+texture = ExtResource("16_bqmoi")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(19.2, 17.8)
+scale = Vector2(0.555, 0.5)
+texture = ExtResource("17_drv6e")
+centered = false
+
+[node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(52.4, 17.8)
+scale = Vector2(0.555, 0.5)
+texture = ExtResource("18_46sed")
+centered = false
+
+[node name="Idle_shoot_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+visible = false
+position = Vector2(37.5, 23.5)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("19_c64n2")
+centered = false
+
+[node name="PeaShooter_eyebrow" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(34.8, 19.7)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("20_w4fxo")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+visible = false
+position = Vector2(60.9452, 30.6411)
+texture = ExtResource("21_angmq")

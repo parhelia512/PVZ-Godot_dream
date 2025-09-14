@@ -27,7 +27,7 @@ func _ready():
 
 func _on_select_anim_folder():
 	var dialog = FileDialog.new()
-	dialog.access = FileDialog.ACCESS_RESOURCES
+	dialog.access = FileDialog.ACCESS_RESOURCES  
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
 	dialog.dir_selected.connect(func(path):
 		var fixed_path = path
@@ -84,12 +84,12 @@ func _load_history_list(key: String, option: OptionButton):
 
 func _on_run_exe():
 	var anim_arg = anim_path_option.get_item_text(anim_path_option.get_selected_id()).strip_edges()
-
+	
 	if anim_arg == "":
 		push_error("请填写完整的参数路径")
 		return
 	_on_dir_selected(anim_arg)
-
+	
 
 	## 更新全局文件
 	if plugin_interface:

@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://cc56wstwe4f2m"]
+
+[ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="1_y5ynd"]
+[ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="2_cgbof"]
+[ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="3_352pr"]
+[ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="4_pk761"]
+[ext_resource type="Texture2D" uid="uid://bu8g84fe1ni48" path="res://assets/reanim/PeaShooter_stalk_top.png" id="5_q50tb"]
+[ext_resource type="Texture2D" uid="uid://300aew7liup" path="res://assets/reanim/PeaShooter_frontleaf.png" id="6_h8n6c"]
+[ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="7_pu64j"]
+[ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="8_jl0b7"]
+[ext_resource type="Texture2D" uid="uid://cyyk1hmvx7u05" path="res://assets/reanim/anim_sprout.png" id="9_qp43a"]
+[ext_resource type="Texture2D" uid="uid://b00drwni3ja82" path="res://assets/reanim/PeaShooter_Head.png" id="10_bwcjn"]
+[ext_resource type="Texture2D" uid="uid://txlm4fwvygkx" path="res://assets/reanim/PeaShooter_mouth.png" id="11_c2ust"]
+[ext_resource type="Texture2D" uid="uid://dp8034ogayq0f" path="res://assets/reanim/PeaShooter_blink1.png" id="12_bbfmk"]
+[ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="13_eg8ng"]
+
+[node name="PeaShooterSingle" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-45, -45)
+
+[node name="Backleaf" type="Sprite2D" parent="Body"]
+position = Vector2(27.7, 53)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("1_y5ynd")
+centered = false
+
+[node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
+position = Vector2(25, 53.9)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("2_cgbof")
+centered = false
+
+[node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(47, 52.9)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("3_352pr")
+centered = false
+
+[node name="Stalk_bottom" type="Sprite2D" parent="Body"]
+position = Vector2(36.1, 52.6)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("4_pk761")
+centered = false
+
+[node name="Stalk_top" type="Sprite2D" parent="Body"]
+position = Vector2(31, 45.3)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("5_q50tb")
+centered = false
+
+[node name="Frontleaf" type="Sprite2D" parent="Body"]
+position = Vector2(22.8, 54.4)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("6_h8n6c")
+centered = false
+
+[node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
+position = Vector2(56.3, 56)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("7_pu64j")
+centered = false
+
+[node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
+position = Vector2(19.4, 61.6)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("8_jl0b7")
+centered = false
+
+[node name="Anim_stem" type="Sprite2D" parent="Body"]
+position = Vector2(37.6, 48.7)
+centered = false
+
+[node name="stem_correct" type="Node2D" parent="Body/Anim_stem"]
+position = Vector2(-37.6, -48.7)
+
+[node name="Anim_sprout" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(7.4, 26.7)
+rotation = -0.258309
+scale = Vector2(0.799, 0.799)
+texture = ExtResource("9_qp43a")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(19.1, 14)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("10_bwcjn")
+centered = false
+
+[node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+position = Vector2(52.4, 13.9)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("11_c2ust")
+centered = false
+
+[node name="Idle_shoot_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+visible = false
+position = Vector2(37.5, 23.5)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("12_bbfmk")
+centered = false
+
+[node name="Projectile" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
+visible = false
+position = Vector2(75, 30)
+texture = ExtResource("13_eg8ng")

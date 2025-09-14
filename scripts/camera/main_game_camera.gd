@@ -10,13 +10,6 @@ func move_to(target_pos: Vector2, duration: float) -> Signal:
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
 
+	
 	return tween.finished
 	
-
-## 开始游戏查看僵尸
-func move_look_zombie():
-	return move_to(Vector2(390, 0), 2)
-
-## 返回原点
-func move_back_ori():
-	return move_to(Vector2(0, 0), 2)

@@ -1,17 +1,17 @@
-extends Zombie000Base
-class_name Zombie006Paper
+extends ZombieBase
+class_name ZombiePaper
 
-@export_group("动画状态")
-@export var is_gasp:bool = false
-
-signal signal_paper_drop()
-
-func _ready() -> void:
-	super()
-	hp_component.signal_armor2_death.connect(drop_paper)
-	## 连接修改每分钟攻击值
-	hp_component.signal_armor2_death.connect(attack_component.change_attack_value.bind(2, attack_component.E_AttackValueFactor.Speed))
-
-## 报纸掉落
-func drop_paper():
+@export var is_gasp := false
+func arm2_drop():
+	super.arm2_drop()
 	is_gasp = true
+	SoundManager.play_zombie_SFX(Global.ZombieType.ZombiePaper, "Rip")
+		
+	
+func _gasp_end():
+	_curr_damage_per_second = damage_per_second * 2
+	$Body/Anim_head_look.visible = false
+	$Body/Anim_head_pupils.visible = false
+	SoundManager.play_zombie_SFX(Global.ZombieType.ZombiePaper, "Rarrgh")
+
+	

@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://01tsys2cfylx"]
+
+[ext_resource type="Texture2D" uid="uid://bxf2w1rk7r03s" path="res://assets/reanim/Torchwood_spark.png" id="1_j6nvk"]
+[ext_resource type="Texture2D" uid="uid://c3chyllw8wp1c" path="res://assets/reanim/Torchwood_fire1a.png" id="2_3m6t2"]
+[ext_resource type="Texture2D" uid="uid://dejh82cbf5y5q" path="res://assets/reanim/Torchwood_body.png" id="3_xj28m"]
+[ext_resource type="Texture2D" uid="uid://dskdfdfajmrkk" path="res://assets/reanim/Torchwood_mouth.png" id="4_hlukw"]
+[ext_resource type="Texture2D" uid="uid://cwhpp4e3mm63u" path="res://assets/reanim/Torchwood_eyes1.png" id="5_y5wbn"]
+
+[node name="TorchWood" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41, -46)
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Layer 35" type="Sprite2D" parent="Body"]
+position = Vector2(58.5, 36.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_j6nvk")
+centered = false
+
+[node name="Layer 33" type="Sprite2D" parent="Body"]
+position = Vector2(32.7, 33.1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_j6nvk")
+centered = false
+
+[node name="Layer 34" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Torchwood_fire1" type="Sprite2D" parent="Body"]
+position = Vector2(17.9, -12.2)
+scale = Vector2(0.715, 1.032)
+texture = ExtResource("2_3m6t2")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(7, 27.8)
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("3_xj28m")
+centered = false
+
+[node name="Torchwood_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(23, 42.6)
+rotation = -0.006981
+scale = Vector2(0.742, 0.8)
+skew = 0.006981
+texture = ExtResource("4_hlukw")
+centered = false
+
+[node name="Torchwood_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(30.3, 38.9)
+scale = Vector2(0.737, 0.787)
+texture = ExtResource("5_y5wbn")
+centered = false

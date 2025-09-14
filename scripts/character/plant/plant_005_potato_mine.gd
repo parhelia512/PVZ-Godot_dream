@@ -1,60 +1,63 @@
-extends Plant000Base
-class_name Plant005PotatoMine
+extends CherryBomb
+class_name PotatoMine
 
-@onready var attack_ray_component: AttackRayComponent = $AttackRayComponent
-@onready var bomb_component: BombComponentBase = $BombComponent
-@onready var prepare_timer: Timer = $PrepareTimer
 
-## 准备时间
-@export var prepare_time := 10.0
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
+
+@export_group("土豆雷基础")
+@export var bury_time = 10
+# 爆炸检测碰撞体
 
 @export_group("动画状态")
-@export var is_prepare_end := false
+@export var is_armed := false
+@export var is_start_rise := false
 
+func _ready() -> void:
+	super._ready()
+	
+	_start_rise_timer()
+	## 继承樱桃炸弹，已经设置不眨眼
 
-## 初始化正常出战角色
-func init_norm():
-	super()
-	## 土豆雷默认禁用攻击射线检测组件
-	attack_ray_component.disable_component(ComponentBase.E_IsEnableFactor.Prepare)
-	## 默认禁用眨眼组件
-	blink_component.disable_component(ComponentBase.E_IsEnableFactor.Prepare)
+## 播放音效
+func play_bome_sfx():
+	## 播放音效
+	SoundManager.play_plant_SFX(Global.PlantType.PotatoMine, &"PotatoMine")
+	
+	
+func _start_rise_timer() -> void:
+	await get_tree().create_timer(bury_time).timeout
+	
+	if is_instance_valid(self):
+		is_start_rise = true  # 开始冒出（触发 rise 动画）
 
-	prepare_timer.wait_time = prepare_time
-	prepare_timer.start()
-
-
-func init_norm_signal_connect():
-	super()
-	## 准备完成后才会检测到敌人(触发爆炸\直接死亡)
-	attack_ray_component.signal_can_attack.connect(bomb_component.bomb_once)
-	attack_ray_component.signal_can_attack.connect(character_death)
-	## 角色死亡信号连接
-	hp_component.signal_hp_component_death.connect(bomb_component.judge_death_bomb)
-	## 角色速度改变
-	signal_update_speed.connect(update_prepare_speed)
-
-## 土豆类出土动画结束调用
 func _rise_end():
-	attack_ray_component.enable_component(ComponentBase.E_IsEnableFactor.Prepare)
-	blink_component.enable_component(ComponentBase.E_IsEnableFactor.Prepare)
-	bomb_component.set_is_auto_bomb_in_death(true)
+	is_armed = true
+	is_bomb = false
+	
+	## 开始眨眼
+	is_blink = true
+	blink_timer.start()
 
-## 准备时间结束
-func _on_prepare_timer_timeout() -> void:
-	is_prepare_end = true
+func _process(delta):
+	if is_armed:
+		# 每帧检查射线是否碰到僵尸
+		var collider = ray_cast_2d.get_collider()
+		if collider != null:  # 必须检查是否为null
+			is_bomb = true
+			await get_tree().physics_frame    # 等待碰撞层更新生效
+			_bomb_all_area_zombie()
 
-## 重新设置准备时间
-func set_prepare_time(new_prepare_time:float):
-	prepare_time = new_prepare_time
-	prepare_timer.wait_time = prepare_time
-	prepare_timer.start()
+func _bomb_all_area_zombie():
+	if not is_bomb_end:
+		is_bomb_end = true
+		var areas = area_2d_2.get_overlapping_areas()
+		for area in areas:
+			area.get_parent().disappear_death()
+		
+		_bomb_particle()
 
-## 改变准备的速度
-func update_prepare_speed(speed_factor:float):
-	if not prepare_timer.is_stopped():
-		if speed_factor == 0:
-			prepare_timer.paused = true
-		else:
-			prepare_timer.paused = false
-			prepare_timer.start(prepare_timer.time_left / speed_factor)
+func judge_death_bomb(plant:PlantBase):
+	if not is_bomb_end:
+		is_bomb_end = true
+		if is_armed:
+			_bomb_all_area_zombie()

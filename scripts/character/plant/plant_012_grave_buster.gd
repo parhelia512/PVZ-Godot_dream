@@ -1,38 +1,35 @@
-extends Plant000Base
-class_name Plant012GraveBuster
+extends PlantBase
+class_name GraveBuster
 
-@onready var gpu_particles_2d_grave_buster: GPUParticles2D = %GPUParticles2DGraveBuster
+@export var is_eat_grave := false
+@onready var gpu_particles_2d: GPUParticles2D = $Body/GPUParticles2D
 
-var is_end_eat_grave := false
+var plant_cell : PlantCell
 
-func init_norm():
-	super()
-	_start_eat_grave()
+func _ready() -> void:
+	super._ready()
+	if curr_scene is MainGameManager:
+		start_eat_grave()
 
-## 植物死亡
-func character_death():
-	super()
-	## 角色死亡时是否已经吞噬墓碑完成
-	if not is_end_eat_grave:
-		plant_cell.failure_eat_tombstone()
 
-## 开始吞噬墓碑
-func _start_eat_grave():
-	plant_cell.start_eat_tombstone()
+func start_eat_grave():
+	is_eat_grave = true
+	
 	## 播放音效
 	SoundManager.play_plant_SFX(Global.PlantType.GraveBuster, &"GraveBusterChomp")
+	
+	plant_cell = get_parent()
+	plant_cell.start_tombstone()
 
 	await get_tree().create_timer(0.5).timeout
-	gpu_particles_2d_grave_buster.emitting = true
-	gpu_particles_2d_grave_buster.visible = true
+	gpu_particles_2d.emitting = true
+	gpu_particles_2d.visible = true
 
-## 吞噬墓碑结束
 func _end_eat_grave():
-	is_end_eat_grave = true
-	GlobalUtils.child_node_change_parent(gpu_particles_2d_grave_buster, plant_cell)
-	gpu_particles_2d_grave_buster.emitting = false
-	## 两秒后删除自身
-	gpu_particles_2d_grave_buster.free_self_after_two_sec()
-
 	plant_cell.delete_tombstone()
-
+	
+	child_node_change_parent(gpu_particles_2d, get_parent())
+	gpu_particles_2d.emitting = false
+	
+	_plant_free()
+	

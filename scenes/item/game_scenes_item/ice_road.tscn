@@ -15,8 +15,3 @@ mouse_filter = 2
 texture = ExtResource("2_sb422")
 expand_mode = 1
 stretch_mode = 1
-
-[node name="IceRoadDisappearTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="IceRoadDisappearTimer" to="." method="_on_ice_road_disappear_timer_timeout"]

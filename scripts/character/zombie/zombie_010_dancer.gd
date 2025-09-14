@@ -1,103 +1,69 @@
-extends Zombie009Jackson
-class_name Zombie010Dancer
+extends ZombieJackson
+class_name ZombieDancer
 
-## 是否为被召唤的伴舞僵尸
-var is_call := false
 @onready var mask: Panel = $Mask
 @onready var dirt: DirtNewZombie = $Dirt
-@onready var body_in_mask: BodyCharacter = $Mask/BodyInMask
 
-## 是否被魅惑舞王召唤
-var is_call_be_hypno:bool = false
+func _ready():
+	super._ready()
+	
+	_init_dance()
 
-## 初始化伴舞赋值，被召唤的伴舞，舞王管理器调用
-func init_dancer_be_call(dancer_id, animation_origin_speed, animation_curr_speed, jackson_init_random_speed, jackson_manager, is_hypnotized):
-	is_call = true
-	self.dancer_id = dancer_id
-	self.jackson_manager = jackson_manager
-	## 如果舞王被魅惑
-	is_call_be_hypno = is_hypnotized
-	call_deferred(&"init_anim_speed_dance", animation_origin_speed, animation_curr_speed, jackson_init_random_speed)
 
-## 重写舞王初始方法，ready调用
+func game_init_zombie_jackson():
+	pass
+
+
+## 重写舞王初始方法
 func _init_dance():
-	if not is_call:
-		jackson_manager = SceneRegistry.JACKSON_MANAGER.instantiate()
-		add_child(jackson_manager)
-		dancer_id = 0
-		jackson_manager.zombie_dancers[0] = self
-		state_machine.jackson_manager = jackson_manager
-		state_machine.init_state(JacksonStateMachine.E_JacksonStatus.Norm)
-		mask.visible = false
-		body.visible = true
-	else:
-		state_machine.jackson_manager = jackson_manager
-		## 初始化状态为入场状态,伴舞入场状态不攻击
-		state_machine.init_state(JacksonStateMachine.E_JacksonStatus.Enter)
-		await zombie_appear_from_ground()
-		state_machine.change_jackson_anim_status(state_machine.curr_jackson_status,state_machine.judge_curr_status())
+	animation_player.set_blend_time('armraise', 'walk', 0.1)
+	zombie_appear_from_ground()
+	is_start_enter = false
+	dirt.start_dirt()
 
-	if is_call_be_hypno:
-		be_hypno()
-
-## 召唤伴舞初始化时重置动画播放速度, 舞王管理器调用
-func init_anim_speed_dance(animation_origin_speed, curr_speed, jackson_init_random_speed):
-	## 获取动画初始速度
+## 随机初始化动画播放速度(重写父类方法)伴舞僵尸不需要
+func _init_anim_speed():
+	# 获取动画初始速度
+	pass
+	
+## 初始化时重置动画播放速度, 舞王管理器调用
+func init_anim_speed_dance(animation_origin_speed, curr_speed):
+	# 获取动画初始速度
 	self.animation_origin_speed = animation_origin_speed
-	update_speed_factor(jackson_init_random_speed, E_Influence_Speed_Factor.InitRandomSpeed)
-	anim_component.set_animation_origin_speed(animation_origin_speed)
-	anim_component.update_anim_speed(jackson_init_random_speed)
-	anim_component.update_anim_speed_scale(curr_speed)
+	#animation_player.speed_scale = animation_origin_speed
+	animation_player.speed_scale = curr_speed
+	
 
-## 随机初始化角色速度,继承重写
-func init_random_speed():
-	if is_call:
-		return
-	super()
+## 僵尸子类重写该方法，获取ground，部分僵尸修改body位置在panel节点下
+func _get_some_node():
+	body = $Mask/Body
+	_ground = $Mask/Body/_ground
+	animation_player = $AnimationPlayer
+	shadow =  $Mask/Body/shadow
+
 
 ## 伴舞僵尸从地下出现
 func zombie_appear_from_ground():
-	dirt.start_dirt()
-	body.visible = false
-	mask.visible = true
-	body_in_mask.position.y = 300.0
+	body.position.y = 180.0
 	var tween = create_tween()
-	#await get_tree().process_frame
-	tween.tween_property(body_in_mask, ^"global_position", body.global_position, 1.0)
+	tween.tween_property(body, "position", Vector2(body.position.x, 20), 1.0)
+	
 	await tween.finished
-	body.visible = true
-	mask.visible = false
+	
+	mask.clip_children = CanvasItem.CLIP_CHILDREN_DISABLED
+	mask.remove_theme_stylebox_override("panel")
+	mask.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 
-## 初始化正常出战角色信号连接
-func init_norm_signal_connect():
-	super()
-	## 被魅惑
-	signal_character_be_hypno.connect(body_in_mask.owner_be_hypno)
 
-## 初始化展示角色
-func _init_show_jackon():
-	mask.visible = false
-	body.visible = true
-
-	while true:
-		animation_player.play("armraise")
-		await animation_player.animation_finished
-		body.scale.x = -body.scale.x
-
-## 伴舞被魅惑额外操作
-func jackson_be_hypno():
-	## 如果是被魅惑舞王召唤、无需处理
-	if is_call_be_hypno:
-		return
-
-	dancer_manager_change()
-
-	jackson_manager = SceneRegistry.JACKSON_MANAGER.instantiate()
-	state_machine.jackson_manager = jackson_manager
-	add_child(jackson_manager)
-	jackson_manager.zombie_dancers[0] = self
-
-	jackson_manager.start_anim()
-	jackson_manager.init_anim_speed(animation_origin_speed, influence_speed_factors[E_Influence_Speed_Factor.InitRandomSpeed])
-	jackson_manager.is_hypnotized = true
-	print("舞王或伴舞被魅惑")
+#被召唤的伴舞被魅惑
+func be_hypnotized():
+	super.be_hypnotized()
+	## -1为舞王
+	dancer_manager.zombie_dancers[-1] = false
+	dancer_manager.zombie_dancers[0] = self
+	
+	
+## 被魅惑召唤的伴舞
+func call_be_hypnotized():
+	be_hypnotized_base()
+	direction_scale = Vector2(-1, 1)

@@ -1,12 +1,9 @@
-extends BulletLinear000Base
-class_name Bullet002PeaSnow
+extends BulletBase
+class_name BulletPeaSnow
 
-@export var time_be_decelerated :float = 3.0
+@export var time_be_decelerated :float = 3
 
-## 攻击一次
-func attack_once(enemy:Character000Base):
-	super(enemy)
-	if enemy is Zombie000Base:
-		var zombie = enemy as Zombie000Base
-		if zombie.hp_component.curr_hp_stage_armor1 <= 0:
-			zombie.be_ice_decelerate(time_be_decelerated)
+func _attack_zombie(zombie:ZombieBase):
+	if zombie.armor_second_curr_hp <= 0:
+		zombie.be_decelerated_bullet(time_be_decelerated)
+	super._attack_zombie(zombie)

@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://jos0ek2dkfn2"]
+
+[ext_resource type="Script" uid="uid://b13huctulxsir" path="res://scripts/bullet/bullet_053_wall_nut_bowling_big.gd" id="1_n1lgo"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_egqrc"]
+[ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="3_mhr3x"]
+[ext_resource type="Texture2D" uid="uid://cpbkvykx6yq07" path="res://assets/reanim/Wallnut_twitch.png" id="4_w823p"]
+[ext_resource type="Texture2D" uid="uid://co3e8k6uwm4hi" path="res://assets/reanim/Wallnut_blink1.png" id="5_73254"]
+[ext_resource type="AudioStream" uid="uid://qkm6isknt63q" path="res://assets/audio/SFX/plant/bowling.ogg" id="6_klpnq"]
+[ext_resource type="AudioStream" uid="uid://udmcvya7c6g7" path="res://assets/audio/SFX/bullet/bowlingimpact2.ogg" id="7_c7gwy"]
+[ext_resource type="AudioStream" uid="uid://dwfehknf3jg8q" path="res://assets/audio/SFX/bullet/bowlingimpact.ogg" id="8_egqrc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4j2e"]
+radius = 35.0
+
+[node name="BulletWallNutBowlingBomb" type="Node2D"]
+z_as_relative = false
+script = ExtResource("1_n1lgo")
+speed = 188.0
+type_bullet_SFX = 51
+
+[node name="shadow" type="Sprite2D" parent="."]
+position = Vector2(-1, 53)
+scale = Vector2(2.09302, 1.11111)
+texture = ExtResource("2_egqrc")
+
+[node name="BulletBody" type="Node2D" parent="."]
+
+[node name="Body" type="Node2D" parent="BulletBody"]
+position = Vector2(-86, -87)
+scale = Vector2(2, 2)
+
+[node name="_ground" type="Sprite2D" parent="BulletBody/Body"]
+position = Vector2(44.8, 75.5)
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="BulletBody/Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="BulletBody/Body"]
+position = Vector2(7.3, 3.6)
+scale = Vector2(0.7, 0.719)
+texture = ExtResource("3_mhr3x")
+centered = false
+
+[node name="Anim_blink_twitch" type="Sprite2D" parent="BulletBody/Body"]
+visible = false
+position = Vector2(29.2, 35.6)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_w823p")
+centered = false
+
+[node name="Anim_blink_twice" type="Sprite2D" parent="BulletBody/Body"]
+visible = false
+position = Vector2(28, 21.6)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_73254")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 72
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_c4j2e")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Bowling" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_klpnq")
+bus = &"SFX"
+
+[node name="Bowlingimpact2" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_c7gwy")
+bus = &"SFX"
+
+[node name="Bowlingimpact" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_egqrc")
+bus = &"SFX"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

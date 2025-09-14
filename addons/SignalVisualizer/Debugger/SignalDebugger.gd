@@ -34,11 +34,11 @@ func _on_signal_debugger_message_capture(message: String, data: Array) -> bool:
 	if message == "stop" and _signal_graph:
 		for signal_item in _signal_graph.signals:
 			_disconnect_from_signal(signal_item)
-
+	
 	if message == "invoke_signal" and data.size() == 2:
 		var node_name = data[0]
 		var signal_name = data[1]
-
+		
 		var root_node = get_tree().current_scene
 		var node = root_node if root_node.name == node_name else root_node.find_child(node_name)
 		if node:
@@ -49,7 +49,7 @@ func _on_signal_debugger_message_capture(message: String, data: Array) -> bool:
 				var bound_args_count = callable.get_bound_arguments_count()
 				var method = callable.get_method()
 				callable.callv([node])
-
+	
 	return true
 
 func _on_signal_execution(signal_name: String, node_name: String, args):

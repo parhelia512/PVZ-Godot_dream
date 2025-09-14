@@ -1,0 +1,2 @@
+extends PeaShooterSingle
+class_name SnowPea

@@ -1,0 +1,419 @@
+[gd_scene load_steps=52 format=3 uid="uid://cmvm2k0or4cs3"]
+
+[ext_resource type="Script" uid="uid://bii0tfng1cbkx" path="res://scripts/character/zombie/zombie_013_zamboni.gd" id="1_6kt6w"]
+[ext_resource type="Texture2D" uid="uid://7fk2twwdkv84" path="res://assets/reanim/Zombie_zamboni_4.png" id="1_mfy74"]
+[ext_resource type="Texture2D" uid="uid://daus6gy6m0prq" path="res://assets/reanim/Zombie_zamboni_3.png" id="2_6kt6w"]
+[ext_resource type="Texture2D" uid="uid://c1xnwdf7vw50m" path="res://assets/reanim/Zombie_zamboni_1_damage1.png" id="2_nuvbv"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_ta2fm"]
+[ext_resource type="Texture2D" uid="uid://bo6ixm22qqf7f" path="res://assets/reanim/Zombie_zamboni_1_damage2.png" id="3_l1uly"]
+[ext_resource type="Texture2D" uid="uid://d1yre1xr8bnxe" path="res://assets/reanim/Zombie_zamboni_seat.png" id="3_nsa4o"]
+[ext_resource type="Texture2D" uid="uid://djqcx83dlm266" path="res://assets/reanim/Zombie_zambonidriver_legs.png" id="4_uehc5"]
+[ext_resource type="Texture2D" uid="uid://dnsb2yp2q5usu" path="res://assets/reanim/Zombie_zambonidriver_innerarm_hand.png" id="5_ta2fm"]
+[ext_resource type="Texture2D" uid="uid://qkd1ati2p0k" path="res://assets/reanim/Zombie_zambonidriver_body.png" id="6_pmmng"]
+[ext_resource type="Texture2D" uid="uid://ctoj5tvddw61f" path="res://assets/reanim/Zombie_zambonidriver_upperarm.png" id="7_nuvbv"]
+[ext_resource type="Texture2D" uid="uid://d0ekgmf10pp67" path="res://assets/reanim/Zombie_zambonidriver_lowerarm_outer.png" id="8_l1uly"]
+[ext_resource type="Texture2D" uid="uid://c0y7haglgaltg" path="res://assets/reanim/Zombie_zambonidriver_outerarm_hand.png" id="9_mhapb"]
+[ext_resource type="Texture2D" uid="uid://p3v5q7bv3myc" path="res://assets/reanim/Zombie_zambonidriver_shoulder.png" id="10_vksv8"]
+[ext_resource type="Texture2D" uid="uid://clby3d5uym1lh" path="res://assets/reanim/Zombie_head.png" id="11_24dwr"]
+[ext_resource type="Texture2D" uid="uid://cbftqok26jk60" path="res://assets/reanim/Zombie_jaw.png" id="12_t73p5"]
+[ext_resource type="Texture2D" uid="uid://r7in0w0qf7nx" path="res://assets/reanim/Zombie_zambonidriver_mullet2.png" id="13_rcwsf"]
+[ext_resource type="Texture2D" uid="uid://bes7n5ccnqquf" path="res://assets/reanim/Zombie_zambonidriver_beanie.png" id="14_uw6lo"]
+[ext_resource type="Texture2D" uid="uid://dk0538rjmegep" path="res://assets/reanim/Zombie_zamboni_wires.png" id="15_sf0ow"]
+[ext_resource type="Texture2D" uid="uid://wi6d2wn7qu3s" path="res://assets/reanim/Zombie_zamboni_brush.png" id="16_r7e57"]
+[ext_resource type="Texture2D" uid="uid://dh5soox485h2" path="res://assets/reanim/Zombie_zamboni_wheel.png" id="17_fmbyb"]
+[ext_resource type="Texture2D" uid="uid://bkkp6b2xnjtu" path="res://assets/reanim/Zombie_zamboni_2.png" id="18_58uuw"]
+[ext_resource type="Texture2D" uid="uid://b7lmkcycrypds" path="res://assets/reanim/Zombie_zamboni_1.png" id="19_p3qae"]
+[ext_resource type="Animation" uid="uid://chuxcesojcaq8" path="res://animation/character/zombie/013_zombie_zamboni/Zombie_zamboni_drive.tres" id="20_t8uiq"]
+[ext_resource type="Animation" uid="uid://bo70mkc1org8o" path="res://animation/character/zombie/013_zombie_zamboni/Zombie_zamboni_wheelie1.tres" id="21_8oa3b"]
+[ext_resource type="Animation" uid="uid://ck4j4plxbjwe5" path="res://animation/character/zombie/013_zombie_zamboni/Zombie_zamboni_wheelie2.tres" id="22_ljmj5"]
+[ext_resource type="PackedScene" uid="uid://chxukp4ntdv8q" path="res://scenes/item/game_scenes_item/ice_road.tscn" id="24_nsa4o"]
+[ext_resource type="Texture2D" uid="uid://7osb444ib7ob" path="res://assets/image/particles/ZamboniSmoke.png" id="24_vksv8"]
+[ext_resource type="PackedScene" uid="uid://dq1gyvhtyoajw" path="res://scenes/character/zombie/013_zombie_zamboni_charred.tscn" id="25_uehc5"]
+[ext_resource type="Texture2D" uid="uid://nnp13qryaqjx" path="res://assets/image/particles/ExplosionCloud.png" id="29_l1uly"]
+[ext_resource type="Script" uid="uid://c383an8puxb8m" path="res://scripts/character/zombie/zombie_013_death_bomb.gd" id="29_mhapb"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_24dwr"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_vksv8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.235955), -0.31628, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_24dwr"]
+curve = SubResource("Curve_vksv8")
+
+[sub_resource type="Curve" id="Curve_t73p5"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.426966), 0.0, 0.888947, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rcwsf"]
+curve = SubResource("Curve_t73p5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uw6lo"]
+particle_flag_disable_z = true
+direction = Vector3(1, -1, 0)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, -10, 0)
+scale_curve = SubResource("CurveTexture_rcwsf")
+alpha_curve = SubResource("CurveTexture_24dwr")
+anim_offset_min = 1.0
+anim_offset_max = 1.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_82abc"]
+_data = {
+&"Zombie_zamboni_drive": ExtResource("20_t8uiq"),
+&"Zombie_zamboni_wheelie1": ExtResource("21_8oa3b"),
+&"Zombie_zamboni_wheelie2": ExtResource("22_ljmj5")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mfy74"]
+animation = &"Zombie_zamboni_drive"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mhapb"]
+animation = &"Zombie_zamboni_wheelie1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nsa4o"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vksv8"]
+advance_mode = 2
+advance_expression = "is_caltrop"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ta2fm"]
+states/Zombie_zamboni_drive/node = SubResource("AnimationNodeAnimation_mfy74")
+states/Zombie_zamboni_drive/position = Vector2(433, 100)
+states/Zombie_zamboni_wheelie1/node = SubResource("AnimationNodeAnimation_mhapb")
+states/Zombie_zamboni_wheelie1/position = Vector2(433, 29)
+transitions = ["Start", "Zombie_zamboni_drive", SubResource("AnimationNodeStateMachineTransition_nsa4o"), "Zombie_zamboni_drive", "Zombie_zamboni_wheelie1", SubResource("AnimationNodeStateMachineTransition_vksv8")]
+graph_offset = Vector2(50, -40)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_pmmng"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nuvbv"]
+graph_offset = Vector2(-173.645, 3.9752)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ta2fm")
+nodes/StateMachine/position = Vector2(-60, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_pmmng")
+nodes/TimeScale/position = Vector2(200, 60)
+nodes/output/position = Vector2(380, 120)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfy74"]
+size = Vector2(128.72, 88)
+
+[sub_resource type="Curve" id="Curve_mhapb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025641, 1), 0.0, 0.0, 0, 0, Vector2(0.634615, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vksv8"]
+curve = SubResource("Curve_mhapb")
+
+[sub_resource type="Gradient" id="Gradient_24dwr"]
+offsets = PackedFloat32Array(0.164336, 0.797203)
+colors = PackedColorArray(0.748252, 0.748252, 0.748252, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t73p5"]
+gradient = SubResource("Gradient_24dwr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rcwsf"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = -10.0
+angular_velocity_max = 20.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.1
+radial_velocity_min = 50.0
+radial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+color = Color(0.192157, 0.305882, 0.580392, 1)
+color_initial_ramp = SubResource("GradientTexture1D_t73p5")
+alpha_curve = SubResource("CurveTexture_vksv8")
+
+[node name="ZombieZamboni" type="Node2D"]
+script = ExtResource("1_6kt6w")
+zamboni_damage_texture = Array[Texture2D]([ExtResource("2_nuvbv"), ExtResource("3_l1uly")])
+zombie_row_type = 0
+max_hp = 1350
+
+[node name="IceRoad" parent="." instance=ExtResource("24_nsa4o")]
+position = Vector2(68, 15)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(0, -104)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(-7, 146)
+scale = Vector2(1.86047, 1.11111)
+texture = ExtResource("2_ta2fm")
+
+[node name="Anim_drive" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_wheelie1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_wheelie2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Zombie_zambonidriver_lowerarm_inner" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Zombie_zamboni_4" type="Sprite2D" parent="Body"]
+position = Vector2(21.5, 115.824)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("1_mfy74")
+centered = false
+
+[node name="Zombie_zamboni_3" type="Sprite2D" parent="Body"]
+position = Vector2(30.5, 86.4528)
+scale = Vector2(0.6, 0.534)
+texture = ExtResource("2_6kt6w")
+centered = false
+
+[node name="Zombie_zamboni_seat" type="Sprite2D" parent="Body"]
+position = Vector2(44.9, 45.5941)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_nsa4o")
+centered = false
+
+[node name="Zombie_zambonidriver_legs" type="Sprite2D" parent="Body"]
+position = Vector2(8.2, 74.9941)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_uehc5")
+centered = false
+
+[node name="Zombie_zambonidriver_innerarm_hand" type="Sprite2D" parent="Body"]
+position = Vector2(19.4, 42.4236)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_ta2fm")
+centered = false
+
+[node name="Zombie_zambonidriver_body" type="Sprite2D" parent="Body"]
+position = Vector2(37.5823, 27.8295)
+rotation = 0.030592
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_pmmng")
+centered = false
+
+[node name="Zombie_zambonidriver_upperarm" type="Sprite2D" parent="Body"]
+position = Vector2(55.3, 52.5177)
+rotation = 6.06851
+scale = Vector2(0.748, 0.748)
+texture = ExtResource("7_nuvbv")
+centered = false
+
+[node name="Zombie_zambonidriver_lowerarm_outer" type="Sprite2D" parent="Body"]
+position = Vector2(41.1941, 70.4236)
+rotation = 5.84418
+scale = Vector2(0.747, 0.747)
+texture = ExtResource("8_l1uly")
+centered = false
+
+[node name="Zombie_zambonidriver_outerarm_hand" type="Sprite2D" parent="Body"]
+position = Vector2(29.4059, 56.6236)
+rotation = 0.118682
+scale = Vector2(0.749, 0.749)
+texture = ExtResource("9_mhapb")
+centered = false
+
+[node name="Zombie_zambonidriver_shoulder" type="Sprite2D" parent="Body"]
+position = Vector2(51.5941, 42.5177)
+rotation = 0.013139
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("10_vksv8")
+centered = false
+
+[node name="Zombie_head" type="Sprite2D" parent="Body"]
+position = Vector2(23.0882, -0.682295)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_24dwr")
+centered = false
+
+[node name="Zombie_jaw" type="Sprite2D" parent="Body"]
+position = Vector2(30.8, 33.3882)
+rotation = -0.0229929
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_t73p5")
+centered = false
+
+[node name="Zombie_zambonidriver_mullet2" type="Sprite2D" parent="Body"]
+position = Vector2(54.9882, 10.8354)
+rotation = -0.011496
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("13_rcwsf")
+centered = false
+
+[node name="Zombie_zambonidriver_beanie" type="Sprite2D" parent="Body"]
+position = Vector2(23.6823, -10.4646)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_uw6lo")
+centered = false
+
+[node name="Zombie_zamboni_wires" type="Sprite2D" parent="Body"]
+position = Vector2(72.1, 93.4882)
+scale = Vector2(0.63, 0.63)
+texture = ExtResource("15_sf0ow")
+centered = false
+
+[node name="Zombie_zamboni_brush" type="Sprite2D" parent="Body"]
+position = Vector2(-39.2354, 138.294)
+scale = Vector2(0.63, 0.63)
+texture = ExtResource("16_r7e57")
+centered = false
+
+[node name="Zombie_zamboni_wheel1" type="Sprite2D" parent="Body"]
+position = Vector2(-69.5649, 123.153)
+rotation = 0.106557
+scale = Vector2(0.562, 0.562)
+texture = ExtResource("17_fmbyb")
+centered = false
+
+[node name="Zombie_zamboni_wheel2" type="Sprite2D" parent="Body"]
+position = Vector2(-4.35902, 123.347)
+rotation = 0.106557
+scale = Vector2(0.562, 0.562)
+texture = ExtResource("17_fmbyb")
+centered = false
+
+[node name="Zombie_zamboni_2" type="Sprite2D" parent="Body"]
+position = Vector2(-80.1, 56.3295)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("18_58uuw")
+centered = false
+
+[node name="Zombie_zamboni_1" type="Sprite2D" parent="Body"]
+position = Vector2(-80.7118, 39.5649)
+rotation = 0.02238
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("19_p3qae")
+centered = false
+
+[node name="Smoke" type="GPUParticles2D" parent="Body/Zombie_zamboni_1"]
+material = SubResource("CanvasItemMaterial_24dwr")
+position = Vector2(64.5495, 85.0208)
+emitting = false
+amount = 30
+texture = ExtResource("24_vksv8")
+lifetime = 3.0
+preprocess = 1.0
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_uw6lo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_82abc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_nuvbv")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(46, 0)
+target_position = Vector2(-117, 0)
+collision_mask = 258
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 0.0080433
+shape = SubResource("RectangleShape2D_mfy74")
+
+[node name="ZombieCharred" parent="." instance=ExtResource("25_uehc5")]
+visible = false
+position = Vector2(0, -101)
+
+[node name="DeathBomb" type="Node2D" parent="."]
+visible = false
+script = ExtResource("29_mhapb")
+
+[node name="Body" type="Node2D" parent="DeathBomb"]
+position = Vector2(0, -104)
+
+[node name="Zombie_zamboni_4" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(57.9116, 94.9855)
+rotation = 2.9099
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("1_mfy74")
+centered = false
+
+[node name="Zombie_zamboni_3" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(66.9116, 65.2166)
+rotation = 2.9099
+scale = Vector2(0.6, 0.534)
+texture = ExtResource("2_6kt6w")
+centered = false
+
+[node name="Zombie_zamboni_wires" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(108.512, 71.8771)
+rotation = 2.9099
+scale = Vector2(0.63, 0.63)
+texture = ExtResource("15_sf0ow")
+centered = false
+
+[node name="Zombie_zamboni_brush" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(-1.88627, 116.037)
+rotation = 2.9099
+scale = Vector2(0.63, 0.63)
+texture = ExtResource("16_r7e57")
+centered = false
+
+[node name="Zombie_zamboni_wheel1" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(-36.4446, 104.152)
+rotation = 2.82569
+scale = Vector2(0.562, 0.562)
+texture = ExtResource("17_fmbyb")
+centered = false
+
+[node name="Zombie_zamboni_wheel2" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(24, 85)
+rotation = 2.82569
+scale = Vector2(0.562, 0.562)
+texture = ExtResource("17_fmbyb")
+centered = false
+
+[node name="Zombie_zamboni_2" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(82.2094, 101.091)
+rotation = 2.9099
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("18_58uuw")
+centered = false
+
+[node name="Zombie_zamboni_1" type="Sprite2D" parent="DeathBomb/Body"]
+position = Vector2(80.8489, 86.9726)
+rotation = 2.91197
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("19_p3qae")
+centered = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="DeathBomb"]
+emitting = false
+amount = 10
+texture = ExtResource("29_l1uly")
+one_shot = true
+explosiveness = 1.0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_rcwsf")

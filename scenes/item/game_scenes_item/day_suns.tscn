@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8bd2m73sdwhf"]
+
+[ext_resource type="Script" uid="uid://lmskm3crn773" path="res://scripts/ui/main_game_ui/day_suns.gd" id="1_w745x"]
+[ext_resource type="PackedScene" uid="uid://f0wyiq6h4jnl" path="res://scenes/item/game_scenes_item/sun.tscn" id="2_kf06c"]
+
+[node name="DaySuns" type="Node2D"]
+script = ExtResource("1_w745x")
+sun_scene = ExtResource("2_kf06c")
+
+[node name="Timer" type="Timer" parent="."]

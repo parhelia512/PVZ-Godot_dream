@@ -26,7 +26,7 @@ script = ExtResource("1_nbmi7")
 move_speed = 300.0
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2(-39, -55)
+position = Vector2(-39, -38)
 scale = Vector2(0.8, 0.8)
 
 [node name="Anim_normal" type="Sprite2D" parent="Body"]
@@ -37,37 +37,39 @@ visible = false
 centered = false
 
 [node name="Lawnmower_backwheelpiece1" type="Sprite2D" parent="Body"]
-position = Vector2(25.8, 26.1)
+position = Vector2(25.8, 25.5935)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_tkewj")
 centered = false
 
 [node name="Lawnmower_backwheel1" type="Sprite2D" parent="Body"]
-position = Vector2(25.5, 29)
-scale = Vector2(0.8, 0.8)
+position = Vector2(49.4716, 34.1648)
+rotation = 1.9857
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("2_0ba1f")
 centered = false
 
 [node name="Lawnmower_backwheelshine1" type="Sprite2D" parent="Body"]
-position = Vector2(25, 28.4)
+position = Vector2(25, 28.2)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_5jk62")
 centered = false
 
 [node name="Lawnmower_backwheelpiece2" type="Sprite2D" parent="Body"]
-position = Vector2(59, 26.2)
+position = Vector2(59.1, 25.7)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_tkewj")
 centered = false
 
 [node name="Lawnmower_backwheel2" type="Sprite2D" parent="Body"]
-position = Vector2(58.6, 29.2)
-scale = Vector2(0.8, 0.8)
+position = Vector2(63.7648, 53.0716)
+rotation = 4.29749
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("2_0ba1f")
 centered = false
 
 [node name="Lawnmower_backwheelshine2" type="Sprite2D" parent="Body"]
-position = Vector2(58.5, 28.6)
+position = Vector2(58.5, 28.4)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_5jk62")
 centered = false
@@ -77,7 +79,8 @@ visible = false
 centered = false
 
 [node name="LawnMower_body" type="Sprite2D" parent="Body"]
-position = Vector2(-2.2, 2.6)
+position = Vector2(-3.71303, 3.91303)
+rotation = -0.0298983
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_nbmi7")
 centered = false
@@ -89,50 +92,53 @@ texture = ExtResource("5_om6jw")
 centered = false
 
 [node name="LawnMower_engine" type="Sprite2D" parent="Body"]
-position = Vector2(38, 26.2)
+position = Vector2(37.8935, 25.587)
+rotation = 0.000113662
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_0kynh")
 centered = false
 
 [node name="Lawnmower_frontwheelpiece1" type="Sprite2D" parent="Body"]
-position = Vector2(19.7, 45.6)
+position = Vector2(19.5, 45.5)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_tkewj")
 centered = false
 
 [node name="Lawnmower_frontwheel1" type="Sprite2D" parent="Body"]
-position = Vector2(19.4, 49)
-scale = Vector2(0.8, 0.8)
+position = Vector2(23.8517, 72.5782)
+rotation = 4.30109
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("7_03vgv")
 centered = false
 
 [node name="Lawnmower_wheelshine1" type="Sprite2D" parent="Body"]
-position = Vector2(18.2, 48.8)
+position = Vector2(18.5065, 48.4935)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_5jk62")
 centered = false
 
 [node name="Lawnmower_frontwheelpiece2" type="Sprite2D" parent="Body"]
-position = Vector2(54.5, 47)
+position = Vector2(54.4, 46.1935)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_tkewj")
 centered = false
 
 [node name="Lawnmower_frontwheel2" type="Sprite2D" parent="Body"]
-position = Vector2(54.1, 49.6)
-scale = Vector2(0.8, 0.8)
+position = Vector2(59.2648, 73.5716)
+rotation = 4.29749
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("2_0ba1f")
 centered = false
 
 [node name="Lawnmower_wheelshine2" type="Sprite2D" parent="Body"]
-position = Vector2(53.1, 49.4)
+position = Vector2(53.3935, 49.587)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_5jk62")
 centered = false
 
 [node name="Lawnmower_exhaust" type="Sprite2D" parent="Body"]
-position = Vector2(38.7, 46.7)
-scale = Vector2(0.8, 0.8)
+position = Vector2(38.3065, 45.7)
+scale = Vector2(0.894762, 0.894762)
 texture = ExtResource("8_iqjm2")
 centered = false
 
@@ -142,9 +148,8 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -17)
 collision_layer = 0
-collision_mask = 4
+collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-3, -10)

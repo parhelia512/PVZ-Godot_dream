@@ -1,0 +1,118 @@
+[gd_scene load_steps=21 format=3 uid="uid://buxcqqq76ff77"]
+
+[ext_resource type="Texture2D" uid="uid://cbgu3a2jxkthd" path="res://assets/reanim/HypnoShroom_body.png" id="0_fuck"]
+[ext_resource type="Animation" uid="uid://dty7dbaeyuw0t" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_idle.tres" id="1_anim"]
+[ext_resource type="Script" uid="uid://cfxet1kd2felb" path="res://scripts/character/plant/plant_013_hypno_shroom.gd" id="1_j1xgq"]
+[ext_resource type="Animation" uid="uid://30e20p4vcyww" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_sleep.tres" id="2_anim"]
+[ext_resource type="Resource" uid="uid://rho1rq5k8uol" path="res://resources/plant_resource/plant_condition/000_common_plant_land.tres" id="2_hrt0k"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_lusfa"]
+[ext_resource type="Texture2D" uid="uid://c3tp56xwnaj8k" path="res://assets/reanim/HypnoShroom_head.png" id="3_fuck"]
+[ext_resource type="Texture2D" uid="uid://dmch2r8l3fn1c" path="res://assets/reanim/HypnoShroom_eye1.png" id="5_hrt0k"]
+[ext_resource type="Texture2D" uid="uid://bm4iskcgxt1lx" path="res://assets/reanim/HypnoShroom_eye2.png" id="7_1dxyp"]
+[ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="9_hrt0k"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ih1jw"]
+_data = {
+&"HypnoShroom_idle": ExtResource("1_anim"),
+&"HypnoShroom_sleep": ExtResource("2_anim")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xmls6"]
+animation = &"HypnoShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lusfa"]
+animation = &"HypnoShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hrt0k"]
+advance_mode = 2
+advance_expression = "not is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1dxyp"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lusfa"]
+advance_mode = 2
+advance_expression = "is_idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7ns8a"]
+states/HypnoShroom_idle/node = SubResource("AnimationNodeAnimation_xmls6")
+states/HypnoShroom_idle/position = Vector2(406, 175)
+states/HypnoShroom_sleep/node = SubResource("AnimationNodeAnimation_lusfa")
+states/HypnoShroom_sleep/position = Vector2(411, 52)
+transitions = ["Start", "HypnoShroom_sleep", SubResource("AnimationNodeStateMachineTransition_hrt0k"), "HypnoShroom_sleep", "HypnoShroom_idle", SubResource("AnimationNodeStateMachineTransition_1dxyp"), "Start", "HypnoShroom_idle", SubResource("AnimationNodeStateMachineTransition_lusfa")]
+graph_offset = Vector2(44, 0)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0ou06"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5dss5"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_7ns8a")
+nodes/StateMachine/position = Vector2(40, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0ou06")
+nodes/TimeScale/position = Vector2(362, 83)
+nodes/output/position = Vector2(580, 120)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dxyp"]
+size = Vector2(50, 60)
+
+[node name="HypnoShroom" type="Node2D"]
+script = ExtResource("1_j1xgq")
+plant_condition = ExtResource("2_hrt0k")
+no_blink = true
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-37, -45)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("2_lusfa")
+
+[node name="Layer 1" type="Sprite2D" parent="Body"]
+position = Vector2(18.3349, 38.0101)
+scale = Vector2(0.8, 0.758649)
+skew = -0.0786293
+texture = ExtResource("0_fuck")
+centered = false
+
+[node name="Layer 3" type="Sprite2D" parent="Body"]
+position = Vector2(40.5548, 63.9801)
+rotation = 3.74785
+scale = Vector2(0.745104, 0.745104)
+texture = ExtResource("5_hrt0k")
+centered = false
+
+[node name="Layer 2" type="Sprite2D" parent="Body"]
+position = Vector2(2.34478, 11.6803)
+rotation = -0.162756
+scale = Vector2(0.799, 0.732698)
+texture = ExtResource("3_fuck")
+centered = false
+
+[node name="Layer 4" type="Sprite2D" parent="Body"]
+position = Vector2(54.46, 54.4499)
+rotation = -3.7461
+scale = Vector2(0.799, 0.799)
+texture = ExtResource("7_1dxyp")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ih1jw")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_5dss5")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="SleepShroom" parent="." instance=ExtResource("9_hrt0k")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1dxyp")

@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc7hvikb4hkp4"]
+
+[ext_resource type="Texture2D" uid="uid://cktibggsi1jj" path="res://assets/reanim/Jalapeno_stem.png" id="1_6nwh1"]
+[ext_resource type="Texture2D" uid="uid://hqee4ag4ittk" path="res://assets/reanim/Jalapeno_body.png" id="2_t8ipm"]
+[ext_resource type="Texture2D" uid="uid://bln0hxmmktyex" path="res://assets/reanim/Jalapeno_mouth.png" id="3_dru7x"]
+[ext_resource type="Texture2D" uid="uid://dg0urs411rllm" path="res://assets/reanim/Jalapeno_eye1.png" id="4_tamq5"]
+[ext_resource type="Texture2D" uid="uid://oi3otxyuk3li" path="res://assets/reanim/Jalapeno_eye2.png" id="5_y365v"]
+[ext_resource type="Texture2D" uid="uid://b4t56wxmfhp6u" path="res://assets/reanim/Jalapeno_cheek.png" id="6_qrurf"]
+[ext_resource type="Texture2D" uid="uid://crbckbw317krk" path="res://assets/reanim/Jalapeno_eyebrow1.png" id="7_w5400"]
+[ext_resource type="Texture2D" uid="uid://4p7jqmj2ot5i" path="res://assets/reanim/Jalapeno_eyebrow2.png" id="8_kkaup"]
+
+[node name="Jalapeno" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-39, -43)
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_explode" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Jalapeno_stem" type="Sprite2D" parent="Body"]
+position = Vector2(33.616, 2.768)
+rotation = 0.0586431
+scale = Vector2(0.78656, 0.7972)
+skew = -0.00879658
+texture = ExtResource("1_6nwh1")
+centered = false
+
+[node name="Jalapeno_body" type="Sprite2D" parent="Body"]
+position = Vector2(16.988, 10.736)
+scale = Vector2(0.80728, 0.79216)
+texture = ExtResource("2_t8ipm")
+centered = false
+
+[node name="Jalapeno_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(26.528, 34.212)
+scale = Vector2(0.83696, 0.77424)
+texture = ExtResource("3_dru7x")
+centered = false
+
+[node name="Jalapeno_eye1" type="Sprite2D" parent="Body"]
+position = Vector2(21.3, 19.48)
+scale = Vector2(0.8, 0.77424)
+texture = ExtResource("4_tamq5")
+centered = false
+
+[node name="Jalapeno_eye2" type="Sprite2D" parent="Body"]
+position = Vector2(41, 25.28)
+scale = Vector2(0.8, 0.74232)
+texture = ExtResource("5_y365v")
+centered = false
+
+[node name="Jalapeno_cheek" type="Sprite2D" parent="Body"]
+position = Vector2(41.932, 28.988)
+scale = Vector2(0.66852, 0.77536)
+texture = ExtResource("6_qrurf")
+centered = false
+
+[node name="Jalapeno_eyebrow1" type="Sprite2D" parent="Body"]
+position = Vector2(22.692, 15.8)
+rotation = 0.0488689
+scale = Vector2(0.82072, 0.79664)
+skew = -0.00195451
+texture = ExtResource("7_w5400")
+centered = false
+
+[node name="Jalapeno_eyebrow2" type="Sprite2D" parent="Body"]
+position = Vector2(39.9, 21.636)
+scale = Vector2(0.82296, 0.786)
+texture = ExtResource("8_kkaup")
+centered = false

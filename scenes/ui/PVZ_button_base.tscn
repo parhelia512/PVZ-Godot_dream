@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://i2ulr85f0jb7"]
 
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="1_xin63"]
-[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://data/PVZ_theme.tres" id="2_qhvyb"]
+[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="2_qhvyb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dc1ex"]
 
