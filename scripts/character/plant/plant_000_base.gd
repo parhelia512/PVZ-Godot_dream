@@ -38,6 +38,7 @@ enum E_BeAttackStatusPlant{
 }
 #endregion
 
+
 #region 花园植物
 ## 花园初始化数据
 var garden_date_init:Dictionary
@@ -75,8 +76,8 @@ func init_norm_signal_connect():
 		)
 
 	## 植物睡眠组件
-	sleep_component.signal_is_sleep.connect(change_is_sleeping.bind(true))
-	sleep_component.signal_not_is_sleep.connect(change_is_sleeping.bind(false))
+	sleep_component.signal_is_sleep.connect(update_is_sleeping.bind(true))
+	sleep_component.signal_not_is_sleep.connect(update_is_sleeping.bind(false))
 
 	## 植物睡眠影响的组件
 	for sleep_influence_component in sleep_component.sleep_influence_components:
@@ -91,6 +92,19 @@ func init_norm():
 	## 如果白天睡觉
 	if is_sleep_in_day:
 		sleep_component.judge_is_sleeping()
+
+	## 斜面与水平面的差值
+	var diff_slope_flat:float = 0
+	if is_instance_valid(plant_cell):
+		diff_slope_flat = plant_cell.position.y
+
+	if diff_slope_flat != 0:
+		position.y -= diff_slope_flat
+		body.position.y += diff_slope_flat
+		shadow.position.y += diff_slope_flat
+		be_attacked_box_component.move_y_hurt_box_real(diff_slope_flat)
+		for c in special_component_update_pos_in_slope:
+			c.update_component_y(diff_slope_flat)
 
 ## 初始化展示角色
 func init_show():
@@ -126,6 +140,11 @@ func be_zombie_eat_once(attack_zombie:Zombie000Base):
 		curr_replace_be_attack_plant.be_zombie_eat_once(attack_zombie)
 		return
 	body.body_light()
+	_be_zombie_eat_once_special(attack_zombie)
+
+## 被僵尸啃食一次特殊效果,魅惑\大蒜
+func _be_zombie_eat_once_special(attack_zombie:Zombie000Base):
+	pass
 
 ## 植物死亡
 func character_death():
@@ -144,7 +163,7 @@ func character_death_not_disappear():
 
 #endregion
 
-#region 与铲子交互
+#region 与铲子\种植交互
 ## 被铲子威胁
 func be_shovel_look():
 	if Global.plant_be_shovel_front:
@@ -160,10 +179,30 @@ func be_shovel_look_end():
 ## 被铲子铲除
 func be_shovel_kill():
 	hp_component.Hp_loss_death()
+
+## 手持紫卡植物可以种植在该植物上
+func new_purple_card_plant_can_in_plant():
+	body.body_light_and_dark()
+
+## 手持紫卡植物可以种植在该植物上结束
+func new_purple_card_plant_can_in_plant_end():
+	body.body_light_and_dark_end()
+
+
+
 #endregion
 
+## 睡眠植物被咖啡豆唤醒
+func coffee_bean_awake_up():
+	var tween:Tween = create_tween()
+	tween.tween_property(body, ^"scale:y", 0.8, 0.5)
+	tween.tween_property(body, ^"scale:y", 1.2, 0.5)
+	tween.tween_property(body, ^"scale:y", 1, 0.5)
+	tween.tween_callback(sleep_component.end_sleep)
+
+
 ## 植物修改睡眠
-func change_is_sleeping(is_sleeping:bool):
+func update_is_sleeping(is_sleeping:bool):
 	self.is_sleeping = is_sleeping
 
 

@@ -10,18 +10,9 @@
 [node name="ZombieWaveManager" parent="Manager/ZombieManager" index="0"]
 zombie_type_candidate_tombstone = Array[int]([1, 3, 5])
 
-[node name="Background1GameoverInteriorOverlay" parent="Background/Home/Door/DoorDown" index="0"]
-visible = true
-
-[node name="Background2GameoverInteriorOverlay" parent="Background/Home/Door/DoorDown" index="1"]
-visible = true
-
 [node name="PanelZombieGoHome" parent="Background/Home/Door/DoorDown" index="4"]
 offset_left = 90.0979
 offset_right = 290.098
-
-[node name="Background1GameoverMask" parent="Background/Home/Door/DoorMask" index="0"]
-visible = true
 
 [node name="LawnMovers" parent="." index="2"]
 position = Vector2(-6.92795, -5.63695)

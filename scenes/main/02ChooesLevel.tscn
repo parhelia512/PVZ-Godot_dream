@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://mcad1jl5d1ui"]
+[gd_scene load_steps=36 format=3 uid="uid://mcad1jl5d1ui"]
 
 [ext_resource type="Texture2D" uid="uid://bwevuvs5nnwfx" path="res://assets/image/ui/ui_challenge/Challenge_Background.jpg" id="1_77tr5"]
 [ext_resource type="Theme" uid="uid://cx302yraw066y" path="res://data/ChooesLevel.tres" id="1_dw7cd"]
@@ -28,6 +28,9 @@
 [ext_resource type="Resource" uid="uid://c8yt6n65ponc6" path="res://resources/level_date_resource/mode_minigame/minigame_01_bowling.tres" id="17_syrok"]
 [ext_resource type="PackedScene" uid="uid://bjdufdnu8jj62" path="res://scenes/character/plant/plant_004_wall_nut.tscn" id="19_k1h2l"]
 [ext_resource type="Resource" uid="uid://3mvuumsl5v6c" path="res://resources/level_date_resource/mode_minigame/minigame_02_hammer_zombie.tres" id="21_0w6wv"]
+[ext_resource type="Texture2D" uid="uid://bj57iq2dgnb0g" path="res://assets/image/Almanac/Almanac_GroundRoof.jpg" id="26_dfwdo"]
+[ext_resource type="Resource" uid="uid://1lhfjbi4gaok" path="res://resources/level_date_resource/mode_adventure/adventure_05_Roof.tres" id="26_pcq3e"]
+[ext_resource type="PackedScene" uid="uid://g6ybgmhkx6rj" path="res://scenes/character/plant/plant_033_cabbage_pult.tscn" id="27_pcq3e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i0xb"]
 
@@ -566,6 +569,73 @@ layout_mode = 2
 [node name="TextureRect9" type="TextureRect" parent="AllPage/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
+script = ExtResource("6_5ankq")
+curr_sences = 5
+curr_level_data_game_para = ExtResource("26_pcq3e")
+
+[node name="Panel" type="Panel" parent="AllPage/GridContainer/TextureRect9"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.9398
+offset_top = 0.987915
+offset_right = 42.0602
+offset_bottom = 68.9879
+grow_horizontal = 2
+pivot_offset = Vector2(41, 33.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ykbb6")
+
+[node name="TextureRect" type="TextureRect" parent="AllPage/GridContainer/TextureRect9/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -51.0
+offset_right = 141.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("26_dfwdo")
+
+[node name="Plant033CabbagePult" parent="AllPage/GridContainer/TextureRect9/Panel/TextureRect" instance=ExtResource("27_pcq3e")]
+position = Vector2(103.233, 113.353)
+character_init_type = 1
+
+[node name="TextureButton" type="TextureButton" parent="AllPage/GridContainer/TextureRect9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -60.0
+offset_right = 59.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qbhvk")
+texture_pressed = ExtResource("4_5ankq")
+texture_focused = ExtResource("3_qbhvk")
+
+[node name="Label" type="Label" parent="AllPage/GridContainer/TextureRect9/TextureButton"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 82.5
+offset_right = 98.0
+offset_bottom = 105.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "屋顶"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect10" type="TextureRect" parent="AllPage/GridContainer"]
 layout_mode = 2

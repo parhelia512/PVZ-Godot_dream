@@ -30,7 +30,7 @@ func init_norm_signal_connect():
 func jump_start():
 	is_jumping = true
 	curr_be_attack_status = E_BeAttackStatusZombie.IsJump
-	signal_status_change.emit(self, curr_be_attack_status)
+	signal_status_update.emit()
 
 ## 僵尸跳跃结束,跳跃组件信号发射调用
 func jump_end():
@@ -40,7 +40,7 @@ func jump_end():
 ## 僵尸跳跃后摇结束
 func jump_end_end():
 	curr_be_attack_status = E_BeAttackStatusZombie.IsNorm
-	signal_status_change.emit(self, curr_be_attack_status)
+	signal_status_update.emit()
 	is_trigger_squash_pos_judge = false
 	is_trigger_tall_nut_stop_jump = false
 

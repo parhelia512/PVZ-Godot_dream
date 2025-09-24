@@ -91,6 +91,10 @@ enum E_SpecialStateZombie {
 ## 当前特殊状态
 @export var curr_special_state_zombie:Dictionary[E_SpecialStateZombie, bool]
 
+@export_group("斜面相关")
+## 当前是否在斜面上
+@export var is_slope :=false
+
 
 func _ready() -> void:
 	## 隐藏按钮样式
@@ -104,6 +108,10 @@ func _ready() -> void:
 func create_plant(plant_type:Global.PlantType):
 	## 创建植物
 	var plant_condition:ResourcePlantCondition = Global.get_plant_info(plant_type, Global.PlantInfoAttribute.PlantConditionResource)
+	## 如果该位置已经存在植物,返回
+	if is_instance_valid(plant_in_cell[plant_condition.place_plant_in_cell]):
+		return
+
 	var plant :Plant000Base= Global.get_plant_info(plant_type, Global.PlantInfoAttribute.PlantScenes).instantiate()
 	plant.init_plant(Character000Base.E_CharacterInitType.IsNorm, self)
 	plant_container_node[plant_condition.place_plant_in_cell].add_child(plant)
@@ -117,7 +125,7 @@ func create_plant(plant_type:Global.PlantType):
 		plant_start_effect_scene = SceneRegistry.PLANT_START_EFFECT_WATER.instantiate()
 	else:
 		plant_start_effect_scene = SceneRegistry.PLANT_START_EFFECT.instantiate()
-	plant.add_child(plant_start_effect_scene)
+	plant.body.add_child(plant_start_effect_scene)
 
 	## 如果是down位置植物，修改中间植物节点顺序， 提高中间植物和壳的位置,
 	if plant_condition.place_plant_in_cell == Global.PlacePlantInCell.Down:
@@ -135,6 +143,13 @@ func create_plant(plant_type:Global.PlantType):
 	update_plant_replace_be_attack()
 
 	return plant
+
+## 咖啡豆唤醒在睡眠中的植物
+func coffee_bean_awake_up():
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Norm]):
+		plant_in_cell[Global.PlacePlantInCell.Norm].coffee_bean_awake_up()
+	else:
+		print("没有睡眠植物")
 
 ## 获取种植新植物时植物虚影的位置
 func get_new_plant_static_shadow_global_position(place_plant_in_cell:Global.PlacePlantInCell):
@@ -159,7 +174,6 @@ func one_plant_free(plant:Plant000Base):
 		add_child(plant_container_node[Global.PlacePlantInCell.Shell])
 		plant_container_node[Global.PlacePlantInCell.Shell].global_position = plant_postion_node_ori_global_position[Global.PlacePlantInCell.Shell]
 
-
 	##如果植物死亡时鼠标在当前植物格子中，重新发射鼠标进入格子信号检测种植
 	if is_mouse_in_ui(button):
 		_on_button_mouse_entered()
@@ -178,12 +192,9 @@ func init_condition():
 			curr_condition = 9
 
 		PlantCellType.Roof:
-			ori_condition = 9
+			ori_condition = 33
 			curr_condition = 33
 
-	## 等待一帧后，赋值底部全局位置
-	## 可能是由于其父节点容器需要这一帧对该节点位置移动，
-	await get_tree().process_frame
 	### 在当前格子中对应位置的节点初始全局位置,植物放在该节点下
 	for place_plant_in_cell in plant_container_node.keys():
 		plant_postion_node_ori_global_position[place_plant_in_cell] = plant_container_node[place_plant_in_cell].global_position
@@ -226,7 +237,6 @@ func _flower_pot_change_condition():
 	## 如果当前是花盆地形，设置地形为原始地形
 	if curr_condition & 4:
 		curr_condition = ori_condition
-
 	## 如果当前不是花盆地形，设置当前地形为花盆地形
 	else:
 		curr_condition = 4
@@ -310,7 +320,7 @@ func del_new_ice_road(new_ice_road):
 
 #endregion
 
-#region 保龄球种植
+#region 保龄球种植限制
 ## 设置保龄球不能种植
 func set_bowling_no_plant():
 	update_special_state_plant(true, E_SpecialStatePlant.IsNoPlantBowling)
@@ -318,7 +328,6 @@ func set_bowling_no_plant():
 ## 设置保龄球不能僵尸
 func set_bowling_no_zombie():
 	update_special_state_zombie(true, E_SpecialStateZombie.IsNoPlantBowling)
-
 #endregion
 
 #endregion
@@ -346,7 +355,7 @@ func return_plant_be_shovel_look():
 	else:
 		null
 
-## 如果当前位置没有植物时，返回顺位植物,递归调用，知道返回植物
+## 如果当前位置没有植物时，返回顺位植物,递归调用，直到返回植物
 ## is_loop 表示上次是否判断过是否为norm，shell循环
 ## 写代码的时候没有float植物，不确定是否有问题
 func return_plant_null_res(plant_place_be_shovel:Global.PlacePlantInCell, is_loop:=false):

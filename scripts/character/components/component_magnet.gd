@@ -2,7 +2,7 @@ extends ComponentBase
 class_name MagnetComponent
 
 ## 当前持有铁器容器
-@onready var curr_iron_container: Node2D = $CurrIronContainer
+@export var curr_iron_container: Node2D
 @onready var attack_cd_timer: Timer = $AttackCdTimer
 @onready var area_2d: Area2D = $Area2D
 

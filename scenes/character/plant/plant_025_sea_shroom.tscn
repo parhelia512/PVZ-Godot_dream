@@ -56,6 +56,7 @@ advance_mode = 2
 advance_expression = "not is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ody2g"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_sleeping"
 
@@ -72,6 +73,7 @@ advance_mode = 2
 advance_expression = "is_garden_aquarium"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t37yi"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_sleeping"
 
@@ -84,14 +86,14 @@ states/SeaShroom_sleep/node = SubResource("AnimationNodeAnimation_v7y1c")
 states/SeaShroom_sleep/position = Vector2(404, 185)
 states/Start/position = Vector2(151, 95)
 transitions = ["Start", "SeaShroom_idle", SubResource("AnimationNodeStateMachineTransition_06utf"), "Start", "SeaShroom_sleep", SubResource("AnimationNodeStateMachineTransition_byi1l"), "SeaShroom_sleep", "SeaShroom_idle", SubResource("AnimationNodeStateMachineTransition_ody2g"), "SeaShroom_idle", "SeaShroom_idle_aquarium", SubResource("AnimationNodeStateMachineTransition_8cpqx"), "SeaShroom_idle_aquarium", "SeaShroom_idle", SubResource("AnimationNodeStateMachineTransition_ai3ac"), "Start", "SeaShroom_idle_aquarium", SubResource("AnimationNodeStateMachineTransition_y3aiw"), "SeaShroom_idle", "SeaShroom_sleep", SubResource("AnimationNodeStateMachineTransition_t37yi")]
-graph_offset = Vector2(-14, -73)
+graph_offset = Vector2(108, -71)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_280kf"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_i7xab"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jispe"]
-graph_offset = Vector2(-472.044, -12.8933)
+graph_offset = Vector2(-419.312, -55.9424)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_taaod")
 nodes/Animation/position = Vector2(-580, 300)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_l0cn6")
@@ -118,20 +120,20 @@ visible = false
 position = Vector2(-42, -63)
 
 [node name="SeaShroom_tentacles" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(16.0133, 52.3)
-scale = Vector2(0.746646, 0.53124)
+position = Vector2(21.247, 52.3067)
+scale = Vector2(0.588522, 0.899687)
 texture = ExtResource("2_cq6r6")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(23.2044, 35.5911)
-scale = Vector2(0.77669, 0.641443)
+position = Vector2(24.7067, 32.5798)
+scale = Vector2(0.70353, 0.742537)
 texture = ExtResource("3_x4qhn")
 centered = false
 
 [node name="SeaShroom_blink" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
 visible = false
-position = Vector2(41.903, 37.7552)
+position = Vector2(41.3341, 35.7618)
 scale = Vector2(0.711841, 0.841227)
 texture = ExtResource("4_ai3ac")
 centered = false
@@ -144,30 +146,28 @@ texture = ExtResource("10_ai3ac")
 centered = false
 
 [node name="Anim_waterline" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(27.8, 51)
-scale = Vector2(0.822734, 0.773)
+position = Vector2(29.1134, 51)
+scale = Vector2(0.734328, 0.773)
 texture = ExtResource("5_y3aiw")
 centered = false
 
 [node name="SeaShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(20.1823, 23.431)
-scale = Vector2(0.730708, 0.655292)
+position = Vector2(21.9067, 19.8866)
+scale = Vector2(0.670597, 0.7)
 texture = ExtResource("6_t37yi")
 centered = false
 
 [node name="SeahShroom_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(52.4956, 42.5)
-rotation = 0.133308
-scale = Vector2(0.705956, 0.7)
-skew = -0.133308
+position = Vector2(51.5933, 40.9866)
+rotation = -0.0690061
+scale = Vector2(0.702067, 0.7)
+skew = 0.0690061
 texture = ExtResource("7_8cpqx")
 centered = false
 
 [node name="SeaShroom_lips" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(56.5177, 41.4956)
-rotation = 0.00463702
-scale = Vector2(0.700089, 0.7)
-skew = -0.00270493
+position = Vector2(56.0933, 38.5798)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_l3s8s")
 centered = false
 

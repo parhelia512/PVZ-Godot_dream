@@ -35,7 +35,7 @@ func jump_start():
 	is_jumping = true
 	is_ride = false
 	curr_be_attack_status = E_BeAttackStatusZombie.IsJump
-	signal_status_change.emit(self, curr_be_attack_status)
+	signal_status_update.emit()
 
 ## 僵尸跳跃结束,跳跃组件信号发射调用
 func jump_end():
@@ -64,7 +64,7 @@ func change_is_swimming(value:bool):
 	if is_swimming:
 		curr_be_attack_status = E_BeAttackStatusZombie.IsJumpInPool
 		#print("当前状态:", curr_be_attack_status)
-		signal_status_change.emit(self, curr_be_attack_status)
+		signal_status_update.emit()
 	else:
 		move_component.update_move_mode(MoveComponent.E_MoveMode.Ground)
 		## 如果骑海豚到泳池边缘离开泳池
@@ -78,7 +78,7 @@ func change_is_swimming(value:bool):
 ## 僵尸跳入泳池动画
 func zombie_jump_in_pool_end():
 	curr_be_attack_status = E_BeAttackStatusZombie.IsNorm
-	signal_status_change.emit(self, curr_be_attack_status)
+	signal_status_update.emit()
 	move_component.update_move_mode(MoveComponent.E_MoveMode.Speed)
 	shadow.visible = false
 

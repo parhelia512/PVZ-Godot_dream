@@ -1,6 +1,10 @@
 extends ComponentBase
 class_name BombComponentBase
 
+## 爆炸检测区域,部分爆炸组件(火爆辣椒\寒冰菇)没有
+## 爆炸检测区域检测敌人的受击检测框而不是受击真实框,角色移动y时,更新爆炸组件位置,更新检测框位置
+@onready var area_2d_bomb: Area2D = get_node_or_null("Area2DBomb")
+
 ## 爆炸伤害
 @export var bomb_value:int = 1800
 ## 是否为灰烬炸弹（非土豆雷）
@@ -60,5 +64,11 @@ func _start_bomb_fx():
 ## 炸死所有敌人
 func _bomb_all_enemy():
 	pass
+
+## 更新爆炸巨剑位置
+func update_component_y(move_y:float):
+	position.y += move_y
+	if is_instance_valid(area_2d_bomb):
+		area_2d_bomb.position.y -= move_y
 
 

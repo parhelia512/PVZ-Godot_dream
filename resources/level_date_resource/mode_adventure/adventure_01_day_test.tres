@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://bu0iybyn3lfrt"]
 
-[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level_data.gd" id="1_0covv"]
+[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level/level_data.gd" id="1_0covv"]
 
 [resource]
 script = ExtResource("1_0covv")
@@ -26,11 +26,11 @@ speed_zombie_add = 0.15
 speed_zombie_max = 2.0
 is_have_tombston = false
 init_tombstone_num = 0
-card_mode = 2
+card_mode = 0
 have_card_bar = true
-max_choosed_card_num = 1
+max_choosed_card_num = 10
 start_sun = 12810
-pre_choosed_card_list_plant = Array[int]([])
+pre_choosed_card_list_plant = Array[int]([0, 9, 10, 14, 36])
 pre_choosed_card_list_zombie = Array[int]([20])
 all_card_plant_type_probability = Dictionary[int, int]({})
 all_card_zombie_type_probability = Dictionary[int, int]({})
@@ -39,7 +39,7 @@ start_list_card_zombie_type = Array[int]([])
 create_new_card_speed = 1.0
 is_mode_column = true
 is_shovel = false
-is_bowling_stripe = true
+is_bowling_stripe = false
 plant_cell_col_j = 7
 plant_cell_can_use = Dictionary[String, bool]({
 "left_can_plant": true,

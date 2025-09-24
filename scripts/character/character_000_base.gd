@@ -43,6 +43,9 @@ enum E_Influence_Speed_Factor{
 	IceFreezeSpeed,
 	HammerZombieSpeed,	## 锤僵尸模式修改速度
 	ZamboniHp,		## 冰车僵尸血量变化时
+	Butter,			## 黄油
+
+	EatGarlic,		## 啃食大蒜后短时间停止
 }
 var is_hypno:bool = false
 ## 冰冻结束后减速时间（每次被冰冻时赋值）
@@ -93,6 +96,10 @@ enum E_CharacterInitType{
 
 ## 角色初始化类型
 @export var character_init_type :E_CharacterInitType = E_CharacterInitType.IsNorm
+@export_group("斜面(屋顶)相关")
+## 特殊组件(不包含植物和僵尸基类的节点)在斜面上更新位置
+## 特殊组件(爆炸组件)移动
+@export var special_component_update_pos_in_slope:Array[ComponentBase]
 
 #endregion
 

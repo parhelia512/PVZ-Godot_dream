@@ -14,6 +14,13 @@ var plant_condition:int = 22
 @export var is_special_plants := false
 
 
-## 特殊植物种植函数判断是否可以种植，特殊植物重写,如墓碑吞噬者，咖啡豆等
+## 特殊植物种植函数判断是否可以种植
 func judge_special_plants_condition(plant_cell:PlantCell) -> bool:
+	if is_instance_valid(plant_cell.plant_in_cell[place_plant_in_cell]):
+		return false
+	else:
+		return _judge_special_plants_condition(plant_cell)
+#
+# 特殊植物种植函数判断是否可以种植，特殊植物重写,如墓碑吞噬者，咖啡豆等
+func _judge_special_plants_condition(plant_cell) -> bool:
 	return true

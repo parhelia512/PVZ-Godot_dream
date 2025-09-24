@@ -43,6 +43,7 @@ animation = &"PuffShroom_idle"
 animation = &"PuffShroom_sleep"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kf1mc"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_sleeping"
 
@@ -55,6 +56,7 @@ advance_mode = 2
 advance_expression = "is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t2sgi"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_sleeping"
 
@@ -64,14 +66,14 @@ states/PuffShroom_idle/position = Vector2(422, 51)
 states/PuffShroom_sleep/node = SubResource("AnimationNodeAnimation_rexsj")
 states/PuffShroom_sleep/position = Vector2(422, 176)
 transitions = ["PuffShroom_sleep", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_kf1mc"), "Start", "PuffShroom_sleep", SubResource("AnimationNodeStateMachineTransition_tm5gy"), "Start", "PuffShroom_idle", SubResource("AnimationNodeStateMachineTransition_mc8sy"), "PuffShroom_idle", "PuffShroom_sleep", SubResource("AnimationNodeStateMachineTransition_t2sgi")]
-graph_offset = Vector2(-158.785, -34)
+graph_offset = Vector2(-67.785, -46)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7p5dm"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3gdsv"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uqyc5"]
-graph_offset = Vector2(-541.801, 49.9912)
+graph_offset = Vector2(-429.035, 54.2933)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_54vaa")
 nodes/Animation/position = Vector2(-540, 420)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_jxqfk")
@@ -111,26 +113,28 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(29.3, 47.9309)
-scale = Vector2(0.44, 0.403556)
+position = Vector2(29.3, 47.7787)
+scale = Vector2(0.44, 0.40864)
 texture = ExtResource("2_7rmee")
 centered = false
 
 [node name="PuffShroom_stem" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(47.6, 51.9654)
-scale = Vector2(0.45, 0.412729)
+position = Vector2(47.6, 51.6311)
+rotation = 0.22793
+scale = Vector2(0.466232, 0.416903)
+skew = -0.22793
 texture = ExtResource("3_t2sgi")
 centered = false
 
 [node name="PuffShroom_tip" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(49.4, 49.4827)
+position = Vector2(49.4, 49.7951)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("4_57i3y")
 centered = false
 
 [node name="PuffShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(21.8173, 30.7963)
-scale = Vector2(0.454309, 0.406383)
+position = Vector2(21.8, 31.1951)
+scale = Vector2(0.455, 0.396884)
 texture = ExtResource("5_wddx6")
 centered = false
 
@@ -140,7 +144,7 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
 visible = false
-position = Vector2(44, 50)
+position = Vector2(44, 49.9475)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_exn8h")
 centered = false

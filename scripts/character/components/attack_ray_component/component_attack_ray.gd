@@ -5,7 +5,6 @@ class_name AttackRayComponent
 ## 敌人进入\离开\状态变化时检测
 ## 敌人进入时连接状态变化函数，离开时不断开
 ## **植物和僵尸通用**
-
 ## 是否使用行属性进行攻击判断
 @export var is_lane:=true
 ## 可以攻击的敌人状态
@@ -28,10 +27,8 @@ var enemy_collision_lay:int = -1:
 
 ## 检测到的敌人
 ## (不能攻击是因为敌人状态不在攻击状态中，连接状态变化信号)
-## 检测到的可以被攻击的一个敌人,给特殊植物\僵尸使用
+## 检测到的可以被攻击的一个敌人,给特殊植物\僵尸\抛物线子弹使用
 var enemy_can_be_attacked :Character000Base = null
-## 检测区域的行属性，仅在攻击僵尸时生效
-var lane:int = -1
 ## 是否需要判断检测敌人
 var need_judge := false
 
@@ -47,7 +44,6 @@ signal signal_can_attack
 signal signal_not_can_attack
 
 func _ready() -> void:
-	lane = owner.lane
 	if owner is Zombie000Base:
 		enemy_collision_lay = zomie_enemy_collision_lay
 	elif owner is Plant000Base:
@@ -64,42 +60,38 @@ func _ready() -> void:
 		all_ray_area.append(area_2d)
 		ray_area_direction.append(Vector2(cos(area_2d.rotation), sin(area_2d.rotation)))
 
-	if lane == -1 and owner.character_init_type == Character000Base.E_CharacterInitType.IsNorm:
+	if owner.lane == -1 and owner.character_init_type == Character000Base.E_CharacterInitType.IsNorm:
 		printerr("lane == -1且为正常出战初始化类型")
 
 
 func _physics_process(_delta):
-	if need_judge:
+	if need_judge and is_enabling:
 		need_judge = false
 		judge_is_have_enemy()
 
 ## 启用组件
 func enable_component(is_enable_factor:E_IsEnableFactor):
 	super(is_enable_factor)
-	for i:int in range(get_child_count()):
-		var area_2d:Area2D = get_child(i)
-		area_2d.monitoring = true
-
-	need_judge = true
+	if is_enabling:
+		need_judge = true
 
 ## 禁用组件
 func disable_component(is_enable_factor:E_IsEnableFactor):
 	super(is_enable_factor)
-	for node in get_children():
-		if node is Area2D:
-			var area_2d = node as Area2D
-			area_2d.monitoring = false
 	enemy_can_be_attacked = null
 	signal_not_can_attack.emit()
+	need_judge = false
 
 ## 敌人进入当前区域，若为同一行，当前帧进行判断是否可以攻击
 func _on_area_2d_area_entered(area: Area2D, i:int) -> void:
 	var enemy = area.owner
-	if is_lane and lane != enemy.lane:
+	if is_lane and owner.lane != enemy.lane:
 		return
 	if enemy is Zombie000Base:
-		if not enemy.signal_status_change.is_connected(_on_enemy_zombie_status_change):
-			enemy.signal_status_change.connect(_on_enemy_zombie_status_change)
+		if not enemy.signal_status_update.is_connected(_on_enemy_zombie_status_update.bind(enemy)):
+			enemy.signal_status_update.connect(_on_enemy_zombie_status_update.bind(enemy))
+		if not enemy.signal_lane_update.is_connected(_on_enemy_zombie_lane_update.bind(enemy)):
+			enemy.signal_lane_update.connect(_on_enemy_zombie_lane_update.bind(enemy))
 	need_judge = true
 
 ## 敌人离开当前射线检测区域
@@ -107,7 +99,11 @@ func _on_area_2d_area_exited(area: Area2D, i:int) -> void:
 	need_judge = true
 
 ## 僵尸敌人状态变化时函数，与状态变化信号连接
-func _on_enemy_zombie_status_change(zombie:Zombie000Base, curr_be_attack_status:Zombie000Base.E_BeAttackStatusZombie):
+func _on_enemy_zombie_status_update(zombie:Zombie000Base):
+	need_judge = true
+
+## 僵尸敌人行变化时函数，与行变化信号连接
+func _on_enemy_zombie_lane_update(zombie:Zombie000Base):
 	need_judge = true
 
 ## 如果检测到可以被攻击的敌人，发射信号,保存当前敌人，return,若到最后没有检测到敌人，发射信号，重置当前敌人，return
@@ -117,29 +113,55 @@ func judge_is_have_enemy():
 		var all_enemy_area = ray_area.get_overlapping_areas()
 		for enemy_area in all_enemy_area:
 			var enemy:Character000Base = enemy_area.owner
-			## 先判断行属性
-			if is_lane and lane != enemy.lane:
-				continue
-			## 如果敌人为植物
-			if enemy is Plant000Base:
-				var enemy_plant:Plant000Base = enemy
-				## 如果当前植物可以被攻击到
-				if enemy_plant.curr_be_attack_status & can_attack_plant_status:
-					enemy_can_be_attacked = enemy_plant
-					signal_can_attack.emit()
-					return true
+			if _judge_enemy_is_can_be_attack(enemy):
+				enemy_can_be_attacked = enemy
+				signal_can_attack.emit()
+				return true
 
-			## 检测到僵尸
-			elif enemy is Zombie000Base:
-				var enemy_zombie:Zombie000Base = enemy
-				if enemy_zombie.curr_be_attack_status & can_attack_zombie_status:
-					enemy_can_be_attacked = enemy_zombie
-					signal_can_attack.emit()
-					return true
-
+	## 如果循环结束还未return,未找到敌人
 	enemy_can_be_attacked = null
 	signal_not_can_attack.emit()
 	return false
+
+## 判断敌人是否可以被攻击
+func _judge_enemy_is_can_be_attack(enemy:Character000Base)->bool:
+	## 先判断行属性
+	if is_lane and owner.lane != enemy.lane:
+		return false
+	## 如果敌人为植物
+	if enemy is Plant000Base :
+		## 如果当前植物可以被攻击到
+		if enemy.curr_be_attack_status & can_attack_plant_status:
+			return true
+		else:
+			return false
+
+	## 检测到僵尸
+	elif enemy is Zombie000Base:
+		if enemy.curr_be_attack_status & can_attack_zombie_status:
+			return true
+		else:
+			return false
+
+	## 其余东西
+	else:
+		print("检测到非角色类敌人")
+		return false
+
+## 更新可攻击敌人为第一个敌人(最前面的敌人)
+func update_first_enemy():
+	for ray_area in all_ray_area:
+		var all_enemy_area = ray_area.get_overlapping_areas()
+		for enemy_area in all_enemy_area:
+			var enemy:Character000Base = enemy_area.owner
+			## 如果敌人可以被攻击
+			if _judge_enemy_is_can_be_attack(enemy):
+				if is_instance_valid(enemy_can_be_attacked):
+					if enemy_can_be_attacked.global_position.x > enemy.global_position.x:
+						enemy_can_be_attacked = enemy
+				else:
+					enemy_can_be_attacked = enemy
+
 
 ## 被魅惑
 func owner_be_hypno():

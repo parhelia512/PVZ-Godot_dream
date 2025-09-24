@@ -26,6 +26,7 @@ advance_mode = 2
 advance_expression = "not is_show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1dxyp"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_sleeping"
 
@@ -34,6 +35,7 @@ advance_mode = 2
 advance_expression = "is_show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_amy8e"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_sleeping"
 
@@ -48,6 +50,7 @@ graph_offset = Vector2(28, -28)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0ou06"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_makqc"]
+graph_offset = Vector2(-49.92, -15.07)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_7ns8a")
 nodes/StateMachine/position = Vector2(40, 80)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0ou06")
@@ -65,30 +68,31 @@ node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"),
 position = Vector2(-38, -72)
 
 [node name="Layer 1" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(17.6186, 38.6814)
-scale = Vector2(0.8, 0.749733)
-skew = -0.09725
+position = Vector2(25.5965, 38.7975)
+scale = Vector2(0.8, 0.748042)
+skew = 0.106367
 texture = ExtResource("2_amy8e")
 centered = false
 
 [node name="Layer 3" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(38.9193, 64.536)
-rotation = 3.88454
-scale = Vector2(0.786881, 0.786881)
+position = Vector2(44.7947, 50.4968)
+rotation = 0.784709
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_sgftx")
 centered = false
 
 [node name="Layer 2" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(0.54661, 14.1347)
-rotation = -0.201005
-scale = Vector2(0.799, 0.717646)
+position = Vector2(22.6905, 4.19718)
+rotation = 0.179603
+scale = Vector2(0.813986, 0.723067)
+skew = 0.0174347
 texture = ExtResource("4_dxhke")
 centered = false
 
 [node name="Layer 4" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(53.964, 53.428)
-rotation = -3.88279
-scale = Vector2(0.799727, 0.799727)
+position = Vector2(48.3997, 56.594)
+rotation = -0.782958
+scale = Vector2(0.799841, 0.799841)
 texture = ExtResource("5_nimi2")
 centered = false
 

@@ -2,6 +2,7 @@ extends Node2D
 class_name Bullet000Base
 
 @onready var area_2d_up: Area2D = $Area2DUp
+@onready var bullet_shadow: Sprite2D = $BulletShadow
 
 ## 子弹击中特效
 @onready var bullet_effect: BulletEffect000Base = $BulletEffect
@@ -9,6 +10,8 @@ class_name Bullet000Base
 @onready var body: Node2D = $Body
 ## 子弹基类
 @export_group("子弹基础属性")
+## 子弹是否旋转
+@export var is_rotate := false
 ## 最大攻击次数(-1表示可以无限攻击)
 @export var max_attack_num:=1
 ## 当前攻击次数
@@ -51,11 +54,17 @@ var bullet_lane :int = -1
 func _ready() -> void:
 	body.rotation = direction.angle()
 
+	if is_rotate:
+		var tween = create_tween()
+		tween.set_loops()
+		tween.tween_property(body, "rotation", TAU, 1.0).as_relative()
+
+
 ## 初始化子弹属性
 func init_bullet(lane:int, start_pos:Vector2, direction:= Vector2.RIGHT, \
 	bullet_lane_activate:bool=default_bullet_lane_activate, \
-	can_attack_plant_status:int = can_attack_plant_status, \
-	can_attack_zombie_status:int=can_attack_zombie_status
+	can_attack_plant_status:int= can_attack_plant_status, \
+	can_attack_zombie_status:int= can_attack_zombie_status
 	):
 
 	self.bullet_lane_activate = bullet_lane_activate
@@ -74,7 +83,6 @@ func _on_area_2d_attack_area_entered(area: Area2D) -> void:
 	var enemy:Character000Base = area.owner
 	## TODO:攻击植物子弹
 	if enemy is Plant000Base:
-		pass
 		return
 	elif enemy is Zombie000Base:
 		var zombie = enemy as Zombie000Base
@@ -103,17 +111,22 @@ func _attack_enemy(enemy:Character000Base):
 ## 攻击一次
 func attack_once(enemy:Character000Base):
 	curr_attack_num += 1
-	## 判断是否进入删除队列
-	if max_attack_num != -1 and curr_attack_num >= max_attack_num:
-		queue_free()
+	if max_attack_num != -1 and curr_attack_num > max_attack_num:
+		return
 	## 对敌人造成伤害
-	_attack_enemy(enemy)
+	if enemy != null:
+		_attack_enemy(enemy)
 	## 是否有音效
 	if type_bullet_SFX != SoundManagerClass.TypeBulletSFX.Null:
 		SoundManager.play_bullet_attack_SFX(type_bullet_SFX)
 	## 如果有子弹特效
 	if bullet_effect.is_bullet_effect:
 		bullet_effect.activate_bullet_effect()
+
+	## 判断是否进入删除队列
+	if max_attack_num != -1 and curr_attack_num >= max_attack_num:
+		queue_free()
+
 
 #region 子弹升级相关
 ## 创建升级后的子弹

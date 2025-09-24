@@ -1203,118 +1203,118 @@ position = Vector2(-47.4564, 70.1)
 centered = false
 
 [node name="Zombie_football_leftarm_upper" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(35.9, 59.6734)
-rotation = 6.27267
-scale = Vector2(0.8, 0.8)
+position = Vector2(35.9, 63.3166)
+rotation = 6.24464
+scale = Vector2(0.799729, 0.799729)
 texture = ExtResource("2_q6sql")
 centered = false
 
 [node name="Zombie_football_leftleg_foot" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(36.8658, 112)
-rotation = 6.25981
-scale = Vector2(0.8, 0.8)
+position = Vector2(36.5459, 112.3)
+rotation = 6.20832
+scale = Vector2(0.799729, 0.799729)
 texture = ExtResource("3_l10ws")
 centered = false
 
 [node name="Zombie_football_leftleg_lower" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(49.7975, 99.9)
-rotation = 6.23708
-scale = Vector2(0.8, 0.8)
+position = Vector2(48.2459, 100.027)
+rotation = 6.13836
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("4_1sncy")
 centered = false
 
 [node name="Zombie_football_leftleg_upper" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(48.8683, 81.4975)
-rotation = 0.0578157
-scale = Vector2(0.8, 0.8)
+position = Vector2(50.1083, 79.7188)
+rotation = 0.186856
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("5_6maka")
 centered = false
 
 [node name="Zombie_football_lowerbody" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(56.3, 74.7025)
+position = Vector2(56.3, 76.2812)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_ivgqx")
 centered = false
 
 [node name="Zombie_football_rightleg_lower" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(83.195, 107.903)
-rotation = 6.19621
-scale = Vector2(0.799658, 0.799658)
+position = Vector2(80.0376, 109.581)
+rotation = 6.01147
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("7_jgk1j")
 centered = false
 
 [node name="Zombie_football_rightleg_foot" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(70.5317, 125.434)
-rotation = 6.25224
-scale = Vector2(0.708, 0.708)
+position = Vector2(70.0729, 125.827)
+rotation = 6.18341
+scale = Vector2(0.707729, 0.707729)
 texture = ExtResource("8_fkqof")
 centered = false
 
 [node name="Zombie_football_rightleg_upper" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(73.2, 80.9)
-rotation = 0.0578157
-scale = Vector2(0.8, 0.8)
+position = Vector2(73.6, 81.2271)
+rotation = 0.186856
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("9_xkwr4")
 centered = false
 
 [node name="Zombie_football_upperbody2" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(15.9658, 19.105)
-rotation = 6.27267
-scale = Vector2(0.8, 0.8)
+position = Vector2(14.9188, 22.7436)
+rotation = 6.24464
+scale = Vector2(0.799729, 0.799729)
 texture = ExtResource("10_cgau2")
 centered = false
 
 [node name="Zombie_football_leftarm_lower" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(17.5, 65.9101)
-rotation = 6.24232
-scale = Vector2(0.799, 0.799)
+position = Vector2(17.5729, 71.6248)
+rotation = 6.15105
+scale = Vector2(0.798, 0.798)
 texture = ExtResource("14_2ie3r")
 centered = false
 
 [node name="Zombie_football_upperbody" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(15.5658, 19.605)
-rotation = 6.27267
-scale = Vector2(0.8, 0.8)
+position = Vector2(14.5459, 23.2166)
+rotation = 6.24464
+scale = Vector2(0.799729, 0.799729)
 texture = ExtResource("12_m4mmm")
 centered = false
 
 [node name="Anim_hair" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(28.295, 3.64426)
-scale = Vector2(0.8, 0.842532)
+position = Vector2(26.2459, 8.23535)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("13_uu7mv")
 centered = false
 
 [node name="Anim_head1" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(32.9583, 6.41261)
-rotation = 6.31438
-scale = Vector2(0.8, 0.8)
+position = Vector2(29.8188, 11.5895)
+rotation = 6.24464
+scale = Vector2(0.799729, 0.799729)
 texture = ExtResource("14_drdyk")
 centered = false
 
 [node name="Zombie_football_rightarm_upper" type="Sprite2D" parent="Body/BodyCorrect" index="14"]
-position = Vector2(80.4342, 61.7709)
+position = Vector2(80.7, 63.7353)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("15_i3wfc")
 centered = false
 
 [node name="Zombie_football_rightarm_lower" type="Sprite2D" parent="Body/BodyCorrect" index="15"]
-position = Vector2(64.3316, 65.4417)
-rotation = 6.23937
-scale = Vector2(0.799658, 0.799658)
+position = Vector2(63.8459, 69.5436)
+rotation = 6.14487
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("16_8fipb")
 centered = false
 
 [node name="Zombie_football_upperbody3" type="Sprite2D" parent="Body/BodyCorrect" index="16"]
-position = Vector2(15.5658, 19.605)
-rotation = 6.27267
-scale = Vector2(0.8, 0.8)
+position = Vector2(14.5459, 23.2166)
+rotation = 6.24464
+scale = Vector2(0.799729, 0.799729)
 texture = ExtResource("17_isl0p")
 centered = false
 
 [node name="Anim_head2" type="Sprite2D" parent="Body/BodyCorrect" index="17"]
-position = Vector2(38.6658, 40.2468)
-rotation = 6.30093
-scale = Vector2(0.8, 0.8)
+position = Vector2(38.1, 46.2895)
+rotation = 6.16945
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("18_p3gye")
 centered = false
 
@@ -1324,9 +1324,9 @@ marker_2d_iron_center = NodePath("Zombie_football_helmet/Marker2D")
 metadata/_custom_type_script = "uid://doalrh1fha7yy"
 
 [node name="Zombie_football_helmet" type="Sprite2D" parent="Body/BodyCorrect/IronNodeHelmet" index="0"]
-position = Vector2(29.4216, -1.51905)
-rotation = 6.30795
-scale = Vector2(0.8, 0.8)
+position = Vector2(24.8376, 4.74363)
+rotation = 6.21355
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("19_kt22c")
 centered = false
 
@@ -1334,15 +1334,15 @@ centered = false
 position = Vector2(22.3291, 36.3838)
 
 [node name="Zombie_football_leftarm_hand" type="Sprite2D" parent="Body/BodyCorrect" index="19"]
-position = Vector2(-1.5, 47.5835)
-rotation = 0.131276
+position = Vector2(-0.29172, 54.5895)
+rotation = 0.10199
 scale = Vector2(0.799, 0.799)
 texture = ExtResource("23_agqki")
 centered = false
 
 [node name="Zombie_football_rightarm_hand" type="Sprite2D" parent="Body/BodyCorrect" index="20"]
-position = Vector2(44.7317, 65.2784)
-rotation = 0.148133
+position = Vector2(45.3812, 69.7812)
+rotation = 0.12737
 scale = Vector2(0.799, 0.799)
 texture = ExtResource("21_os2o1")
 centered = false

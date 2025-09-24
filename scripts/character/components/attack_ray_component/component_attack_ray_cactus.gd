@@ -19,7 +19,7 @@ func judge_is_have_enemy():
 			if not is_have_zombie_in_sky:
 				var enemy:Character000Base = enemy_area.owner
 				## 先判断行属性
-				if is_lane and lane != enemy.lane:
+				if is_lane and owner.lane != enemy.lane:
 					continue
 				## 如果敌人为植物
 				if enemy is Plant000Base:

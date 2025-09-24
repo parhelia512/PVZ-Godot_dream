@@ -58,6 +58,7 @@ advance_mode = 2
 advance_expression = "not is_show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_und8k"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_sleeping"
 
@@ -82,6 +83,7 @@ advance_mode = 2
 advance_expression = "is_show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tthcx"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_sleeping"
 
@@ -139,19 +141,19 @@ speech_influence_components = [NodePath("AttackComponent")]
 position = Vector2(-36, -72)
 
 [node name="ScaredyShroom_head_inner" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(21.7961, 27.3568)
-scale = Vector2(0.797137, 0.773392)
+position = Vector2(21.4478, 28.2326)
+scale = Vector2(0.814653, 0.75963)
 texture = ExtResource("2_6htc2")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(27.6, 36.4549)
-scale = Vector2(0.8, 0.774902)
+position = Vector2(27.6, 37.1566)
+scale = Vector2(0.8, 0.762391)
 texture = ExtResource("3_esfqn")
 centered = false
 
 [node name="Anim_eye2" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(39.4, 33.7529)
+position = Vector2(39.4, 33.9761)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_tthcx")
 centered = false
@@ -161,22 +163,22 @@ visible = false
 centered = false
 
 [node name="ScaredyShroom_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(38.5, 44.3529)
-rotation = 0.0446936
-scale = Vector2(1.60402, 0.8)
-skew = -0.0446936
+position = Vector2(38.5, 44.6522)
+rotation = 0.0700418
+scale = Vector2(1.60576, 0.8)
+skew = -0.0700418
 texture = ExtResource("5_n8m1a")
 centered = false
 
 [node name="ScaredyShroom_lips" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(43.6, 41.0568)
-rotation = 0.0332979
-scale = Vector2(0.8, 0.782432)
+position = Vector2(43.7522, 41.8566)
+rotation = 0.050767
+scale = Vector2(0.8, 0.773674)
 texture = ExtResource("6_68pw3")
 centered = false
 
 [node name="Anim_eye1" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(33.4, 35.402)
+position = Vector2(33.4, 35.7283)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_wh8am")
 centered = false
@@ -186,8 +188,8 @@ visible = false
 centered = false
 
 [node name="ScaredyShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(4.44707, 8.55684)
-scale = Vector2(0.822588, 0.782432)
+position = Vector2(4.14781, 9.50874)
+scale = Vector2(0.833848, 0.773674)
 texture = ExtResource("8_arnij")
 centered = false
 
@@ -196,15 +198,15 @@ visible = false
 centered = false
 
 [node name="ScaredyShroom_eyebrow1" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(28.249, 31.7568)
-rotation = 0.0271378
+position = Vector2(28.2761, 32.6326)
+rotation = 0.0407122
 scale = Vector2(1.018, 0.8)
 texture = ExtResource("9_ts0jv")
 centered = false
 
 [node name="ScaredyShroom_eyebrow2" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(38.951, 28.2568)
-rotation = 0.0508196
+position = Vector2(39.0761, 29.1326)
+rotation = 0.0783516
 scale = Vector2(0.999, 0.999)
 texture = ExtResource("10_lci7m")
 centered = false

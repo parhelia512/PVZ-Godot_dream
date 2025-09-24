@@ -1,0 +1,2 @@
+extends Bullet000Base
+class_name Bullet000TrackBase

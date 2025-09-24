@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b2soejmoqi7wd"]
+[gd_scene load_steps=61 format=3 uid="uid://b2soejmoqi7wd"]
 
 [ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_7dde3"]
 [ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_8fvtd"]
@@ -40,6 +40,7 @@
 [ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="26_84h1o"]
 [ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="27_w5iw5"]
 [ext_resource type="Script" uid="uid://c6mc0k0vhb4ad" path="res://scripts/main_game_item/lawn_movers.gd" id="28_3uxdp"]
+[ext_resource type="Texture2D" uid="uid://dfjdwrmbaotyx" path="res://assets/image/background/background5_gameover_mask.png" id="28_71hfq"]
 [ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="28_mddbc"]
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="29_8fvtd"]
 [ext_resource type="PackedScene" uid="uid://b2xxhep8oyipk" path="res://scenes/item/coin_bank_label.tscn" id="30_xh73d"]
@@ -49,7 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="34_8fvtd"]
 [ext_resource type="PackedScene" uid="uid://5v0fdtao52jl" path="res://scenes/main/control_canvas_layer.tscn" id="34_ifnc6"]
 [ext_resource type="Script" uid="uid://2kldvd28hidq" path="res://scripts/ui/card/card_slot/card_slot_root.gd" id="35_ee3wa"]
-[ext_resource type="Script" uid="uid://bw0stsbito4w" path="res://scenes/item/game_scenes_item/real_shovel.gd" id="35_mjx71"]
+[ext_resource type="Script" uid="uid://bw0stsbito4w" path="res://scripts/main_game_item/real_shovel.gd" id="35_mjx71"]
 [ext_resource type="Texture2D" uid="uid://47ixd5hsddft" path="res://assets/image/ui/ui_card/ShovelBank.png" id="42_pmw6j"]
 [ext_resource type="Script" uid="uid://drl7ywtxslsbm" path="res://scripts/ui/card/shovel_in_ui.gd" id="43_erab5"]
 [ext_resource type="Script" uid="uid://5unqafehbil7" path="res://scripts/fx/other_effect/canvas_layer_effect.gd" id="51_qfhda"]
@@ -171,12 +172,12 @@ texture = ExtResource("16_7eijg")
 
 [node name="Background3GameoverInteriorOverlay" type="Sprite2D" parent="Background/Home/Door/DoorDown"]
 visible = false
-position = Vector2(-629, 340)
+position = Vector2(107, 327)
 texture = ExtResource("18_g0ofp")
 
 [node name="Background4GameoverInteriorOverlay" type="Sprite2D" parent="Background/Home/Door/DoorDown"]
 visible = false
-position = Vector2(-629, 340)
+position = Vector2(101, 327)
 texture = ExtResource("19_470oe")
 
 [node name="PanelZombieGoHome" type="Panel" parent="Background/Home/Door/DoorDown"]
@@ -202,13 +203,18 @@ texture = ExtResource("18_tsrbg")
 
 [node name="Background3GameoverMask" type="Sprite2D" parent="Background/Home/Door/DoorMask"]
 visible = false
-position = Vector2(-629, 343)
+position = Vector2(113, 343.5)
 texture = ExtResource("22_xh73d")
 
 [node name="Background4GameoverMask" type="Sprite2D" parent="Background/Home/Door/DoorMask"]
 visible = false
-position = Vector2(-563, 304)
+position = Vector2(179, 304.5)
 texture = ExtResource("23_401pl")
+
+[node name="Background5GameoverMask" type="Sprite2D" parent="Background/Home/Door/DoorMask"]
+visible = false
+position = Vector2(50, 196)
+texture = ExtResource("28_71hfq")
 
 [node name="ShowZombiePanel" type="Panel" parent="Background"]
 unique_name_in_owner = true

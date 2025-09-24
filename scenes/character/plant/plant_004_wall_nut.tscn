@@ -96,22 +96,22 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(8.77302, 4.22434)
-rotation = 0.0273129
-scale = Vector2(0.7, 0.701351)
+position = Vector2(6.71963, 3.84049)
+rotation = -0.00244839
+scale = Vector2(0.7, 0.717397)
 texture = ExtResource("2_1opod")
 centered = false
 
 [node name="Anim_blink_twitch" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
 visible = false
-position = Vector2(30.2405, 36.3284)
+position = Vector2(29.0998, 35.6701)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_ia1rq")
 centered = false
 
 [node name="Anim_blink_twice" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
 visible = false
-position = Vector2(29.0405, 22.3284)
+position = Vector2(27.8998, 21.6701)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_s15q3")
 centered = false

@@ -29,7 +29,7 @@ animation = &"LilyPad_idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_36qgt"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iaqk1"]
-graph_offset = Vector2(-166.231, 30.3884)
+graph_offset = Vector2(-166.231, -5.6116)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3puwi")
 nodes/Animation/position = Vector2(20, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_36qgt")

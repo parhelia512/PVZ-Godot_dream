@@ -13,11 +13,11 @@ class_name AttackComponentBulletBase
 ## 是否使用行属性进行攻击判断
 @export var is_lane:=true
 
-## 子弹攻击伤害
-@export var attack_value_bullet:int = 20
+### TODO:子弹攻击伤害(为正数时可以给子弹赋值,默认为子弹攻击力)
+#@export var attack_value_bullet:int = -1
 @export var attack_cd:float = 1.5
-## 攻击子弹场景
-@export var attack_bullet_type:Global.BulletType = Global.BulletType.BulletPea
+## 攻击子弹类型
+@export var attack_bullet_type:Global.BulletType = Global.BulletType.Bullet001Pea
 ## 子弹生产位置
 @export var markers_2d_bullet: Array[Marker2D]
 @export_group("发射子弹音效")
@@ -87,8 +87,13 @@ func _shoot_bullet():
 		## 子弹初始位置
 		var bullet_pos_ori = marker_2d_bullet.global_position
 		bullet.init_bullet(owner.lane, bullets.to_local(bullet_pos_ori), ray_direction, is_lane, can_attack_plant_status, can_attack_zombie_status)
+		special_bullet_init(bullet)
 		bullets.add_child(bullet)
 		play_throw_sfx()
+
+## 特殊子弹初始化
+func special_bullet_init(bullet):
+	pass
 
 func play_throw_sfx():
 	## 播放音效

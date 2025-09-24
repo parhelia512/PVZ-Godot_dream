@@ -8,20 +8,23 @@ class_name MainGameHome
 	$Door/DoorDown/Background1GameoverInteriorOverlay,
 	$Door/DoorDown/Background2GameoverInteriorOverlay,
 	$Door/DoorDown/Background3GameoverInteriorOverlay,
-	$Door/DoorDown/Background4GameoverInteriorOverlay
+	$Door/DoorDown/Background4GameoverInteriorOverlay,
+	null,
 ]
 
 @onready var door_masks: Array[Sprite2D] = [
 	$Door/DoorMask/Background1GameoverMask,
 	$Door/DoorMask/Background2GameoverMask,
 	$Door/DoorMask/Background3GameoverMask,
-	$Door/DoorMask/Background4GameoverMask
+	$Door/DoorMask/Background4GameoverMask,
+	$Door/DoorMask/Background5GameoverMask
 ]
 
 ## 根据当前背景初始化房门
 func init_home(game_BG:ResourceLevelData.GameBg):
-	## 打开房门
-	door_downs[game_BG].visible = true
+	if is_instance_valid(door_downs[game_BG]):
+		## 打开房门
+		door_downs[game_BG].visible = true
 	door_masks[game_BG].visible = true
 
 ## 僵尸进房

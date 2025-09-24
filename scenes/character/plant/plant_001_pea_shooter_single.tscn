@@ -1088,84 +1088,87 @@ speech_influence_components = [NodePath("AttackComponent")]
 position = Vector2(-43, -67)
 
 [node name="Backleaf" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(27.6, 54.0343)
-scale = Vector2(0.575686, 0.508457)
+position = Vector2(27.5, 55.775)
+scale = Vector2(0.607917, 0.434415)
 texture = ExtResource("2_866ce")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(24.9171, 54.5)
-rotation = 0.0329118
-scale = Vector2(0.5912, 0.525972)
+position = Vector2(23.9417, 57.2917)
+rotation = -0.131633
+scale = Vector2(0.659585, 0.515)
 texture = ExtResource("3_w7gu6")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(47.5, 53.8343)
-rotation = 0.0145612
-scale = Vector2(0.637742, 0.525972)
+position = Vector2(48.7167, 55.575)
+rotation = 0.142684
+scale = Vector2(0.635499, 0.479916)
 texture = ExtResource("4_hlxsk")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(37.6686, 50.2972)
-rotation = 0.189841
-scale = Vector2(0.559171, 0.650085)
-skew = -0.0666716
+position = Vector2(40.8084, 49.7167)
+rotation = 0.478812
+scale = Vector2(0.563583, 0.678747)
+skew = -0.170319
 texture = ExtResource("5_rgmag")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(33.8028, 37.18)
-rotation = 0.164509
-scale = Vector2(0.563514, 0.838113)
-skew = -0.0655241
+position = Vector2(39.167, 37.3917)
+rotation = 0.329
+scale = Vector2(0.555165, 0.808582)
+skew = -0.0378058
 texture = ExtResource("6_rdoq1")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(22.2829, 55.3343)
-scale = Vector2(0.574514, 0.525972)
+position = Vector2(21.8417, 56.0583)
+scale = Vector2(0.590334, 0.501083)
 texture = ExtResource("7_ul06u")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(55.5829, 56.5171)
-rotation = -0.135985
-scale = Vector2(0.70497, 0.546657)
+position = Vector2(56.9167, 56.8583)
+rotation = -0.0615191
+scale = Vector2(0.651747, 0.539416)
 texture = ExtResource("8_6f6l5")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(19.5171, 60.8486)
-rotation = 0.123169
-scale = Vector2(0.618057, 0.545829)
+position = Vector2(18.725, 61.6334)
+rotation = 0.000285187
+scale = Vector2(0.599332, 0.566501)
+skew = -0.00523588
 texture = ExtResource("9_7rwin")
 centered = false
 
 [node name="Anim_stem" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(39.6686, 43.0486)
+position = Vector2(44.0169, 44.2668)
 centered = false
 
 [node name="stem_correct" type="Node2D" parent="Body/BodyCorrect/Anim_stem" index="0"]
 position = Vector2(-37.6, -48.7)
 
 [node name="Anim_sprout" type="Sprite2D" parent="Body/BodyCorrect/Anim_stem/stem_correct" index="0"]
-position = Vector2(7.91714, 25.3171)
-rotation = -0.272371
-scale = Vector2(0.756743, 0.796829)
+position = Vector2(8.26661, 22.3169)
+rotation = -0.00640784
+scale = Vector2(0.798, 0.798)
 texture = ExtResource("10_q6tdq")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect/Anim_stem/stem_correct" index="1"]
-position = Vector2(19.3, 12.2486)
-scale = Vector2(0.555, 0.580028)
+position = Vector2(19.4, 14.5002)
+scale = Vector2(0.555, 0.544497)
 texture = ExtResource("11_ydmpl")
 centered = false
 
 [node name="Idle_mouth" type="Sprite2D" parent="Body/BodyCorrect/Anim_stem/stem_correct" index="2"]
-position = Vector2(52.5829, 12.2486)
-scale = Vector2(0.555, 0.580028)
+position = Vector2(52.7, 14.5418)
+rotation = -0.0791165
+scale = Vector2(0.555666, 0.544497)
+skew = 0.0791165
 texture = ExtResource("12_tjilp")
 centered = false
 
@@ -1175,7 +1178,7 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect/Anim_stem/stem_correct" index="4"]
 visible = false
-position = Vector2(38.0088, 18.85)
+position = Vector2(38.0088, 21.0001)
 scale = Vector2(0.555, 0.555)
 texture = ExtResource("13_dkjuv")
 centered = false

@@ -163,14 +163,14 @@ var curr_plant = [
 	PlantType.P031Pumpkin,
 	PlantType.P032MagnetShroom,
 
-	##PlantType.P033CabbagePult,
-	#PlantType.P034FlowerPot,
-	#PlantType.P035CornPult,
-	#PlantType.P036CoffeeBean,
-	#PlantType.P037Garlic,
-	#PlantType.P038UmbrellaLeaf,
-	#PlantType.P039MariGold,
-	#PlantType.P040MelonPult,
+	PlantType.P033CabbagePult,
+	PlantType.P034FlowerPot,
+	PlantType.P035CornPult,
+	PlantType.P036CoffeeBean,
+	PlantType.P037Garlic,
+	PlantType.P038UmbrellaLeaf,
+	PlantType.P039MariGold,
+	PlantType.P040MelonPult,
 #
 	#PlantType.P041GatlingPea,
 	#PlantType.P042TwinSunFlower,
@@ -605,55 +605,62 @@ const  PlantInfo = {
 		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_032_magnet_shroom.tscn")
 		},
 
-	#PlantType.P033CabbagePult: {
-		#PlantInfoAttribute.PlantName: "CabbagePult",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
-	#PlantType.P034FlowerPot: {
-		#PlantInfoAttribute.PlantName: "FlowerPot",
-		#PlantInfoAttribute.CoolTime: 7.5,
-		#PlantInfoAttribute.SunCost: 25,
-		#PlantInfoAttribute.PlantScenesName: "034_flower_pot",
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/034_flower_pot.tres")
-		#},
-	#PlantType.P035CornPult: {
-		#PlantInfoAttribute.PlantName: "TallNut",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
-	#PlantType.P036CoffeeBean: {
-		#PlantInfoAttribute.PlantName: "TallNut",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
-	#PlantType.P037Garlic: {
-		#PlantInfoAttribute.PlantName: "TallNut",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
-	#PlantType.P038UmbrellaLeaf: {
-		#PlantInfoAttribute.PlantName: "TallNut",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
-	#PlantType.P039MariGold: {
-		#PlantInfoAttribute.PlantName: "TallNut",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
-	#PlantType.P040MelonPult: {
-		#PlantInfoAttribute.PlantName: "TallNut",
-		#PlantInfoAttribute.CoolTime: 30.0,
-		#PlantInfoAttribute.SunCost: 175,
-		#PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres")
-		#},
+	PlantType.P033CabbagePult: {
+		PlantInfoAttribute.PlantName: "CabbagePult",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 100,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_033_cabbage_pult.tscn")
+		},
+	PlantType.P034FlowerPot: {
+		PlantInfoAttribute.PlantName: "FlowerPot",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 25,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/034_flower_pot.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_034_flower_pot.tscn")
+		},
+	PlantType.P035CornPult: {
+		PlantInfoAttribute.PlantName: "CornPult",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 125,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_035_corn_pult.tscn")
+		},
+	PlantType.P036CoffeeBean: {
+		PlantInfoAttribute.PlantName: "CoffeeBean",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 75,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/036_coffee_bean.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_036_coffee_bean.tscn")
+		},
+	PlantType.P037Garlic: {
+		PlantInfoAttribute.PlantName: "TallNut",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_037_garlic.tscn")
+		},
+	PlantType.P038UmbrellaLeaf: {
+		PlantInfoAttribute.PlantName: "TallNut",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 100,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_038_umbrella_leaf.tscn")
+		},
+	PlantType.P039MariGold: {
+		PlantInfoAttribute.PlantName: "TallNut",
+		PlantInfoAttribute.CoolTime: 30.0,
+		PlantInfoAttribute.SunCost: 50,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_039_mari_gold.tscn")
+		},
+	PlantType.P040MelonPult: {
+		PlantInfoAttribute.PlantName: "TallNut",
+		PlantInfoAttribute.CoolTime: 7.5,
+		PlantInfoAttribute.SunCost: 300,
+		PlantInfoAttribute.PlantConditionResource :  preload("res://resources/character_resource/plant_condition/000_common_plant_land.tres"),
+		PlantInfoAttribute.PlantScenes : preload("res://scenes/character/plant/plant_040_melon_pult.tscn")
+		},
 	#PlantType.P041GatlingPea: {
 		#PlantInfoAttribute.PlantName: "TallNut",
 		#PlantInfoAttribute.CoolTime: 30.0,
@@ -981,26 +988,36 @@ enum AttackMode {
 enum BulletType{
 	Null = 0,
 
-	BulletPea = 1,			## 豌豆
-	BulletPeaSnow,		## 寒冰豌豆
-	BulletPuff,			## 小喷孢子
-	BulletFume,			## 大喷孢子
-	BulletPuffLongTime,	## 胆小菇孢子（和小喷孢子一样，不过修改存在持续距离）
-	BulletPeaFire,		## 火焰豌豆
-	BulletCactus,		## 仙人掌尖刺
-	BulletStar,			## 星星子弹
+	Bullet001Pea = 1,			## 豌豆
+	Bullet002PeaSnow,		## 寒冰豌豆
+	Bullet003Puff,			## 小喷孢子
+	Bullet004Fume,			## 大喷孢子
+	Bullet005PuffLongTime,	## 胆小菇孢子（和小喷孢子一样，不过修改存在持续距离）
+	Bullet006PeaFire,		## 火焰豌豆
+	Bullet007Cactus,		## 仙人掌尖刺
+	Bullet008Star,			## 星星子弹
+
+	Bullet009Cabbage,		## 卷心菜
+	Bullet010Corn,			## 玉米
+	Bullet011Butter,		## 黄油
+	Bullet012Melon,		## 西瓜
+
 }
 
 const BulletTypeMap := {
-	BulletType.BulletPea : preload("res://scenes/bullet/bullet_linear/bullet_001_pea.tscn"),
-	BulletType.BulletPeaSnow : preload("res://scenes/bullet/bullet_linear/bullet_002_pea_snow.tscn"),
-	BulletType.BulletPuff : preload("res://scenes/bullet/bullet_linear/bullet_003_puff.tscn"),
-	BulletType.BulletFume : preload("res://scenes/bullet/bullet_linear/bullet_004_fume.tscn"),
-	BulletType.BulletPuffLongTime : preload("res://scenes/bullet/bullet_linear/bullet_005_puff_long_time.tscn"),
-	BulletType.BulletPeaFire : preload("res://scenes/bullet/bullet_linear/bullet_006_pea_fire.tscn"),
-	BulletType.BulletCactus : preload("res://scenes/bullet/bullet_linear/bullet_007_cactus.tscn"),
-	BulletType.BulletStar : preload("res://scenes/bullet/bullet_linear/bullet_008_star.tscn"),
+	BulletType.Bullet001Pea : preload("res://scenes/bullet/bullet_001_pea.tscn"),
+	BulletType.Bullet002PeaSnow : preload("res://scenes/bullet/bullet_002_pea_snow.tscn"),
+	BulletType.Bullet003Puff : preload("res://scenes/bullet/bullet_003_puff.tscn"),
+	BulletType.Bullet004Fume : preload("res://scenes/bullet/bullet_004_fume.tscn"),
+	BulletType.Bullet005PuffLongTime : preload("res://scenes/bullet/bullet_005_puff_long_time.tscn"),
+	BulletType.Bullet006PeaFire : preload("res://scenes/bullet/bullet_006_pea_fire.tscn"),
+	BulletType.Bullet007Cactus : preload("res://scenes/bullet/bullet_007_cactus.tscn"),
+	BulletType.Bullet008Star : preload("res://scenes/bullet/bullet_008_star.tscn"),
 
+	BulletType.Bullet009Cabbage :preload("res://scenes/bullet/bullet_009_cabbage.tscn"),
+	BulletType.Bullet010Corn :preload("res://scenes/bullet/bullet_010_corn.tscn"),
+	BulletType.Bullet011Butter :preload("res://scenes/bullet/bullet_011_butter.tscn"),
+	BulletType.Bullet012Melon :preload("res://scenes/bullet/bullet_012_melon.tscn"),
 }
 
 ## 获取子弹场景方法
@@ -1139,6 +1156,7 @@ enum MainScenes{
 
 	MainGameFront,
 	MainGameBack,
+	MainGameRoof,
 
 	Garden,
 	Almanac,
@@ -1152,6 +1170,7 @@ var MainScenesMap = {
 
 	MainScenes.MainGameFront: "res://scenes/main/MainGame01Front.tscn",
 	MainScenes.MainGameBack: "res://scenes/main/MainGame02Back.tscn",
+	MainScenes.MainGameRoof: "res://scenes/main/MainGame03Roof.tscn",
 
 	MainScenes.Garden: "res://scenes/main/10Garden.tscn",
 	MainScenes.Almanac: "res://scenes/main/11Almanac.tscn",

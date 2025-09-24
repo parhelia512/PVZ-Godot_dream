@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://cdcg662one7df"]
 
-[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level_data.gd" id="1_ma3wb"]
+[ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level/level_data.gd" id="1_ma3wb"]
 
 [resource]
 script = ExtResource("1_ma3wb")
@@ -15,7 +15,7 @@ is_day = true
 is_day_sun = true
 look_show_zombie = true
 can_choosed_card = true
-monster_mode = 0
+monster_mode = 1
 zombie_multy = 1
 max_wave = 30
 zombie_refresh_types = Array[int]([1, 3, 4, 5])

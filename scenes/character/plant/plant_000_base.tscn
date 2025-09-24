@@ -212,15 +212,19 @@ label_settings = SubResource("LabelSettings_813jy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Area2D" parent="BeAttackedBoxComponent" index="0"]
+[node name="HurtBoxDetection" parent="BeAttackedBoxComponent" index="0"]
 collision_layer = 2
 collision_mask = 0
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BeAttackedBoxComponent/Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeAttackedBoxComponent/HurtBoxDetection" index="0"]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_bie68")
 
-[node name="SleepComponent" type="Node2D" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="HurtBoxReal" parent="BeAttackedBoxComponent" index="1"]
+collision_layer = 256
+
+[node name="SleepComponent" type="Node2D" parent="." index="6" node_paths=PackedStringArray("sleep_influence_components")]
 unique_name_in_owner = true
 visible = false
 script = ExtResource("5_813jy")
@@ -250,13 +254,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_vonjk")
 }
 
-[node name="BlinkComponent" type="Node2D" parent="." index="8"]
+[node name="BlinkComponent" type="Node2D" parent="." index="7"]
 unique_name_in_owner = true
 script = ExtResource("6_813jy")
 
 [node name="BlinkTimer" type="Timer" parent="BlinkComponent" index="0"]
 
-[node name="GardenComponent" type="Node2D" parent="." index="9"]
+[node name="GardenComponent" type="Node2D" parent="." index="8"]
 unique_name_in_owner = true
 z_index = 1
 script = ExtResource("7_at3ho")

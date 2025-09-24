@@ -58,145 +58,149 @@ zombie_type = 7
 iron_type = 2
 iron_node = NodePath("Body/BodyCorrect/IronNodeScreendoor")
 
-[node name="Body" parent="." index="1"]
-position = Vector2(0, 0)
-rotation = 0.0
-
-[node name="BodyCorrect" parent="Body" index="0"]
-script = null
-
 [node name="_ground" parent="Body/BodyCorrect" index="0"]
 position = Vector2(10.1152, 40)
 
 [node name="Anim_innerarm3" parent="Body/BodyCorrect" index="1"]
 visible = false
-position = Vector2(24.5, 79.107)
-rotation = 6.24146
-scale = Vector2(0.799, 0.799)
+position = Vector2(25.1078, 78.6078)
+rotation = 6.18952
+scale = Vector2(0.798, 0.798)
 
 [node name="Anim_innerarm2" parent="Body/BodyCorrect" index="2"]
 visible = false
-position = Vector2(24.5976, 64.9466)
-rotation = 6.24146
-scale = Vector2(0.799, 0.799)
+position = Vector2(27.8157, 62.0039)
+rotation = 6.36193
+scale = Vector2(0.798, 0.798)
 
 [node name="Anim_innerarm1" parent="Body/BodyCorrect" index="3"]
 visible = false
-position = Vector2(25.9534, 45.2466)
-rotation = 6.24146
-scale = Vector2(0.999, 0.999)
+position = Vector2(31.8196, 42.4039)
+rotation = 6.36193
+scale = Vector2(0.997961, 0.997961)
 
 [node name="Zombie_flaghand" parent="Body/BodyCorrect" index="4"]
-position = Vector2(-8.22329, 49.7419)
-rotation = 5.72293
-scale = Vector2(0.797, 0.797)
+position = Vector2(-3.98041, 44.5)
+rotation = 5.86869
 
 [node name="Zombie_flagpole" parent="Body/BodyCorrect" index="5"]
-position = Vector2(6.76157, -6.5881)
-rotation = -0.597641
+position = Vector2(15.4759, -6.83311)
+rotation = -0.532972
 
 [node name="Zombie_flag" parent="Body/BodyCorrect" index="6"]
-position = Vector2(8.76156, -6.5881)
-rotation = -0.597641
+position = Vector2(17.4759, -6.83311)
+rotation = -0.532972
 
 [node name="Zombie_innerarm_screendoor" parent="Body/BodyCorrect" index="7"]
 visible = true
-position = Vector2(1.87671, 47.8814)
+position = Vector2(5.20783, 46.0117)
 
 [node name="Zombie_neck" parent="Body/BodyCorrect" index="8"]
-position = Vector2(31.2139, 32.8442)
-rotation = 0.0330379
-scale = Vector2(0.837, 0.797)
+position = Vector2(38.5392, 31.5078)
+rotation = 0.198247
+scale = Vector2(0.836, 0.796)
 
 [node name="Anim_head1" parent="Body/BodyCorrect" index="9"]
-position = Vector2(9.21154, 6.84658)
-rotation = 0.0121764
+position = Vector2(25.9, 3.03917)
+rotation = 0.233122
+scale = Vector2(0.798, 0.798)
 
 [node name="Zombie_innerleg_upper" parent="Body/BodyCorrect" index="10"]
-position = Vector2(44, 76.5209)
-rotation = 0.0330379
-scale = Vector2(0.801395, 0.8)
-skew = -0.0379084
+position = Vector2(44.2, 76.3)
+rotation = 0.05236
+scale = Vector2(0.8, 0.8)
+skew = -1e-07
 
-[node name="Zombie_innerleg_lower" parent="Body/BodyCorrect" index="11"]
-position = Vector2(31.6, 90.3)
-rotation = 0.0
-
-[node name="Zombie_body" parent="Body/BodyCorrect" index="16"]
-position = Vector2(30.8534, 32.4047)
-rotation = 0.0431449
-
-[node name="Zombie_duckytube" parent="Body/BodyCorrect" index="17"]
-position = Vector2(0.716239, 45.0233)
-rotation = 0.0142462
-
-[node name="Zombie_tie" parent="Body/BodyCorrect" index="19"]
-position = Vector2(25.0162, 49.1861)
-rotation = 6.17692
+[node name="Zombie_outerleg_upper" parent="Body/BodyCorrect" index="13"]
+position = Vector2(54.8, 68.2039)
+rotation = 0.102254
 scale = Vector2(0.799, 0.799)
 
+[node name="Zombie_outerleg_foot" parent="Body/BodyCorrect" index="14"]
+position = Vector2(44.0961, 109.604)
+rotation = -0.0600246
+
+[node name="Zombie_outerleg_lower" parent="Body/BodyCorrect" index="15"]
+position = Vector2(57.0687, 94.7078)
+rotation = -0.112726
+scale = Vector2(0.801, 0.799)
+skew = -0.0529068
+
+[node name="Zombie_body" parent="Body/BodyCorrect" index="16"]
+position = Vector2(37.9392, 31.1118)
+rotation = 0.220868
+
+[node name="Zombie_duckytube" parent="Body/BodyCorrect" index="17"]
+position = Vector2(4.81175, 42.3039)
+rotation = 0.113993
+scale = Vector2(0.799, 0.799)
+
+[node name="Zombie_tie" parent="Body/BodyCorrect" index="19"]
+position = Vector2(30.4118, 50.4843)
+rotation = 6.03364
+scale = Vector2(0.797961, 0.797961)
+
 [node name="Anim_head2" parent="Body/BodyCorrect" index="20"]
-position = Vector2(15.8115, 37.9885)
-rotation = 0.0507751
-scale = Vector2(0.799605, 0.799605)
+position = Vector2(25.0392, 36.6196)
+rotation = 0.0889436
+scale = Vector2(0.797, 0.797)
 
 [node name="Anim_tongue" parent="Body/BodyCorrect" index="21"]
-position = Vector2(22.9511, 40.7675)
-rotation = 6.22693
-scale = Vector2(0.799, 0.692139)
-skew = 0.106096
+position = Vector2(31.347, 39.4039)
+rotation = 6.38797
+scale = Vector2(0.798, 0.762608)
+skew = -0.27947
 
 [node name="Zombie_mustache" parent="Body/BodyCorrect" index="22"]
-position = Vector2(6.83248, 29.0071)
-rotation = 0.0121764
+position = Vector2(18.7157, 24.047)
+rotation = 0.233122
+scale = Vector2(0.798, 0.798)
 
 [node name="Anim_screendoor" parent="Body/BodyCorrect/IronNodeScreendoor" index="0"]
 visible = true
-position = Vector2(-1.26282, 31.3628)
-rotation = 0.0
+position = Vector2(3.01959, 27.9)
+rotation = 0.0402797
 
 [node name="Zombie_innerarm_screendoor_hand" parent="Body/BodyCorrect" index="24"]
 visible = true
-position = Vector2(-1.90235, 48.4209)
-rotation = 0.0
+position = Vector2(1.11175, 46.1)
 
 [node name="Zombie_outerarm_screendoor" parent="Body/BodyCorrect" index="25"]
 visible = true
-position = Vector2(34.4348, 42.6442)
-rotation = 0.0309681
+position = Vector2(37.8157, 41.8196)
 
 [node name="Zombie_outerarm_hand" parent="Body/BodyCorrect" index="26"]
 visible = false
-position = Vector2(33.2186, 80.8675)
-rotation = 6.3025
-scale = Vector2(0.799, 0.799)
+position = Vector2(41.5922, 80.0961)
+rotation = 6.59282
+scale = Vector2(0.796961, 0.796961)
 
 [node name="Zombie_outerarm_upper" parent="Body/BodyCorrect" index="27"]
 visible = false
-position = Vector2(44.5139, 41.6628)
-rotation = 6.26529
-scale = Vector2(0.799, 0.799)
+position = Vector2(49.3274, 42.3235)
+rotation = 6.30635
+scale = Vector2(0.798, 0.798)
 
 [node name="Zombie_outerarm_lower" parent="Body/BodyCorrect" index="29"]
 visible = false
-position = Vector2(37.8348, 64.1861)
-rotation = 6.3025
-scale = Vector2(0.799, 0.799)
+position = Vector2(41.4039, 65.5235)
+rotation = 6.16081
+scale = Vector2(0.797, 0.797)
 
 [node name="Anim_hair" parent="Body/BodyCorrect" index="30"]
-position = Vector2(5.21154, 4.14658)
-rotation = 0.0121764
-skew = -1.23291e-07
+position = Vector2(24.2647, 1.01567)
+rotation = 0.233122
+scale = Vector2(0.798, 0.804843)
+skew = 0.125016
 
 [node name="Anim_cone" parent="Body/BodyCorrect" index="31"]
-position = Vector2(15.5115, -20.5139)
-rotation = 0.0903916
-scale = Vector2(0.8, 0.8)
+position = Vector2(36.4452, -20.8647)
+rotation = 0.243321
 
 [node name="Anim_bucket" parent="Body/BodyCorrect/IronNodeBucket" index="0"]
-position = Vector2(3.77201, -9.95342)
-rotation = 0.0
-scale = Vector2(0.8, 0.8)
+position = Vector2(25.9569, -15.053)
+rotation = 0.273848
+scale = Vector2(0.799, 0.799)
 
 [node name="Anim_head1" parent="Body/NodeDrop/Node2D_Head_Drop/Head_Drop" index="0"]
 scale = Vector2(0.788886, 0.778795)

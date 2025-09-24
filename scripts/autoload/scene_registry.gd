@@ -41,19 +41,20 @@ const DOOM_SHROOM_CRATER = preload("res://scenes/fx/doom_shroom_crater.tscn")
 const TOMBSTONE = preload("res://scenes/item/game_scenes_item/tombstone.tscn")
 
 
-## 冰冻僵尸特效
-const ICE_EFFECT = preload("res://scenes/fx/ice_effect.tscn")
-
 ## 舞王管理器
 var JACKSON_MANAGER = load("res://scenes/character/components/jackson_manager.tscn")
 
 ## 奖杯
 var TROPHY = load("res://scenes/item/game_scenes_item/trophy.tscn")
 
+## 冰冻僵尸特效
+const ICE_EFFECT = preload("res://scenes/fx/ice_effect.tscn")
 ## 泳池水花场景
 const SPLASH = preload("res://scenes/item/game_scenes_item/splash.tscn")
 ## 火焰特效(火爆辣椒\火焰豌豆)
 const FIRE = preload("res://scenes/fx/fire.tscn")
+## 黄油特效
+const BUTTER_SPLAT = preload("res://scenes/fx/butter_splat.tscn")
 
 ## 阳光
 var SUN = load("res://scenes/item/game_scenes_item/sun.tscn")
@@ -62,3 +63,4 @@ const DAY_SUNS_MANAGER = preload("res://scenes/manager/day_suns_manager.tscn")
 
 ## 泥土上升特效
 const DIRT_RISE_EFFECT = preload("res://scenes/character/item/dirt_rise_effect.tscn")
+

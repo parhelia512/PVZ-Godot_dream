@@ -5,7 +5,7 @@ class_name BombComponentJackbox
 
 @onready var jack_bomb_timer: Timer = $JackBombTimer
 @onready var bomb_effect: BombEffectBase = $BombEffect
-@onready var area_2d_bomb: Area2D = $Area2DBomb
+
 
 ## 早爆小丑概率
 @export_range(0, 100, 1) var probability_early_bomb :int = 5

@@ -4,6 +4,7 @@ class_name BodyCharacter
 
 const BODY_MASK = preload("res://shader_material/body_mask.tres")
 var hit_tween: Tween = null  # 发光动画
+var light_and_dark_tween: Tween = null  # 明暗交替动画
 
 # modulate 状态颜色变量
 var base_color := Color(1, 1, 1)
@@ -16,6 +17,7 @@ enum E_ChangeColors{
 	BeShovelLookColor,
 	HypnoColor,
 	CreateSunColor,
+	LightAndDark,	## 明暗交替颜色变化(紫卡种植\咖啡豆)
 }
 
 
@@ -28,7 +30,7 @@ func set_other_color(change_name:E_ChangeColors, value: Color) -> void:
 	_update_modulate()
 
 
-# 更新最终 modulate 的合成颜色
+## 更新最终 modulate 的合成颜色
 func _update_modulate():
 	var final_color = base_color
 	for change_color_value in change_color.values():
@@ -51,6 +53,31 @@ func body_light():
 		Color(1, 1, 1),
 		0.5
 	)
+
+## 身体明暗交替(紫卡植物种植时显示)
+func body_light_and_dark():
+	if light_and_dark_tween and light_and_dark_tween.is_running():
+		light_and_dark_tween.kill()
+	light_and_dark_tween = create_tween()
+	light_and_dark_tween.set_loops()
+	light_and_dark_tween.tween_method(
+		func(val): set_other_color(E_ChangeColors.LightAndDark, val), # 传匿名函数包一层，保证有 change_name
+		Color(0.6, 0.6, 0.6),
+		Color(2, 2, 2),
+		0.5
+	)
+	light_and_dark_tween.tween_method(
+		func(val): set_other_color(E_ChangeColors.LightAndDark, val), # 传匿名函数包一层，保证有 change_name
+		Color(2, 2, 2),
+		Color(0.6, 0.6, 0.6),
+		0.5
+	)
+
+## 明暗交替结束
+func body_light_and_dark_end():
+	if light_and_dark_tween and light_and_dark_tween.is_running():
+		light_and_dark_tween.kill()
+	set_other_color(E_ChangeColors.LightAndDark, Color(1,1,1))
 
 ## 僵尸从地下出来
 func zombie_body_up_from_ground():

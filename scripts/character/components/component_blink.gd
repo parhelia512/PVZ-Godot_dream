@@ -13,6 +13,7 @@ func _ready() -> void:
 	if is_enabling:
 		blink_timer.start(blink_time + randf_range(-1,1))
 
+
 ## 眨眼
 func _on_blink_timer_timeout() -> void:
 	if is_enabling:

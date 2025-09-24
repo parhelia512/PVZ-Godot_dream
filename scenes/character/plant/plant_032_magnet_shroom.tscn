@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://g3sfat0vm1lk"]
+[gd_scene load_steps=33 format=3 uid="uid://g3sfat0vm1lk"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_la5fr"]
 [ext_resource type="Texture2D" uid="uid://c5i3v2h1dou6p" path="res://assets/reanim/Magnetshroom_stem.png" id="2_1ji1j"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cac85x53tvblx" path="res://assets/reanim/Magnetshroom_eyeblink3.png" id="7_4o74c"]
 [ext_resource type="Texture2D" uid="uid://b03m7og0h7653" path="res://assets/reanim/Magnetshroom_eyebrow.png" id="8_ilpu8"]
 [ext_resource type="Animation" uid="uid://crcgp4xy72of0" path="res://animation/character/plant/032_magnet_shroom/Magnetshroom_idle.tres" id="9_751g4"]
-[ext_resource type="Texture2D" uid="uid://j4xw4erjse5o" path="res://assets/reanim/Magnetshroom_idle_electric3.png" id="10_fmi46"]
+[ext_resource type="Texture2D" uid="uid://dlw253catyacv" path="res://assets/reanim/Magnetshroom_idle_electric1.png" id="10_fmi46"]
 [ext_resource type="Animation" uid="uid://cvcrqy3gtiaom" path="res://animation/character/plant/032_magnet_shroom/Magnetshroom_nonactive_idle.tres" id="10_h3pes"]
 [ext_resource type="Animation" uid="uid://d4mvc6wrs744f" path="res://animation/character/plant/032_magnet_shroom/Magnetshroom_nonactive_idle2.tres" id="11_hfq51"]
 [ext_resource type="Animation" uid="uid://cq0rhsyu667e2" path="res://animation/character/plant/032_magnet_shroom/Magnetshroom_shooting.tres" id="12_yvast"]
@@ -47,6 +47,7 @@ advance_mode = 2
 advance_expression = "is_sleeping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qnhe6"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_sleeping"
 
@@ -63,6 +64,11 @@ xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_attack"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52fw1"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "is_sleeping"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dex4y"]
 states/Magnetshroom_idle/node = SubResource("AnimationNodeAnimation_6te6e")
 states/Magnetshroom_idle/position = Vector2(401, 160)
@@ -72,8 +78,8 @@ states/Magnetshroom_shooting/node = SubResource("AnimationNodeAnimation_sx43b")
 states/Magnetshroom_shooting/position = Vector2(661, 160)
 states/Magnetshroom_sleep/node = SubResource("AnimationNodeAnimation_fmtat")
 states/Magnetshroom_sleep/position = Vector2(401, 49)
-transitions = ["Start", "Magnetshroom_idle", SubResource("AnimationNodeStateMachineTransition_uaxcm"), "Start", "Magnetshroom_sleep", SubResource("AnimationNodeStateMachineTransition_w8uqx"), "Magnetshroom_sleep", "Magnetshroom_idle", SubResource("AnimationNodeStateMachineTransition_qnhe6"), "Magnetshroom_idle", "Magnetshroom_shooting", SubResource("AnimationNodeStateMachineTransition_w0x5d"), "Magnetshroom_shooting", "Magnetshroom_nonactive_idle2", SubResource("AnimationNodeStateMachineTransition_0kjhv"), "Magnetshroom_nonactive_idle2", "Magnetshroom_idle", SubResource("AnimationNodeStateMachineTransition_pj7e0")]
-graph_offset = Vector2(32, 74)
+transitions = ["Start", "Magnetshroom_idle", SubResource("AnimationNodeStateMachineTransition_uaxcm"), "Start", "Magnetshroom_sleep", SubResource("AnimationNodeStateMachineTransition_w8uqx"), "Magnetshroom_sleep", "Magnetshroom_idle", SubResource("AnimationNodeStateMachineTransition_qnhe6"), "Magnetshroom_idle", "Magnetshroom_shooting", SubResource("AnimationNodeStateMachineTransition_w0x5d"), "Magnetshroom_shooting", "Magnetshroom_nonactive_idle2", SubResource("AnimationNodeStateMachineTransition_0kjhv"), "Magnetshroom_nonactive_idle2", "Magnetshroom_idle", SubResource("AnimationNodeStateMachineTransition_pj7e0"), "Magnetshroom_idle", "Magnetshroom_sleep", SubResource("AnimationNodeStateMachineTransition_52fw1")]
+graph_offset = Vector2(141, -16)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_4f0f1"]
 
@@ -100,49 +106,49 @@ is_sleep_in_day = true
 position = Vector2(-43, -68)
 
 [node name="Magnetshroom_stem" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(34.1074, 59.0642)
-scale = Vector2(0.6, 0.587147)
-skew = -0.134997
+position = Vector2(35.232, 58.5227)
+scale = Vector2(0.6, 0.606639)
+skew = -0.0522702
 texture = ExtResource("2_1ji1j")
 centered = false
 
 [node name="Magnetshroom_stemcap" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(24.6863, 49.3063)
-rotation = -0.109441
-scale = Vector2(0.605421, 0.580726)
-skew = -0.00810208
+position = Vector2(26.6639, 46.3041)
+rotation = -0.0396574
+scale = Vector2(0.599773, 0.606639)
+skew = -0.0034902
 texture = ExtResource("3_vvqvt")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(-9.02106, 8.12738)
-rotation = -0.172163
-scale = Vector2(0.597358, 0.585147)
-skew = -0.0120886
+position = Vector2(-2.87631, -0.0329609)
+rotation = -0.0724945
+scale = Vector2(0.598773, 0.606412)
+skew = -0.00388659
 texture = ExtResource("4_fmi46")
 centered = false
 
 [node name="Magnetshroom_stemcap_overlay" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(24.6221, 49.2421)
-rotation = -0.109441
-scale = Vector2(0.605421, 0.587147)
-skew = -0.00810208
+position = Vector2(26.6639, 46.4815)
+rotation = -0.0396574
+scale = Vector2(0.599773, 0.606639)
+skew = -0.0034902
 texture = ExtResource("5_joae0")
 centered = false
 
 [node name="Anim_eyes" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(30.5074, 41.2421)
-rotation = -0.163436
-scale = Vector2(0.599, 0.587147)
-skew = -0.00872649
+position = Vector2(32.9959, 38.2041)
+rotation = -0.0686084
+scale = Vector2(0.599, 0.606639)
+skew = -0.00388613
 texture = ExtResource("6_52fw1")
 centered = false
 
 [node name="Anim_eyes2" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(44.1432, 34.4421)
-rotation = -0.163436
-scale = Vector2(0.569, 0.557147)
-skew = -0.00872649
+position = Vector2(47.2732, 32.4907)
+rotation = -0.0686084
+scale = Vector2(0.569, 0.576639)
+skew = -0.00388613
 texture = ExtResource("6_52fw1")
 centered = false
 
@@ -169,18 +175,18 @@ texture = ExtResource("7_4o74c")
 centered = false
 
 [node name="Magnetshroom_eyebrows" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(35.6432, 37.8347)
-rotation = 1.00083
-scale = Vector2(0.589789, 0.594358)
-skew = 0.0213115
+position = Vector2(38.3959, 34.0495)
+rotation = 1.11179
+scale = Vector2(0.605866, 0.598773)
+skew = -0.00539758
 texture = ExtResource("8_ilpu8")
 centered = false
 
 [node name="Magnetshroom_eyebrows2" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(42.2432, 33.499)
-rotation = 1.63014
-scale = Vector2(0.585147, 0.598358)
-skew = -3.14034
+position = Vector2(45.5505, 30.3041)
+rotation = 1.7221
+scale = Vector2(0.604639, 0.599)
+skew = -3.13017
 texture = ExtResource("8_ilpu8")
 centered = false
 
@@ -189,14 +195,17 @@ visible = false
 centered = false
 
 [node name="Magnetshroom_shock" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-visible = false
-position = Vector2(18.4, 16.2)
-rotation = -0.099484
-scale = Vector2(0.599, 0.599)
+position = Vector2(24.4103, 13.4609)
+rotation = -0.0299435
+scale = Vector2(0.610341, 0.599227)
 texture = ExtResource("10_fmi46")
 centered = false
 
-[node name="SleepComponent" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="CurrIronContainer" type="Node2D" parent="Body" index="1"]
+z_index = 10
+position = Vector2(21, -42)
+
+[node name="SleepComponent" parent="." index="6" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../MagnetComponent")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
@@ -211,17 +220,14 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="MagnetComponent" type="Node2D" parent="." index="12"]
+[node name="MagnetComponent" type="Node2D" parent="." index="12" node_paths=PackedStringArray("curr_iron_container")]
 script = ExtResource("16_joae0")
+curr_iron_container = NodePath("../Body/CurrIronContainer")
 
-[node name="CurrIronContainer" type="Node2D" parent="MagnetComponent" index="0"]
-z_index = 10
-position = Vector2(21, -42)
-
-[node name="AttackCdTimer" type="Timer" parent="MagnetComponent" index="1"]
+[node name="AttackCdTimer" type="Timer" parent="MagnetComponent" index="0"]
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="MagnetComponent" index="2"]
+[node name="Area2D" type="Area2D" parent="MagnetComponent" index="1"]
 position = Vector2(0, -23)
 collision_layer = 0
 collision_mask = 4100

@@ -45,10 +45,12 @@ advance_mode = 2
 advance_expression = "is_sleeping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkwun"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "not is_sleeping and not is_show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3wco"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_sleeping"
 
@@ -77,7 +79,7 @@ states/IceShroom_sleep/node = SubResource("AnimationNodeAnimation_edbt1")
 states/IceShroom_sleep/position = Vector2(401, 100)
 states/Start/position = Vector2(187, 100)
 transitions = ["Start", "IceShroom_sleep", SubResource("AnimationNodeStateMachineTransition_sxd4y"), "IceShroom_sleep", "IceShroom_idle", SubResource("AnimationNodeStateMachineTransition_hkwun"), "IceShroom_idle", "IceShroom_sleep", SubResource("AnimationNodeStateMachineTransition_n3wco"), "Start", "IceShroom_idle_only", SubResource("AnimationNodeStateMachineTransition_qhmsm"), "IceShroom_sleep", "IceShroom_idle_only", SubResource("AnimationNodeStateMachineTransition_wi4d4"), "IceShroom_idle_only", "IceShroom_sleep", SubResource("AnimationNodeStateMachineTransition_bep3f"), "Start", "IceShroom_idle", SubResource("AnimationNodeStateMachineTransition_ohyhk")]
-graph_offset = Vector2(46, -69)
+graph_offset = Vector2(95, -3)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sa70k"]
 
@@ -107,18 +109,19 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 98, 0)
 scale_max = 3.0
 
-[node name="Plant015IceShroom" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("1_n3wco")]
+[node name="Plant015IceShroom" node_paths=PackedStringArray("node_no_change_direction", "special_component_update_pos_in_slope") instance=ExtResource("1_n3wco")]
 script = ExtResource("2_xarg1")
 plant_type = 15
 is_sleep_in_day = true
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
+special_component_update_pos_in_slope = [NodePath("BombComponent")]
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-41, -69)
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(12.9879, 41.1485)
-scale = Vector2(0.823364, 0.725788)
+position = Vector2(12.9943, 41.1227)
+scale = Vector2(0.82317, 0.726434)
 texture = ExtResource("2_37t62")
 centered = false
 
@@ -134,18 +137,18 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
 visible = false
-position = Vector2(27.0189, 40.8173)
+position = Vector2(27.048, 40.5362)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_663tl")
 centered = false
 
 [node name="IceShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(-1.4, 4.95151)
-scale = Vector2(0.8, 0.787697)
+position = Vector2(-1.4, 4.12831)
+scale = Vector2(0.8, 0.800943)
 texture = ExtResource("5_236rb")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="7"]
 all_blink_body_change = Array[ExtResource("7_wi4d4")]([SubResource("Resource_ohyhk")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]

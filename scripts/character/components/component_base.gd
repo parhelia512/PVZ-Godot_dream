@@ -23,6 +23,7 @@ enum E_IsEnableFactor{
 	Lose,		## 失去该组件(小丑爆炸匣子)
 	Balloon,	## 气球在空中禁用攻击组件
 	DownGround,	## 矿工在地下禁用攻击组件
+	Garlic,		## 大蒜禁用攻击组件
 }
 
 var is_enable_factors:Dictionary[E_IsEnableFactor, bool] = {}

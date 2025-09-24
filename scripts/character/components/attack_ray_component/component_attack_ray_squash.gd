@@ -1,7 +1,7 @@
 extends AttackRayComponent
 class_name AttackRayComponentSquash
 
-
+## 部分僵尸有需要进行倭瓜位置判断,撑杆跳起跳之前在左边时可以攻击
 ## 如果检测到可以被攻击的敌人，发射信号,保存当前敌人，return,若到最后没有检测到敌人，发射信号，重置当前敌人，return
 func judge_is_have_enemy():
 	for ray_area in all_ray_area:
@@ -9,7 +9,7 @@ func judge_is_have_enemy():
 		for enemy_area in all_enemy_area:
 			var enemy:Character000Base = enemy_area.owner
 			## 先判断行属性
-			if is_lane and lane != enemy.lane:
+			if is_lane and owner.lane != enemy.lane:
 				continue
 			## 如果敌人为植物
 			if enemy is Plant000Base:

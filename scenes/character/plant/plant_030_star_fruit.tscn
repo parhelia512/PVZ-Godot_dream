@@ -50,8 +50,9 @@ node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"TimeScale 2", 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ds8om"]
 size = Vector2(800, 5)
 
-[node name="Plant030StarFruit" instance=ExtResource("1_nndnm")]
+[node name="Plant030StarFruit" node_paths=PackedStringArray("special_component_update_pos_in_slope") instance=ExtResource("1_nndnm")]
 plant_type = 30
+special_component_update_pos_in_slope = [NodePath("AttackComponent")]
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-40, -59)
@@ -68,8 +69,8 @@ visible = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(3.11721, 9.69016)
-scale = Vector2(0.70568, 0.706197)
+position = Vector2(1.54438, 10.9534)
+scale = Vector2(0.73909, 0.682444)
 texture = ExtResource("2_j1qv8")
 centered = false
 
@@ -80,22 +81,23 @@ texture = ExtResource("3_ds8om")
 centered = false
 
 [node name="Starfruit_smile" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(34.6, 35.2951)
-scale = Vector2(0.70568, 0.706197)
+position = Vector2(32.7955, 35.4)
+scale = Vector2(0.81527, 0.702489)
+skew = -0.0787753
 texture = ExtResource("3_us3df")
 centered = false
 
 [node name="Starfruit_leaf" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(26.7295, 5.16558)
-rotation = 0.00227442
-scale = Vector2(0.705705, 0.706147)
-skew = 0.000300409
+position = Vector2(28.5511, 4.85112)
+rotation = 0.322083
+scale = Vector2(0.706, 0.713309)
+skew = -0.0619787
 texture = ExtResource("4_ds8om")
 centered = false
 
 [node name="Starfruit_stem" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(29.3123, 6.38279)
-scale = Vector2(0.70541, 0.707057)
+position = Vector2(29.3, 8.15787)
+scale = Vector2(0.758112, 0.640151)
 texture = ExtResource("5_uefxc")
 centered = false
 
@@ -108,8 +110,8 @@ centered = false
 
 [node name="Starfruit_eyes2" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
 visible = false
-position = Vector2(29.0035, 25.9951)
-scale = Vector2(0.7058, 0.714492)
+position = Vector2(28.8196, 26)
+scale = Vector2(0.71631, 0.714)
 texture = ExtResource("6_0ews2")
 centered = false
 
@@ -159,6 +161,8 @@ markers_2d_bullet = [NodePath("../Body/BodyCorrect/Marker2DBullet"), NodePath(".
 
 [node name="AttackRayComponent" type="Node2D" parent="AttackComponent" index="1"]
 script = ExtResource("10_us3df")
+plant_enemy_collision_lay = 512
+zomie_enemy_collision_lay = 1280
 
 [node name="Area2D" type="Area2D" parent="AttackComponent/AttackRayComponent" index="0"]
 position = Vector2(0, -25)

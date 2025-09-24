@@ -111,7 +111,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif enemy is Zombie000Base:
 		var enemy_zombie:Zombie000Base = enemy
 		## 连接信号僵尸状态变化函数
-		enemy_zombie.signal_status_change.connect(_on_enemy_zombie_status_change)
+		enemy_zombie.signal_status_update.connect(_on_enemy_zombie_status_change.bind(enemy_zombie))
 
 		## 如果当前僵尸可以被僵尸攻击到
 		if enemy_zombie.curr_be_attack_status & can_attack_zombie_status:
@@ -131,11 +131,11 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	if enemy is Zombie000Base:
 		var enemy_zombie:Zombie000Base = enemy
 		## 连接信号僵尸状态变化函数
-		enemy_zombie.signal_status_change.disconnect(_on_enemy_zombie_status_change)
+		enemy_zombie.signal_status_update.disconnect(_on_enemy_zombie_status_change.bind(enemy_zombie))
 
 
 ## 僵尸敌人状态变化时函数，与状态变化信号连接
-func _on_enemy_zombie_status_change(zombie:Zombie000Base, curr_be_attack_status:Zombie000Base.E_BeAttackStatusZombie):
+func _on_enemy_zombie_status_change(zombie:Zombie000Base):
 	## 如果当前僵尸敌人可以被攻击
 	if zombie.curr_be_attack_status & can_attack_plant_status:
 		jump_start(false)

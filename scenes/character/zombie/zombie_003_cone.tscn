@@ -36,149 +36,148 @@ metadata/_custom_type_script = "uid://jl0nl4a234bc"
 [node name="Zombie003Cone" instance=ExtResource("1_7pxgy")]
 zombie_type = 3
 
-[node name="BodyCorrect" parent="Body" index="0"]
-unique_name_in_owner = false
-
-[node name="_ground" parent="Body/BodyCorrect" index="0"]
-position = Vector2(39.4526, 40)
-
-[node name="Anim_innerarm3" parent="Body/BodyCorrect" index="1"]
-position = Vector2(24.9929, 77.7364)
-rotation = 6.23354
-scale = Vector2(0.798, 0.798)
-
-[node name="Anim_innerarm2" parent="Body/BodyCorrect" index="2"]
-position = Vector2(27.3647, 61.7788)
-rotation = 6.35786
-scale = Vector2(0.798, 0.798)
-
-[node name="Anim_innerarm1" parent="Body/BodyCorrect" index="3"]
-position = Vector2(31.2647, 42.0929)
-rotation = 6.35786
-scale = Vector2(0.998, 0.998)
-
-[node name="Zombie_flaghand" parent="Body/BodyCorrect" index="4"]
-position = Vector2(-4.53533, 44.5)
-rotation = 5.84363
-scale = Vector2(0.797, 0.797)
-
-[node name="Zombie_flagpole" parent="Body/BodyCorrect" index="5"]
-position = Vector2(14.761, -6.81301)
-rotation = -0.538277
-
-[node name="Zombie_flag" parent="Body/BodyCorrect" index="6"]
-position = Vector2(16.761, -6.81301)
-rotation = -0.538277
-
-[node name="Zombie_innerarm_screendoor" parent="Body/BodyCorrect" index="7"]
-position = Vector2(5.0788, 45.5788)
-
-[node name="Zombie_neck" parent="Body/BodyCorrect" index="8"]
-position = Vector2(37.4364, 31.1859)
-rotation = 0.165579
-
-[node name="Anim_head1" parent="Body/BodyCorrect" index="9"]
-position = Vector2(23.1234, 2.7788)
-rotation = 0.194756
-scale = Vector2(0.798, 0.798)
-
-[node name="Zombie_innerleg_upper" parent="Body/BodyCorrect" index="10"]
-position = Vector2(44.2, 76.3)
-rotation = 0.05236
-scale = Vector2(0.8, 0.8)
-
-[node name="Zombie_innerleg_lower" parent="Body/BodyCorrect" index="11"]
-position = Vector2(31.6, 90.3)
+[node name="Body" parent="." index="1"]
+position = Vector2(0, 0)
 rotation = 0.0
 
-[node name="Zombie_outerleg_upper" parent="Body/BodyCorrect" index="13"]
-position = Vector2(54.8, 68.0929)
-rotation = 0.0731992
+[node name="BodyCorrect" parent="Body" index="0"]
+unique_name_in_owner = false
+script = null
 
-[node name="Zombie_outerleg_foot" parent="Body/BodyCorrect" index="14"]
-position = Vector2(44.3141, 109.5)
-rotation = -0.0458908
+[node name="_ground" parent="Body/BodyCorrect" index="0"]
+position = Vector2(-9.8, 40)
 
-[node name="Zombie_outerleg_lower" parent="Body/BodyCorrect" index="15"]
-position = Vector2(58.0565, 94.3859)
-rotation = -0.0801803
-scale = Vector2(0.800929, 0.799071)
-skew = -0.0375344
-
-[node name="Zombie_body" parent="Body/BodyCorrect" index="16"]
-position = Vector2(36.9435, 30.7859)
-rotation = 0.195372
+[node name="Anim_innerarm3" parent="Body/BodyCorrect" index="1"]
+position = Vector2(25.1249, 77.566)
+rotation = 6.28393
 scale = Vector2(0.799, 0.799)
 
+[node name="Anim_innerarm2" parent="Body/BodyCorrect" index="2"]
+position = Vector2(25.8168, 63.4243)
+rotation = 6.28393
+scale = Vector2(0.799, 0.799)
+
+[node name="Anim_innerarm1" parent="Body/BodyCorrect" index="3"]
+position = Vector2(28.5086, 43.4827)
+rotation = 6.30152
+scale = Vector2(0.998416, 0.998416)
+
+[node name="Zombie_flaghand" parent="Body/BodyCorrect" index="4"]
+position = Vector2(-6.70811, 47.0076)
+rotation = 5.74345
+scale = Vector2(0.796584, 0.796584)
+
+[node name="Zombie_flagpole" parent="Body/BodyCorrect" index="5"]
+position = Vector2(11.9717, -6.04943)
+rotation = -0.559052
+
+[node name="Zombie_flag" parent="Body/BodyCorrect" index="6"]
+position = Vector2(13.9717, -6.04943)
+rotation = -0.559052
+
+[node name="Zombie_innerarm_screendoor" parent="Body/BodyCorrect" index="7"]
+position = Vector2(3.79189, 46.6243)
+
+[node name="Zombie_neck" parent="Body/BodyCorrect" index="8"]
+position = Vector2(32.9005, 32.0995)
+rotation = 0.0410288
+scale = Vector2(0.836, 0.796)
+
+[node name="Anim_head1" parent="Body/BodyCorrect" index="9"]
+position = Vector2(12.2594, 5.07408)
+rotation = 0.0363781
+
+[node name="Zombie_innerleg_upper" parent="Body/BodyCorrect" index="10"]
+position = Vector2(44.1416, 76.6832)
+rotation = 0.0117921
+scale = Vector2(0.8, 0.836822)
+skew = 3e-07
+
+[node name="Zombie_innerleg_lower" parent="Body/BodyCorrect" index="11"]
+position = Vector2(32.3081, 90.0168)
+rotation = 0.0402749
+
+[node name="Zombie_outerleg_upper" parent="Body/BodyCorrect" index="13"]
+position = Vector2(54.8, 67.8)
+rotation = 0.0
+
+[node name="Zombie_outerleg_foot" parent="Body/BodyCorrect" index="14"]
+position = Vector2(44.6, 109.3)
+rotation = 0.0
+
+[node name="Zombie_outerleg_lower" parent="Body/BodyCorrect" index="15"]
+position = Vector2(60.4, 93.6)
+rotation = 0.0
+skew = 0.0
+
+[node name="Zombie_body" parent="Body/BodyCorrect" index="16"]
+position = Vector2(32.5005, 31.5162)
+rotation = 0.0692467
+
 [node name="Zombie_duckytube" parent="Body/BodyCorrect" index="17"]
-position = Vector2(4.2788, 42.1859)
-rotation = 0.100366
+position = Vector2(2.16702, 43.9076)
+rotation = 0.0349155
+scale = Vector2(0.799, 0.799)
 
 [node name="Zombie_tie" parent="Body/BodyCorrect" index="19"]
-position = Vector2(29.7505, 49.7505)
-rotation = 6.05802
+position = Vector2(26.7086, 49.3995)
+rotation = 6.10633
 scale = Vector2(0.798, 0.798)
 
 [node name="Anim_head2" parent="Body/BodyCorrect" index="20"]
-position = Vector2(23.7223, 35.2011)
-rotation = 0.117288
-scale = Vector2(0.797071, 0.797071)
+position = Vector2(18.5589, 34.6406)
+rotation = 0.120889
+scale = Vector2(0.799, 0.799)
 
 [node name="Anim_tongue" parent="Body/BodyCorrect" index="21"]
-position = Vector2(30.1152, 38.3223)
-rotation = 6.37893
-scale = Vector2(0.798, 0.759859)
-skew = -0.195287
+position = Vector2(25.1838, 37.6243)
+rotation = 6.39953
+scale = Vector2(0.798, 0.757249)
+skew = 0.0379633
 
 [node name="Zombie_mustache" parent="Body/BodyCorrect" index="22"]
-position = Vector2(16.7799, 24.1)
-rotation = 0.194756
-scale = Vector2(0.798, 0.798)
+position = Vector2(9.39241, 27.1573)
+rotation = 0.0363781
 
 [node name="Anim_screendoor" parent="Body/BodyCorrect/IronNodeScreendoor" index="0"]
-position = Vector2(2.47174, 27.9071)
-rotation = 0.0346603
+position = Vector2(-0.174606, 30.266)
+rotation = -0.00871749
 
 [node name="Zombie_innerarm_screendoor_hand" parent="Body/BodyCorrect" index="24"]
-position = Vector2(0.878803, 46.1)
-rotation = 0.0
+position = Vector2(-0.749737, 48.566)
+rotation = -0.0251518
 
 [node name="Zombie_outerarm_screendoor" parent="Body/BodyCorrect" index="25"]
-position = Vector2(37.3717, 41.0576)
-rotation = 0.087266
-scale = Vector2(0.8, 0.8)
+position = Vector2(34.7254, 40.8162)
+rotation = 0.0343401
 
 [node name="Zombie_outerarm_hand" parent="Body/BodyCorrect" index="26"]
-position = Vector2(40.5364, 79.7859)
-rotation = 6.49108
-scale = Vector2(0.797, 0.797)
+position = Vector2(37.6335, 80.8162)
+rotation = 6.19432
 
 [node name="Zombie_outerarm_upper" parent="Body/BodyCorrect" index="27"]
-position = Vector2(48.7647, 41.7576)
-rotation = 6.28768
-scale = Vector2(0.798, 0.798)
+position = Vector2(45.8254, 41.0914)
+rotation = 6.22284
+scale = Vector2(0.799, 0.799)
 
 [node name="Zombie_outerarm_lower" parent="Body/BodyCorrect" index="29"]
-position = Vector2(41.2788, 64.8576)
-rotation = 6.16487
-scale = Vector2(0.797, 0.797)
+position = Vector2(40.0503, 64.633)
+rotation = 6.1696
 
 [node name="Anim_hair" parent="Body/BodyCorrect" index="30"]
-position = Vector2(20.988, 0.271737)
-rotation = 0.194756
-scale = Vector2(0.798, 0.802859)
-skew = 0.0937735
+position = Vector2(8.31781, 2.25733)
+rotation = 0.0363781
 
 [node name="Anim_cone" parent="Body/BodyCorrect" index="31"]
 visible = true
-position = Vector2(31.7891, -21.3283)
-rotation = 0.193769
-scale = Vector2(0.798, 0.798)
+position = Vector2(14.6929, -19.2092)
+rotation = 0.0051035
+scale = Vector2(0.797584, 0.797584)
 
 [node name="Anim_bucket" parent="Body/BodyCorrect/IronNodeBucket" index="0"]
-position = Vector2(23.1022, -15.7283)
-rotation = 0.251346
-scale = Vector2(0.799, 0.799)
+position = Vector2(9.53509, -13.2513)
+rotation = 0.0952942
+scale = Vector2(0.798, 0.798)
 
 [node name="Node2D_Arm1_Drop" type="Node2D" parent="Body/NodeDrop" index="2"]
 script = ExtResource("2_jiuhg")

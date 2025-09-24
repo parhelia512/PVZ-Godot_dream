@@ -17,9 +17,8 @@ func _ready() -> void:
 	Global.save_config()
 
 func _physics_process(delta: float) -> void:
-	frame_num += 1
-	if frame_num >= 25:
-		frame_num = 0
+	frame_num = wrapi(frame_num + 1, 0, 25)
+	if frame_num == 0:
 		curr_frame_sfx.clear()
 
 #region 播放音乐和音效
@@ -208,15 +207,23 @@ const SFXPlantMap := {
 
 ## 僵尸音效字典
 const SFXZombieMap := {
-	Global.ZombieType.Z001Norm:{
-		## 啃食
+	## 通用音效
+	Global.ZombieType.Null:{## 啃食
 		&"Chomp":[
 			preload("res://assets/audio/SFX/zombie/chomp.ogg"),
 			preload("res://assets/audio/SFX/zombie/chomp2.ogg"),
 			preload("res://assets/audio/SFX/zombie/chompsoft.ogg")
 		],
 		## 掉头
-		&"Shoop":preload("res://assets/audio/SFX/zombie/shoop.ogg")
+		&"Shoop":preload("res://assets/audio/SFX/zombie/shoop.ogg"),
+		## 啃食大蒜
+		&"yuck":[
+			preload("res://assets/audio/SFX/zombie/yuck2.ogg"),
+			preload("res://assets/audio/SFX/zombie/yuck.ogg")
+		]
+	},
+
+	Global.ZombieType.Z001Norm:{
 	},
 	Global.ZombieType.Z002Flag:{
 	},

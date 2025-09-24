@@ -15,7 +15,7 @@ func init_bullet(lane:int, start_pos:Vector2, direction:= Vector2.RIGHT, \
 	can_attack_zombie_status:int=can_attack_zombie_status
 	):
 	super(lane, start_pos, direction, bullet_lane_activate, can_attack_plant_status, can_attack_zombie_status)
-	
+
 	z_as_relative = false
 	z_index = 415 + lane * 10
 

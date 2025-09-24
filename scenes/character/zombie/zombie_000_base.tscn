@@ -57,6 +57,7 @@ is_walk = true
 is_attack = false
 is_swimming = false
 sfx_enter_name = &""
+head1_path = NodePath("Body/BodyCorrect/Anim_head1")
 node_follow_body_direction = [NodePath("Shadow"), NodePath("Body"), NodePath("CharredComponent")]
 speech_influence_components = [NodePath("AttackComponent"), NodePath("MoveComponent")]
 
@@ -279,29 +280,38 @@ position = Vector2(0, -40)
 shape = SubResource("RectangleShape2D_ewfmg")
 debug_color = Color(0.974132, 0, 0.429002, 0.42)
 
-[node name="BeAttackedBoxComponent" parent="." index="9"]
+[node name="DropItemComponent" type="Node2D" parent="." index="9"]
+unique_name_in_owner = true
+script = ExtResource("12_ewfmg")
+
+[node name="BeAttackedBoxComponent" parent="." index="10"]
 script = ExtResource("3_t14t4")
 
-[node name="Area2D" parent="BeAttackedBoxComponent" index="0"]
+[node name="HurtBoxDetection" parent="BeAttackedBoxComponent" index="0"]
 collision_layer = 4
 collision_mask = 0
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BeAttackedBoxComponent/Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeAttackedBoxComponent/HurtBoxDetection" index="0"]
 position = Vector2(0, -40)
 shape = SubResource("CapsuleShape2D_xdwn0")
 
-[node name="Area2DAttackAppear" type="Area2D" parent="BeAttackedBoxComponent" index="1"]
+[node name="HurtBoxDetectionOnAttack" type="Area2D" parent="BeAttackedBoxComponent" index="1"]
+unique_name_in_owner = true
 collision_layer = 16
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BeAttackedBoxComponent/Area2DAttackAppear" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeAttackedBoxComponent/HurtBoxDetectionOnAttack" index="0"]
 position = Vector2(0, -40)
 shape = SubResource("CapsuleShape2D_xdwn0")
 
-[node name="DropItemComponent" type="Node2D" parent="." index="10"]
-unique_name_in_owner = true
-script = ExtResource("12_ewfmg")
+[node name="HurtBoxReal" parent="BeAttackedBoxComponent" index="2"]
+collision_layer = 512
+
+[node name="ButterTimer" type="Timer" parent="." index="12"]
+one_shot = true
 
 [connection signal="area_entered" from="SwimBoxComponent/Area2D" to="SwimBoxComponent" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="SwimBoxComponent/Area2D" to="SwimBoxComponent" method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="ButterTimer" to="." method="_on_butter_timer_timeout"]

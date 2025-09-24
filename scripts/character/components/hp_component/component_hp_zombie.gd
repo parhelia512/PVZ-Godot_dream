@@ -76,8 +76,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if owner_character.is_death and curr_hp != 0:
-		num_frame += 1
-		if num_frame % 4 == 3:
+		num_frame = wrapi(num_frame + 1, 0, 4)
+		if num_frame == 0:
 			curr_hp -= delta * 50 * 4
 
 

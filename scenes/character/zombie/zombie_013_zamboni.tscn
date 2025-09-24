@@ -1361,6 +1361,7 @@ shader_parameter/random_direction_from_spread = Vector3(0, 0, 0)
 script = ExtResource("2_tjtkh")
 is_caltrop = false
 zombie_type = 13
+head1_path = NodePath("Body/BodyCorrect/Zombie_head")
 speech_influence_components = [NodePath("MoveComponent")]
 
 [node name="IceRoad" parent="." index="0" instance=ExtResource("3_yuhtx")]
@@ -1388,130 +1389,131 @@ visible = false
 centered = false
 
 [node name="Zombie_zamboni_4" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(21.5, 116.364)
+position = Vector2(21.5, 116.948)
 scale = Vector2(0.55, 0.55)
 texture = ExtResource("2_ted5p")
 centered = false
 
 [node name="Zombie_zamboni_3" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(30.5, 86.0419)
+position = Vector2(30.5, 87.2)
 scale = Vector2(0.6, 0.534)
 texture = ExtResource("3_vbmfc")
 centered = false
 
 [node name="Zombie_zamboni_seat" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(44.9, 45.4316)
+position = Vector2(44.9, 46.0594)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_e0420")
 centered = false
 
 [node name="Zombie_zambonidriver_legs" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(8.2, 74.9684)
+position = Vector2(8.2, 75.3594)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_q5x6w")
 centered = false
 
 [node name="Zombie_zambonidriver_innerarm_hand" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(19.4, 43.0052)
+position = Vector2(19.5594, 42.3594)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_ujpb2")
 centered = false
 
 [node name="Zombie_zambonidriver_body" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(37.0948, 28.5736)
-rotation = 0.0114854
+position = Vector2(37.6217, 28.1566)
+rotation = 0.0297207
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("7_n01se")
 centered = false
 
 [node name="Zombie_zambonidriver_upperarm" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(55.3, 52.9368)
+position = Vector2(55.4189, 52.6783)
 rotation = 6.06851
 scale = Vector2(0.748, 0.748)
 texture = ExtResource("8_yv182")
 centered = false
 
 [node name="Zombie_zambonidriver_lowerarm_outer" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(41.1, 71.0736)
-rotation = 5.81985
-scale = Vector2(0.747, 0.747)
+position = Vector2(41.4594, 69.8)
+rotation = 5.87091
+scale = Vector2(0.747594, 0.747594)
 texture = ExtResource("9_to5yd")
 centered = false
 
 [node name="Zombie_zambonidriver_outerarm_hand" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(29.5, 57.2052)
+position = Vector2(29.5594, 56.5594)
 rotation = 0.118682
 scale = Vector2(0.749, 0.749)
 texture = ExtResource("10_w0oyq")
 centered = false
 
 [node name="Zombie_zambonidriver_shoulder" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(51.3632, 42.9368)
-rotation = -0.00477423
+position = Vector2(51.5406, 42.7377)
+rotation = 0.0122673
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("11_sp1fh")
 centered = false
 
 [node name="Zombie_head" type="Sprite2D" parent="Body/BodyCorrect" index="14"]
-position = Vector2(22.7632, -0.126444)
+position = Vector2(23.0406, -0.362287)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("12_dqc0a")
 centered = false
 
 [node name="Zombie_jaw" type="Sprite2D" parent="Body/BodyCorrect" index="15"]
-position = Vector2(30.7316, 33.3368)
+position = Vector2(30.9, 33.6594)
+rotation = -0.022789
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("13_wy8xw")
 centered = false
 
 [node name="Zombie_zambonidriver_mullet2" type="Sprite2D" parent="Body/BodyCorrect" index="16"]
-position = Vector2(54.5948, 11.7419)
+position = Vector2(54.8, 11.3971)
+rotation = -0.0294414
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("14_8njlc")
 centered = false
 
 [node name="Zombie_zambonidriver_beanie" type="Sprite2D" parent="Body/BodyCorrect" index="17"]
-position = Vector2(23.2632, -9.48967)
-rotation = 0.00119339
+position = Vector2(23.7811, -10.9246)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("15_l1rr5")
 centered = false
 
 [node name="Zombie_zamboni_wires" type="Sprite2D" parent="Body/BodyCorrect" index="18"]
-position = Vector2(72.1, 93.2316)
+position = Vector2(72.1, 93.8594)
 scale = Vector2(0.63, 0.63)
 texture = ExtResource("16_q0xlo")
 centered = false
 
 [node name="Zombie_zamboni_brush" type="Sprite2D" parent="Body/BodyCorrect" index="19"]
-position = Vector2(-40.1419, 138.063)
+position = Vector2(-38.1029, 138.3)
 scale = Vector2(0.63, 0.63)
 texture = ExtResource("17_n0y45")
 centered = false
 
 [node name="Zombie_zamboni_wheel1" type="Sprite2D" parent="Body/BodyCorrect" index="20"]
-position = Vector2(-71.2839, 124.479)
-rotation = 0.0165516
-scale = Vector2(0.562684, 0.562684)
+position = Vector2(-70.1537, 123.575)
+rotation = 0.0757278
+scale = Vector2(0.562, 0.562)
 texture = ExtResource("18_6mx43")
 centered = false
 
 [node name="Zombie_zamboni_wheel2" type="Sprite2D" parent="Body/BodyCorrect" index="21"]
-position = Vector2(-5.84711, 124.51)
-rotation = 0.0165516
-scale = Vector2(0.562684, 0.562684)
+position = Vector2(-4.79428, 123.716)
+rotation = 0.0757278
+scale = Vector2(0.562, 0.562)
 texture = ExtResource("18_6mx43")
 centered = false
 
 [node name="Zombie_zamboni_2" type="Sprite2D" parent="Body/BodyCorrect" index="22"]
-position = Vector2(-80.1, 57.0736)
+position = Vector2(-80.1, 56.9189)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("19_he2le")
 centered = false
 
 [node name="Zombie_zamboni_1" type="Sprite2D" parent="Body/BodyCorrect" index="23"]
-position = Vector2(-80.9684, 41.2839)
-rotation = 0.0150662
+position = Vector2(-81.2594, 42.0943)
+rotation = 0.00665236
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("20_p2bi8")
 centered = false

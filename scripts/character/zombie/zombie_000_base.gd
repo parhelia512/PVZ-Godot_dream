@@ -26,7 +26,7 @@ var curr_wave:=-1
 var curr_be_attack_status:E_BeAttackStatusZombie:
 	set(value):
 		curr_be_attack_status = value
-		signal_status_change.emit(self, curr_be_attack_status)
+		signal_status_update.emit()
 
 ## 当前僵尸所在行，陆地、水池
 var curr_zombie_row_type:Global.ZombieRowType=Global.ZombieRowType.Land
@@ -38,8 +38,14 @@ var curr_zombie_row_type:Global.ZombieRowType=Global.ZombieRowType.Land
 ## 是否可以高建国强行停止跳跃判定，默认都为否，可以跳跃的僵尸跳跃组件跳跃后修改为否
 @export var is_trigger_tall_nut_stop_jump := false
 
-## 状态变化信号
-signal signal_status_change(zombie:Zombie000Base,curr_be_attack_status:E_BeAttackStatusZombie)
+## 状态更新信号
+signal signal_status_update
+## 行更新信号
+signal signal_lane_update
+func _update_lane(new_lane):
+	lane = new_lane
+	signal_lane_update.emit()
+
 ## 僵尸掉血信号（只有僵尸使用）,参数为损失的血量值
 signal signal_zombie_hp_loss(all_loss_hp:int, wave:int)
 
@@ -94,6 +100,17 @@ func _stop_sfx_enter():
 	if is_sfxing:
 		sfx_enter.stop()
 
+@export_group("其他")
+@export_subgroup("黄油")
+## 头的节点路径,黄油糊脸使用
+@export_node_path("Sprite2D") var head1_path:NodePath = "Body/BodyCorrect/Anim_head1"
+## 头的节点
+@onready var head_node:Node2D = get_node(head1_path)
+## 黄油节点,
+var butter_splat:Node2D
+## 黄油计时器
+@onready var butter_timer: Timer = $ButterTimer
+
 ## 修改初始化状态，在添加到场景树之前调用
 func init_zombie(
 	character_init_type:E_CharacterInitType, 	## 角色初始化类型（正常、展示）
@@ -134,7 +151,6 @@ func init_zombie(
 func init_norm():
 	super()
 	curr_be_attack_status = init_be_attack_status
-
 ## 初始化正常出战角色信号连接
 func init_norm_signal_connect():
 	super()
@@ -159,6 +175,9 @@ func init_norm_signal_connect():
 		attack_component.signal_change_is_attack.connect(change_is_attack)
 		## 攻击时受击组件
 		attack_component.signal_change_is_attack.connect(be_attacked_box_component.change_area_attack_appear)
+
+	## 死亡时取消黄油
+	hp_component.signal_hp_component_death.connect(death_stop_butter)
 
 	## 血量状态变化组件
 	hp_component.signal_hp_loss.connect(hp_stage_change_component.judge_body_change)
@@ -188,6 +207,9 @@ func init_norm_signal_connect():
 	hp_component.signal_hp_component_death.connect(drop_item_component.drop_coin)
 	hp_component.signal_hp_component_death.connect(drop_item_component.drop_garden_plant)
 
+	## 移动y方向
+	move_component.signal_move_body_y.connect(move_y_body)
+
 ## 初始化展示角色
 func init_show():
 	super()
@@ -196,6 +218,21 @@ func init_show():
 ## 改变攻击状态攻击
 func change_is_attack(value:bool):
 	is_attack = value
+
+## 更新移动方向
+func update_move_dir(move_dir_y_correct:Vector2):
+	#print("更新移动方向:", move_dir)
+	move_component.move_dir_y_correct = move_dir_y_correct
+
+## body\shader\灰烬\受击(真实)框移动y方向
+func move_y_body(move_y:float):
+	body.position.y += move_y
+	shadow.position.y += move_y
+	charred_component.position.y += move_y
+	be_attacked_box_component.move_y_hurt_box_real(move_y)
+
+	for c in special_component_update_pos_in_slope:
+		c.update_component_y(move_y)
 
 ## 改变游泳状态,切换动画时0.2秒过度时间停止移动
 func change_is_swimming(value:bool):
@@ -314,3 +351,63 @@ func zombie_up_from_ground():
 ## 跳跃被高坚果停止
 func jump_be_stop(plant:Plant000Base):
 	pass
+
+
+#region 黄油
+## 黄油糊脸
+##[butter_time:float]:黄油糊脸时间
+func be_butter(butter_time:float=4):
+	if not is_death:
+		## 黄油节点
+		if not is_instance_valid(butter_splat):
+			butter_splat = SceneRegistry.BUTTER_SPLAT.instantiate()
+			# 将精灵添加到当前场景中
+			add_child(butter_splat)
+		butter_splat.visible = true
+		butter_splat.global_position = head_node.to_global(Vector2(20, 10))
+
+		## 更新速度
+		update_speed_factor(0.0, E_Influence_Speed_Factor.Butter)
+		butter_timer.start(butter_time)
+
+## 死亡时停止黄油
+func death_stop_butter():
+	if is_instance_valid(butter_splat):
+		_on_butter_timer_timeout()
+
+## 黄油时间计时器结束
+func _on_butter_timer_timeout() -> void:
+	update_speed_factor(1.0, E_Influence_Speed_Factor.Butter)
+	butter_splat.visible = false
+#endregion
+
+#region 僵尸吃大蒜换行
+func update_lane_on_eat_garlic():
+	SoundManager.play_zombie_SFX(0, "yuck")
+	update_speed_factor(0.0, E_Influence_Speed_Factor.EatGarlic)
+	await get_tree().create_timer(0.5, false).timeout
+	update_speed_factor(1.0, E_Influence_Speed_Factor.EatGarlic)
+	update_lane()
+
+
+## 换行
+func update_lane():
+	## 可以换的行索引
+	var can_update_zombie_row_i:Array[int] = []
+	if lane != 0 and MainGameDate.all_zombie_rows[lane-1].zombie_row_type == curr_zombie_row_type:
+		can_update_zombie_row_i.append(lane-1)
+	if lane != MainGameDate.all_zombie_rows.size()-1 and MainGameDate.all_zombie_rows[lane+1].zombie_row_type == curr_zombie_row_type:
+		can_update_zombie_row_i.append(lane+1)
+
+	var new_lane_i = can_update_zombie_row_i.pick_random()
+	lane = new_lane_i
+	signal_lane_update.emit()
+
+	## 禁用攻击组件
+	attack_component.disable_component(ComponentBase.E_IsEnableFactor.Garlic)
+	GlobalUtils.child_node_change_parent(self, MainGameDate.all_zombie_rows[lane])
+	var tween:Tween = create_tween()
+	tween.tween_property(self, ^"position:y", MainGameDate.all_zombie_rows[lane].zombie_create_position.position.y, 1)
+	tween.tween_callback(attack_component.enable_component.bind(ComponentBase.E_IsEnableFactor.Garlic))
+
+#endregion

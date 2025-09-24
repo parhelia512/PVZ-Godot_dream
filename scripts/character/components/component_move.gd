@@ -13,6 +13,9 @@ enum E_MoveMode {
 	Speed,	## 根据速度移动
 }
 
+## 移动方向y值修正,移动时,对应y方向的修正,屋顶斜坡使用
+var move_dir_y_correct:Vector2 = Vector2.ZERO
+
 @export var move_mode:E_MoveMode = E_MoveMode.Ground
 @export var ori_speed :float = 20
 var curr_speed :float = 20
@@ -46,6 +49,7 @@ enum E_MoveFactor{
 	IsDeath,				## 停止移动的死亡时
 }
 
+signal signal_move_body_y(move_y:float)
 
 func _ready() -> void:
 	curr_speed = ori_speed
@@ -91,8 +95,10 @@ func _process(delta: float) -> void:
 					_walk()
 
 			E_MoveMode.Speed:
-				owner_zombie.position.x -= delta * curr_speed * owner_zombie.direction_x_root
+				var move_x = delta * curr_speed * owner_zombie.direction_x_root
+				owner_zombie.position.x -= move_x
 
+				move_y(move_x)
 
 func _walk():
 	# 计算ground的全局坐标变化量
@@ -101,7 +107,15 @@ func _walk():
 	owner_zombie.position.x -= ground_global_offset
 	# 更新记录值
 	_previous_ground_global_x = _ground.global_position.x
+	move_y(ground_global_offset)
 
+
+## 移动y的方向
+func move_y(move_x:float):
+	if move_dir_y_correct == Vector2.ZERO:
+		return
+	else:
+		signal_move_body_y.emit(-move_x / move_dir_y_correct.x * move_dir_y_correct.y)
 
 func _walking_start():
 	walking_status = WalkingStatus.start

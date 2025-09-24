@@ -2,7 +2,6 @@ extends BombComponentBase
 class_name BombComponentNorm
 ## 普通炸弹使用爆炸组件
 
-@onready var area_2d_bomb: Area2D = $Area2DBomb
 @onready var bomb_effect: BombEffectBase = $BombEffect
 
 ## 爆炸特效

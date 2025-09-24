@@ -44,6 +44,8 @@ func _ready() -> void:
 	if boundary_value_hp.is_empty():
 		boundary_value_hp.append(hp_component.max_hp * 2 / 3 - 1)	## 掉手
 		boundary_value_hp.append(hp_component.max_hp * 1 / 3 - 1)	## 掉头
+		if owner is Plant000Base:
+			printerr("植物使用血量阶段变化组件需对对`boundary_value_hp`赋值")
 
 	## 修改死亡临界值
 	if boundary_value_hp[-1] != 0:
@@ -80,6 +82,7 @@ func judge_body_change(curr_hp:int, is_drop:=true):
 			for j in range(body_change[i].sprite_change.size()):
 				var sprite_change:Sprite2D = get_node(body_change[i].sprite_change[j])
 				sprite_change.texture = body_change[i].sprite_change_texture[j]
+				#print("改变")
 
 			for j in range(body_change[i].sprite_appear.size()):
 				var sprite_appear:Node2D = get_node(body_change[i].sprite_appear[j])

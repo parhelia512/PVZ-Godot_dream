@@ -46,7 +46,7 @@ func _ready() -> void:
 				card.sun_cost = Global.ZombieInfo[card.card_zombie_type][Global.ZombieInfoAttribute.SunCost]
 				all_zombie_card_prefabs[card.card_zombie_type] = card
 				zombie_card_ids[card.card_zombie_type] = zombie_i
-	#
+	##
 #### 该部分物理帧实际运行时删除
 #func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint():
@@ -82,7 +82,7 @@ func _ready() -> void:
 #
 	#else:
 		#printerr("将该部分注释掉")
-###
+####
 #func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint():
 		#frame_num += 1
