@@ -14,6 +14,8 @@ class_name MainGameManager
 @onready var zombie_manager: ZombieManager = %ZombieManager
 @onready var game_item_manager: GameItemManager = %GameItemManager
 @onready var plant_cell_manager: PlantCellManager = %PlantCellManager
+@onready var lawn_mover_manager: LawnMoverManager = %LawnMoverManager
+
 #endregion
 
 #region UI元素、相机
@@ -146,6 +148,8 @@ func init_manager():
 	game_item_manager.init_game_item_manager(game_para)
 	hand_manager.init_hand_manager(game_para)
 	zombie_manager.init_zombie_manager(game_para)
+	lawn_mover_manager.init_lawn_mover_manager(game_para)
+
 
 ## 子节点之间信号连接
 func signal_connect():

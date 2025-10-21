@@ -18,6 +18,9 @@ var attack_value_factor:Dictionary[E_AttackValueFactor, float] = {}
 ## 间隔帧数
 var frame_counter := 0
 
+## 初始化攻击组件属性
+func init_attack_component(is_ignore_ladder:=false):
+	attack_ray_component.is_attack_ladder_plant = is_ignore_ladder
 
 func _ready() -> void:
 	super()
@@ -25,6 +28,7 @@ func _ready() -> void:
 
 ## 修改攻击速度,通过修改攻击值实现
 func owner_update_speed(speed_product:float):
+	#print("攻击组件修改攻击速度")
 	update_attack_value(speed_product, E_AttackValueFactor.Speed)
 
 ## 修改攻击值
@@ -34,7 +38,7 @@ func update_attack_value(value:float, influence_factor:E_AttackValueFactor):
 	curr_attack_value_per_min = init_attack_value_per_min * res_product
 
 func _physics_process(delta: float) -> void:
-	if is_attack_res:
+	if is_enabling and is_attack_res:
 		frame_counter = wrapi(frame_counter + 1, 0, 8)
 		if not is_instance_valid(attack_ray_component.enemy_can_be_attacked):
 			return
@@ -47,3 +51,6 @@ func attack_once():
 	if is_instance_valid(attack_ray_component.enemy_can_be_attacked) and not owner.is_death:
 		attack_ray_component.enemy_can_be_attacked.be_zombie_eat_once(owner)
 		SoundManager.play_zombie_SFX(Global.ZombieType.Null, "Chomp")
+
+
+

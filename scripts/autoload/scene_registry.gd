@@ -38,7 +38,7 @@ const PLANT_START_EFFECT_WATER = preload("res://scenes/item/game_scenes_item/pla
 const DOOM_SHROOM_CRATER = preload("res://scenes/fx/doom_shroom_crater.tscn")
 
 ## 墓碑
-const TOMBSTONE = preload("res://scenes/item/game_scenes_item/tombstone.tscn")
+var TOMBSTONE = load("res://scenes/item/game_scenes_item/tombstone.tscn")
 
 
 ## 舞王管理器
@@ -52,7 +52,7 @@ const ICE_EFFECT = preload("res://scenes/fx/ice_effect.tscn")
 ## 泳池水花场景
 const SPLASH = preload("res://scenes/item/game_scenes_item/splash.tscn")
 ## 火焰特效(火爆辣椒\火焰豌豆)
-const FIRE = preload("res://scenes/fx/fire.tscn")
+var FIRE = load("res://scenes/fx/fire.tscn")
 ## 黄油特效
 const BUTTER_SPLAT = preload("res://scenes/fx/butter_splat.tscn")
 
@@ -64,3 +64,5 @@ const DAY_SUNS_MANAGER = preload("res://scenes/manager/day_suns_manager.tscn")
 ## 泥土上升特效
 const DIRT_RISE_EFFECT = preload("res://scenes/character/item/dirt_rise_effect.tscn")
 
+## 梯子
+const LADDER = preload("res://scenes/item/game_scenes_item/ladder.tscn")

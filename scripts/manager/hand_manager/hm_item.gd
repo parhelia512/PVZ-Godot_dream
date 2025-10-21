@@ -45,7 +45,7 @@ func mouse_enter(plant_cell:PlantCell):
 			## 获取当前格子植物数量
 			curr_shovel_look_plant_num = plant_cell.get_curr_plant_num()
 			if curr_shovel_look_plant_num >= 1:
-				plant_be_shovel_look =  plant_cell.return_plant_be_shovel_look()
+				plant_be_shovel_look = plant_cell.return_plant_be_shovel_look()
 				plant_be_shovel_look.be_shovel_look()
 
 ## 鼠标移出cell

@@ -58,8 +58,10 @@ enum TypeBulletSFX{
 	Null,		## 无声音
 	Pea,		## 豌豆
 	PeaFire,	## 火焰豌豆
-
-	Bowling = 51,		## 保龄球
+	Corn,		## 玉米粒
+	Butter,		## 黄油
+	Melon,		## 西瓜
+	Bowling = 1001,		## 保龄球
 }
 
 ## 子弹音效资源字典
@@ -72,6 +74,17 @@ const SFXBulletMap := {
 	],
 	TypeBulletSFX.PeaFire: [
 		preload("res://assets/audio/SFX/bullet/firepea.ogg"),
+	],
+	TypeBulletSFX.Corn:[
+		preload("res://assets/audio/SFX/bullet/kernelpult2.ogg"),
+		preload("res://assets/audio/SFX/bullet/kernelpult.ogg")
+	],
+	TypeBulletSFX.Butter:[
+		preload("res://assets/audio/SFX/bullet/butter.ogg")
+	],
+	TypeBulletSFX.Melon:[
+		preload("res://assets/audio/SFX/bullet/melonimpact.ogg"),
+		preload("res://assets/audio/SFX/bullet/melonimpact2.ogg")
 	],
 
 	TypeBulletSFX.Bowling: [
@@ -168,6 +181,7 @@ const SFXPlantMap := {
 	Global.PlantType.P031Pumpkin:{
 	},
 	Global.PlantType.P032MagnetShroom:{
+		&"magnetshroom": preload("res://assets/audio/SFX/plant/magnetshroom.ogg")
 	},
 
 	Global.PlantType.P033CabbagePult:{
@@ -285,9 +299,31 @@ const SFXZombieMap := {
 	},
 	Global.ZombieType.Z020Yeti:{
 	},
-	Global.ZombieType.Z021Bungee:{
+	Global.ZombieType.Z021Bungi:{
+		&"bungee_scream":[
+			preload("res://assets/audio/SFX/zombie/bungee_scream.ogg"),
+			preload("res://assets/audio/SFX/zombie/bungee_scream2.ogg"),
+			preload("res://assets/audio/SFX/zombie/bungee_scream3.ogg")
+		]
 	},
 	Global.ZombieType.Z022Ladder:{
+		&"ladder_zombie": preload("res://assets/audio/SFX/zombie/ladder_zombie.ogg")
+	},
+
+	Global.ZombieType.Z023Catapult:{
+	},
+
+	Global.ZombieType.Z024Gargantuar:{
+		&"gargantuar_thump": preload("res://assets/audio/SFX/zombie/gargantuar_thump.ogg"),
+		&"gargantudeath": preload("res://assets/audio/SFX/zombie/gargantudeath.ogg")
+	},
+
+	Global.ZombieType.Z025Imp:{
+		&"imp":[
+			preload("res://assets/audio/SFX/zombie/imp.ogg"),
+			preload("res://assets/audio/SFX/zombie/imp2.ogg")
+		]
+
 	},
 
 }

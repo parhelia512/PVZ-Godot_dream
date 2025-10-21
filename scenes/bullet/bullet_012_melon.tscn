@@ -37,8 +37,8 @@ script = ExtResource("2_itde2")
 parabola_height = -500.0
 is_rotate = true
 attack_value = 80
-speed = 600.0
 bullet_mode = 1
+type_bullet_SFX = 5
 can_attack_zombie_status = 5
 
 [node name="BulletShadow" parent="." index="0"]
@@ -67,10 +67,7 @@ process_material = SubResource("ParticleProcessMaterial_itde2")
 [node name="CollisionShape2D" parent="Area2DAttack" index="0"]
 shape = SubResource("CircleShape2D_wo6mn")
 
-[node name="CollisionShape2D" parent="Area2DUp" index="0"]
-shape = SubResource("CircleShape2D_wo6mn")
-
-[node name="SpatterComponent" type="Node2D" parent="." index="5"]
+[node name="SpatterComponent" type="Node2D" parent="." index="4"]
 script = ExtResource("5_d0acj")
 sum_attack_value = 574
 range_attack_value = Vector2i(1, 26)

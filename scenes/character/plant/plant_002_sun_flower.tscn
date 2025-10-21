@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://wte35drumapp"]
+[gd_scene load_steps=41 format=3 uid="uid://wte35drumapp"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_3q4dl"]
+[ext_resource type="Script" uid="uid://cw14nqa0mih0i" path="res://scripts/character/plant/plant_002_sun_flower.gd" id="2_vbc7f"]
 [ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="3_1op7k"]
 [ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="4_vbc7f"]
 [ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="5_dowj6"]
@@ -62,234 +63,233 @@ nodes/TimeScale/position = Vector2(660, 140)
 nodes/output/position = Vector2(840, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
-[node name="Plant002SunFlower" node_paths=PackedStringArray("node_no_change_direction", "speech_influence_components") instance=ExtResource("1_3q4dl")]
+[node name="Plant002SunFlower" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("1_3q4dl")]
+script = ExtResource("2_vbc7f")
 plant_type = 2
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
-speech_influence_components = [NodePath("CreateSunComponent")]
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-43, -69)
 
 [node name="Backleaf" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(27.5, 53.9433)
-scale = Vector2(0.609422, 0.5254)
+position = Vector2(27.7, 53.8532)
+scale = Vector2(0.563943, 0.513106)
 texture = ExtResource("3_1op7k")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(23.9144, 55.9)
-rotation = -0.175968
-scale = Vector2(0.666411, 0.625523)
-skew = 0.059826
+position = Vector2(24.9411, 54.6355)
+rotation = 0.0103734
+scale = Vector2(0.570887, 0.51946)
+skew = 0.00657275
 texture = ExtResource("4_vbc7f")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(48.7711, 53.6433)
-rotation = 0.183959
-scale = Vector2(0.636722, 0.580534)
-skew = -0.0605637
+position = Vector2(47.2589, 53.7532)
+rotation = 0.00729108
+scale = Vector2(0.590951, 0.51946)
+skew = 0.00102725
 texture = ExtResource("5_dowj6")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(41.6989, 49.9711)
-rotation = 0.570608
-scale = Vector2(0.564856, 0.652033)
-skew = -0.205155
+position = Vector2(36.6177, 51.6468)
+rotation = 0.0564827
+scale = Vector2(0.556589, 0.608426)
+skew = -0.0183818
 texture = ExtResource("6_5jjc0")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(41.7112, 38.0278)
-rotation = 0.370457
-scale = Vector2(0.542444, 0.795444)
-skew = 0.0510035
+position = Vector2(31.7532, 41.7049)
+rotation = 0.051965
+scale = Vector2(0.556589, 0.678328)
+skew = -0.021155
 texture = ExtResource("7_32i5t")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(21.8144, 55.5989)
-scale = Vector2(0.594422, 0.515611)
+position = Vector2(22.6823, 53.7645)
+scale = Vector2(0.560355, 0.576653)
 texture = ExtResource("8_vp3q1")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(57.3278, 56.5278)
-rotation = -0.0282161
-scale = Vector2(0.624177, 0.557744)
+position = Vector2(56.0411, 55.3645)
+rotation = -0.0398466
+scale = Vector2(0.601072, 0.580419)
 texture = ExtResource("9_cu2um")
 centered = false
 
 [node name="Frontleaf_left_tip" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(18.3289, 61.6989)
-rotation = -0.0500533
-scale = Vector2(0.595022, 0.594589)
-skew = -0.00374234
+position = Vector2(19.4, 60.8057)
+rotation = 0.0381006
+scale = Vector2(0.583596, 0.580419)
 texture = ExtResource("10_jf80v")
 centered = false
 
 [node name="SunFlower_leftpetal8" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(32.5267, 45.7267)
-rotation = 0.0127026
-scale = Vector2(0.8, 0.858068)
-skew = -0.0127026
+position = Vector2(23.6298, 45.517)
+rotation = 0.00729108
+scale = Vector2(0.806943, 0.860275)
+skew = -0.00729108
 texture = ExtResource("11_uqrih")
 centered = false
 
 [node name="SunFlower_leftpetal7" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(24.3267, 41.6823)
-rotation = 0.0127026
-scale = Vector2(1, 1.01709)
-skew = -0.0127026
+position = Vector2(15.3709, 42.0872)
+rotation = -0.121528
+scale = Vector2(1.01841, 1.03952)
+skew = 0.121528
 texture = ExtResource("12_v8486")
 centered = false
 
 [node name="SunFlower_leftpetal6" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(19.0122, 37.0678)
-rotation = 0.122559
-scale = Vector2(0.812733, 0.829722)
-skew = -0.122559
+position = Vector2(10.2532, 37.9872)
+rotation = -0.121528
+scale = Vector2(0.814411, 0.83146)
+skew = 0.121528
 texture = ExtResource("13_hddd6")
 centered = false
 
 [node name="SunFlower_leftpetal5" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(15.7267, 30.7823)
-rotation = 0.123316
-scale = Vector2(0.813733, 0.821711)
-skew = -0.123316
+position = Vector2(6.77094, 33.146)
+rotation = -0.226794
+scale = Vector2(0.829532, 0.8)
+skew = 0.226794
 texture = ExtResource("14_j8cc2")
 centered = false
 
 [node name="SunFlower_leftpetal4" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(18.1122, 22.6967)
-rotation = 0.022689
-scale = Vector2(0.8, 0.852611)
-skew = -0.022689
+position = Vector2(9.17094, 24.9638)
+rotation = -0.233367
+scale = Vector2(0.830532, 0.8)
+skew = 0.233367
 texture = ExtResource("15_dme1b")
 centered = false
 
 [node name="SunFlower_leftpetal3" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(22.3267, 16.3111)
-rotation = 0.0396768
-scale = Vector2(0.801, 0.869633)
-skew = -0.0396768
+position = Vector2(13.6121, 19.2928)
+rotation = -0.164048
+scale = Vector2(0.818, 0.8)
+skew = 0.164048
 texture = ExtResource("16_0ok7d")
 centered = false
 
 [node name="SunFlower_leftpetal2" type="Sprite2D" parent="Body/BodyCorrect" index="14"]
-position = Vector2(29.5122, 11.6823)
-rotation = 0.022689
-scale = Vector2(1, 1.07449)
-skew = -0.022689
+position = Vector2(20.7709, 12.5928)
+rotation = -0.0374556
+scale = Vector2(1.00994, 1)
+skew = 0.0374556
 texture = ExtResource("17_nmejw")
 centered = false
 
 [node name="SunFlower_leftpetal1" type="Sprite2D" parent="Body/BodyCorrect" index="15"]
-position = Vector2(35.8267, 10.5245)
-rotation = 0.022689
-scale = Vector2(0.8, 0.923565)
-skew = -0.022689
+position = Vector2(27.0709, 10.6517)
+rotation = 0.00729108
+scale = Vector2(0.806943, 0.8)
+skew = -0.00729108
 texture = ExtResource("18_pw6u3")
 centered = false
 
 [node name="SunFlower_bottompetals" type="Sprite2D" parent="Body/BodyCorrect" index="16"]
-position = Vector2(40.3411, 46.8556)
-rotation = 0.0127026
-scale = Vector2(0.8, 0.83209)
-skew = -0.0127026
+position = Vector2(32.1532, 46.2525)
+rotation = 0.00729108
+scale = Vector2(0.806943, 0.91814)
+skew = -0.00729108
 texture = ExtResource("19_dfogl")
 centered = false
 
 [node name="SunFlower_rightpetal9" type="Sprite2D" parent="Body/BodyCorrect" index="17"]
-position = Vector2(53.4411, 46.5122)
-rotation = 0.0127026
-scale = Vector2(0.8, 0.817)
-skew = -0.0127026
+position = Vector2(44.8887, 45.7758)
+rotation = 0.00729108
+scale = Vector2(0.806943, 0.860275)
+skew = -0.00729108
 texture = ExtResource("20_ue2yt")
 centered = false
 
 [node name="SunFlower_rightpetal8" type="Sprite2D" parent="Body/BodyCorrect" index="18"]
-position = Vector2(58.2122, 43.7122)
-rotation = 0.0127026
-scale = Vector2(0.8, 0.888367)
-skew = -0.0127026
+position = Vector2(49.4887, 43.1347)
+rotation = 0.137954
+scale = Vector2(0.815823, 0.860275)
+skew = -0.137954
 texture = ExtResource("21_igtt6")
 centered = false
 
 [node name="SunFlower_rightpetal7" type="Sprite2D" parent="Body/BodyCorrect" index="19"]
-position = Vector2(61.4556, 40.3267)
-rotation = 0.0127026
-scale = Vector2(0.8, 0.907068)
-skew = -0.0127026
+position = Vector2(53.2475, 39.5581)
+rotation = 0.188173
+scale = Vector2(0.822, 0.83146)
+skew = -0.188173
 texture = ExtResource("22_ar00w")
 centered = false
 
 [node name="SunFlower_rightpetal6" type="Sprite2D" parent="Body/BodyCorrect" index="20"]
-position = Vector2(66.5556, 36.4267)
-rotation = -0.149923
-scale = Vector2(0.811011, 0.966446)
-skew = 0.149923
+position = Vector2(58.1475, 35.4638)
+rotation = 0.230693
+scale = Vector2(0.830355, 0.8)
+skew = -0.230693
 texture = ExtResource("23_exg78")
 centered = false
 
 [node name="SunFlower_rightpetal5" type="Sprite2D" parent="Body/BodyCorrect" index="21"]
-position = Vector2(68.5122, 30.64)
-rotation = -0.0514666
-scale = Vector2(0.804578, 0.821711)
-skew = 0.0514666
+position = Vector2(59.8887, 29.2872)
+rotation = 0.269202
+scale = Vector2(0.840709, 0.8)
+skew = -0.269202
 texture = ExtResource("24_c2iyl")
 centered = false
 
 [node name="SunFlower_rightpetal4" type="Sprite2D" parent="Body/BodyCorrect" index="22"]
-position = Vector2(66.1834, 22.1834)
-rotation = -0.0572068
-scale = Vector2(1.00687, 0.994378)
-skew = 0.0572068
+position = Vector2(57.483, 21.246)
+rotation = 0.172873
+scale = Vector2(1.02441, 1)
+skew = -0.172873
 texture = ExtResource("25_k4mil")
 centered = false
 
 [node name="SunFlower_rightpetal3" type="Sprite2D" parent="Body/BodyCorrect" index="23"]
-position = Vector2(62.0267, 18.74)
-rotation = -0.0609498
-scale = Vector2(1.00787, 1.0104)
-skew = 0.0609498
+position = Vector2(53.5475, 18.1283)
+rotation = 0.127791
+scale = Vector2(1.01882, 1)
+skew = -0.127791
 texture = ExtResource("26_uudhq")
 centered = false
 
 [node name="SunFlower_rightpetal2" type="Sprite2D" parent="Body/BodyCorrect" index="24"]
-position = Vector2(57.9267, 14.2823)
-rotation = -0.0267417
-scale = Vector2(0.802144, 0.823856)
-skew = 0.0267417
+position = Vector2(49.1887, 13.9106)
+rotation = 0.117417
+scale = Vector2(0.814411, 0.8)
+skew = -0.117417
 texture = ExtResource("27_5r6pb")
 centered = false
 
 [node name="SunFlower_rightpetal1" type="Sprite2D" parent="Body/BodyCorrect" index="25"]
-position = Vector2(52.6267, 11.4678)
-rotation = 0.022689
-scale = Vector2(0.8, 0.865199)
-skew = -0.022689
+position = Vector2(43.9887, 11.3928)
+rotation = 0.00729108
+scale = Vector2(0.806943, 0.8)
+skew = -0.00729108
 texture = ExtResource("28_c07id")
 centered = false
 
 [node name="SunFlower_toppetals" type="Sprite2D" parent="Body/BodyCorrect" index="26"]
-position = Vector2(42.1267, 10.0812)
-rotation = 0.022689
-scale = Vector2(0.8, 0.949742)
-skew = -0.022689
+position = Vector2(33.0475, 10.4106)
+rotation = 0.00308233
+scale = Vector2(0.803532, 0.8)
+skew = -0.00308233
 texture = ExtResource("29_2q2wl")
 centered = false
 
 [node name="Anim_idle" type="Sprite2D" parent="Body/BodyCorrect" index="27"]
-position = Vector2(24.5267, 17.0956)
-scale = Vector2(0.8, 0.763499)
+position = Vector2(16.0475, 16.5283)
+scale = Vector2(0.8, 0.75866)
 texture = ExtResource("30_st0ig")
 centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="28"]
 visible = false
-position = Vector2(37.2834, 23.7112)
+position = Vector2(28.5887, 23.4113)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("31_waaya")
 centered = false
@@ -297,24 +297,24 @@ centered = false
 [node name="Marker2DCreateSun" type="Marker2D" parent="Body/BodyCorrect" index="29"]
 position = Vector2(43, 27)
 
-[node name="SleepComponent" parent="." index="6" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../CreateSunComponent")]
 
-[node name="BlinkComponent" parent="." index="7"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("34_vbc7f")]([SubResource("Resource_5jjc0")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_p20s5")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 tree_root = SubResource("AnimationNodeBlendTree_kbloa")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.2
 
-[node name="CreateSunComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("marker_2d_create_sun")]
+[node name="CreateSunComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("marker_2d_create_sun")]
 script = ExtResource("34_1op7k")
 marker_2d_create_sun = NodePath("../Body/BodyCorrect/Marker2DCreateSun")
 

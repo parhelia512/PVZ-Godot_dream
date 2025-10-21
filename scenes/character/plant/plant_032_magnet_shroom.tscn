@@ -106,49 +106,49 @@ is_sleep_in_day = true
 position = Vector2(-43, -68)
 
 [node name="Magnetshroom_stem" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(35.232, 58.5227)
-scale = Vector2(0.6, 0.606639)
-skew = -0.0522702
+position = Vector2(37.0328, 58.5219)
+scale = Vector2(0.6, 0.606562)
+skew = 0.0742324
 texture = ExtResource("2_1ji1j")
 centered = false
 
 [node name="Magnetshroom_stemcap" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(26.6639, 46.3041)
-rotation = -0.0396574
-scale = Vector2(0.599773, 0.606639)
-skew = -0.0034902
+position = Vector2(29.5547, 45.3219)
+rotation = 0.059888
+scale = Vector2(0.599, 0.602453)
+skew = 0.00368149
 texture = ExtResource("3_vvqvt")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(-2.87631, -0.0329609)
-rotation = -0.0724945
-scale = Vector2(0.598773, 0.606412)
-skew = -0.00388659
+position = Vector2(9.89547, -7.04377)
+rotation = 0.132184
+scale = Vector2(0.599, 0.602453)
+skew = 0.00349072
 texture = ExtResource("4_fmi46")
 centered = false
 
 [node name="Magnetshroom_stemcap_overlay" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(26.6639, 46.4815)
-rotation = -0.0396574
-scale = Vector2(0.599773, 0.606639)
-skew = -0.0034902
+position = Vector2(29.4657, 45.4219)
+rotation = 0.059888
+scale = Vector2(0.599, 0.602453)
+skew = 0.00368149
 texture = ExtResource("5_joae0")
 centered = false
 
 [node name="Anim_eyes" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(32.9959, 38.2041)
-rotation = -0.0686084
-scale = Vector2(0.599, 0.606639)
-skew = -0.00388613
+position = Vector2(37.0766, 37.6547)
+rotation = 0.132184
+scale = Vector2(0.599, 0.602453)
+skew = 0.00349072
 texture = ExtResource("6_52fw1")
 centered = false
 
 [node name="Anim_eyes2" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(47.2732, 32.4907)
-rotation = -0.0686084
-scale = Vector2(0.569, 0.576639)
-skew = -0.00388613
+position = Vector2(52.1985, 35.0204)
+rotation = 0.132184
+scale = Vector2(0.569, 0.572453)
+skew = 0.00349072
 texture = ExtResource("6_52fw1")
 centered = false
 
@@ -175,18 +175,18 @@ texture = ExtResource("7_4o74c")
 centered = false
 
 [node name="Magnetshroom_eyebrows" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(38.3959, 34.0495)
-rotation = 1.11179
-scale = Vector2(0.605866, 0.598773)
-skew = -0.00539758
+position = Vector2(43.1985, 35.0204)
+rotation = 1.31862
+scale = Vector2(0.600453, 0.599891)
+skew = -0.00640836
 texture = ExtResource("8_ilpu8")
 centered = false
 
 [node name="Magnetshroom_eyebrows2" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(45.5505, 30.3041)
-rotation = 1.7221
-scale = Vector2(0.604639, 0.599)
-skew = -3.13017
+position = Vector2(50.9094, 32.7532)
+rotation = 1.93356
+scale = Vector2(0.601453, 0.597891)
+skew = -3.14023
 texture = ExtResource("8_ilpu8")
 centered = false
 
@@ -195,9 +195,9 @@ visible = false
 centered = false
 
 [node name="Magnetshroom_shock" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(24.4103, 13.4609)
-rotation = -0.0299435
-scale = Vector2(0.610341, 0.599227)
+position = Vector2(33.0219, 11.2487)
+rotation = 0.133672
+scale = Vector2(0.605362, 0.6)
 texture = ExtResource("10_fmi46")
 centered = false
 
@@ -205,22 +205,22 @@ centered = false
 z_index = 10
 position = Vector2(21, -42)
 
-[node name="SleepComponent" parent="." index="6" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../MagnetComponent")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_0q7qt")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_vbdv8")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="MagnetComponent" type="Node2D" parent="." index="12" node_paths=PackedStringArray("curr_iron_container")]
+[node name="MagnetComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("curr_iron_container")]
 script = ExtResource("16_joae0")
 curr_iron_container = NodePath("../Body/CurrIronContainer")
 
@@ -230,7 +230,7 @@ one_shot = true
 [node name="Area2D" type="Area2D" parent="MagnetComponent" index="1"]
 position = Vector2(0, -23)
 collision_layer = 0
-collision_mask = 4100
+collision_mask = 5
 input_pickable = false
 monitorable = false
 

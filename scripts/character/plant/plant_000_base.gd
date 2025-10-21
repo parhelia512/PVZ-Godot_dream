@@ -12,16 +12,17 @@ class_name Plant000Base
 @export var init_be_attack_status :E_BeAttackStatusPlant = 1
 ## 是否白天睡觉
 @export var is_sleep_in_day:bool = false
+## 植物是否可以挂载梯子(Nrom位置植物使用)
+@export var is_can_ladder := false
 ## 植物当前状态，僵尸攻击检测时判断是否可以攻击
 var curr_be_attack_status:E_BeAttackStatusPlant
 ## 行和列
 var row_col:Vector2i = Vector2i(-1, -1)
 ## 植物所在格子
 var plant_cell:PlantCell
-## 当前代替受伤植物（保护壳没有，底部类植物的代替受伤植物为Norm类植物）植物格子更新
-var curr_replace_be_attack_plant:Plant000Base
 ## 植物死亡后是否直接删除
 var is_death_free:= true
+
 #endregion
 
 #region 植物动画
@@ -29,6 +30,10 @@ var is_death_free:= true
 @export var is_sleeping:=false
 ## 是否在花园水族馆
 @export var is_garden_aquarium := false
+
+## 植物梯子状态变化信号
+signal signal_ladder_update
+
 #region 角色枚举
 ## 检测攻击时，根据状态判断是否可以攻击
 enum E_BeAttackStatusPlant{
@@ -102,10 +107,12 @@ func init_norm():
 		position.y -= diff_slope_flat
 		body.position.y += diff_slope_flat
 		shadow.position.y += diff_slope_flat
+		hp_component.position.y += diff_slope_flat
 		be_attacked_box_component.move_y_hurt_box_real(diff_slope_flat)
 		for c in special_component_update_pos_in_slope:
 			c.update_component_y(diff_slope_flat)
-
+		for n in special_node2d_update_pos_in_slope:
+			n.position.y += diff_slope_flat
 ## 初始化展示角色
 func init_show():
 	super()
@@ -125,20 +132,23 @@ func init_garden():
 #endregion
 
 #region 植物受伤、死亡
+## 被蹦极僵尸偷走
+func be_bungi()->Node2D:
+	var body_copy:Node2D = body.duplicate()
+	plant_cell.add_child(body_copy)
+	body_copy.global_position = body.global_position
+	## 死亡直接消失,复制一个body给蹦极
+	character_death_disappear()
+	return body_copy
+
 ## 被僵尸啃食
 ## attack_value:伤害
 ## attack_zombie:攻击的僵尸
 func be_zombie_eat(attack_value:int, attack_zombie:Zombie000Base):
-	if curr_replace_be_attack_plant:
-		curr_replace_be_attack_plant.be_zombie_eat(attack_value, attack_zombie)
-		return
 	hp_component.Hp_loss(attack_value, Global.AttackMode.Penetration, true, false)
 
 ## 被僵尸啃食一次发光
 func be_zombie_eat_once(attack_zombie:Zombie000Base):
-	if curr_replace_be_attack_plant:
-		curr_replace_be_attack_plant.be_zombie_eat_once(attack_zombie)
-		return
 	body.body_light()
 	_be_zombie_eat_once_special(attack_zombie)
 
@@ -156,7 +166,7 @@ func character_death():
 	if is_death_free:
 		queue_free()
 
-## 死亡不消失(被压扁)
+## 死亡不消失
 func character_death_not_disappear():
 	is_death_free = false
 	hp_component.Hp_loss_death()
@@ -176,8 +186,9 @@ func be_shovel_look_end():
 		z_index -= 1
 	body.set_other_color(BodyCharacter.E_ChangeColors.BeShovelLookColor, Color(1, 1, 1))
 
-## 被铲子铲除
+## 被铲子铲除,禁止亡语
 func be_shovel_kill():
+	is_can_death_language = false
 	hp_component.Hp_loss_death()
 
 ## 手持紫卡植物可以种植在该植物上
@@ -188,10 +199,7 @@ func new_purple_card_plant_can_in_plant():
 func new_purple_card_plant_can_in_plant_end():
 	body.body_light_and_dark_end()
 
-
-
 #endregion
-
 ## 睡眠植物被咖啡豆唤醒
 func coffee_bean_awake_up():
 	var tween:Tween = create_tween()

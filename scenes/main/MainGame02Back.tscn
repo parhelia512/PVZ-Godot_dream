@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://qa5hdp5x5xq8"]
+[gd_scene load_steps=7 format=3 uid="uid://qa5hdp5x5xq8"]
 
 [ext_resource type="PackedScene" uid="uid://b2soejmoqi7wd" path="res://scenes/main/MainGame00Base.tscn" id="1_ebgo8"]
 [ext_resource type="Texture2D" uid="uid://cvydoge11mp4" path="res://assets/image/background/background3.jpg" id="2_d84l0"]
-[ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mover/lawn_mower.tscn" id="3_ue22f"]
 [ext_resource type="PackedScene" uid="uid://bq5t78cjcpj7y" path="res://scenes/item/game_scenes_item/bg_item/pool.tscn" id="4_7o8m0"]
-[ext_resource type="PackedScene" uid="uid://vhxn4alby3ow" path="res://scenes/item/game_scenes_item/lawn_mover/pool_cleaner.tscn" id="4_jlyge"]
 [ext_resource type="PackedScene" uid="uid://brnfbv2sxv2qh" path="res://scenes/ui/plant_cell.tscn" id="5_lh46o"]
 [ext_resource type="Script" uid="uid://bkeu6j2ek3su7" path="res://scripts/main_game_item/zombies_row.gd" id="12_jlyge"]
 
@@ -35,36 +33,6 @@ position = Vector2(71.474, 343.806)
 position = Vector2(137.674, 304.677)
 
 [node name="Pool" parent="Background" index="2" instance=ExtResource("4_7o8m0")]
-
-[node name="LawnMover" parent="LawnMovers" index="0" instance=ExtResource("3_ue22f")]
-z_index = 15
-position = Vector2(34, 179)
-lane = 0
-
-[node name="LawnMover2" parent="LawnMovers" index="1" instance=ExtResource("3_ue22f")]
-z_index = 25
-position = Vector2(31, 259)
-lane = 1
-
-[node name="PoolCleaner" parent="LawnMovers" index="2" instance=ExtResource("4_jlyge")]
-z_index = 35
-position = Vector2(21, 349)
-lane = 2
-
-[node name="PoolCleaner2" parent="LawnMovers" index="3" instance=ExtResource("4_jlyge")]
-z_index = 45
-position = Vector2(19, 428)
-lane = 3
-
-[node name="LawnMover5" parent="LawnMovers" index="4" instance=ExtResource("3_ue22f")]
-z_index = 55
-position = Vector2(29, 523)
-lane = 4
-
-[node name="LawnMover6" parent="LawnMovers" index="5" instance=ExtResource("3_ue22f")]
-z_index = 65
-position = Vector2(30, 594)
-lane = 5
 
 [node name="PlantCellsRow1" type="Control" parent="PlantCellsRoot" index="0"]
 z_index = 10

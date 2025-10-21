@@ -47,6 +47,7 @@ func pad_array(arr: Array, target_size: int, pad_value = 0) -> Array:
 		arr.append(pad_value)
 	return arr
 
+## 世界坐标转屏幕坐标
 func world_to_screen(global_pos : Vector2) -> Vector2:
 	# pos 是 world / canvas 坐标，也就是某个 Node2D 的 global_position
 	var viewport := get_viewport()
@@ -54,4 +55,15 @@ func world_to_screen(global_pos : Vector2) -> Vector2:
 	var vt : Transform2D = viewport.get_screen_transform()
 	# 用 vt * pos 得到屏幕上的像素位置
 	return vt * global_pos
+
+## 创建计时器(触发一次)(角色buff[减速]使用)
+func create_new_timer_once(need_node:Node, callable:Callable, wait_time:float=0):
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.autostart = false
+	if wait_time != 0:
+		timer.wait_time = wait_time
+	timer.timeout.connect(callable)
+	need_node.add_child(timer)
+	return timer
 #endregion

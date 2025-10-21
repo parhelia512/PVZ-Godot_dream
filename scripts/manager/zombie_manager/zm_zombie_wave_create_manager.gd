@@ -30,6 +30,11 @@ const zombie_power = {
 	Global.ZombieType.Z018Digger: 2,		# 矿工
 	Global.ZombieType.Z019Pogo: 2,			# 跳跳
 	Global.ZombieType.Z020Yeti: 1,			# 雪人
+
+	Global.ZombieType.Z022Ladder: 3,		# 扶梯
+	Global.ZombieType.Z023Catapult: 4,		# 投篮
+	Global.ZombieType.Z024Gargantuar: 4,	# 伽刚特尔
+	Global.ZombieType.Z025Imp: 1,			# 小鬼
 }
 
 ## 创建 zombie_weights 字典，存储初始权重,普僵权重会修改，
@@ -56,6 +61,11 @@ var zombie_weights = {
 	Global.ZombieType.Z018Digger: 3000,		# 矿工
 	Global.ZombieType.Z019Pogo: 3000,			# 跳跳
 	Global.ZombieType.Z020Yeti: 100,			# 雪人
+
+	Global.ZombieType.Z022Ladder: 2000,		# 扶梯
+	Global.ZombieType.Z023Catapult: 2000,	# 投篮
+	Global.ZombieType.Z024Gargantuar: 2000,	# 伽刚特尔
+	Global.ZombieType.Z025Imp: 2000,		# 小鬼
 }
 
 ## 每波最大僵尸数量
@@ -70,7 +80,10 @@ var min_power:=100
 var curr_zombie_weight_upper_limit :int
 ## 当前波次生成的僵尸
 var wave_all_zombies:Array[Zombie000Base]
-
+## 是否有蹦极僵尸
+var is_bungi:bool = false
+## 蹦极僵尸数量范围
+var range_num_bungi:Vector2i = Vector2i(3,5)
 ## 创建僵尸信号，发给僵尸管理器创建僵尸
 signal signal_create_one_zombie_in_wave
 
@@ -81,7 +94,8 @@ func init_zombie_wave_create_manager(game_para:ResourceLevelData):
 	for zombie_type in self.zombie_refresh_types:
 		if min_power > zombie_power[zombie_type]:
 			min_power =  zombie_power[zombie_type]
-
+	self.is_bungi = game_para.is_bungi
+	self.range_num_bungi = game_para.range_num_bungi
 	zombie_choose_row_system.init_zombie_choose_row_system()
 
 
@@ -280,6 +294,19 @@ func _get_random_zombie_based_on_weight() -> int:
 #endregion
 
 #endregion
+
+#region 大波僵尸时生成特殊僵尸
+## 大波僵尸时创建特殊僵尸
+## [is_final:bool] 是否为最后一波
+func spawn_special_zombie_in_big_wave(is_final:=false):
+	## 珊瑚僵尸,若有水路自动创建,没有则不创建
+	if is_final:
+		spawn_sea_weed_zombies()
+	## 如果有蹦极僵尸
+	if is_bungi:
+		spawn_bungi_zombies()
+
+#region 珊瑚僵尸
 ## 最后一大波珊瑚僵尸
 func spawn_sea_weed_zombies():
 	var zombie_row_pool_i :Array[int]
@@ -300,3 +327,36 @@ func spawn_sea_weed_zombies():
 func _zombie_seaweed(z:Zombie001Norm):
 	z.global_position.x = randf_range(500, 750)
 	z.sea_weed_init()
+#endregion
+
+#region 蹦极僵尸
+func spawn_bungi_zombies():
+	## 选择plant_cell
+	var num_bungi_rand:int = randi_range(range_num_bungi.x, range_num_bungi.y)
+	var all_cell_have_plant:Array[PlantCell] = MainGameDate.main_game_manager.plant_cell_manager.get_cell_have_plant()
+	var num_bungi_res:int = min(num_bungi_rand, all_cell_have_plant.size())
+	## 打乱顺序
+	all_cell_have_plant.shuffle()
+	## 蹦极僵尸选中的plant_cell
+	var all_cell_be_bungi = all_cell_have_plant.slice(0, num_bungi_res)
+	## 生成蹦极僵尸
+	for plant_cell:PlantCell in all_cell_be_bungi:
+		MainGameDate.zombie_manager.create_norm_zombie(
+			Global.ZombieType.Z021Bungi,
+			MainGameDate.all_zombie_rows[plant_cell.row_col.x],
+			Character000Base.E_CharacterInitType.IsNorm,
+			plant_cell.row_col.x,
+			-1,
+			Vector2(plant_cell.global_position.x + plant_cell.size.x/2 - MainGameDate.all_zombie_rows[plant_cell.row_col.x].global_position.x,
+				MainGameDate.all_zombie_rows[plant_cell.row_col.x].zombie_create_position.position.y
+			),
+			create_bungi.bind(plant_cell)
+		)
+
+## 蹦极僵尸特殊函数
+func create_bungi(zombie_bungi:Zombie021Bungi, plant_cell:PlantCell):
+	zombie_bungi.plant_cell = plant_cell
+
+#endregion
+
+#endregion

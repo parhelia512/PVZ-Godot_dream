@@ -455,29 +455,32 @@ plant_type = 18
 position = Vector2(-41, -75)
 
 [node name="Squash_stem" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(32.6795, 3.07619)
-rotation = -0.171956
+position = Vector2(33.6688, -2.33752)
+rotation = 0.0195446
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_tfn24")
 centered = false
 
 [node name="Squash_body" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(5.47949, 9.46153)
-scale = Vector2(0.82641, 0.755326)
+position = Vector2(6.77917, 4.70728)
+scale = Vector2(0.796865, 0.804927)
 texture = ExtResource("3_kh2ri")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(33.3941, 32.9352)
-scale = Vector2(0.795147, 0.748531)
+position = Vector2(33.2896, 29.7312)
+scale = Vector2(0.79776, 0.801792)
 texture = ExtResource("4_rin1p")
 centered = false
 
 [node name="Anim_eye" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(25.5912, 22.4469)
-scale = Vector2(0.795147, 0.748531)
+position = Vector2(25.4344, 18.5864)
+scale = Vector2(0.79776, 0.801792)
 texture = ExtResource("5_xoecu")
 centered = false
+
+[node name="IceDecelerateTimer" type="Timer" parent="." index="5"]
+one_shot = true
 
 [node name="BlinkComponent" parent="." index="7"]
 is_enable_default = false
@@ -515,3 +518,9 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DSquashAttack" index="0"]
 shape = SubResource("RectangleShape2D_kh2ri")
+
+[node name="IceFreezeTimer" type="Timer" parent="." index="13"]
+one_shot = true
+
+[connection signal="timeout" from="IceDecelerateTimer" to="." method="_on_ice_decelerate_timer_timeout"]
+[connection signal="timeout" from="IceFreezeTimer" to="." method="_on_ice_freeze_timer_timeout"]

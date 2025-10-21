@@ -12,6 +12,9 @@ func init_norm_signal_connect():
 	bomb_component_jackbox.signal_trigger_bomb.connect(_strigger_bomb)
 	hp_component.signal_hp_component_death.connect(bomb_component_jackbox.disable_component.bind(ComponentBase.E_IsEnableFactor.Death))
 
+	signal_update_speed.connect(bomb_component_jackbox.owner_update_speed)
+
+
 ## 触发爆炸
 func _strigger_bomb():
 	is_pop = true

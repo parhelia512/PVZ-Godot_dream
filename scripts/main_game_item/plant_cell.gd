@@ -21,7 +21,6 @@ signal signal_cell_delete_tombstone(plant_cell:PlantCell, tombstone:TombStone)
 ## 植物碰撞器位置节点
 @onready var plant_area_2d_position: Control = $PlantArea2dPosition
 
-
 ## 植物格子类型
 enum PlantCellType{
 	Grass,		## 草地
@@ -35,7 +34,7 @@ enum PlantCellType{
 @export var row_col:Vector2i
 
 @export_group("当前格子的条件")
-@export_group("植物种植")
+@export_subgroup("植物种植")
 #@export_flags("1 无", "2 草地", "4 花盆", "8 水", "16 睡莲", "32 屋顶/裸地")
 var ori_condition:int = 3
 ## 植物种植地形条件（满足一个即可），默认（无1 + 草地2 = 3）
@@ -64,7 +63,7 @@ var plant_postion_node_ori_global_position:Dictionary =  {}
 
 ## 是否可以种植普通植物
 @export var can_common_plant := true
-@export_group("特殊状态，特殊状态下无法种植")
+@export_subgroup("特殊状态，特殊状态下无法种植")
 enum E_SpecialStatePlant {
 	IsTombstone,	# 墓碑
 	IsCrater,		# 坑洞
@@ -84,18 +83,17 @@ var crater:DoomShroomCrater
 
 ## 是否可以种植僵尸
 @export var can_common_zombie := true
-@export_group("特殊状态，特殊状态下无法种植僵尸")
+@export_subgroup("特殊状态，特殊状态下无法种植僵尸")
 enum E_SpecialStateZombie {
 	IsNoPlantBowling,		# 不能种植（保龄球红线模式不能种植）
 }
 ## 当前特殊状态
 @export var curr_special_state_zombie:Dictionary[E_SpecialStateZombie, bool]
 
-@export_group("斜面相关")
-## 当前是否在斜面上
-@export var is_slope :=false
+## 梯子
+var ladder:Ladder
 
-
+#region 植物格子初始化
 func _ready() -> void:
 	## 隐藏按钮样式
 	var new_stylebox_normal = $Button.get_theme_stylebox("pressed").duplicate()
@@ -103,6 +101,39 @@ func _ready() -> void:
 
 	## 根据格子类型初始化植物种植地形条件
 	init_condition()
+
+## 根据当前格子类型初始化当前格子状态
+func init_condition():
+	match plant_cell_type:
+		PlantCellType.Grass:
+			ori_condition = 3
+			curr_condition = 3
+
+		PlantCellType.Pool:
+			ori_condition = 9
+			curr_condition = 9
+
+		PlantCellType.Roof:
+			ori_condition = 33
+			curr_condition = 33
+
+	### 在当前格子中对应位置的节点初始全局位置,植物放在该节点下
+	for place_plant_in_cell in plant_container_node.keys():
+		plant_postion_node_ori_global_position[place_plant_in_cell] = plant_container_node[place_plant_in_cell].global_position
+#endregion
+
+
+#region 伽刚特尔攻击当前植物格子
+func be_gargantuar_attack(zombie_gargantuar:Zombie000Base):
+	for k in plant_in_cell:
+		if is_instance_valid(plant_in_cell[k]):
+			## 被压扁
+			plant_in_cell[k].be_flattened(zombie_gargantuar)
+
+
+#endregion
+
+#region 植物(僵尸)种植(死亡)
 
 ## 新植物种植
 func create_plant(plant_type:Global.PlantType):
@@ -139,9 +170,6 @@ func create_plant(plant_type:Global.PlantType):
 		plant.down_plant_container.add_child(plant_container_node[Global.PlacePlantInCell.Shell])
 		plant_container_node[Global.PlacePlantInCell.Shell].global_position = plant_postion_node_ori_global_position[Global.PlacePlantInCell.Shell] - plant.plant_up_position
 
-	## 更新植物代替受伤
-	update_plant_replace_be_attack()
-
 	return plant
 
 ## 咖啡豆唤醒在睡眠中的植物
@@ -155,13 +183,10 @@ func coffee_bean_awake_up():
 func get_new_plant_static_shadow_global_position(place_plant_in_cell:Global.PlacePlantInCell):
 	return plant_container_node[place_plant_in_cell].global_position
 
-
 ## 植物死亡
 func one_plant_free(plant:Plant000Base):
 	var curr_plant_condition :ResourcePlantCondition = Global.get_plant_info(plant.plant_type, Global.PlantInfoAttribute.PlantConditionResource)
-
-	plant_in_cell[curr_plant_condition.place_plant_in_cell] = null
-
+	#plant_in_cell[curr_plant_condition.place_plant_in_cell] = null
 	## 如果是down位置植物，下降中间植物和壳的位置，修改节点结构
 	if curr_plant_condition.place_plant_in_cell == Global.PlacePlantInCell.Down:
 
@@ -174,30 +199,10 @@ func one_plant_free(plant:Plant000Base):
 		add_child(plant_container_node[Global.PlacePlantInCell.Shell])
 		plant_container_node[Global.PlacePlantInCell.Shell].global_position = plant_postion_node_ori_global_position[Global.PlacePlantInCell.Shell]
 
-	##如果植物死亡时鼠标在当前植物格子中，重新发射鼠标进入格子信号检测种植
+	##如果植物死亡时鼠标在当前植物格子中，等待一帧后重新发射鼠标进入格子信号检测种植
 	if is_mouse_in_ui(button):
+		await get_tree().process_frame
 		_on_button_mouse_entered()
-	## 更新植物代替受伤
-	update_plant_replace_be_attack()
-
-## 根据当前格子类型初始化当前格子状态
-func init_condition():
-	match plant_cell_type:
-		PlantCellType.Grass:
-			ori_condition = 3
-			curr_condition = 3
-
-		PlantCellType.Pool:
-			ori_condition = 9
-			curr_condition = 9
-
-		PlantCellType.Roof:
-			ori_condition = 33
-			curr_condition = 33
-
-	### 在当前格子中对应位置的节点初始全局位置,植物放在该节点下
-	for place_plant_in_cell in plant_container_node.keys():
-		plant_postion_node_ori_global_position[place_plant_in_cell] = plant_container_node[place_plant_in_cell].global_position
 
 ## 改变特殊状态(植物)
 func update_special_state_plant(value:bool, change_specila_state:E_SpecialStatePlant):
@@ -247,6 +252,22 @@ func down_plant_change_condition(is_water:bool):
 		_lily_pad_change_condition()
 	else:
 		_flower_pot_change_condition()
+#endregion
+
+#region 蹦极僵尸偷植物
+## 被蹦极僵尸偷植物,返回被偷的植物body复制体
+func be_bungi()->Node2D:
+	for place in [
+		Global.PlacePlantInCell.Norm,
+		Global.PlacePlantInCell.Shell,
+		Global.PlacePlantInCell.Down,
+		Global.PlacePlantInCell.Float
+	]:
+		if is_instance_valid(plant_in_cell[place]):
+			#plant_in_cell[place].be_bungi()
+			return plant_in_cell[place].be_bungi()
+	return null
+#endregion
 
 #region 特殊状态
 #region 墓碑相关
@@ -261,7 +282,7 @@ func create_tombstone(tombstone:TombStone):
 	## 删除对应位置植物
 	for place_plant_in_cell in all_place_plant_in_cell_be_tombstone:
 		## 如果存在植物
-		if plant_in_cell[place_plant_in_cell]:
+		if is_instance_valid(plant_in_cell[place_plant_in_cell]):
 			plant_in_cell[place_plant_in_cell].character_death()
 
 	self.tombstone = tombstone
@@ -349,7 +370,7 @@ func is_mouse_in_ui(control_node: Control) -> bool:
 ## 返回当前被铲子威胁的植物
 func return_plant_be_shovel_look():
 	## 如果当前格子有植物,根据位置选择植物，若位置没有植物，选择别的植物
-	if get_curr_plant_num:
+	if get_curr_plant_num() > 0:
 		var plant_place_be_shovel = get_plant_place_from_mouse_pos()
 		return return_plant_null_res(plant_place_be_shovel)
 	else:
@@ -361,7 +382,7 @@ func return_plant_be_shovel_look():
 func return_plant_null_res(plant_place_be_shovel:Global.PlacePlantInCell, is_loop:=false):
 	match plant_place_be_shovel:
 		Global.PlacePlantInCell.Norm:
-			if plant_in_cell[Global.PlacePlantInCell.Norm]:
+			if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Norm]):
 				return plant_in_cell[Global.PlacePlantInCell.Norm]
 			else:
 				if is_loop:
@@ -370,7 +391,7 @@ func return_plant_null_res(plant_place_be_shovel:Global.PlacePlantInCell, is_loo
 					return return_plant_null_res(Global.PlacePlantInCell.Shell, true)
 
 		Global.PlacePlantInCell.Shell:
-			if plant_in_cell[Global.PlacePlantInCell.Shell]:
+			if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Shell]):
 				return plant_in_cell[Global.PlacePlantInCell.Shell]
 			else:
 				if is_loop:
@@ -379,29 +400,28 @@ func return_plant_null_res(plant_place_be_shovel:Global.PlacePlantInCell, is_loo
 					return return_plant_null_res(Global.PlacePlantInCell.Norm, true)
 
 		Global.PlacePlantInCell.Float:
-			if plant_in_cell[Global.PlacePlantInCell.Float]:
+			if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Float]):
 				return plant_in_cell[Global.PlacePlantInCell.Float]
 			else:
 				return return_plant_null_res(Global.PlacePlantInCell.Norm)
 
 		Global.PlacePlantInCell.Down:
-			if plant_in_cell[Global.PlacePlantInCell.Down]:
+			if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Down]):
 				return plant_in_cell[Global.PlacePlantInCell.Down]
 			else:
 				return return_plant_null_res(Global.PlacePlantInCell.Float)
 
-## 铲子进入该shell时，判断当前格子是否有多个植物,
+## 铲子进入该shell时，判断当前格子是否有多个植物,蹦极僵尸判断是否有植物
 ## 有多个植物时，会随鼠标移动更新当前被铲子看的植物
-## 判断时忽略down植物
 func get_curr_plant_num()->int:
 	var curr_plant_num = 0
-	if plant_in_cell[Global.PlacePlantInCell.Norm]:
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Norm]):
 		curr_plant_num += 1
-	if plant_in_cell[Global.PlacePlantInCell.Shell]:
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Shell]):
 		curr_plant_num += 1
-	if plant_in_cell[Global.PlacePlantInCell.Float]:
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Float]):
 		curr_plant_num += 1
-	if plant_in_cell[Global.PlacePlantInCell.Down]:
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Down]):
 		curr_plant_num += 1
 	return curr_plant_num
 
@@ -423,16 +443,47 @@ func get_plant_place_from_mouse_pos():
 
 #endregion
 
-#region 更新植物代替受伤
-## 种植新植物或植物死亡时调用
-func update_plant_replace_be_attack():
-	## 底部植物和正常植物
-	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Down]) and is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Norm]):
-		plant_in_cell[Global.PlacePlantInCell.Down].curr_replace_be_attack_plant = plant_in_cell[Global.PlacePlantInCell.Norm]
-	## 正常植物和壳类植物
-	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Norm]) and is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Shell]):
-		plant_in_cell[Global.PlacePlantInCell.Norm].curr_replace_be_attack_plant = plant_in_cell[Global.PlacePlantInCell.Shell]
-	## 底部植物和壳类植物
-	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Down]) and is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Shell]):
-		plant_in_cell[Global.PlacePlantInCell.Down].curr_replace_be_attack_plant = plant_in_cell[Global.PlacePlantInCell.Shell]
+#region 梯子
+## 被挂载梯子
+## plant:挂载梯子的植物,该植物死亡时,梯子消失
+## global_pos:挂载梯子精灵节点的全局位置
+func be_ladder(plant:Plant000Base):
+	ladder = SceneRegistry.LADDER.instantiate()
+	ladder.init_ladder(plant, self)
+	add_child(ladder)
+	for p:Plant000Base in plant_in_cell.values():
+		if is_instance_valid(p):
+			p.signal_ladder_update.emit()
+
+## 梯子消失
+func ladder_loss():
+	ladder.ladder_death()
+	for p:Plant000Base in plant_in_cell.values():
+		if is_instance_valid(p):
+			p.signal_ladder_update.emit()
+
+## 获取当前植物格子可以挂载梯子的植物
+func get_plant_ladder() -> Plant000Base:
+	## 如果有壳类植物
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Shell]):
+		return plant_in_cell[Global.PlacePlantInCell.Shell]
+	## 如果Norm植物
+	if is_instance_valid(plant_in_cell[Global.PlacePlantInCell.Norm]) and plant_in_cell[Global.PlacePlantInCell.Norm].is_can_ladder:
+		return plant_in_cell[Global.PlacePlantInCell.Norm]
+
+	return null
+
+
 #endregion
+
+## 获取周围一圈(包括本身格子)的某个植物
+func get_plant_surrounding(p_t:Global.PlantType) -> Array[Plant000Base]:
+	var all_plant:Array[Plant000Base] = []
+	## 植物种植条件
+	var plant_condition:ResourcePlantCondition = Global.get_plant_info(p_t, Global.PlantInfoAttribute.PlantConditionResource)
+	for i in range(max(0, row_col.x-1), min(MainGameDate.row_col.x, row_col.x+2)):
+		for j in range(max(0, row_col.y-1), min(MainGameDate.row_col.y, row_col.y+2)):
+			var p_c:PlantCell = MainGameDate.all_plant_cells[i][j]
+			if is_instance_valid(p_c.plant_in_cell[plant_condition.place_plant_in_cell]) and p_c.plant_in_cell[plant_condition.place_plant_in_cell].plant_type == p_t:
+				all_plant.append(p_c.plant_in_cell[plant_condition.place_plant_in_cell])
+	return all_plant

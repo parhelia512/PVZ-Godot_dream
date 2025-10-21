@@ -6,10 +6,10 @@
 max_attack_num = -1
 speed = 450.0
 bullet_mode = 1
-type_bullet_SFX = 0
 max_distance = 350.0
+type_bullet_SFX = 0
 
-[node name="BulletShadow" parent="." index="1"]
+[node name="BulletShadow" parent="." index="0"]
 visible = false
 
 [node name="BulletEffect" parent="." index="2"]

@@ -78,4 +78,4 @@ func Hp_loss(attack_value:int, bullet_mode : Global.AttackMode = Global.AttackMo
 ## 掉血死亡
 ##[is_drop:bool]是否有掉落body
 func Hp_loss_death(is_drop:=true):
-	Hp_loss(get_all_hp(), Global.AttackMode.Norm, true, false)
+	Hp_loss(get_all_hp(), Global.AttackMode.Norm, is_drop, false)

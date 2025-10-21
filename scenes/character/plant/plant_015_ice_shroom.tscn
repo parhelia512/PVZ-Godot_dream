@@ -120,8 +120,8 @@ special_component_update_pos_in_slope = [NodePath("BombComponent")]
 position = Vector2(-41, -69)
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(12.9943, 41.1227)
-scale = Vector2(0.82317, 0.726434)
+position = Vector2(12.9526, 41.2895)
+scale = Vector2(0.824421, 0.722262)
 texture = ExtResource("2_37t62")
 centered = false
 
@@ -137,33 +137,33 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
 visible = false
-position = Vector2(27.048, 40.5362)
+position = Vector2(27.005, 40.9518)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_663tl")
 centered = false
 
 [node name="IceShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(-1.4, 4.12831)
-scale = Vector2(0.8, 0.800943)
+position = Vector2(-1.4, 4.81049)
+scale = Vector2(0.8, 0.792633)
 texture = ExtResource("5_236rb")
 centered = false
 
-[node name="BlinkComponent" parent="." index="7"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("7_wi4d4")]([SubResource("Resource_ohyhk")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_euprm")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_wi4d4")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="BombComponent" type="Node2D" parent="." index="11"]
+[node name="BombComponent" type="Node2D" parent="." index="10"]
 script = ExtResource("8_37t62")
 bomb_value = 0
 is_cherry_bomb = false

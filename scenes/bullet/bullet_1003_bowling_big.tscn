@@ -14,7 +14,7 @@ radius = 30.0
 script = ExtResource("2_8mtcf")
 max_attack_num = -1
 speed = 188.0
-type_bullet_SFX = 51
+type_bullet_SFX = 1001
 can_attack_zombie_status = 3
 
 [node name="BulletShadow" parent="." index="0"]
@@ -67,9 +67,3 @@ collision_layer = 72
 [node name="CollisionShape2D" parent="Area2DAttack" index="0"]
 position = Vector2(1, -30)
 shape = SubResource("CircleShape2D_fm8h6")
-
-[node name="Area2DUp" parent="." index="4"]
-visible = false
-collision_mask = 0
-monitoring = false
-monitorable = false

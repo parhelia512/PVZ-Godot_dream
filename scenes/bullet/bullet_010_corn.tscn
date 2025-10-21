@@ -7,8 +7,8 @@
 [node name="Bullet010Corn" instance=ExtResource("1_02pep")]
 parabola_height = -500.0
 is_rotate = true
-speed = 600.0
 bullet_mode = 2
+type_bullet_SFX = 3
 can_attack_zombie_status = 5
 
 [node name="BulletBody" parent="Body" index="0"]

@@ -65,18 +65,18 @@ scale = Vector2(0.735294, 0.695652)
 texture = ExtResource("4_pknwq")
 centered = false
 
+[node name="BlinkComponent" parent="." index="6"]
+all_blink_body_change = Array[ExtResource("6_taohl")]([SubResource("Resource_wqhw3")])
+
 [node name="DownPlantContainer" parent="." index="7"]
 position = Vector2(0, -9)
 
-[node name="BlinkComponent" parent="." index="9"]
-all_blink_body_change = Array[ExtResource("6_taohl")]([SubResource("Resource_wqhw3")])
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
 libraries = {
 &"": SubResource("AnimationLibrary_gmjy2")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_iaqk1")
 advance_expression_base_node = NodePath("..")

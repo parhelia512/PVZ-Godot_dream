@@ -40,8 +40,8 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_hpcex")
 
 [node name="Bullet003Puff" instance=ExtResource("1_jeubn")]
-type_bullet_SFX = 0
 max_distance = 250.0
+type_bullet_SFX = 0
 
 [node name="BulletBody" parent="Body" index="0"]
 texture = ExtResource("2_4bpgy")
@@ -59,7 +59,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ksldc")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="5"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4"]
 position = Vector2(-8, 0)
 texture = ExtResource("4_22myu")
 process_material = SubResource("ParticleProcessMaterial_bbmkp")

@@ -157,6 +157,7 @@ script = ExtResource("2_4jr4d")
 plant_type = 0
 init_be_attack_status = 1
 is_sleep_in_day = false
+is_can_ladder = false
 is_sleeping = false
 is_garden_aquarium = false
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), NodePath("GardenComponent")]
@@ -224,7 +225,7 @@ shape = SubResource("RectangleShape2D_bie68")
 [node name="HurtBoxReal" parent="BeAttackedBoxComponent" index="1"]
 collision_layer = 256
 
-[node name="SleepComponent" type="Node2D" parent="." index="6" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" type="Node2D" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 unique_name_in_owner = true
 visible = false
 script = ExtResource("5_813jy")
@@ -254,13 +255,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_vonjk")
 }
 
-[node name="BlinkComponent" type="Node2D" parent="." index="7"]
+[node name="BlinkComponent" type="Node2D" parent="." index="6"]
 unique_name_in_owner = true
 script = ExtResource("6_813jy")
 
 [node name="BlinkTimer" type="Timer" parent="BlinkComponent" index="0"]
 
-[node name="GardenComponent" type="Node2D" parent="." index="8"]
+[node name="GardenComponent" type="Node2D" parent="." index="7"]
 unique_name_in_owner = true
 z_index = 1
 script = ExtResource("7_at3ho")

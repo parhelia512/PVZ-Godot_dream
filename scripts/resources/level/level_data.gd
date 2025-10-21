@@ -88,36 +88,35 @@ enum E_CardMode{
 #endregion
 
 #region 关卡参数
-#region 关卡
-@export_group("关卡")
-## 游戏模式
-@export var  game_mode:GameMode = GameMode.Adventure
-## 冒险关卡
-@export var adventure_game_level :AdventureLevel = AdventureLevel.FrontDay
-## 迷你游戏关卡
-@export var mini_game_level :MiniGameLevel = MiniGameLevel.Bowling
-#endregion
+##region 关卡
+#@export_group("关卡")
+### 游戏模式
+#@export var game_mode:GameMode = GameMode.Adventure
+### 冒险关卡
+#@export var adventure_game_level :AdventureLevel = AdventureLevel.FrontDay
+### 迷你游戏关卡
+#@export var mini_game_level :MiniGameLevel = MiniGameLevel.Bowling
+##endregion
 
 #region 关卡背景
-@export_group("关卡背景参数")
 ## 游戏场景
 @export var game_sences:Global.MainScenes = Global.MainScenes.MainGameFront
+@export_group("关卡背景参数")
 ## 游戏背景
 @export var game_BG:GameBg = GameBg.FrontDay
 ## 游戏背景音乐
 @export var game_BGM:GameBGM = GameBGM.FrontDay
-
 ## 是否有雾
 @export var is_fog:bool = false
 ## 是否为白天,控制蘑菇睡觉
 @export var is_day:bool = true
 ## 是否天降阳光,传送带没有
 @export var is_day_sun:bool = true
+## 是否有小推车
+@export var is_lawn_mover:bool = true
 
 @export_subgroup("预种植植物(从1开始,0为整行或整列)")
 @export var all_pre_plant_data:Array[PrePlantResource]
-
-
 
 #endregion
 
@@ -150,6 +149,10 @@ enum E_CardMode{
 	Global.ZombieType.Z004PoleVaulter,	# 撑杆僵尸
 	Global.ZombieType.Z005Bucket,			# 铁桶僵尸
 ]
+## 是否有蹦极僵尸
+@export var is_bungi := false
+## 大波时生成的蹦极僵尸数量范围
+@export var range_num_bungi:Vector2i = Vector2i(3,5)
 @export_subgroup("锤僵尸出怪模式（需调整对应墓碑参数）")
 ## 墓碑出怪倍率
 @export var zombie_multy_hammer := 1
@@ -222,6 +225,18 @@ enum E_CardMode{
 #endregion
 
 ## 游戏开始会根据参数初始化一些硬性的参数
+"""
+卡槽模式:
+	正常模式:
+		无
+	传送带模式:
+		有卡槽,禁止选卡,禁止天降阳光
+预选卡:
+	使用 0 补全预选卡,方便后续操作
+出怪参数:
+	正常模式:
+		出怪列表禁止: 011鸭子僵尸 021蹦极僵尸 025小鬼僵尸
+"""
 func init_para():
 	match card_mode:
 		E_CardMode.Norm:
@@ -238,3 +253,22 @@ func init_para():
 		GlobalUtils.pad_array(pre_choosed_card_list_zombie, max_choosed_card_num, 0)
 	print("预选卡植物:", pre_choosed_card_list_plant)
 	print("预选卡僵尸:", pre_choosed_card_list_zombie)
+	zombie_refresh_types = zombie_refresh_types.filter(func(x): return x != 0)
+
+	## 出怪参数判断是否正确
+	if monster_mode == E_MonsterMode.Norm:
+		var is_err:=false
+		for i in range(zombie_refresh_types.size()-1, -1, -1):
+			var zombie_type :Global.ZombieType = zombie_refresh_types[i]
+			if zombie_type == Global.ZombieType.Z011Duckytube:
+				printerr("出怪刷新列表禁止使用 Z011Duckytube ")
+				zombie_refresh_types.remove_at(i)
+				is_err = true
+			elif zombie_type == Global.ZombieType.Z021Bungi:
+				printerr("出怪刷新列表禁止使用 Z021Bungi ,请选择 is_bungi 参数")
+				zombie_refresh_types.remove_at(i)
+				is_err = true
+
+		if is_err:
+			print("将上述出怪刷新列表错误僵尸删除")
+

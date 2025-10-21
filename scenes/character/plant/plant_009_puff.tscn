@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://prux5sri4p8i"]
+[gd_scene load_steps=30 format=3 uid="uid://prux5sri4p8i"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_o8j4c"]
 [ext_resource type="Texture2D" uid="uid://8othbxgdaxqc" path="res://assets/reanim/PuffShroom_body.png" id="2_7rmee"]
+[ext_resource type="Script" uid="uid://dhgm65uqy38wr" path="res://scripts/character/plant/plant_009_puff.gd" id="2_wddx6"]
 [ext_resource type="Texture2D" uid="uid://7o5qmisxmqhk" path="res://assets/reanim/PuffShroom_stem.png" id="3_t2sgi"]
 [ext_resource type="Texture2D" uid="uid://bp35mb8xfhk3r" path="res://assets/reanim/PuffShroom_tip.png" id="4_57i3y"]
 [ext_resource type="Texture2D" uid="uid://c1s61ypq4l5s7" path="res://assets/reanim/PuffShroom_head.png" id="5_wddx6"]
@@ -90,10 +91,10 @@ node_connections = [&"OneShot", 0, &"StateMachine", &"OneShot", 1, &"TimeScale 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57i3y"]
 size = Vector2(249, 5)
 
-[node name="Plant009Puff" node_paths=PackedStringArray("speech_influence_components") instance=ExtResource("1_o8j4c")]
+[node name="Plant009Puff" instance=ExtResource("1_o8j4c")]
+script = ExtResource("2_wddx6")
 plant_type = 9
 is_sleep_in_day = true
-speech_influence_components = [NodePath("AttackComponent")]
 
 [node name="Shadow" parent="." index="0"]
 scale = Vector2(0.576, 0.5)
@@ -113,28 +114,26 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(29.3, 47.7787)
-scale = Vector2(0.44, 0.40864)
+position = Vector2(29.3, 46.8532)
+scale = Vector2(0.44, 0.431562)
 texture = ExtResource("2_7rmee")
 centered = false
 
 [node name="PuffShroom_stem" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(47.6, 51.6311)
-rotation = 0.22793
-scale = Vector2(0.466232, 0.416903)
-skew = -0.22793
+position = Vector2(47.6, 51.2532)
+scale = Vector2(0.45, 0.441562)
 texture = ExtResource("3_t2sgi")
 centered = false
 
 [node name="PuffShroom_tip" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(49.4, 49.7951)
+position = Vector2(49.4, 48.9688)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("4_57i3y")
 centered = false
 
 [node name="PuffShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(21.8, 31.1951)
-scale = Vector2(0.455, 0.396884)
+position = Vector2(22.2312, 28.9063)
+scale = Vector2(0.443375, 0.432405)
 texture = ExtResource("5_wddx6")
 centered = false
 
@@ -144,7 +143,7 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
 visible = false
-position = Vector2(44, 49.9475)
+position = Vector2(43.9281, 49.425)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_exn8h")
 centered = false
@@ -153,7 +152,7 @@ centered = false
 position = Vector2(55, 55)
 scale = Vector2(0.5, 0.592593)
 
-[node name="SleepComponent" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../AttackComponent")]
 
 [node name="Zzz" parent="SleepComponent/Body" index="0"]
@@ -169,15 +168,15 @@ position = Vector2(17.4496, -60.2756)
 modulate = Color(1, 1, 1, 1)
 position = Vector2(37.4278, -35.741)
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("7_57i3y")]([SubResource("Resource_exn8h")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_kf1mc")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_uqyc5")
 advance_expression_base_node = NodePath("..")
@@ -188,7 +187,7 @@ parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 2/scale" = 2.0
 
-[node name="AttackComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("markers_2d_bullet")]
+[node name="AttackComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("markers_2d_bullet")]
 script = ExtResource("12_wddx6")
 attack_bullet_type = 3
 markers_2d_bullet = [NodePath("../Body/BodyCorrect/Marker2DBullet")]

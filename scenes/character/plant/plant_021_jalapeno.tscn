@@ -80,73 +80,73 @@ visible = false
 centered = false
 
 [node name="Jalapeno_stem" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(36.0576, 3.62881)
-rotation = 0.285528
-scale = Vector2(0.736562, 0.787141)
-skew = -0.0396498
+position = Vector2(35.9215, 3.60063)
+rotation = 0.273454
+scale = Vector2(0.739171, 0.787595)
+skew = -0.0380663
 texture = ExtResource("2_2sesa")
 centered = false
 
 [node name="Jalapeno_body" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(16.5571, 12.1003)
-scale = Vector2(0.835291, 0.762709)
+position = Vector2(16.5797, 12.0209)
+scale = Vector2(0.833816, 0.764184)
 texture = ExtResource("3_6qgup")
 centered = false
 
 [node name="Jalapeno_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(23.9424, 34.4715)
-scale = Vector2(0.979169, 0.67441)
+position = Vector2(24.0785, 34.4601)
+scale = Vector2(0.971684, 0.679741)
 texture = ExtResource("4_7jj3l")
 centered = false
 
 [node name="Jalapeno_eye1" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(21.3, 20.6573)
-scale = Vector2(0.8, 0.674125)
+position = Vector2(21.3, 20.6006)
+scale = Vector2(0.8, 0.679342)
 texture = ExtResource("5_wobmd")
 centered = false
 
 [node name="Jalapeno_eye2" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(41, 26.5288)
-scale = Vector2(0.8, 0.520388)
+position = Vector2(41, 26.4608)
+scale = Vector2(0.8, 0.53207)
 texture = ExtResource("6_citj3")
 centered = false
 
 [node name="Jalapeno_cheek" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(41.3141, 28.4571)
-scale = Vector2(0.812169, 0.679554)
+position = Vector2(41.2797, 28.4797)
+scale = Vector2(0.804684, 0.684544)
 texture = ExtResource("7_yip6k")
 centered = false
 
 [node name="Jalapeno_eyebrow1" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(24.7147, 15.8715)
-rotation = 0.2369
-scale = Vector2(0.902158, 0.785427)
-skew = -0.000995688
+position = Vector2(24.6013, 15.9399)
+rotation = 0.227003
+scale = Vector2(0.897848, 0.785994)
+skew = -0.00139162
 texture = ExtResource("8_6ompq")
 centered = false
 
 [node name="Jalapeno_eyebrow2" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(40.0715, 22.9288)
-scale = Vector2(0.911302, 0.732133)
+position = Vector2(40.1, 22.8608)
+scale = Vector2(0.906652, 0.734968)
 texture = ExtResource("9_60eid")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_3dqyt")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_g5a41")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="BombComponent" type="Node2D" parent="." index="11"]
+[node name="BombComponent" type="Node2D" parent="." index="10"]
 unique_name_in_owner = true
 script = ExtResource("12_wobmd")
 can_attack_plant_status = 7

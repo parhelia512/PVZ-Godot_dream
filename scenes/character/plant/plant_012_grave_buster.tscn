@@ -1168,32 +1168,32 @@ node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"),
 position = Vector2(-41, -90)
 
 [node name="Gravebuster_tooth1" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(7.3, 44.1603)
+position = Vector2(7.3, 45.4964)
 texture = ExtResource("2_xhurg")
 centered = false
 
 [node name="Gravebuster_tooth2" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(12, 45.1087)
+position = Vector2(12, 43.2868)
 texture = ExtResource("3_2a3ft")
 centered = false
 
 [node name="Gravebuster_tooth3" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(26.6, 41.9585)
+position = Vector2(26.6, 43.659)
 texture = ExtResource("4_27we4")
 centered = false
 
 [node name="Gravebuster_tooth6" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(59, 46.7725)
+position = Vector2(59, 45.5578)
 texture = ExtResource("5_1p5sv")
 centered = false
 
 [node name="Gravebuster_tooth5" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(49, 40.1913)
+position = Vector2(49, 42.0132)
 texture = ExtResource("6_dsbn4")
 centered = false
 
 [node name="Gravebuster_tooth4" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(37.9, 44.3415)
+position = Vector2(37.9, 42.641)
 texture = ExtResource("7_up1rf")
 centered = false
 
@@ -1208,46 +1208,47 @@ texture = ExtResource("9_sguxt")
 centered = false
 
 [node name="Gravebuster_eyebrows" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(12, 18.138)
-scale = Vector2(1.00167, 0.680979)
+position = Vector2(12, 17.3663)
+scale = Vector2(1.001, 0.756529)
 texture = ExtResource("10_axj0w")
 centered = false
 
 [node name="Gravebuster_leaf1" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(-12.3707, 18.6105)
-rotation = -0.369627
-scale = Vector2(0.997672, 0.997672)
+position = Vector2(-9.82893, 13.3374)
+rotation = 0.0704219
+scale = Vector2(0.999, 0.999)
 texture = ExtResource("11_fdwy4")
 centered = false
 
 [node name="Gravebuster_leaf2" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(80.6275, 16.431)
-rotation = 0.681274
-scale = Vector2(0.943, 1.026)
-skew = 0.0488695
+position = Vector2(83.9626, 17.8542)
+rotation = 1.02308
+scale = Vector2(0.945, 1.027)
+skew = 0.0488693
 texture = ExtResource("12_sd0vj")
 centered = false
 
 [node name="Gravebuster_leaf3" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(68.5052, 6.53798)
-rotation = 1.0067
-scale = Vector2(1.016, 0.948328)
-skew = 0.067496
+position = Vector2(64.2121, 4.19157)
+rotation = 0.390516
+scale = Vector2(1.01708, 0.948458)
+skew = 0.0680678
 texture = ExtResource("12_sd0vj")
 centered = false
 
 [node name="Gravebuster_leaf4" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(32.207, -0.870733)
-rotation = 6.38189
-scale = Vector2(0.991672, 0.908672)
-skew = -0.153017
+position = Vector2(30.1374, -0.137356)
+rotation = 6.16396
+scale = Vector2(0.994, 0.911)
+skew = -0.152642
 texture = ExtResource("12_sd0vj")
 centered = false
 
 [node name="Gravebuster_leaf5" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(7.60349, 14.9052)
-rotation = 4.50863
-scale = Vector2(0.937, 1.03267)
+position = Vector2(6.60843, 12.8626)
+rotation = 4.77251
+scale = Vector2(0.936, 1.034)
+skew = -0.00174522
 texture = ExtResource("12_sd0vj")
 centered = false
 
@@ -1261,15 +1262,15 @@ texture = ExtResource("13_e5ukr")
 process_material = SubResource("ParticleProcessMaterial_brsh4")
 script = SubResource("GDScript_xhurg")
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_apf3a")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_sd45s")
 advance_expression_base_node = NodePath("..")

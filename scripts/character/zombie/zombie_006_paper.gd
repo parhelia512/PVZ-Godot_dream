@@ -6,7 +6,8 @@ class_name Zombie006Paper
 
 signal signal_paper_drop()
 
-func _ready() -> void:
+## 初始化正常出战角色信号连接
+func init_norm_signal_connect():
 	super()
 	hp_component.signal_armor2_death.connect(drop_paper)
 	## 连接修改每分钟攻击值

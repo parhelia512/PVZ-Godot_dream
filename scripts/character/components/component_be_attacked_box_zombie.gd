@@ -6,13 +6,14 @@ class_name BeAttackedBoxComponentZombie
 @onready var hurt_box_detection: Area2D = %HurtBoxDetection
 ## 攻击时被检测受击框（大嘴花、窝瓜可以检测到）
 @onready var hurt_box_detection_on_attack: Area2D = %HurtBoxDetectionOnAttack
-
+## 攻击时受击框修正x位置
+@export var x_correct_on_attack:float = -20
 
 ## 攻击时受击框出现
 func change_area_attack_appear(value: bool):
 	if is_instance_valid(hurt_box_detection_on_attack):
 		if value:
-			hurt_box_detection_on_attack.position.x = -20
+			hurt_box_detection_on_attack.position.x = x_correct_on_attack
 		else:
 			hurt_box_detection_on_attack.position.x = 0
 

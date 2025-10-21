@@ -19,11 +19,14 @@ class_name CharredComponentZombieBobsled
 
 ## 播放灰烬动画
 func play_charred_anim():
-	zombie_bobsled_1.modulate = Color.BLACK
+	super()
+	var black_zombie_bobsled_1:Node2D = zombie_bobsled_1.duplicate()
+	add_child(black_zombie_bobsled_1)
+	black_zombie_bobsled_1.global_position = zombie_bobsled_1.global_position
+	black_zombie_bobsled_1.modulate = Color.BLACK
 	for i in range(4):
 		all_body[i].visible = false
 		zombie_charred[i].visible = true
 		all_anim_lib[i].play("ALL_ANIMS")
 	await all_anim_lib[0].animation_finished
-
-	owner_character.queue_free()
+	queue_free()

@@ -48,7 +48,10 @@ func _ready():
 
 	## 初始化僵尸和行列表
 	MainGameDate.all_zombie_rows.clear()
-	for zombie_row in zombies_root.get_children():
+	for zombie_row_i in zombies_root.get_child_count():
+		var zombie_row :CanvasItem= zombies_root.get_child(zombie_row_i)
+		zombie_row.z_index = (zombie_row_i+1) * 10
+
 		MainGameDate.all_zombie_rows.append(zombie_row)
 		var row_ice_roads:Array[IceRoad] = []
 		MainGameDate.all_ice_roads.append(row_ice_roads)
@@ -119,6 +122,7 @@ func create_norm_zombie(
 	## 只要创建僵尸，都要连接这两个信号
 	zombie.signal_character_death.connect(_on_zombie_dead.bind(zombie))
 	zombie.signal_character_be_hypno.connect(_on_zombie_hypno.bind(zombie))
+	zombie.signal_lane_update.connect(zombie_update_lane.bind(zombie, zombie.lane))
 
 	all_zombies_2d[lane].append(zombie)
 	all_zombies_1d.append(zombie)
@@ -222,8 +226,9 @@ func ice_all_zombie(time_ice:float, time_decelerate: float):
 func jalapeno_bomb_lane_zombie(lane:int):
 	print(all_zombies_2d[lane])
 	for i in range(all_zombies_2d[lane].size()-1,-1,-1) :
-		var zombie:Zombie000Base = all_zombies_2d[lane][i]
-		zombie.be_bomb(1800, true)
+		if is_instance_valid(all_zombies_2d[lane][i]):
+			var zombie:Zombie000Base = all_zombies_2d[lane][i]
+			zombie.be_bomb(1800, true)
 
 ## 三叶草吹走空中僵尸
 func blover_blow_away_in_sky_zombie():
@@ -240,3 +245,13 @@ func blover_blow_away_in_sky_zombie():
 ## 最后一波时每秒检查是否有僵尸离开当前视野
 func _on_check_zombie_end_wave_timer_timeout() -> void:
 	set_zombie_death_over_view()
+
+## 僵尸换行,更新数据
+func zombie_update_lane(zombie:Zombie000Base, ori_lane:int):
+	if all_zombies_2d[ori_lane].has(zombie):
+		all_zombies_2d[ori_lane].erase(zombie)
+		all_zombies_2d[zombie.lane].append(zombie)
+		zombie.signal_lane_update.disconnect(zombie_update_lane.bind(zombie, ori_lane))
+		zombie.signal_lane_update.connect(zombie_update_lane.bind(zombie, zombie.lane))
+		#print("僵尸换行")
+

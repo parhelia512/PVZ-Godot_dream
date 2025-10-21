@@ -68,6 +68,8 @@ func _ready() -> void:
 ## 判断body是否需要变化
 ## curr_hp: 当前剩余血量
 func judge_body_change(curr_hp:int, is_drop:=true):
+	if not is_instance_valid(owner_character):
+		return
 	## 死亡并且无变化
 	if is_no_change and curr_hp <= boundary_value_hp[-1]:
 		return

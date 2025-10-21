@@ -85,14 +85,16 @@ func start_next_wave() -> void:
 			await ui_remind_word.zombie_approach(true)
 			curr_wave_all_zombies = zombie_wave_create_manager.create_curr_wave_all_zombies(curr_wave, true)
 			set_progress_bar(curr_wave/10)
-			## 额外生成珊瑚僵尸
-			zombie_wave_create_manager.spawn_sea_weed_zombies()
+			## 额外生成大波特殊僵尸,珊瑚僵尸,蹦极僵尸
+			zombie_wave_create_manager.spawn_special_zombie_in_big_wave(true)
 
 		else:
 			curr_wave_type = E_WaveType.Flag
 			await ui_remind_word.zombie_approach(false)
 			curr_wave_all_zombies = zombie_wave_create_manager.create_curr_wave_all_zombies(curr_wave, true)
 			set_progress_bar(curr_wave/10)
+			## 额外生成大波特殊僵尸,珊瑚僵尸,蹦极僵尸
+			zombie_wave_create_manager.spawn_special_zombie_in_big_wave(false)
 
 		## 如果有墓碑
 		if is_have_tombston:

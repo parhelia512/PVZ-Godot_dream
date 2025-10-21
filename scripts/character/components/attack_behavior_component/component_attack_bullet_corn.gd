@@ -7,8 +7,9 @@ class_name AttackComponentBulletCorn
 ## body中的黄油节点
 @export var sprite_2d_butter_in_body:Sprite2D
 
-func _on_bullet_attack_cd_timer_timeout() -> void:
-	super()
+
+## 随机选择黄油子弹或玉米子弹,攻击动画开始时调用
+func random_choose_butter_or_corn():
 	var p = randf()
 	if p < p_butter:
 		attack_bullet_type = Global.BulletType.Bullet011Butter

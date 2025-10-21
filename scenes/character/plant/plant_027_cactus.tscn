@@ -146,37 +146,38 @@ plant_type = 27
 position = Vector2(-37, -66)
 
 [node name="Cactus_flower" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(12.2291, -4.65815)
-scale = Vector2(0.775192, 0.897294)
+position = Vector2(9.52501, -0.766675)
+scale = Vector2(0.828333, 0.826458)
+skew = -0.0773033
 texture = ExtResource("2_4xp4t")
 centered = false
 
 [node name="Cactus_floer_top" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(21.7259, -9.35815)
-rotation = 0.103884
-scale = Vector2(0.8, 0.841419)
+position = Vector2(19.9417, -4.60834)
+rotation = -0.0825389
+scale = Vector2(0.799, 0.822667)
 texture = ExtResource("3_d8wji")
 centered = false
 
 [node name="Cactus_floer_top2" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(15.9613, -5.05496)
-rotation = 0.103884
-scale = Vector2(0.5, 0.525709)
+position = Vector2(15.1, 0.51249)
+rotation = -0.0825389
+scale = Vector2(0.499208, 0.514042)
 texture = ExtResource("3_d8wji")
 centered = false
 
 [node name="Cactus_floer_top3" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(17.2904, -10.1227)
-rotation = 0.103884
-scale = Vector2(0.55, 0.578387)
+position = Vector2(15.4417, -4.50834)
+rotation = -0.0825389
+scale = Vector2(0.549, 0.56525)
 texture = ExtResource("3_d8wji")
 centered = false
 
 [node name="Cactus_arm2_2" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(52, 43.1968)
-rotation = -0.0651461
-scale = Vector2(0.802645, 0.841741)
-skew = 0.0651461
+position = Vector2(52, 43.4792)
+rotation = 0.0992656
+scale = Vector2(0.805583, 0.823458)
+skew = -0.0992656
 texture = ExtResource("4_x7yu1")
 centered = false
 
@@ -189,9 +190,9 @@ visible = false
 centered = false
 
 [node name="Cactus_arm2_1" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(53.7741, 30.2968)
-rotation = -0.0409347
-scale = Vector2(0.8, 0.841741)
+position = Vector2(55.9375, 31.1375)
+rotation = 0.0829026
+scale = Vector2(0.799208, 0.823458)
 texture = ExtResource("5_j28og")
 centered = false
 
@@ -202,38 +203,38 @@ texture = ExtResource("7_d8wji")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(9.5, 4.46134)
-scale = Vector2(0.8, 0.841741)
+position = Vector2(9.5, 5.77499)
+scale = Vector2(0.8, 0.823458)
 texture = ExtResource("7_v8tp1")
 centered = false
 
 [node name="Cactus_arm1_2" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(2.63227, 38.345)
-rotation = 0.066328
-scale = Vector2(0.802645, 0.841741)
-skew = -0.066328
+position = Vector2(2.62083, 41.475)
+rotation = -0.0480695
+scale = Vector2(0.801, 0.823458)
+skew = 0.0480695
 texture = ExtResource("8_dbqxx")
 centered = false
 
 [node name="Cactus_arm1_1" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(-7.8837, 12.5128)
-rotation = 0.0530963
-scale = Vector2(0.8, 0.841741)
+position = Vector2(-11.6167, 17.7125)
+rotation = -0.0644318
+scale = Vector2(0.8, 0.823458)
 texture = ExtResource("9_culdb")
 centered = false
 
 [node name="Cactus_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(48.5323, 22.6645)
-rotation = -0.0536033
-scale = Vector2(0.801645, 0.841741)
-skew = 0.0536033
+position = Vector2(48.5, 23.9167)
+rotation = 0.0574506
+scale = Vector2(0.801792, 0.834833)
+skew = -0.0574506
 texture = ExtResource("10_bu7x2")
 centered = false
 
 [node name="Cactus_lips" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(49.7709, 16.1032)
-rotation = -0.0507872
-scale = Vector2(0.8, 0.841741)
+position = Vector2(51.0583, 18.6958)
+rotation = 0.0585415
+scale = Vector2(0.8, 0.823458)
 texture = ExtResource("11_yhhlx")
 centered = false
 
@@ -248,7 +249,7 @@ centered = false
 
 [node name="Cactus_blink2" type="Sprite2D" parent="Body/BodyCorrect" index="15"]
 visible = false
-position = Vector2(24, 15.5669)
+position = Vector2(24, 16.625)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("12_sgy8y")
 centered = false
@@ -257,12 +258,12 @@ centered = false
 position = Vector2(56, -39)
 scale = Vector2(0.5, 0.592593)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_s1mso")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_1mhlx")
 advance_expression_base_node = NodePath("..")
@@ -277,7 +278,7 @@ parameters/StateMachine/BlendTree/TimeScale/scale = 3.0
 "parameters/StateMachine/BlendTree 2/TimeScale/scale" = 3.0
 parameters/TimeScale/scale = 1.0
 
-[node name="AttackComponent" type="Node2D" parent="." index="12" node_paths=PackedStringArray("markers_2d_bullet")]
+[node name="AttackComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("markers_2d_bullet")]
 script = ExtResource("20_d8wji")
 attack_bullet_type = 7
 markers_2d_bullet = [NodePath("../Body/BodyCorrect/Marker2DBullet")]

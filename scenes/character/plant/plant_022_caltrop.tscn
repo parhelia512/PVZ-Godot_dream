@@ -103,55 +103,55 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(0.290023, 42.92)
-scale = Vector2(0.781249, 0.844401)
+position = Vector2(0.049477, 43.5021)
+scale = Vector2(0.788021, 0.827442)
 texture = ExtResource("3_qfs8i")
 centered = false
 
 [node name="Caltrop_horn1" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(9.58005, 43.2299)
-rotation = 0.0534085
-scale = Vector2(0.8, 0.843451)
+position = Vector2(8.99791, 43.9537)
+rotation = 0.0330885
+scale = Vector2(0.8, 0.827442)
 texture = ExtResource("4_taal7")
 centered = false
 
 [node name="Caltrop_horn2" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(24.89, 39.0299)
-rotation = 0.0517505
-scale = Vector2(0.8, 0.843451)
+position = Vector2(24.599, 39.9537)
+rotation = 0.0330885
+scale = Vector2(0.8, 0.827442)
 texture = ExtResource("5_w0kwl")
 centered = false
 
 [node name="Caltrop_horn3" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(44.405, 41.42)
-rotation = -0.0671973
-scale = Vector2(0.8, 0.843451)
+position = Vector2(44.7021, 41.9021)
+rotation = -0.0417967
+scale = Vector2(0.8, 0.827442)
 texture = ExtResource("6_8g1ka")
 centered = false
 
 [node name="Caltrop_horn4" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(55.415, 48.42)
-rotation = -0.0551544
-scale = Vector2(0.8, 0.843451)
+position = Vector2(55.8516, 48.8021)
+rotation = -0.0339518
+scale = Vector2(0.8, 0.827442)
 texture = ExtResource("7_4imoc")
 centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
 visible = false
-position = Vector2(18.689, 59.3359)
-scale = Vector2(0.81145, 0.915872)
+position = Vector2(18.5, 59.501)
+scale = Vector2(0.821754, 0.909923)
 texture = ExtResource("8_0t614")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("9_taal7")]([SubResource("Resource_8g1ka")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_xhn8r")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_f6by2")
 advance_expression_base_node = NodePath("..")
@@ -159,7 +159,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/BlendTree/TimeScale/scale = 0.7
 parameters/TimeScale/scale = 1.0
 
-[node name="AttackRayComponent" type="Node2D" parent="." index="12"]
+[node name="AttackRayComponent" type="Node2D" parent="." index="10"]
 script = ExtResource("11_5b05c")
 plant_enemy_collision_lay = 20
 

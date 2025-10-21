@@ -18,6 +18,7 @@ enum E_ChangeColors{
 	HypnoColor,
 	CreateSunColor,
 	LightAndDark,	## 明暗交替颜色变化(紫卡种植\咖啡豆)
+	CharredBlack,	## 被炸弹炸黑
 }
 
 
@@ -79,6 +80,11 @@ func body_light_and_dark_end():
 		light_and_dark_tween.kill()
 	set_other_color(E_ChangeColors.LightAndDark, Color(1,1,1))
 
+## body被炸弹炸黑(蹦极)
+func body_charred_black():
+	set_other_color(E_ChangeColors.CharredBlack, Color(0,0,0))
+
+#region 僵尸从地下\水下出现
 ## 僵尸从地下出来
 func zombie_body_up_from_ground():
 	body_mask_start()
@@ -109,7 +115,6 @@ func body_mask_start():
 	for child in get_children():
 		_node_use_parent_material(child)
 
-
 ## 结束身体在当前body节点以上的显示,以下透明
 func body_mask_end():
 	material = null
@@ -120,3 +125,22 @@ func _node_use_parent_material(node: Node2D) -> void:
 	## 遍历所有子节点
 	for child in node.get_children():
 		_node_use_parent_material(child)
+#endregion
+
+## 角色被压扁,复制一份body更新其为根节点父节点
+## 角色被压扁时死亡消失,copy body保留两秒后消失
+func be_flattened_body():
+	var body_copy = duplicate()
+	owner.get_parent().add_child(body_copy)
+	body_copy.copy_be_flattened()
+
+
+## 复制体被压扁,两秒后删除
+func copy_be_flattened():
+	scale.y *= 0.4
+	await_free(2)
+
+## 设置等待一段时间后删除
+func await_free(time:float = 2):
+	await get_tree().create_timer(time, false).timeout
+	queue_free()

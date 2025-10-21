@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b0p1b625yhylp" path="res://scripts/character/plant/plant_020_tanglekelp.gd" id="2_emppc"]
 [ext_resource type="Texture2D" uid="uid://cvnkhhw2kwhqf" path="res://assets/reanim/Tanglekelp_body.png" id="2_n0fa0"]
 [ext_resource type="Texture2D" uid="uid://bh61rwjcgjjaf" path="res://assets/reanim/Tanglekelp_arm1.png" id="4_emppc"]
-[ext_resource type="Texture2D" uid="uid://bpkld61hce75f" path="res://assets/reanim/Tanglekelp_whitewater3.png" id="4_icm4b"]
+[ext_resource type="Texture2D" uid="uid://dxcbc8jk8xrij" path="res://assets/reanim/Tanglekelp_whitewater2.png" id="4_icm4b"]
 [ext_resource type="Texture2D" uid="uid://bpvt5hsrkwhwn" path="res://assets/reanim/Tanglekelp_arm2.png" id="5_f8t44"]
 [ext_resource type="Texture2D" uid="uid://13iffk72b514" path="res://assets/reanim/Tanglekelp_arm3.png" id="6_08x7m"]
 [ext_resource type="Texture2D" uid="uid://dvlvk4mwxcma7" path="res://assets/reanim/Tanglekelp_arm4.png" id="7_44l6r"]
@@ -112,104 +112,104 @@ visible = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(2.3, 11.6654)
-scale = Vector2(0.8, 0.799128)
+position = Vector2(2.3, 13.8336)
+scale = Vector2(0.8, 0.770329)
 texture = ExtResource("2_n0fa0")
 centered = false
 
 [node name="Anim_waterline" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(3.19098, 53.0308)
+position = Vector2(3.16635, 53.6016)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_icm4b")
 centered = false
 
 [node name="Tanglekelp_arm1" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(-5.9, 24.9526)
-rotation = -0.00456645
-scale = Vector2(0.800436, 0.798692)
-skew = 0.00456645
+position = Vector2(-5.9, 28.3678)
+rotation = -0.0477394
+scale = Vector2(0.805334, 0.768993)
+skew = 0.0477394
 texture = ExtResource("4_emppc")
 centered = false
 
 [node name="Tanglekelp_arm2" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(12.8, 21.6872)
-rotation = -0.00456645
-scale = Vector2(0.8, 0.799128)
-skew = 0.000761082
+position = Vector2(12.1666, 24.4007)
+rotation = -0.0273709
+scale = Vector2(0.803, 0.767993)
+skew = -0.0785397
 texture = ExtResource("5_f8t44")
 centered = false
 
 [node name="Tanglekelp_arm3" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(14.6, 11.1962)
-rotation = -0.00456645
-scale = Vector2(0.800436, 0.797602)
-skew = 0.00456645
+position = Vector2(14.6334, 14.2675)
+rotation = -0.0302864
+scale = Vector2(0.812, 0.774995)
+skew = 0.0302864
 texture = ExtResource("6_08x7m")
 centered = false
 
 [node name="Tanglekelp_arm4" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(15.9564, 5.41803)
-rotation = -0.00456645
-scale = Vector2(0.800218, 0.797166)
-skew = 0.00380537
+position = Vector2(16.4, 8.80094)
+rotation = -0.0355224
+scale = Vector2(0.804, 0.774995)
+skew = 0.0326026
 texture = ExtResource("7_44l6r")
 centered = false
 
 [node name="Tanglekelp_arm5" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(41.3782, 5.66541)
-rotation = 0.00684967
-scale = Vector2(0.800436, 0.797602)
-skew = -0.004947
+position = Vector2(41.4336, 8.06682)
+rotation = 0.104781
+scale = Vector2(0.803334, 0.768659)
+skew = -0.0500603
 texture = ExtResource("8_ytogi")
 centered = false
 
 [node name="Tanglekelp_arm6" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(51.2218, 14.0872)
-rotation = 0.00875243
-scale = Vector2(0.800654, 0.797384)
-skew = -0.00646921
+position = Vector2(51.6336, 16.5002)
+rotation = 0.128637
+scale = Vector2(0.806666, 0.768659)
+skew = -0.0349476
 texture = ExtResource("9_icm4b")
 centered = false
 
 [node name="Tanglekelp_arm7" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(63.8, 21.3962)
-rotation = 0.00114161
-scale = Vector2(0.8, 0.797384)
-skew = -0.00114161
+position = Vector2(63.5, 21.9009)
+rotation = 0.108185
+scale = Vector2(0.807332, 0.782327)
+skew = -0.108185
 texture = ExtResource("10_28p6e")
 centered = false
 
 [node name="Tanglekelp_arm8" type="Sprite2D" parent="Body/BodyCorrect" index="13"]
-position = Vector2(66.1, 28.8654)
-rotation = 0.00570806
-scale = Vector2(0.800436, 0.79891)
-skew = -0.00570806
+position = Vector2(66.1, 30.5002)
+rotation = -0.0418468
+scale = Vector2(0.81, 0.782327)
+skew = 0.0418468
 texture = ExtResource("11_me61c")
 centered = false
 
 [node name="Anim_blink1" type="Sprite2D" parent="Body/BodyCorrect" index="14"]
 visible = false
-position = Vector2(21.7, 42.8227)
+position = Vector2(21.7, 43.5247)
 scale = Vector2(0.8, 0.770034)
 texture = ExtResource("12_18tlf")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("14_28p6e")]([SubResource("Resource_18tlf")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_pqdke")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_nescp")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="GrapComponent" type="Node2D" parent="." index="11"]
+[node name="GrapComponent" type="Node2D" parent="." index="10"]
 visible = false
 script = ExtResource("16_44l6r")
 
@@ -231,7 +231,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_Tanglekelp_grab")
 }
 
-[node name="AttackRayComponent" type="Node2D" parent="." index="12"]
+[node name="AttackRayComponent" type="Node2D" parent="." index="11"]
 script = ExtResource("22_icm4b")
 can_attack_zombie_status = 5
 plant_enemy_collision_lay = 20

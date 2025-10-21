@@ -24,7 +24,7 @@ func attack_start():
 		is_attack = true
 		target_x = attack_ray_component.enemy_can_be_attacked.shadow.global_position.x
 		is_right = target_x > global_position.x
-		be_attacked_box_component.queue_free()
+		be_attacked_box_component.disable_component(ComponentBase.E_IsEnableFactor.Character)
 
 ## 开始跳跃
 func jump_up_start():

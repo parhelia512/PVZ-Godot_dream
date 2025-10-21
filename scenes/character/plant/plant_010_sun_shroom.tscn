@@ -98,7 +98,7 @@ nodes/TimeScale/position = Vector2(580, 100)
 nodes/output/position = Vector2(800, 120)
 node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
 
-[node name="Plant010SunShroom" node_paths=PackedStringArray("node_no_change_direction", "speech_influence_components") instance=ExtResource("1_dqhtu")]
+[node name="Plant010SunShroom" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("1_dqhtu")]
 script = ExtResource("2_qum68")
 time_grow = 100.0
 mini_sun_value = 15
@@ -107,7 +107,6 @@ is_grow = false
 plant_type = 10
 is_sleep_in_day = true
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
-speech_influence_components = [NodePath("CreateSunComponent")]
 
 [node name="Shadow" parent="." index="0"]
 scale = Vector2(0.511628, 0.444444)
@@ -116,61 +115,60 @@ scale = Vector2(0.511628, 0.444444)
 position = Vector2(-42, -61)
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(31.0825, 47.7262)
-scale = Vector2(0.365437, 0.354563)
+position = Vector2(30.717, 48.483)
+scale = Vector2(0.383979, 0.337851)
 texture = ExtResource("2_2o6oo")
 centered = false
 
 [node name="Anim_sleep1" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
 visible = false
-position = Vector2(36.9, 50.4)
-scale = Vector2(0.37, 0.38)
+position = Vector2(36.5, 51.7149)
+scale = Vector2(0.410128, 0.340702)
 centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
 visible = false
-position = Vector2(36.9, 50.6218)
-rotation = 0.00387183
-scale = Vector2(0.377395, 0.371126)
+position = Vector2(36.5, 51.3957)
+scale = Vector2(0.403106, 0.347085)
 texture = ExtResource("4_qum68")
 centered = false
 
 [node name="SunShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(25.4651, 27.3611)
+position = Vector2(25.1511, 28.9808)
 rotation = 0.07854
-scale = Vector2(0.366611, 0.350214)
+scale = Vector2(0.375319, 0.338851)
 texture = ExtResource("5_utsq0")
 centered = false
 
 [node name="Marker2DCreateSun" type="Marker2D" parent="Body/BodyCorrect" index="4"]
 position = Vector2(42, 36)
 
-[node name="SleepComponent" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../CreateSunComponent")]
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("7_dmd1b")]([SubResource("Resource_vdr6k")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_6h3r7")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_fw6sg")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="CreateSunComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("marker_2d_create_sun")]
+[node name="CreateSunComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("marker_2d_create_sun")]
 script = ExtResource("11_kknrs")
 marker_2d_create_sun = NodePath("../Body/BodyCorrect/Marker2DCreateSun")
 
 [node name="CreateSunTimer" type="Timer" parent="CreateSunComponent" index="0"]
 one_shot = true
 
-[node name="GrowTimer" type="Timer" parent="." index="12"]
+[node name="GrowTimer" type="Timer" parent="." index="11"]
 one_shot = true
 
 [connection signal="timeout" from="CreateSunComponent/CreateSunTimer" to="CreateSunComponent" method="_on_create_sun_timer_timeout"]

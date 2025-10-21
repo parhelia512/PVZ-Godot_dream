@@ -76,15 +76,16 @@ size = Vector2(50, 50)
 [node name="Plant024TallNut" instance=ExtResource("1_qbo1e")]
 script = ExtResource("2_lgypc")
 plant_type = 24
+is_can_ladder = true
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-43, -74)
 
 [node name="Anim_idle" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(-0.249318, -36.7438)
-rotation = -0.00124338
-scale = Vector2(0.801425, 0.813863)
-skew = 0.000621763
+position = Vector2(-0.924795, -35.7253)
+rotation = -0.00479856
+scale = Vector2(0.805499, 0.807752)
+skew = 0.00109155
 texture = ExtResource("2_814ck")
 centered = false
 
@@ -111,27 +112,27 @@ texture = ExtResource("3_se5o2")
 [node name="HpComponent" parent="." index="3"]
 max_hp = 8000
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("6_lgypc")]([SubResource("Resource_6hwhb")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_mp8j5")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_ecgny")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="HpStageChangeComponent" type="Node2D" parent="." index="12"]
+[node name="HpStageChangeComponent" type="Node2D" parent="." index="10"]
 script = ExtResource("5_ecgny")
 boundary_value_hp = Array[int]([5332, 2666, 0])
 body_change = Array[ExtResource("6_lgypc")]([SubResource("Resource_sum7j"), SubResource("Resource_hev76"), null])
 
-[node name="Area2DStopJump" type="Area2D" parent="." index="13"]
+[node name="Area2DStopJump" type="Area2D" parent="." index="11"]
 collision_layer = 0
 collision_mask = 4
 monitorable = false

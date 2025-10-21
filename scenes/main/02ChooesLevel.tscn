@@ -249,7 +249,6 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 script = ExtResource("6_5ankq")
-curr_sences = 4
 curr_level_data_game_para = ExtResource("15_umhll")
 
 [node name="Panel" type="Panel" parent="AllPage/GridContainer/TextureRect3"]
@@ -321,7 +320,6 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 script = ExtResource("6_5ankq")
-curr_sences = 4
 curr_level_data_game_para = ExtResource("17_k1h2l")
 
 [node name="Panel" type="Panel" parent="AllPage/GridContainer/TextureRect4"]
@@ -570,7 +568,6 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("2_7vy8i")
 script = ExtResource("6_5ankq")
-curr_sences = 5
 curr_level_data_game_para = ExtResource("26_pcq3e")
 
 [node name="Panel" type="Panel" parent="AllPage/GridContainer/TextureRect9"]
@@ -605,6 +602,7 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("26_dfwdo")
 
 [node name="Plant033CabbagePult" parent="AllPage/GridContainer/TextureRect9/Panel/TextureRect" instance=ExtResource("27_pcq3e")]
+visible = true
 position = Vector2(103.233, 113.353)
 character_init_type = 1
 

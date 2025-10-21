@@ -105,8 +105,9 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "查看植物"
 
-[node name="Plant002SunFlower" parent="StartPage/Panel" instance=ExtResource("8_pt714")]
+[node name="Plant002SunFlower" parent="StartPage/Panel" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("8_pt714")]
 position = Vector2(162, 125)
+node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
 character_init_type = 1
 
 [node name="Panel2" type="Panel" parent="StartPage"]

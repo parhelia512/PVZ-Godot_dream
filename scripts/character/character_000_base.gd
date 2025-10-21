@@ -8,11 +8,21 @@ class_name Character000Base
 @onready var hp_component: HpComponent = %HpComponent
 @onready var anim_component: AnimComponentBase = %AnimComponent
 
-## 冰冻减速和冰冻计时器
-@onready var ice_decelerate_timer: Timer = $IceDecelerateTimer
-@onready var ice_freeze_timer: Timer = $IceFreezeTimer
 @onready var shadow: Sprite2D = %Shadow
 
+## 计时器种类
+enum E_TimerType{
+	IceDecelerate,	## 冰冻减速
+	IceFreeze,		## 冰冻停滞
+	Butter,			## 黄油
+}
+## 减速相关计时器(第一次使用时创建)
+var all_timer:Dictionary[E_TimerType, Timer] = {
+	E_TimerType.IceDecelerate:null,
+	E_TimerType.IceFreeze:null,
+	E_TimerType.Butter:null,
+}
+var a :Dictionary = {"111":1}
 #endregion
 
 #region 基础属性
@@ -31,8 +41,6 @@ class_name Character000Base
 @export_group("角色速度")
 ## 角色速度随机范围
 @export var random_speed_range :Vector2 = Vector2(0.9, 1.1)
-## 角色速度影响的组件(攻击)
-@export var speech_influence_components:Array[ComponentBase]
 var lane:int = -1
 ## 速度改变量
 var influence_speed_factors :Dictionary[E_Influence_Speed_Factor, float]= {
@@ -53,7 +61,7 @@ var time_ice_end_decelerate := 5.0
 ## 冰冻特效
 var ice_effect:IceEffect
 
-## 是否可以触发亡语(爆炸\大嘴花不可以触发)
+## 是否可以触发亡语(爆炸\大嘴花\铲子不可以触发)
 var is_can_death_language:=true
 
 ## 速度改变信号 speed_factor_product: 速度系数乘积
@@ -100,7 +108,8 @@ enum E_CharacterInitType{
 ## 特殊组件(不包含植物和僵尸基类的节点)在斜面上更新位置
 ## 特殊组件(爆炸组件)移动
 @export var special_component_update_pos_in_slope:Array[ComponentBase]
-
+## 特殊节点
+@export var special_node2d_update_pos_in_slope:Array[Node2D]
 #endregion
 
 #endregion
@@ -128,13 +137,9 @@ func init_norm_signal_connect():
 
 	## 血量组件发射死亡信号
 	hp_component.signal_hp_component_death.connect(character_death)
-	hp_component.signal_hp_component_death.connect(death_language)
 
 	## 被魅惑
 	signal_character_be_hypno.connect(body.owner_be_hypno)
-
-	for component :ComponentBase in speech_influence_components:
-		signal_update_speed.connect(component.owner_update_speed)
 
 ## 初始化正常出战角色
 func init_norm():
@@ -156,6 +161,7 @@ func init_garden():
 
 ## 随机初始化角色速度
 func init_random_speed():
+	#print("随机初始化角色速度")
 	## 初始化角色速度
 	update_speed_factor(randf_range(random_speed_range.x, random_speed_range.y), E_Influence_Speed_Factor.InitRandomSpeed)
 
@@ -173,6 +179,9 @@ func death_language():
 func character_death():
 	is_death = true
 	signal_character_death.emit()
+	#call_deferred("emit_signal", "signal_character_death")
+	if is_can_death_language:
+		death_language()
 
 ## 被攻击至死亡(大保龄球)
 func be_attack_to_death(trigger_be_attack_SFX:=true):
@@ -221,24 +230,22 @@ func be_hypno():
 ## 被压扁
 ## [character:Character000Base] 发动攻击的角色
 func be_flattened(character:Character000Base):
-	body.scale.y = 0.4
-	shadow.visible = false
-	anim_component.stop_anim()
-	## 角色死亡不消失
-	character_death_not_disappear()
-	## 两秒后删除
-	await get_tree().create_timer(2.0).timeout
-	queue_free()
+	body.be_flattened_body()
+	## 角色死亡消失
+	character_death_disappear()
 
 #endregion
+
 
 #region 速度修改相关
 ## 被冰冻减速
 func be_ice_decelerate(time:float):
 	update_speed_factor(0.5, E_Influence_Speed_Factor.IceDecelerateSpeed)
 	body.set_other_color(BodyCharacter.E_ChangeColors.IceColor, Color(0.5, 1, 1))
-	if ice_decelerate_timer.time_left < time:
-		ice_decelerate_timer.start(time)
+	if not is_instance_valid(all_timer[E_TimerType.IceDecelerate]):
+		all_timer[E_TimerType.IceDecelerate] = GlobalUtils.create_new_timer_once(self, _on_ice_decelerate_timer_timeout)
+	if all_timer[E_TimerType.IceDecelerate].time_left < time:
+		all_timer[E_TimerType.IceDecelerate].start(time)
 
 ## 冰冻减速计时器结束
 func _on_ice_decelerate_timer_timeout() -> void:
@@ -250,8 +257,11 @@ func be_ice_freeze(time:float, time_ice_end_decelerate:float):
 	self.time_ice_end_decelerate = time_ice_end_decelerate
 	update_speed_factor(0.0, E_Influence_Speed_Factor.IceFreezeSpeed)
 	body.set_other_color(BodyCharacter.E_ChangeColors.IceColor, Color(0.5, 1, 1))
-	if ice_freeze_timer.time_left < time:
-		ice_freeze_timer.start(time)
+	if not is_instance_valid(all_timer[E_TimerType.IceFreeze]):
+		all_timer[E_TimerType.IceFreeze] = GlobalUtils.create_new_timer_once(self, _on_ice_freeze_timer_timeout)
+
+	if all_timer[E_TimerType.IceFreeze].time_left < time:
+		all_timer[E_TimerType.IceFreeze].start(time)
 
 ## 冰冻控制计时器结束
 func _on_ice_freeze_timer_timeout() -> void:
@@ -260,11 +270,13 @@ func _on_ice_freeze_timer_timeout() -> void:
 
 ## 取消冰冻减速(火焰豌豆\辣椒)
 func cancel_ice():
-	ice_freeze_timer.stop()
-	_on_ice_freeze_timer_timeout()
-	ice_decelerate_timer.stop()
-	_on_ice_decelerate_timer_timeout()
-	if is_instance_valid(ice_effect):
-		ice_effect.queue_free()
+	if is_instance_valid(all_timer[E_TimerType.IceFreeze]) and all_timer[E_TimerType.IceFreeze].time_left != 0:
+		all_timer[E_TimerType.IceFreeze].stop()
+		_on_ice_freeze_timer_timeout()
+		if is_instance_valid(ice_effect):
+			ice_effect.queue_free()
+	if is_instance_valid(all_timer[E_TimerType.IceDecelerate]) and all_timer[E_TimerType.IceDecelerate].time_left != 0:
+		all_timer[E_TimerType.IceDecelerate].stop()
+		_on_ice_decelerate_timer_timeout()
 
 #endregion

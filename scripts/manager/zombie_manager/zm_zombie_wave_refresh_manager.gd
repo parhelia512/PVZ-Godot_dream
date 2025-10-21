@@ -118,7 +118,8 @@ func judge_half_refresh(all_loss_hp:int, wave:int):
 	## 可以残半刷新时，更新当前波次僵尸血量，僵尸掉血信号连接触发
 	if wave == curr_wave and curr_can_refresh_type == E_RefreshType.HalfRefresh:
 		wave_current_health -= all_loss_hp
-		if wave_current_health <= refresh_health:
+
+		if wave_current_health <= refresh_health or MainGameDate.zombie_manager.curr_zombie_num <= 0:
 			_trigger_refresh()
 
 ## 判断全部死亡刷新

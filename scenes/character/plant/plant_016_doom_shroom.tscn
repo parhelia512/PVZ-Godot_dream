@@ -1589,14 +1589,14 @@ special_component_update_pos_in_slope = [NodePath("BombComponent")]
 position = Vector2(-39, -72)
 
 [node name="DoomShroom_body" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(17.0108, 40.2677)
-scale = Vector2(0.804015, 0.794201)
+position = Vector2(17.9059, 38.2529)
+scale = Vector2(0.773117, 0.833942)
 texture = ExtResource("2_55ivw")
 centered = false
 
 [node name="DoomShroom_head1" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(-0.133829, 4.09071)
-scale = Vector2(0.803123, 0.795539)
+position = Vector2(0.941214, 0.476359)
+scale = Vector2(0.781176, 0.838649)
 texture = ExtResource("3_oiu6n")
 centered = false
 
@@ -1612,25 +1612,25 @@ centered = false
 visible = false
 centered = false
 
-[node name="SleepComponent" parent="." index="6" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BombComponent")]
 
-[node name="BlinkComponent" parent="." index="7"]
+[node name="BlinkComponent" parent="." index="6"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_rjiww")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_tjrwq")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="BombComponent" type="Node2D" parent="." index="12"]
+[node name="BombComponent" type="Node2D" parent="." index="10"]
 unique_name_in_owner = true
 script = ExtResource("7_enwho")
 can_attack_plant_status = 7
@@ -1640,7 +1640,7 @@ bomb_sfx = &"DoomShroom"
 
 [node name="Area2DBomb" type="Area2D" parent="BombComponent" index="0"]
 collision_layer = 0
-collision_mask = 20
+collision_mask = 21
 input_pickable = false
 monitorable = false
 

@@ -23,7 +23,6 @@ func _ready() -> void:
 	super()
 	attack_cd_timer.wait_time = attack_cd
 
-
 ## 启用组件
 func enable_component(is_enable_factor:E_IsEnableFactor):
 	super(is_enable_factor)
@@ -31,32 +30,28 @@ func enable_component(is_enable_factor:E_IsEnableFactor):
 		for area in area_2d.get_overlapping_areas():
 			_on_area_2d_area_entered(area)
 
-
 ## 磁力菇吸铁
-func attack_once(zombie:Zombie000Base):
-	if not is_attack_cd:
-		is_attack_cd = true
-		signal_attack_start.emit()
+func attack_once(iron_node:IronNodeBase):
+	SoundManager.play_plant_SFX(Global.PlantType.P032MagnetShroom, "magnetshroom")
 
-		## 僵尸身上的铁器节点
-		var iron_node:IronNodeBase = zombie.iron_node
-		iron_node.preprocessing_be_magnet()
+	is_attack_cd = true
+	signal_attack_start.emit()
 
-		## 创建一个新铁器，避免原始铁器动画控制
-		var ori_iron_global_position = iron_node.global_position
-		var new_iron_node = iron_node.duplicate()
-		curr_iron_container.add_child(new_iron_node)
-		new_iron_node.global_position = ori_iron_global_position
+	iron_node.preprocessing_be_magnet()
 
-		new_iron_node.visible = true
-		curr_iron = new_iron_node
-		var tween = get_tree().create_tween()
-		tween.tween_property(new_iron_node, "position", Vector2.ZERO, 0.5)
+	## 创建一个新铁器，避免原始铁器动画控制
+	var ori_iron_global_position = iron_node.global_position
+	var new_iron_node = iron_node.duplicate()
+	curr_iron_container.add_child(new_iron_node)
+	new_iron_node.global_position = ori_iron_global_position
 
-		attack_cd_timer.start()
+	new_iron_node.visible = true
+	curr_iron = new_iron_node
+	var tween = get_tree().create_tween()
+	tween.tween_property(new_iron_node, "position", Vector2.ZERO, 0.5)
 
-		## 僵尸调用被删除铁器函数
-		zombie.be_magnet_iron()
+	attack_cd_timer.start()
+
 ## 消化铁器完成
 func _on_attack_cd_timer_timeout() -> void:
 	signal_attack_cd_end.emit()
@@ -67,11 +62,44 @@ func _on_attack_cd_timer_timeout() -> void:
 
 ## 有僵尸进入到吸铁范围内
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if not is_enabling:
+	## 禁用组件\冷却中
+	if not is_enabling or is_attack_cd:
 		return
+	var area_owner = area.owner
+	if area_owner is Zombie000Base:
+		## 如果没有铁器
+		if area_owner.iron_type == Global.IronType.Null:
+			return
+		else:
+			## 僵尸身上的铁器节点
+			var iron_node:IronNodeBase = area_owner.iron_node
+			if iron_node.is_be_magnet:
+				return
+			else:
+				iron_node.is_be_magnet = true
+				attack_once(iron_node)
+				## 僵尸调用被删除铁器函数
+				area_owner.be_magnet_iron()
 
-	var zombie:Zombie000Base = area.owner
-	## 如果没有铁器\正在攻击(冷却)中
-	if zombie.iron_type == Global.IronType.Null or is_attack_cd:
-		return
-	attack_once(zombie)
+	elif area_owner is Ladder:
+		## 梯子身上的铁器节点
+		var iron_node:IronNodeBase = area_owner.iron_node
+		if iron_node.is_be_magnet:
+			return
+		else:
+			iron_node.is_be_magnet = true
+		attack_once(iron_node)
+		area_owner.ladder_death()
+
+
+## 角色速度修改
+func owner_update_speed(speed_product:float):
+	if not attack_cd_timer.is_stopped():
+		if speed_product == 0:
+			attack_cd_timer.paused = true
+		else:
+			attack_cd_timer.paused = false
+
+			attack_cd_timer.start(attack_cd_timer.time_left / speed_product)
+
+	attack_cd_timer.wait_time = attack_cd / speed_product

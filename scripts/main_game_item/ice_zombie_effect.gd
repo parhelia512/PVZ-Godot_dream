@@ -6,7 +6,7 @@ class_name IceEffect
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 
 func start_ice_effect(ice_time:float):
-	await get_tree().create_timer(ice_time).timeout
+	await get_tree().create_timer(ice_time, false).timeout
 	icetrap.visible = false
 	icetrap_2.visible = false
 

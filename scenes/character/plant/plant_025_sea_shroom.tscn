@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://dvtg44jen3lb6"]
+[gd_scene load_steps=37 format=3 uid="uid://dvtg44jen3lb6"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_trumw"]
 [ext_resource type="Texture2D" uid="uid://eyoj2etiyi4k" path="res://assets/reanim/SeaShroom_tentacles.png" id="2_cq6r6"]
+[ext_resource type="Script" uid="uid://d1irf0shejy1e" path="res://scripts/character/plant/plant_025_sea_shroom.gd" id="2_y3aiw"]
 [ext_resource type="Texture2D" uid="uid://vm2queyyke4v" path="res://assets/reanim/SeaShroom_body.png" id="3_x4qhn"]
 [ext_resource type="Texture2D" uid="uid://dsuh2ioxrdues" path="res://assets/reanim/SeaShroom_blink1.png" id="4_ai3ac"]
 [ext_resource type="Texture2D" uid="uid://cxc288x17u2g8" path="res://assets/reanim/SeaShroom_foam.png" id="5_y3aiw"]
@@ -110,6 +111,7 @@ node_connections = [&"OneShot", 0, &"StateMachine", &"OneShot", 1, &"TimeScale 2
 size = Vector2(249, 5)
 
 [node name="Plant025SeaShroom" instance=ExtResource("1_trumw")]
+script = ExtResource("2_y3aiw")
 plant_type = 25
 is_sleep_in_day = true
 
@@ -120,20 +122,20 @@ visible = false
 position = Vector2(-42, -63)
 
 [node name="SeaShroom_tentacles" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(21.247, 52.3067)
-scale = Vector2(0.588522, 0.899687)
+position = Vector2(16.0097, 52.2968)
+scale = Vector2(0.746741, 0.530906)
 texture = ExtResource("2_cq6r6")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(24.7067, 32.5798)
-scale = Vector2(0.70353, 0.742537)
+position = Vector2(23.2032, 35.5935)
+scale = Vector2(0.776773, 0.641324)
 texture = ExtResource("3_x4qhn")
 centered = false
 
 [node name="SeaShroom_blink" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
 visible = false
-position = Vector2(41.3341, 35.7618)
+position = Vector2(41.9014, 37.7562)
 scale = Vector2(0.711841, 0.841227)
 texture = ExtResource("4_ai3ac")
 centered = false
@@ -146,27 +148,27 @@ texture = ExtResource("10_ai3ac")
 centered = false
 
 [node name="Anim_waterline" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(29.1134, 51)
-scale = Vector2(0.734328, 0.773)
+position = Vector2(27.8, 51)
+scale = Vector2(0.822806, 0.773)
 texture = ExtResource("5_y3aiw")
 centered = false
 
 [node name="SeaShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(21.9067, 19.8866)
-scale = Vector2(0.670597, 0.7)
+position = Vector2(20.2032, 23.3871)
+scale = Vector2(0.729838, 0.656227)
 texture = ExtResource("6_t37yi")
 centered = false
 
 [node name="SeahShroom_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(51.5933, 40.9866)
-rotation = -0.0690061
-scale = Vector2(0.702067, 0.7)
-skew = 0.0690061
+position = Vector2(52.4968, 42.5)
+rotation = 0.133599
+scale = Vector2(0.705968, 0.7)
+skew = -0.133599
 texture = ExtResource("7_8cpqx")
 centered = false
 
 [node name="SeaShroom_lips" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(56.0933, 38.5798)
+position = Vector2(56.5, 41.4935)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_l3s8s")
 centered = false
@@ -175,18 +177,18 @@ centered = false
 position = Vector2(60, 46)
 scale = Vector2(0.5, 0.592593)
 
-[node name="SleepComponent" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../AttackComponent")]
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("9_x4qhn")]([SubResource("Resource_ai3ac")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_too6g")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_jispe")
 advance_expression_base_node = NodePath("..")
@@ -197,7 +199,7 @@ parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 2/scale" = 1.0
 
-[node name="AttackComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("markers_2d_bullet")]
+[node name="AttackComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("markers_2d_bullet")]
 script = ExtResource("14_x4qhn")
 attack_bullet_type = 3
 markers_2d_bullet = [NodePath("../Body/BodyCorrect/Marker2DBullet")]

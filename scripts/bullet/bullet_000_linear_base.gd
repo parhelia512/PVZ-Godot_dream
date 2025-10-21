@@ -25,11 +25,24 @@ func _on_area_2d_attack_area_entered(area: Area2D) -> void:
 	## 如果是世界层的碰撞
 	if area.collision_layer == 1:
 		## 线性子弹判断是否攻击到斜坡
-		if area.get_parent() is MainGameSlope:
-			var slope:MainGameSlope = area.get_parent()
+		if area.owner is Slope:
+			var slope:Slope = area.owner
 			## 如果方向与斜面法向量夹角小于90度
 			if direction.dot(slope.normal_vector_slope) < 0:
 				attack_once(null)
 		return
 
 	super(area)
+
+## 直线子弹先对壳类进行攻击
+func get_first_be_hit_plant_in_cell(plant:Plant000Base)->Plant000Base:
+	## shell
+	if is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]
+	elif is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]
+	elif is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]
+	else:
+		printerr("当前植物格子没有检测到可以攻击的植物")
+		return null

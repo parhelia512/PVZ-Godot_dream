@@ -45,9 +45,10 @@ size = Vector2(40, 20)
 radius = 20.0
 height = 80.0
 
-[node name="Zombie000Base" node_paths=PackedStringArray("node_follow_body_direction", "speech_influence_components") instance=ExtResource("1_q5all")]
+[node name="Zombie000Base" node_paths=PackedStringArray("node_no_change_direction", "node_follow_body_direction") instance=ExtResource("1_q5all")]
 script = ExtResource("2_72xfp")
 zombie_type = 0
+is_ignore_ladder = false
 iron_type = 0
 init_be_attack_status = 1
 body_change_on_pool = null
@@ -58,8 +59,8 @@ is_attack = false
 is_swimming = false
 sfx_enter_name = &""
 head1_path = NodePath("Body/BodyCorrect/Anim_head1")
-node_follow_body_direction = [NodePath("Shadow"), NodePath("Body"), NodePath("CharredComponent")]
-speech_influence_components = [NodePath("AttackComponent"), NodePath("MoveComponent")]
+node_no_change_direction = []
+node_follow_body_direction = []
 
 [node name="NodeDrop" type="Node2D" parent="Body" index="1"]
 unique_name_in_owner = true
@@ -238,11 +239,11 @@ vertical_alignment = 1
 
 [node name="CharredComponent" type="Node2D" parent="." index="5"]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("11_t14t4")
 
 [node name="ZombieCharred" type="Node2D" parent="CharredComponent" index="0"]
 unique_name_in_owner = true
-visible = false
 
 [node name="CharredCorrect" type="Node2D" parent="CharredComponent/ZombieCharred" index="0"]
 position = Vector2(-43, -117)
@@ -259,6 +260,7 @@ script = ExtResource("5_b1t0g")
 position = Vector2(0, -25)
 collision_layer = 0
 collision_mask = 34
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent/AttackRayComponent/Area2d" index="0"]
 position = Vector2(-13, 0)
@@ -286,6 +288,7 @@ script = ExtResource("12_ewfmg")
 
 [node name="BeAttackedBoxComponent" parent="." index="10"]
 script = ExtResource("3_t14t4")
+x_correct_on_attack = -20.0
 
 [node name="HurtBoxDetection" parent="BeAttackedBoxComponent" index="0"]
 collision_layer = 4
@@ -309,9 +312,5 @@ shape = SubResource("CapsuleShape2D_xdwn0")
 [node name="HurtBoxReal" parent="BeAttackedBoxComponent" index="2"]
 collision_layer = 512
 
-[node name="ButterTimer" type="Timer" parent="." index="12"]
-one_shot = true
-
 [connection signal="area_entered" from="SwimBoxComponent/Area2D" to="SwimBoxComponent" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="SwimBoxComponent/Area2D" to="SwimBoxComponent" method="_on_area_2d_area_exited"]
-[connection signal="timeout" from="ButterTimer" to="." method="_on_butter_timer_timeout"]

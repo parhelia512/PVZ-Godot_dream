@@ -12,4 +12,5 @@ func init_norm_signal_connect():
 	magnet_component.signal_attack_start.connect(func():is_attack=true)
 	magnet_component.signal_attack_cd_end.connect(func():is_attack=false)
 
+	signal_update_speed.connect(magnet_component.owner_update_speed)
 

@@ -5,6 +5,9 @@ class_name Plant016DoomShroom
 
 func init_norm_signal_connect():
 	super()
-	## 角色死亡信号连接
-	hp_component.signal_hp_component_death.connect(bomb_component.judge_death_bomb)
 	bomb_component.signal_bomb_once.connect(plant_cell.create_crater)
+
+
+## 亡语
+func death_language():
+	bomb_component.judge_death_bomb()

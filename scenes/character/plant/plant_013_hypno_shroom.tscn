@@ -68,43 +68,43 @@ node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"),
 position = Vector2(-38, -72)
 
 [node name="Layer 1" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(25.5965, 38.7975)
-scale = Vector2(0.8, 0.748042)
-skew = 0.106367
+position = Vector2(22.7716, 36.6373)
+scale = Vector2(0.8, 0.784769)
+skew = 0.0306736
 texture = ExtResource("2_amy8e")
 centered = false
 
 [node name="Layer 3" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(44.7947, 50.4968)
-rotation = 0.784709
+position = Vector2(39.4605, 49.4)
+rotation = 0.229329
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_sgftx")
 centered = false
 
 [node name="Layer 2" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(22.6905, 4.19718)
-rotation = 0.179603
-scale = Vector2(0.813986, 0.723067)
-skew = 0.0174347
+position = Vector2(15.0634, 2.02015)
+rotation = 0.0511224
+scale = Vector2(0.803687, 0.776739)
+skew = 0.00583539
 texture = ExtResource("4_dxhke")
 centered = false
 
 [node name="Layer 4" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(48.3997, 56.594)
-rotation = -0.782958
-scale = Vector2(0.799841, 0.799841)
+position = Vector2(48.4657, 52.2403)
+rotation = -0.22903
+scale = Vector2(0.671724, 0.671724)
 texture = ExtResource("5_nimi2")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_ih1jw")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_makqc")
 advance_expression_base_node = NodePath("..")

@@ -77,7 +77,7 @@ size = Vector2(250, 200)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.54792, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ql0xv"]
+[sub_resource type="CurveTexture" id="CurveTexture_2gy5r"]
 curve = SubResource("Curve_2gy5r")
 
 [sub_resource type="Curve" id="Curve_qq8mq"]
@@ -92,7 +92,7 @@ point_count = 2
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
 point_count = 1
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jel4a"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ql0xv"]
 curve_x = SubResource("Curve_qq8mq")
 curve_y = SubResource("Curve_s6vx3")
 curve_z = SubResource("Curve_0rjum")
@@ -101,14 +101,14 @@ curve_z = SubResource("Curve_0rjum")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.303371, 1), 0.0, 0.0, 0, 0, Vector2(0.64794, 0.177344), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_7m227"]
+[sub_resource type="CurveTexture" id="CurveTexture_qq8mq"]
 curve = SubResource("Curve_erbjr")
 
 [sub_resource type="Curve" id="Curve_nlrwo"]
 _data = [Vector2(0, 0.505372), 0.0, 0.0, 0, 0, Vector2(0.524345, 0.5125), 0.0135949, -2.71172, 1, 1, Vector2(0.696629, 0.0453124), -2.71172, -0.274964, 1, 1, Vector2(0.861423, 0), -0.274964, 0.0, 1, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_gsjgd"]
+[sub_resource type="CurveTexture" id="CurveTexture_s6vx3"]
 curve = SubResource("Curve_nlrwo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lg8p0"]
@@ -151,10 +151,10 @@ shader_parameter/tangent_accel_min = 0.0
 shader_parameter/tangent_accel_max = 0.0
 shader_parameter/damping_min = 0.0
 shader_parameter/damping_max = 0.0
-shader_parameter/alpha_curve = SubResource("CurveTexture_ql0xv")
-shader_parameter/color_curve = SubResource("CurveXYZTexture_jel4a")
-shader_parameter/scale_curve = SubResource("CurveTexture_gsjgd")
-shader_parameter/initial_linear_velocity_curve = SubResource("CurveTexture_7m227")
+shader_parameter/alpha_curve = SubResource("CurveTexture_2gy5r")
+shader_parameter/color_curve = SubResource("CurveXYZTexture_ql0xv")
+shader_parameter/scale_curve = SubResource("CurveTexture_s6vx3")
+shader_parameter/initial_linear_velocity_curve = SubResource("CurveTexture_qq8mq")
 shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
 shader_parameter/emission_shape_scale = 1.0
 shader_parameter/emission_sphere_radius = 40.0
@@ -164,7 +164,7 @@ shader_parameter/random_direction_from_spread = Vector3(0, 0, 0)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.54792, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_qq8mq"]
+[sub_resource type="CurveTexture" id="CurveTexture_0rjum"]
 curve = SubResource("Curve_ql0xv")
 
 [sub_resource type="Curve" id="Curve_jel4a"]
@@ -179,7 +179,7 @@ point_count = 2
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
 point_count = 1
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_lg8p0"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jel4a"]
 curve_x = SubResource("Curve_jel4a")
 curve_y = SubResource("Curve_7m227")
 curve_z = SubResource("Curve_gsjgd")
@@ -188,7 +188,7 @@ curve_z = SubResource("Curve_gsjgd")
 _data = [Vector2(0, 1), 0.0, -0.481111, 0, 1, Vector2(0.23221, 0.888281), -0.481111, -2.00431, 1, 1, Vector2(0.404494, 0.542969), -2.00431, -0.513028, 1, 1, Vector2(0.681648, 0.400781), -0.513028, 0.0, 1, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_g6ibo"]
+[sub_resource type="CurveTexture" id="CurveTexture_erbjr"]
 curve = SubResource("Curve_6bpf6")
 
 [sub_resource type="Curve" id="Curve_kw33j"]
@@ -196,7 +196,7 @@ _limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 1.26328), 0.0, 0.0, 0, 0, Vector2(0.337079, 1.26328), 0.0, -2.46195, 1, 1, Vector2(0.621723, 0.5625), -2.46195, -1.487, 1, 1, Vector2(1, 0), -1.487, 0.0, 1, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_rhvhm"]
+[sub_resource type="CurveTexture" id="CurveTexture_7m227"]
 curve = SubResource("Curve_kw33j")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vp07b"]
@@ -239,10 +239,10 @@ shader_parameter/tangent_accel_min = 0.0
 shader_parameter/tangent_accel_max = 0.0
 shader_parameter/damping_min = 0.0
 shader_parameter/damping_max = 0.0
-shader_parameter/alpha_curve = SubResource("CurveTexture_qq8mq")
-shader_parameter/color_curve = SubResource("CurveXYZTexture_lg8p0")
-shader_parameter/scale_curve = SubResource("CurveTexture_rhvhm")
-shader_parameter/initial_linear_velocity_curve = SubResource("CurveTexture_g6ibo")
+shader_parameter/alpha_curve = SubResource("CurveTexture_0rjum")
+shader_parameter/color_curve = SubResource("CurveXYZTexture_jel4a")
+shader_parameter/scale_curve = SubResource("CurveTexture_7m227")
+shader_parameter/initial_linear_velocity_curve = SubResource("CurveTexture_erbjr")
 shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
 shader_parameter/emission_shape_scale = 1.0
 shader_parameter/emission_sphere_radius = 60.0
@@ -389,21 +389,21 @@ skew = -0.125664
 texture = ExtResource("18_lg8p0")
 centered = false
 
-[node name="BlinkComponent" parent="." index="7"]
+[node name="BlinkComponent" parent="." index="6"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_q5e28")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 tree_root = SubResource("AnimationNodeBlendTree_dniyj")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="BombComponent" type="Node2D" parent="." index="11"]
+[node name="BombComponent" type="Node2D" parent="." index="10"]
 unique_name_in_owner = true
 script = ExtResource("20_dniyj")
 can_attack_plant_status = 7
@@ -411,7 +411,7 @@ can_attack_zombie_status = 63
 
 [node name="Area2DBomb" type="Area2D" parent="BombComponent" index="0"]
 collision_layer = 0
-collision_mask = 20
+collision_mask = 21
 input_pickable = false
 monitorable = false
 

@@ -1,7 +1,7 @@
 extends Character000Base
 class_name Zombie000Base
 
-@onready var attack_component:AttackComponentBase= %AttackComponent
+@onready var attack_component: AttackComponentBase = %AttackComponent
 @onready var hp_stage_change_component: HpStageChangeComponent = %HpStageChangeComponent
 @onready var charred_component: CharredComponent = %CharredComponent
 @onready var move_component: MoveComponent = %MoveComponent
@@ -12,6 +12,9 @@ class_name Zombie000Base
 @export var zombie_type:Global.ZombieType
 ## 僵尸基础属性参数，_ready初始化
 @export_group("僵尸基础属性")
+## 是否忽略梯子,即可以攻击梯子下的植物
+@export var is_ignore_ladder:=false
+
 @export_subgroup("僵尸铁器")
 ## 僵尸铁器类型
 @export var iron_type:Global.IronType = Global.IronType.Null
@@ -42,9 +45,9 @@ var curr_zombie_row_type:Global.ZombieRowType=Global.ZombieRowType.Land
 signal signal_status_update
 ## 行更新信号
 signal signal_lane_update
-func _update_lane(new_lane):
-	lane = new_lane
-	signal_lane_update.emit()
+#func _update_lane(new_lane):
+	#lane = new_lane
+	#signal_lane_update.emit()
 
 ## 僵尸掉血信号（只有僵尸使用）,参数为损失的血量值
 signal signal_zombie_hp_loss(all_loss_hp:int, wave:int)
@@ -108,9 +111,6 @@ func _stop_sfx_enter():
 @onready var head_node:Node2D = get_node(head1_path)
 ## 黄油节点,
 var butter_splat:Node2D
-## 黄油计时器
-@onready var butter_timer: Timer = $ButterTimer
-
 ## 修改初始化状态，在添加到场景树之前调用
 func init_zombie(
 	character_init_type:E_CharacterInitType, 	## 角色初始化类型（正常、展示）
@@ -151,6 +151,16 @@ func init_zombie(
 func init_norm():
 	super()
 	curr_be_attack_status = init_be_attack_status
+	## 若生成位置在斜面中,生成时修正斜面位置
+	if is_instance_valid(MainGameDate.main_game_slope):
+		## 获取对应位置的斜面y相对位置
+		var slope_y_first = MainGameDate.main_game_slope.get_all_slope_y(global_position.x)
+		move_y_body(slope_y_first)
+	## 僵尸普通攻击组件连接信号
+	if attack_component is AttackComponentZombieNorm:
+		## 攻击组件是否攻击梯子下僵尸
+		attack_component.init_attack_component(is_ignore_ladder)
+
 ## 初始化正常出战角色信号连接
 func init_norm_signal_connect():
 	super()
@@ -165,16 +175,13 @@ func init_norm_signal_connect():
 			hp_component.signal_hp_component_death.connect(_stop_sfx_enter)
 
 	hp_component.signal_zombie_hp_loss.connect(func(hp_loss:int): signal_zombie_hp_loss.emit(hp_loss, curr_wave))
-
-	## 僵尸普通攻击组件连接信号
-	if attack_component is AttackComponentZombieNorm:
-		## 血量组件发射死亡信号，使攻击力为0
-		hp_component.signal_hp_component_death.connect(attack_component.update_attack_value.bind(0,AttackComponentZombieNorm.E_AttackValueFactor.Death))
-		## 攻击组件
-		attack_component.signal_change_is_attack.connect(move_component.update_move_factor.bind(move_component.E_MoveFactor.IsAttack))
-		attack_component.signal_change_is_attack.connect(change_is_attack)
-		## 攻击时受击组件
-		attack_component.signal_change_is_attack.connect(be_attacked_box_component.change_area_attack_appear)
+	## 角色死亡时禁用攻击组件
+	hp_component.signal_hp_component_death.connect(attack_component.disable_component.bind(ComponentBase.E_IsEnableFactor.Death))
+	## 攻击组件
+	attack_component.signal_change_is_attack.connect(move_component.update_move_factor.bind(move_component.E_MoveFactor.IsAttack))
+	attack_component.signal_change_is_attack.connect(change_is_attack)
+	## 攻击时受击组件
+	attack_component.signal_change_is_attack.connect(be_attacked_box_component.change_area_attack_appear)
 
 	## 死亡时取消黄油
 	hp_component.signal_hp_component_death.connect(death_stop_butter)
@@ -210,6 +217,11 @@ func init_norm_signal_connect():
 	## 移动y方向
 	move_component.signal_move_body_y.connect(move_y_body)
 
+	## 对移动速度影响,只对速度移动模式生效
+	signal_update_speed.connect(move_component.owner_update_speed)
+	## 对攻击影响,
+	signal_update_speed.connect(attack_component.owner_update_speed)
+
 ## 初始化展示角色
 func init_show():
 	super()
@@ -219,20 +231,24 @@ func init_show():
 func change_is_attack(value:bool):
 	is_attack = value
 
-## 更新移动方向
-func update_move_dir(move_dir_y_correct:Vector2):
+## 更新移动方向修正(斜面时使用)
+func update_move_dir_y_correct(move_dir_y_correct_slope:Vector2):
 	#print("更新移动方向:", move_dir)
-	move_component.move_dir_y_correct = move_dir_y_correct
+	move_component.move_dir_y_correct_slope = move_dir_y_correct_slope
+
 
 ## body\shader\灰烬\受击(真实)框移动y方向
 func move_y_body(move_y:float):
 	body.position.y += move_y
 	shadow.position.y += move_y
 	charred_component.position.y += move_y
+	hp_component.position.y += move_y
 	be_attacked_box_component.move_y_hurt_box_real(move_y)
 
 	for c in special_component_update_pos_in_slope:
 		c.update_component_y(move_y)
+	for n in special_node2d_update_pos_in_slope:
+		n.position.y += move_y
 
 ## 改变游泳状态,切换动画时0.2秒过度时间停止移动
 func change_is_swimming(value:bool):
@@ -271,7 +287,7 @@ func character_death_disappear():
 ## 被小推车碾压
 ## TODO: 修改为原版
 func be_mowered_run():
-	hp_component.Hp_loss_death(false)
+	hp_component.Hp_loss_death(true)
 
 ## 角色在泳池中死亡,泳池死亡动画调用
 func in_water_death_start():
@@ -287,21 +303,17 @@ func be_grap_in_pool():
 	move_component.update_move_factor(true, MoveComponent.E_MoveFactor.IsDeath)
 
 ## 被炸弹炸
+## 灰烬动画从角色本体摘出来,本体节点free,灰烬动画播放玩后删除
 ## is_cherry_bomb:bool = false ：是否灰烬炸弹(非土豆雷)
 func be_bomb(attack_value:int, is_cherry_bomb:bool = false):
 	is_can_death_language = false
 	hp_component.Hp_loss(attack_value, Global.AttackMode.Penetration, false, false)
+	## 如果角色死亡
 	if is_death:
-		## 在水中\在地下直接删除
-		if is_swimming or curr_be_attack_status == E_BeAttackStatusZombie.IsDownGround:
-			queue_free()
-		else:
-			if is_cherry_bomb:
-				anim_component.stop_anim()
-				move_component.update_move_factor(true, MoveComponent.E_MoveFactor.IsBombDeath)
-				charred_component.play_charred_anim()
-			else:
-				queue_free()
+		## 在在灰烬动画条件下
+		if is_cherry_bomb and (not is_swimming or not curr_be_attack_status != E_BeAttackStatusZombie.IsDownGround):
+			charred_component.play_charred_anim()
+		queue_free()
 	#await get_tree().process_frame
 	set_deferred("is_can_death_language", true)
 
@@ -368,7 +380,10 @@ func be_butter(butter_time:float=4):
 
 		## 更新速度
 		update_speed_factor(0.0, E_Influence_Speed_Factor.Butter)
-		butter_timer.start(butter_time)
+		if not is_instance_valid(all_timer[E_TimerType.Butter]):
+			all_timer[E_TimerType.Butter] = GlobalUtils.create_new_timer_once(self, _on_butter_timer_timeout)
+
+		all_timer[E_TimerType.Butter].start(butter_time)
 
 ## 死亡时停止黄油
 func death_stop_butter():
@@ -409,5 +424,13 @@ func update_lane():
 	var tween:Tween = create_tween()
 	tween.tween_property(self, ^"position:y", MainGameDate.all_zombie_rows[lane].zombie_create_position.position.y, 1)
 	tween.tween_callback(attack_component.enable_component.bind(ComponentBase.E_IsEnableFactor.Garlic))
+
+#endregion
+
+
+#region 梯子
+## 梯子检测到僵尸时,僵尸爬过梯子
+func start_climbing_ladder():
+	move_component.start_ladder()
 
 #endregion

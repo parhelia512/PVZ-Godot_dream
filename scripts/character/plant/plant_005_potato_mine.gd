@@ -29,10 +29,12 @@ func init_norm_signal_connect():
 	## 准备完成后才会检测到敌人(触发爆炸\直接死亡)
 	attack_ray_component.signal_can_attack.connect(bomb_component.bomb_once)
 	attack_ray_component.signal_can_attack.connect(character_death)
-	## 角色死亡信号连接
-	hp_component.signal_hp_component_death.connect(bomb_component.judge_death_bomb)
 	## 角色速度改变
 	signal_update_speed.connect(update_prepare_speed)
+
+## 亡语
+func death_language():
+	bomb_component.judge_death_bomb()
 
 ## 土豆类出土动画结束调用
 func _rise_end():

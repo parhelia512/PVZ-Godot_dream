@@ -26,6 +26,7 @@ func init_norm_signal_connect():
 	super()
 	## 角色速度改变
 	signal_update_speed.connect(update_grow_speed)
+	signal_update_speed.connect(create_sun_component.owner_update_speed)
 
 ## 成长结束
 func _on_grow_timer_timeout() -> void:

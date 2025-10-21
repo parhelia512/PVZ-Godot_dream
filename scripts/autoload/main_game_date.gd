@@ -18,9 +18,7 @@ var marker_2d_sun_target:Marker2D
 var fog_node:Fog
 
 ## 斜面(屋顶)
-var slope:MainGameSlope
-
-
+var main_game_slope:MainGameSlope
 ## ZombieManager初始化
 ## 僵尸管理器,全局创建僵尸时使用
 var zombie_manager:ZombieManager = null

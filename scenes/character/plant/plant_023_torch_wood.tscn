@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bxf2w1rk7r03s" path="res://assets/reanim/Torchwood_spark.png" id="2_f3mgj"]
 [ext_resource type="Script" uid="uid://xmyk51geyxx8" path="res://scripts/character/plant/plant_023_torch_wood.gd" id="2_s1g5k"]
 [ext_resource type="Texture2D" uid="uid://dejh82cbf5y5q" path="res://assets/reanim/Torchwood_body.png" id="4_ji27e"]
-[ext_resource type="Texture2D" uid="uid://cg0kmdqyqdiu1" path="res://assets/reanim/Torchwood_fire1b.png" id="4_w81nd"]
+[ext_resource type="Texture2D" uid="uid://cb0u1a7b8se76" path="res://assets/reanim/Torchwood_fire1c.png" id="4_w81nd"]
 [ext_resource type="Texture2D" uid="uid://dskdfdfajmrkk" path="res://assets/reanim/Torchwood_mouth.png" id="5_w81nd"]
 [ext_resource type="Texture2D" uid="uid://cwhpp4e3mm63u" path="res://assets/reanim/Torchwood_eyes1.png" id="6_lpob7"]
 [ext_resource type="Animation" uid="uid://ccowvoaw57mbe" path="res://animation/character/plant/023_torch_wood/Torchwood_idle.tres" id="7_1e0vl"]
@@ -49,7 +49,6 @@ size = Vector2(66, 66)
 [node name="Plant023TorchWood" instance=ExtResource("1_t46j5")]
 script = ExtResource("2_s1g5k")
 plant_type = 23
-is_garden_aquarium = false
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-40, -67)
@@ -62,78 +61,78 @@ visible = false
 centered = false
 
 [node name="Layer 35" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-self_modulate = Color(1, 1, 1, 0.830422)
-position = Vector2(32.7, 25.2994)
+self_modulate = Color(1, 1, 1, 0.02)
+position = Vector2(39.7, -7.3)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_f3mgj")
 centered = false
 
 [node name="Layer 33" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-self_modulate = Color(1, 1, 1, 0.234687)
-position = Vector2(55.1, 2.83363)
+self_modulate = Color(1, 1, 1, 0.61905)
+position = Vector2(55.1, 16.1849)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_f3mgj")
 centered = false
 
 [node name="Layer 34" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-self_modulate = Color(1, 1, 1, 0.776158)
-position = Vector2(58.5, 24.9009)
+self_modulate = Color(1, 1, 1, 0.02)
+position = Vector2(49.1, -2.9)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_f3mgj")
 centered = false
 
 [node name="Torchwood_fire1" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(15.8748, -9.68457)
-scale = Vector2(0.749197, 0.990985)
+position = Vector2(17.0732, -5.3)
+scale = Vector2(0.736944, 0.917229)
 texture = ExtResource("4_w81nd")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(6.76783, 28.8287)
-scale = Vector2(0.725643, 0.703392)
+position = Vector2(6.63184, 29.6726)
+scale = Vector2(0.729363, 0.691592)
 texture = ExtResource("4_ji27e")
 centered = false
 
 [node name="Torchwood_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(22.6678, 42.8322)
+position = Vector2(22.3637, 43)
 rotation = -0.006981
-scale = Vector2(0.757287, 0.84086)
+scale = Vector2(0.767726, 0.869179)
 skew = 0.006981
 texture = ExtResource("5_w81nd")
 centered = false
 
 [node name="Torchwood_blink" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
 visible = false
-position = Vector2(30.2841, 39.7679)
+position = Vector2(30.2728, 40.3845)
 scale = Vector2(0.737, 0.787)
 texture = ExtResource("6_lpob7")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("8_lpob7")]([SubResource("Resource_7d34a")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_ytarc")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7d34a")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="Area2DUpBullet" type="Area2D" parent="." index="11"]
+[node name="Area2DUpBullet" type="Area2D" parent="." index="10"]
 collision_layer = 0
-collision_mask = 128
+collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DUpBullet" index="0"]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_f3mgj")
 
-[node name="FogClearerComponent" type="Node2D" parent="." index="12"]
+[node name="FogClearerComponent" type="Node2D" parent="." index="11"]
 unique_name_in_owner = true
 script = ExtResource("11_lpob7")
 

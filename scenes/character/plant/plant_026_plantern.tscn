@@ -57,102 +57,104 @@ texture = ExtResource("2_71jlg")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(10.1717, 0.14903)
-scale = Vector2(0.819849, 0.781151)
+position = Vector2(9.74944, 1.70223)
+scale = Vector2(0.830264, 0.770989)
 texture = ExtResource("3_4prwg")
 centered = false
 
 [node name="Plantern_blink" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
 visible = false
-position = Vector2(42.7662, 32.3929)
+position = Vector2(42.9114, 33.2616)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("4_r1rn4")
 centered = false
 
 [node name="Plantern_leaf1" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(4.28682, 11.1829)
-rotation = -0.045473
-scale = Vector2(0.798, 0.798)
+position = Vector2(2.35056, 24.1572)
+rotation = -1.04811
+scale = Vector2(0.795747, 0.795747)
 texture = ExtResource("5_v0wv6")
 centered = false
 
 [node name="Plantern_leaf2" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(-0.641471, 13.0471)
-rotation = 0.0861843
-scale = Vector2(0.802283, 0.798)
-skew = 0.0635557
+position = Vector2(-1.62416, 25.5814)
+rotation = -0.697138
+scale = Vector2(0.838769, 0.796747)
+skew = 0.278506
 texture = ExtResource("6_h7gip")
 centered = false
 
 [node name="Plantern_leaf3" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(6.23585, 18.7698)
-rotation = 0.0156437
-scale = Vector2(0.938322, 0.736678)
+position = Vector2(6.14944, 22.3275)
+rotation = -0.322159
+scale = Vector2(0.812506, 0.922056)
+skew = 0.163697
 texture = ExtResource("7_bl71l")
 centered = false
 
 [node name="Plantern_leaf1_2" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(74.2849, 10.1546)
-rotation = -3.09326
-scale = Vector2(0.738283, 0.738283)
-skew = 3.133
+position = Vector2(74.8989, 23.5561)
+rotation = -1.92076
+scale = Vector2(0.739253, 0.740253)
+skew = 3.12588
 texture = ExtResource("5_v0wv6")
 centered = false
 
 [node name="Plantern_leaf2_2" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(79.6207, 12.1395)
-rotation = -3.19054
-scale = Vector2(0.78951, 0.787151)
-skew = 3.07119
+position = Vector2(78.7483, 23.2045)
+rotation = -2.48993
+scale = Vector2(0.780769, 0.744253)
+skew = 2.85085
 texture = ExtResource("6_h7gip")
 centered = false
 
 [node name="Plantern_leaf3_2" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(73.2717, 16.8056)
-rotation = 3.12595
-scale = Vector2(0.92519, 0.725546)
-skew = -3.1432
+position = Vector2(71.5, 21.2033)
+rotation = 3.56943
+scale = Vector2(0.777517, 0.789275)
+skew = -3.42447
 texture = ExtResource("7_bl71l")
 centered = false
 
 [node name="Plantern_leaf4" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(26.4717, 23.1622)
-rotation = 0.0850952
-scale = Vector2(0.799, 0.799)
+position = Vector2(25.3506, 34.255)
+rotation = -0.567926
+scale = Vector2(0.806253, 0.797747)
+skew = 0.127908
 texture = ExtResource("8_r4efy")
 centered = false
 
 [node name="Plantern_leaf4_2" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(52.3924, 26.0622)
-rotation = -3.09819
-scale = Vector2(0.798, 0.798)
-skew = 3.14047
+position = Vector2(52.5494, 35.9792)
+rotation = -2.35552
+scale = Vector2(0.814506, 0.797)
+skew = 3.00975
 texture = ExtResource("8_r4efy")
 centered = false
 
 [node name="Plantern_leaf5" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(27.0717, 25.9339)
-rotation = 0.126621
-scale = Vector2(0.804283, 0.828132)
+position = Vector2(27.7253, 31.8275)
+rotation = -0.244022
+scale = Vector2(0.738472, 0.922803)
 texture = ExtResource("9_e4jmj")
 centered = false
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("10_4prwg")]([SubResource("Resource_v0wv6")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_q37s8")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_at01j")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="FogClearerComponent" type="Node2D" parent="." index="11"]
+[node name="FogClearerComponent" type="Node2D" parent="." index="10"]
 unique_name_in_owner = true
 script = ExtResource("13_r1rn4")
 

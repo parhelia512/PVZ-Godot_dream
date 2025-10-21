@@ -40,7 +40,7 @@ movie_writer/movie_file="E:/movie"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/R2Ga_PVZ/plugin.cfg", "res://addons/anim_free_common_tracks/plugin.cfg", "res://addons/anim_player_refactor/plugin.cfg", "res://addons/todo_controller/plugin.cfg")
+enabled=PackedStringArray("res://addons/R2Ga_PVZ/plugin.cfg", "res://addons/anim_player_refactor/plugin.cfg", "res://addons/todo_controller/plugin.cfg")
 
 [input]
 
@@ -105,11 +105,11 @@ ShortcutKeys_Card10={
 2d_physics/layer_1="World"
 2d_physics/layer_2="PlantHurtBoxDetecttion"
 2d_physics/layer_3="ZombieHurtBoxDetecttion"
-2d_physics/layer_4="Bullet"
+2d_physics/layer_4="BulletFromPlant"
 2d_physics/layer_5="ZombieHurtBoxDetecttionOnAttack"
 2d_physics/layer_6="ZombieHurtBoxDetecttionBeHypnotized"
 2d_physics/layer_7="Bowling"
-2d_physics/layer_8="UpBullet"
+2d_physics/layer_8="BulletFromZombie"
 2d_physics/layer_9="PlantHurtBoxReal"
 2d_physics/layer_10="ZombieHurtBoxReal"
 2d_physics/layer_11="ZombieHurtBoxRealBeHypnotized"

@@ -7,6 +7,8 @@ class_name AttackRayComponent
 ## **植物和僵尸通用**
 ## 是否使用行属性进行攻击判断
 @export var is_lane:=true
+## 是否攻击梯子下的植物,僵尸初始化时根据is_ignore_ladder更新该值
+var is_attack_ladder_plant:=true
 ## 可以攻击的敌人状态
 @export_flags("1 正常", "2 悬浮", "4 地刺") var can_attack_plant_status:int = 1
 @export_flags("1 正常", "2 跳跃", "4 水下", "8 空中", "16 地下") var can_attack_zombie_status:int = 1
@@ -64,7 +66,7 @@ func _ready() -> void:
 		printerr("lane == -1且为正常出战初始化类型")
 
 
-func _physics_process(_delta):
+func _process(_delta):
 	if need_judge and is_enabling:
 		need_judge = false
 		judge_is_have_enemy()
@@ -87,7 +89,10 @@ func _on_area_2d_area_entered(area: Area2D, i:int) -> void:
 	var enemy = area.owner
 	if is_lane and owner.lane != enemy.lane:
 		return
-	if enemy is Zombie000Base:
+	if enemy is Plant000Base:
+		if not enemy.signal_ladder_update.is_connected(_on_enemy_plant_ladder_update.bind(enemy)):
+			enemy.signal_ladder_update.connect(_on_enemy_plant_ladder_update.bind(enemy))
+	elif enemy is Zombie000Base:
 		if not enemy.signal_status_update.is_connected(_on_enemy_zombie_status_update.bind(enemy)):
 			enemy.signal_status_update.connect(_on_enemy_zombie_status_update.bind(enemy))
 		if not enemy.signal_lane_update.is_connected(_on_enemy_zombie_lane_update.bind(enemy)):
@@ -96,6 +101,10 @@ func _on_area_2d_area_entered(area: Area2D, i:int) -> void:
 
 ## 敌人离开当前射线检测区域
 func _on_area_2d_area_exited(area: Area2D, i:int) -> void:
+	need_judge = true
+
+## 植物敌人梯子状态变化
+func _on_enemy_plant_ladder_update(plant:Plant000Base):
 	need_judge = true
 
 ## 僵尸敌人状态变化时函数，与状态变化信号连接
@@ -115,6 +124,10 @@ func judge_is_have_enemy():
 			var enemy:Character000Base = enemy_area.owner
 			if _judge_enemy_is_can_be_attack(enemy):
 				enemy_can_be_attacked = enemy
+				#print("检测到敌人", enemy.name)
+				if enemy_can_be_attacked is Plant000Base:
+					enemy_can_be_attacked = get_first_be_hit_plant_in_cell(enemy_can_be_attacked)
+					enemy_can_be_attacked.signal_character_death.connect(func():need_judge = true)
 				signal_can_attack.emit()
 				return true
 
@@ -123,16 +136,37 @@ func judge_is_have_enemy():
 	signal_not_can_attack.emit()
 	return false
 
+## 获取应该被攻击的植物,在当前植物格子中
+func get_first_be_hit_plant_in_cell(plant:Plant000Base)->Plant000Base:
+	## shell
+	#prints("植物是否合法", is_instance_valid(plant), plant.name)
+	if is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]
+	elif is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]
+	elif is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]
+	else:
+		printerr("当前植物格子没有检测到可以攻击的植物", is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Float]))
+		return null
+
 ## 判断敌人是否可以被攻击
 func _judge_enemy_is_can_be_attack(enemy:Character000Base)->bool:
+	if not is_instance_valid(enemy):
+		return false
 	## 先判断行属性
 	if is_lane and owner.lane != enemy.lane:
 		return false
 	## 如果敌人为植物
-	if enemy is Plant000Base :
+	if enemy is Plant000Base:
 		## 如果当前植物可以被攻击到
 		if enemy.curr_be_attack_status & can_attack_plant_status:
-			return true
+			## 梯子
+			if is_attack_ladder_plant:
+				return true
+			else:
+				## 判断格子是否有梯子
+				return not is_instance_valid(enemy.plant_cell.ladder)
 		else:
 			return false
 
@@ -148,8 +182,9 @@ func _judge_enemy_is_can_be_attack(enemy:Character000Base)->bool:
 		print("检测到非角色类敌人")
 		return false
 
-## 更新可攻击敌人为第一个敌人(最前面的敌人)
-func update_first_enemy():
+## 更新可攻击敌人为第一个敌人(最前面的敌人),投手类使用
+func update_first_enemy()->Character000Base:
+	enemy_can_be_attacked = null
 	for ray_area in all_ray_area:
 		var all_enemy_area = ray_area.get_overlapping_areas()
 		for enemy_area in all_enemy_area:
@@ -161,7 +196,21 @@ func update_first_enemy():
 						enemy_can_be_attacked = enemy
 				else:
 					enemy_can_be_attacked = enemy
+	#print(enemy_can_be_attacked.global_position.x, enemy_can_be_attacked.name)
+	return enemy_can_be_attacked
 
+
+## 获取所有可以被攻击的敌人
+func get_all_enemy_can_be_attacked()->Array[Character000Base]:
+	var all_enemy_can_be_attacked:Array[Character000Base]
+	for ray_area in all_ray_area:
+		var all_enemy_area = ray_area.get_overlapping_areas()
+		for enemy_area in all_enemy_area:
+			var enemy:Character000Base = enemy_area.owner
+			## 如果敌人可以被攻击
+			if _judge_enemy_is_can_be_attack(enemy) and not all_enemy_can_be_attacked.has(enemy):
+				all_enemy_can_be_attacked.append(enemy)
+	return all_enemy_can_be_attacked
 
 ## 被魅惑
 func owner_be_hypno():

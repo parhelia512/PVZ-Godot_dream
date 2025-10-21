@@ -29,11 +29,11 @@ func init_norm():
 	time_pogo_once = time_pogo_once_default
 	attack_component.disable_component(ComponentBase.E_IsEnableFactor.Character)
 	## 跳跳状态下检测到植物停止移动,弹跳两次后移动
-	attack_ray_component_pogo.signal_can_attack.connect(pogo_ray_enemt)
+	attack_ray_component_pogo.signal_can_attack.connect(pogo_ray_enemy)
 	#attack_ray_component_pogo.signal_not_can_attack.connect(func():move_component.update_move_factor.bind(false, MoveComponent.E_MoveFactor.IsCharacter))
 
 ## 检测到敌人时
-func pogo_ray_enemt():
+func pogo_ray_enemy():
 	## 非大跳状态并且敌人在左边时
 	if not is_big_pogo and \
 	attack_ray_component_pogo.enemy_can_be_attacked.global_position.x < global_position.x:
@@ -70,6 +70,7 @@ func pogo_start():
 				move_component.update_only_move_speed(4)
 				pogo_y = pogo_y_defalut * 2
 		else:
+			move_component.update_only_move_speed(0)
 			pogo_y = pogo_y_defalut
 	else:
 		move_component.update_only_move_speed(1)

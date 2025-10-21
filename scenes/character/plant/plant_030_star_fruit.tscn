@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://bo2laq3egm6ic"]
+[gd_scene load_steps=21 format=3 uid="uid://bo2laq3egm6ic"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_nndnm"]
+[ext_resource type="Script" uid="uid://ufhh4gtgm5my" path="res://scripts/character/plant/plant_030_star_fruit.gd" id="2_ds8om"]
 [ext_resource type="Texture2D" uid="uid://h5yqjc7mrtnq" path="res://assets/reanim/Starfruit_body.png" id="2_j1qv8"]
 [ext_resource type="Texture2D" uid="uid://k8arpkjanpdw" path="res://assets/reanim/Starfruit_mouth.png" id="3_ds8om"]
 [ext_resource type="Texture2D" uid="uid://h7nxedbfin5i" path="res://assets/reanim/Starfruit_smile.png" id="3_us3df"]
@@ -51,6 +52,7 @@ node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"TimeScale 2", 
 size = Vector2(800, 5)
 
 [node name="Plant030StarFruit" node_paths=PackedStringArray("special_component_update_pos_in_slope") instance=ExtResource("1_nndnm")]
+script = ExtResource("2_ds8om")
 plant_type = 30
 special_component_update_pos_in_slope = [NodePath("AttackComponent")]
 
@@ -69,8 +71,8 @@ visible = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(1.54438, 10.9534)
-scale = Vector2(0.73909, 0.682444)
+position = Vector2(2.61324, 10.1401)
+scale = Vector2(0.716268, 0.697665)
 texture = ExtResource("2_j1qv8")
 centered = false
 
@@ -81,23 +83,23 @@ texture = ExtResource("3_ds8om")
 centered = false
 
 [node name="Starfruit_smile" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(32.7955, 35.4)
-scale = Vector2(0.81527, 0.702489)
-skew = -0.0787753
+position = Vector2(33.9599, 35.3467)
+scale = Vector2(0.741206, 0.704533)
+skew = -0.023857
 texture = ExtResource("3_us3df")
 centered = false
 
 [node name="Starfruit_leaf" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(28.5511, 4.85112)
-rotation = 0.322083
-scale = Vector2(0.706, 0.713309)
-skew = -0.0619787
+position = Vector2(27.4335, 4.75993)
+rotation = 0.0818116
+scale = Vector2(0.706, 0.74414)
+skew = -0.0409634
 texture = ExtResource("4_ds8om")
 centered = false
 
 [node name="Starfruit_stem" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(29.3, 8.15787)
-scale = Vector2(0.758112, 0.640151)
+position = Vector2(29.3, 6.64669)
+scale = Vector2(0.726537, 0.714801)
 texture = ExtResource("5_uefxc")
 centered = false
 
@@ -110,8 +112,8 @@ centered = false
 
 [node name="Starfruit_eyes2" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
 visible = false
-position = Vector2(28.8196, 26)
-scale = Vector2(0.71631, 0.714)
+position = Vector2(28.8582, 26)
+scale = Vector2(0.714103, 0.714)
 texture = ExtResource("6_0ews2")
 centered = false
 
@@ -135,12 +137,12 @@ scale = Vector2(0.5, 0.592593)
 position = Vector2(70, 56)
 scale = Vector2(0.5, 0.592593)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_el77c")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_lia21")
 advance_expression_base_node = NodePath("..")
@@ -151,7 +153,7 @@ parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 2/scale" = 2.0
 
-[node name="AttackComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("markers_2d_bullet")]
+[node name="AttackComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("markers_2d_bullet")]
 script = ExtResource("9_j1qv8")
 is_lane = false
 attack_bullet_type = 8

@@ -110,13 +110,13 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_l3gfd")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="5"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4"]
 material = SubResource("CanvasItemMaterial_vebj3")
 texture = ExtResource("7_8bp4q")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_juo3x")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="." index="6"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." index="5"]
 material = SubResource("CanvasItemMaterial_8wxh0")
 texture = ExtResource("8_fvejc")
 lifetime = 0.5

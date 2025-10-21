@@ -1041,7 +1041,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_gvium")
 }
 
-[node name="SpatterComponent" type="Node2D" parent="." index="5"]
+[node name="SpatterComponent" type="Node2D" parent="." index="4"]
 script = ExtResource("16_nb40j")
 
 [node name="Area2DSpatter" type="Area2D" parent="SpatterComponent" index="0"]

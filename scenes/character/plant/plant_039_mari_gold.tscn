@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://1k30aslpk43r"]
+[gd_scene load_steps=23 format=3 uid="uid://1k30aslpk43r"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_rdg00"]
 [ext_resource type="Texture2D" uid="uid://cy3xu8ug3gd2" path="res://assets/reanim/PeaShooter_backleaf.png" id="2_43sbo"]
+[ext_resource type="Script" uid="uid://cdmi72wg2u0se" path="res://scripts/character/plant/plant_039_mari_gold.gd" id="2_n70fy"]
 [ext_resource type="Texture2D" uid="uid://cyknr5ymersct" path="res://assets/reanim/PeaShooter_backleaf_lefttip.png" id="3_n70fy"]
 [ext_resource type="Texture2D" uid="uid://i7fngqj5l36a" path="res://assets/reanim/PeaShooter_backleaf_righttip.png" id="4_k746y"]
 [ext_resource type="Texture2D" uid="uid://yxv2bpco6d57" path="res://assets/reanim/PeaShooter_stalk_bottom.png" id="5_5omrt"]
@@ -37,99 +38,99 @@ nodes/TimeScale/position = Vector2(240, 140)
 nodes/output/position = Vector2(420, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
-[node name="Plant039MariGold" node_paths=PackedStringArray("speech_influence_components") instance=ExtResource("1_rdg00")]
+[node name="Plant039MariGold" instance=ExtResource("1_rdg00")]
+script = ExtResource("2_n70fy")
 plant_type = 39
-speech_influence_components = [NodePath("CreateCoinComponent")]
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-41, -68)
 
 [node name="Backleaf" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(27.6, 54.6578)
-scale = Vector2(0.58563, 0.485689)
+position = Vector2(27.5, 55.52)
+scale = Vector2(0.603798, 0.445204)
 texture = ExtResource("2_43sbo")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(24.8422, 55.0156)
-rotation = 0.025094
-scale = Vector2(0.610311, 0.515)
+position = Vector2(24.18, 56.8399)
+rotation = -0.0959808
+scale = Vector2(0.648796, 0.515)
 texture = ExtResource("3_n70fy")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(47.8052, 54.2578)
-rotation = 0.0381128
-scale = Vector2(0.663319, 0.511319)
+position = Vector2(48.42, 55.3399)
+rotation = 0.117277
+scale = Vector2(0.641002, 0.486803)
 texture = ExtResource("4_k746y")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(37.8578, 50.037)
-rotation = 0.203454
-scale = Vector2(0.559526, 0.656467)
-skew = -0.0710029
+position = Vector2(42.0603, 50.8401)
+rotation = 0.540032
+scale = Vector2(0.5598, 0.556592)
+skew = -0.0785398
 texture = ExtResource("5_5omrt")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(35.5311, 36.2741)
-rotation = 0.176265
-scale = Vector2(0.564578, 0.846622)
-skew = -0.071093
+position = Vector2(44.181, 38.2803)
+rotation = 0.619993
+scale = Vector2(0.5572, 0.735387)
+skew = -0.0767943
 texture = ExtResource("6_kriex")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(22.2474, 55.3526)
-scale = Vector2(0.575578, 0.523844)
+position = Vector2(21.7, 56.48)
+scale = Vector2(0.599202, 0.488197)
 texture = ExtResource("7_q31kj")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(55.6422, 56.4526)
-rotation = -0.146504
-scale = Vector2(0.715252, 0.545948)
+position = Vector2(57.8002, 57.08)
+rotation = -0.00487562
+scale = Vector2(0.60419, 0.535399)
 texture = ExtResource("8_ufngy")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body/BodyCorrect" index="7"]
-position = Vector2(19.6474, 60.5896)
-rotation = 0.132451
-scale = Vector2(0.622311, 0.545474)
+position = Vector2(19.4, 62.5401)
+rotation = -0.0942677
+scale = Vector2(0.520791, 0.580603)
 texture = ExtResource("9_y3c1e")
 centered = false
 
 [node name="Marigold_petals" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(16.5156, 0.237036)
-scale = Vector2(0.7, 0.7)
+position = Vector2(21.2204, 5.92065)
+scale = Vector2(0.7, 0.666394)
 texture = ExtResource("10_swbfu")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(28.6156, 12.5422)
+position = Vector2(33.5805, 15.6803)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("11_wclar")
 centered = false
 
 [node name="Marigold_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(34.9156, 28.4156)
-rotation = -0.03885
-scale = Vector2(0.7, 0.503504)
+position = Vector2(40.8207, 27.6399)
+rotation = 0.124987
+scale = Vector2(0.7, 0.958643)
 texture = ExtResource("12_d18mp")
 centered = false
 
 [node name="Marigold_eyebrow1" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(32.9156, 17.6844)
-rotation = -0.24388
-scale = Vector2(0.489526, 0.489526)
+position = Vector2(39.7606, 20.1002)
+rotation = 0.180154
+scale = Vector2(0.4898, 0.4898)
 texture = ExtResource("13_lluj0")
 centered = false
 
 [node name="Marigold_eyebrow2" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(49.2207, 13.4267)
-rotation = 0.165781
-scale = Vector2(0.489, 0.489)
+position = Vector2(53.1404, 18.8805)
+rotation = -0.10265
+scale = Vector2(0.488, 0.488)
 texture = ExtResource("14_sy65w")
 centered = false
 
@@ -143,18 +144,18 @@ centered = false
 [node name="Marker2DCreateCoin" type="Marker2D" parent="Body" index="1"]
 position = Vector2(0, -63)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_6m1dl")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 tree_root = SubResource("AnimationNodeBlendTree_rdg00")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 0.5
 
-[node name="CreateCoinComponent" type="Node2D" parent="." index="12" node_paths=PackedStringArray("marker_2d_create_coin")]
+[node name="CreateCoinComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("marker_2d_create_coin")]
 script = ExtResource("17_43sbo")
 marker_2d_create_coin = NodePath("../Body/Marker2DCreateCoin")
 

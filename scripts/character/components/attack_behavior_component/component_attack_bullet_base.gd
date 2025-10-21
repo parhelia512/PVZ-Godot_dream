@@ -13,6 +13,8 @@ class_name AttackComponentBulletBase
 ## 是否使用行属性进行攻击判断
 @export var is_lane:=true
 
+## 攻击参数,动画攻击一次的参数
+@export var attack_para:StringName= &"parameters/OneShot/request"
 ### TODO:子弹攻击伤害(为正数时可以给子弹赋值,默认为子弹攻击力)
 #@export var attack_value_bullet:int = -1
 @export var attack_cd:float = 1.5
@@ -25,6 +27,9 @@ class_name AttackComponentBulletBase
 @export var attack_sfx_plant_type:Global.PlantType = Global.PlantType.P001PeaShooterSingle
 ## 攻击音效名字（发射子弹）
 @export var attack_sfx:StringName = &"Throw"
+
+## 发射一次子弹信号
+signal signal_shoot_bullet
 
 ## 主游戏场景子弹父节点
 var bullets: Node2D
@@ -70,16 +75,16 @@ func attack_end():
 
 ## 攻击间隔后触发执行攻击
 func _on_bullet_attack_cd_timer_timeout() -> void:
-	#if is_attack_res:
 	# 在这里调用实际攻击逻辑
-	animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	animation_tree.set(attack_para, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func set_cancel_attack():
-	animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_NONE)
+	animation_tree.set(attack_para, AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
 
 
 ## 发射子弹（动画调用）
 func _shoot_bullet():
+	signal_shoot_bullet.emit()
 	for i in range(markers_2d_bullet.size()):
 		var marker_2d_bullet = markers_2d_bullet[i]
 		var ray_direction = attack_ray_component.ray_area_direction[i]
@@ -92,7 +97,7 @@ func _shoot_bullet():
 		play_throw_sfx()
 
 ## 特殊子弹初始化
-func special_bullet_init(bullet):
+func special_bullet_init(bullet:Bullet000Base):
 	pass
 
 func play_throw_sfx():

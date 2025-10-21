@@ -1107,7 +1107,6 @@ script = ExtResource("2_fumvv")
 num_moon_walk = 2
 zombie_type = 9
 sfx_enter_name = &"Dancer"
-head1_path = NodePath("Body/BodyCorrect/Anim_head1")
 metadata/_edit_pinned_properties_ = [&"zombie_type"]
 
 [node name="BodyCorrect" parent="Body" index="0"]
@@ -1380,11 +1379,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_bab66")
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="13"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
 libraries = {
 &"": SubResource("AnimationLibrary_0mrgh")
 }
 speed_scale = 1.3
 
-[node name="StateMachine" type="Node" parent="." index="14"]
+[node name="StateMachine" type="Node" parent="." index="12"]
 script = ExtResource("50_5vu3m")

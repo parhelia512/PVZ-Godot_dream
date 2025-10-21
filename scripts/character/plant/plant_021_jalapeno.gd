@@ -3,7 +3,6 @@ class_name Plant021Jalapeno
 
 @onready var bomb_component: BombComponentBase = %BombComponent
 
-func init_norm_signal_connect():
-	super()
-	## 角色死亡信号连接
-	hp_component.signal_hp_component_death.connect(bomb_component.judge_death_bomb)
+## 亡语
+func death_language():
+	bomb_component.judge_death_bomb()

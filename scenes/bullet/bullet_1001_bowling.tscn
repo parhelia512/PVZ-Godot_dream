@@ -15,7 +15,7 @@ script = ExtResource("2_il6ge")
 max_attack_num = -1
 speed = 188.0
 bullet_mode = 3
-type_bullet_SFX = 51
+type_bullet_SFX = 1001
 
 [node name="BulletShadow" parent="." index="0"]
 position = Vector2(0, 0)
@@ -66,11 +66,5 @@ collision_layer = 72
 [node name="CollisionShape2D" parent="Area2DAttack" index="0"]
 position = Vector2(0, -30)
 shape = SubResource("CircleShape2D_kevkr")
-
-[node name="Area2DUp" parent="." index="4"]
-visible = false
-collision_mask = 0
-monitoring = false
-monitorable = false
 
 [connection signal="area_exited" from="Area2DAttack" to="." method="_on_area_2d_attack_area_exited"]

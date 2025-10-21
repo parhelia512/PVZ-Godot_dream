@@ -64,15 +64,15 @@ visible = false
 centered = false
 
 [node name="Coffeebean_leaf" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(17.179, 10.5383)
-rotation = -0.0544937
-scale = Vector2(0.50279, 0.5)
-skew = 0.0544937
+position = Vector2(17.1901, 6.66054)
+rotation = 0.0111927
+scale = Vector2(0.500789, 0.5)
+skew = -0.0111927
 texture = ExtResource("2_i7rq2")
 centered = false
 
 [node name="Coffeebean_head" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(18.2, 14.0691)
+position = Vector2(18.2, 12.2987)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_wi000")
 centered = false
@@ -81,12 +81,12 @@ centered = false
 offset_top = -40.0
 offset_bottom = -40.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_lhahu")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 tree_root = SubResource("AnimationNodeBlendTree_rb7r5")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")

@@ -39,7 +39,7 @@
 [ext_resource type="Script" uid="uid://duv8spyw6f44n" path="res://scripts/manager/zombie_manager/zm_zombie_choose_row_system.gd" id="25_iuyhw"]
 [ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="26_84h1o"]
 [ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="27_w5iw5"]
-[ext_resource type="Script" uid="uid://c6mc0k0vhb4ad" path="res://scripts/main_game_item/lawn_movers.gd" id="28_3uxdp"]
+[ext_resource type="Script" uid="uid://c6mc0k0vhb4ad" path="res://scripts/manager/lawn_mover_manager.gd" id="28_3uxdp"]
 [ext_resource type="Texture2D" uid="uid://dfjdwrmbaotyx" path="res://assets/image/background/background5_gameover_mask.png" id="28_71hfq"]
 [ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="28_mddbc"]
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="29_8fvtd"]
@@ -134,6 +134,10 @@ script = ExtResource("13_3d12c")
 [node name="CardManager" type="Node" parent="Manager"]
 unique_name_in_owner = true
 script = ExtResource("34_5pjpf")
+
+[node name="LawnMoverManager" type="Node" parent="Manager"]
+unique_name_in_owner = true
+script = ExtResource("28_3uxdp")
 
 [node name="Background" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -231,13 +235,26 @@ grow_horizontal = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ha6fd")
 
+[node name="ShowZombiePanel2" type="Panel" parent="Background"]
+unique_name_in_owner = true
+z_index = 710
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 180.0
+offset_right = -20.0
+offset_bottom = 580.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ha6fd")
+
 [node name="GameItemsInBg" type="Node2D" parent="Background"]
 unique_name_in_owner = true
 
 [node name="LawnMovers" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = 400
-script = ExtResource("28_3uxdp")
 
 [node name="PlantCellsRoot" type="Node2D" parent="."]
 unique_name_in_owner = true

@@ -3,7 +3,8 @@ class_name Zombie013Zamboni
 
 ## 状态三阶段时损毁烟雾
 @onready var smoke: GPUParticles2D = %Smoke
-@onready var death_bomb: ZamboniDeathBomb = $DeathBomb
+@onready var death_bomb: ZamboniDeathBomb = $Body/DeathBomb
+
 ## 冰道
 @onready var ice_road: IceRoad = $IceRoad
 

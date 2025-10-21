@@ -31,7 +31,6 @@ anim_offset_max = 1.0
 [node name="Bullet009Cabbage" instance=ExtResource("1_tg8in")]
 parabola_height = -500.0
 is_rotate = true
-speed = 600.0
 bullet_mode = 1
 
 [node name="BulletBody" parent="Body" index="0"]

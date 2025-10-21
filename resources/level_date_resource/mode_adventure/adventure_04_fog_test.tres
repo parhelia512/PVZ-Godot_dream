@@ -1,24 +1,24 @@
-[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=2 format=3 uid="uid://qbly1sno3hn6"]
+[gd_resource type="Resource" script_class="ResourceLevelData" load_steps=3 format=3 uid="uid://qbly1sno3hn6"]
 
+[ext_resource type="Script" uid="uid://bke3sg5otco7s" path="res://scripts/resources/level/pre_plant_in_level.gd" id="1_et7b7"]
 [ext_resource type="Script" uid="uid://bjt3l56exxmdw" path="res://scripts/resources/level/level_data.gd" id="1_w0hwk"]
 
 [resource]
 script = ExtResource("1_w0hwk")
-game_mode = 0
-adventure_game_level = 2
-mini_game_level = 0
-game_sences = 3
+game_sences = 1
 game_BG = 3
 game_BGM = 3
 is_fog = true
 is_day = false
 is_day_sun = false
+all_pre_plant_data = Array[ExtResource("1_et7b7")]([])
 look_show_zombie = true
 can_choosed_card = true
 monster_mode = 0
 zombie_multy = 1
 max_wave = 30
 zombie_refresh_types = Array[int]([1, 3, 4, 5])
+is_bungi = false
 zombie_multy_hammer = 1
 max_wave_hammer_zombie = 10
 speed_zombie_init = 1.0

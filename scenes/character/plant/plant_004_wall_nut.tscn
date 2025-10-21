@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bjdufdnu8jj62"]
+[gd_scene load_steps=24 format=3 uid="uid://bjdufdnu8jj62"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_rscpg"]
 [ext_resource type="Texture2D" uid="uid://osds5r8hvsmb" path="res://assets/reanim/Wallnut_body.png" id="2_1opod"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://dnilkxbadh0rl" path="res://assets/reanim/PotatoMine_blink1.png" id="7_v6xc2"]
 [ext_resource type="Texture2D" uid="uid://nqtupvaignh1" path="res://assets/reanim/PotatoMine_blink2.png" id="8_hev76"]
 [ext_resource type="Script" uid="uid://jl0nl4a234bc" path="res://scripts/resources/resource_body_change.gd" id="8_y4g8x"]
-[ext_resource type="Texture2D" uid="uid://d06vgaisnbd0n" path="res://assets/reanim/Wallnut_cracked1.png" id="12_gq356"]
 [ext_resource type="Texture2D" uid="uid://bms4xhmhlcsam" path="res://assets/reanim/Wallnut_cracked2.png" id="13_akyvq"]
 
 [sub_resource type="Resource" id="Resource_gq356"]
@@ -60,16 +59,16 @@ nodes/TimeScale/position = Vector2(600, 100)
 nodes/output/position = Vector2(900, 120)
 node_connections = [&"TimeScale", 0, &"AnimationNodeStateMachine", &"output", 0, &"TimeScale"]
 
-[sub_resource type="Resource" id="Resource_rc6lj"]
+[sub_resource type="Resource" id="Resource_hev76"]
 script = ExtResource("8_y4g8x")
 sprite_change = Array[NodePath]([NodePath("../Body/BodyCorrect/Anim_face")])
-sprite_change_texture = Array[Texture2D]([ExtResource("12_gq356")])
+sprite_change_texture = Array[Texture2D]([ExtResource("13_akyvq")])
 sprite_appear = Array[NodePath]([])
 sprite_disappear = Array[NodePath]([])
 node_drop = NodePath("")
 metadata/_custom_type_script = "uid://jl0nl4a234bc"
 
-[sub_resource type="Resource" id="Resource_yaxta"]
+[sub_resource type="Resource" id="Resource_akyvq"]
 script = ExtResource("8_y4g8x")
 sprite_change = Array[NodePath]([NodePath("../Body/BodyCorrect/Anim_face")])
 sprite_change_texture = Array[Texture2D]([ExtResource("13_akyvq")])
@@ -81,6 +80,7 @@ metadata/_custom_type_script = "uid://jl0nl4a234bc"
 [node name="Plant004WallNut" instance=ExtResource("1_rscpg")]
 script = ExtResource("2_v6xc2")
 plant_type = 4
+is_can_ladder = true
 
 [node name="Shadow" parent="." index="0"]
 position = Vector2(0, -5)
@@ -96,22 +96,22 @@ centered = false
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(6.71963, 3.84049)
-rotation = -0.00244839
-scale = Vector2(0.7, 0.717397)
+position = Vector2(7.16963, 3.54241)
+rotation = 0.00296069
+scale = Vector2(0.7, 0.717304)
 texture = ExtResource("2_1opod")
 centered = false
 
 [node name="Anim_blink_twitch" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
 visible = false
-position = Vector2(29.0998, 35.6701)
+position = Vector2(29.306, 35.6742)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_ia1rq")
 centered = false
 
 [node name="Anim_blink_twice" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
 visible = false
-position = Vector2(27.8998, 21.6701)
+position = Vector2(28.106, 21.6742)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_s15q3")
 centered = false
@@ -119,22 +119,22 @@ centered = false
 [node name="HpComponent" parent="." index="3"]
 max_hp = 4000
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("8_y4g8x")]([SubResource("Resource_gq356")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_w5ly5")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_hev76")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="HpStageChangeComponent" type="Node2D" parent="." index="12"]
+[node name="HpStageChangeComponent" type="Node2D" parent="." index="10"]
 script = ExtResource("7_s15q3")
 boundary_value_hp = Array[int]([2666, 1333, 0])
-body_change = Array[ExtResource("8_y4g8x")]([SubResource("Resource_rc6lj"), SubResource("Resource_yaxta"), null])
+body_change = Array[ExtResource("8_y4g8x")]([SubResource("Resource_hev76"), SubResource("Resource_akyvq"), null])

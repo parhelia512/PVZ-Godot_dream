@@ -23,17 +23,29 @@ var all_time:float
 #region 影子相关
 ## 当前场景是否有斜坡,有斜坡的场景每帧检测斜面位置
 var is_have_slope:=false
-## 影子全局位置默认值y,影子不跟随斜坡移动时的全局位置y
-var global_pos_y_shadow_default:float
-## 影子与第一行斜面的偏移量
-var offset_shadow_first_slope:float
+## 影子全局位置y,
+## 该值默认为当前行僵尸出现位置y
+## 有斜面时更新该值,更新影子对应位置
+var global_pos_y_shadow:float
+#endregion
 
+#region 被弹开
+## 是否被弹开
+var is_bounce:=false
+## 是否弹开更新曲线
+var is_bounce_update:=false
+## 弹开的起点
+var start_global_pos_on_bounce:Vector2
+## 弹开的终点
+var end_global_pos_on_bounce:Vector2
+## 第一控制点
+var start_control_point_on_bounce:Vector2
 #endregion
 
 func _ready() -> void:
 	super()
 	if is_instance_valid(enemy):
-		enemy_last_global_pos = enemy.global_position
+		enemy_last_global_pos = enemy.body.global_position
 	curr_diff_x = 0
 	start_global_pos = global_position
 	# 计算贝塞尔曲线的控制点，确保曲线的最高点位于中间
@@ -44,13 +56,9 @@ func _ready() -> void:
 	)
 	all_time = (start_control_point.distance_to(global_position) + start_control_point.distance_to(enemy_last_global_pos)) / speed
 
-	## 如果有斜坡
-	if is_instance_valid(MainGameDate.slope):
-		is_have_slope = true
-		offset_shadow_first_slope = 10 + MainGameDate.slope.get_offest_first_slope(bullet_lane)
-	else:
-		is_have_slope = false
-		global_pos_y_shadow_default = MainGameDate.all_zombie_rows[bullet_lane].zombie_create_position.global_position.y
+	## 是否有斜坡
+	is_have_slope = is_instance_valid(MainGameDate.main_game_slope)
+	global_pos_y_shadow = MainGameDate.all_zombie_rows[bullet_lane].zombie_create_position.global_position.y
 
 	update_shadow_global_pos()
 
@@ -67,9 +75,9 @@ func _process(delta: float) -> void:
 	## 若敌人存在且敌人还未死亡,更新其位置
 	if is_instance_valid(enemy) and not enemy.is_death:
 		##$ 计算敌人移动的水平差距
-		curr_diff_x += abs(enemy.global_position.x - enemy_last_global_pos.x)
+		curr_diff_x += abs(enemy.body.global_position.x - enemy_last_global_pos.x)
 		if curr_diff_x < max_diff_x:
-			enemy_last_global_pos = enemy.global_position + Vector2(0, -20)
+			enemy_last_global_pos = enemy.body.global_position + Vector2(0, -20)
 
 	current_time += delta
 	var t :float= min(current_time / all_time, 1)
@@ -78,35 +86,43 @@ func _process(delta: float) -> void:
 	## 如果到达最终落点时未命中敌人,攻击空气销毁子弹
 	if eased_t >= 1:
 		attack_once(null)
-	## 子弹根据贝塞尔曲线的路径更新位置
-	global_position = start_global_pos.bezier_interpolate(start_control_point, enemy_last_global_pos, enemy_last_global_pos, eased_t)
+	## 是否更新弹开曲线
+	if not is_bounce_update:
+		## 子弹根据贝塞尔曲线的路径更新位置
+		global_position = start_global_pos.bezier_interpolate(start_control_point, enemy_last_global_pos, enemy_last_global_pos, eased_t)
+	else:
+		## 子弹根据贝塞尔曲线的路径更新位置
+		global_position = start_global_pos_on_bounce.bezier_interpolate(start_control_point_on_bounce, end_global_pos_on_bounce, end_global_pos_on_bounce, eased_t)
+
 	update_shadow_global_pos()
+
+
+## 攻击一次
+func attack_once(enemy:Character000Base):
+	## 攻击植物时,若周围有叶子保护伞
+	if enemy is Plant000Base:
+		var all_umbrella_surrounding:Array[Plant000Base] = enemy.plant_cell.get_plant_surrounding(Global.PlantType.P038UmbrellaLeaf)
+		if not all_umbrella_surrounding.is_empty():
+			for p:Plant038UmbrellaLeaf in all_umbrella_surrounding:
+				p.activete_umbrella()
+			be_umbrella_bounce()
+			return
+	super(enemy)
+
 
 ## 控制影子位置
 func update_shadow_global_pos():
 	if is_have_slope:
-		update_global_pos_y_shadow_default_on_have_slope()
+		update_global_pos_y_shadow_on_have_slope()
 
-	bullet_shadow.global_position.y = global_pos_y_shadow_default
+	bullet_shadow.global_position.y = global_pos_y_shadow
 
 ## 场景有斜坡时更新默认影子y值
-func update_global_pos_y_shadow_default_on_have_slope():
-	## 在斜坡左边
-	if global_position.x < MainGameDate.slope.global_pos_slope_start.x:
-		global_pos_y_shadow_default = MainGameDate.slope.global_pos_slope_start.y + 10 + offset_shadow_first_slope
-	## 在斜坡右边
-	elif global_position.x > MainGameDate.slope.global_pos_slope_end.x:
-		global_pos_y_shadow_default = MainGameDate.slope.global_pos_slope_end.y + 10 + offset_shadow_first_slope
-	## 在斜坡中
-	else:
-		# 计算斜坡上的y值
-		var slope_start = MainGameDate.slope.global_pos_slope_start
-		var slope_end = MainGameDate.slope.global_pos_slope_end
-		var t = (global_position.x - slope_start.x) / (slope_end.x - slope_start.x)  # 计算相对位置
+func update_global_pos_y_shadow_on_have_slope():
+	## 获取相对斜坡的位置
+	var slope_y = MainGameDate.main_game_slope.get_all_slope_y(global_position.x)
+	global_pos_y_shadow = MainGameDate.all_zombie_rows[bullet_lane].zombie_create_position.global_position.y + slope_y
 
-		# 基于斜坡起始和结束点计算中间位置的y值
-		var slope_y = slope_start.y + (slope_end.y - slope_start.y) * t
-		global_pos_y_shadow_default = slope_y + 10 + offset_shadow_first_slope
 
 ## 自定义的缓动函数，分段加速,抛物线移动到最后时加速
 func eased_time(t: float) -> float:
@@ -119,3 +135,40 @@ func eased_time(t: float) -> float:
 	else:
 		return t
 
+
+## 抛物线子弹先对Norm进行攻击
+func get_first_be_hit_plant_in_cell(plant:Plant000Base)->Plant000Base:
+	## shell
+	if is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Norm]
+	elif is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Shell]
+	elif is_instance_valid(plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]):
+		return plant.plant_cell.plant_in_cell[Global.PlacePlantInCell.Down]
+	else:
+		printerr("当前植物格子没有检测到可以攻击的植物")
+		return null
+
+## 被保护伞弹开,更新移动贝塞尔曲线
+func be_umbrella_bounce():
+	if not is_bounce:
+		is_bounce = true
+		## 被弹开之后,删除子弹碰撞器
+		area_2d_attack.queue_free()
+
+		await get_tree().create_timer(0.1).timeout
+		is_bounce_update = true
+		## 原本的终点和起点的差值
+		var ori_diff = enemy_last_global_pos - start_global_pos
+		## 被弹开后更新起点.终点,控制点位置
+		start_global_pos_on_bounce = global_position
+		end_global_pos_on_bounce = enemy_last_global_pos + ori_diff/2
+		# 计算贝塞尔曲线的控制点，确保曲线的最高点位于中间
+		start_control_point_on_bounce = Vector2(
+			(start_global_pos_on_bounce.x + end_global_pos_on_bounce.x) / 2,
+			# 确保最高点在路径的中间，调节 y 坐标来控制弯曲程度
+			min(start_global_pos_on_bounce.y, end_global_pos_on_bounce.y) + parabola_height / 2
+		)
+
+		current_time = 0
+		all_time = (start_control_point_on_bounce.distance_to(start_global_pos_on_bounce) + start_control_point_on_bounce.distance_to(end_global_pos_on_bounce)) / speed

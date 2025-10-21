@@ -10283,7 +10283,7 @@ position = Vector2(40, -40)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_csye1")
 
-[node name="JudgeIsInIceRoadTimer" type="Timer" parent="." index="17"]
+[node name="JudgeIsInIceRoadTimer" type="Timer" parent="." index="15"]
 wait_time = 0.3
 
 [connection signal="timeout" from="JudgeIsInIceRoadTimer" to="." method="judge_is_in_ice_road"]

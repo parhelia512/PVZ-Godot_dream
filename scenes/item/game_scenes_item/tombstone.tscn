@@ -35,7 +35,7 @@ scale_curve = SubResource("CurveTexture_vyo3a")
 anim_offset_max = 1.0
 
 [node name="Tombstone" type="Node2D"]
-z_index = -2
+z_index = -4
 script = ExtResource("1_34xhw")
 zombie_candidate_list = Array[int]([1, 3, 5])
 

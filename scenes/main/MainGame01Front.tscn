@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1w2cmehilec8"]
+[gd_scene load_steps=4 format=3 uid="uid://c1w2cmehilec8"]
 
 [ext_resource type="PackedScene" uid="uid://b2soejmoqi7wd" path="res://scenes/main/MainGame00Base.tscn" id="1_aymxe"]
-[ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mover/lawn_mower.tscn" id="2_6s8l4"]
 [ext_resource type="PackedScene" uid="uid://brnfbv2sxv2qh" path="res://scenes/ui/plant_cell.tscn" id="2_awllt"]
 [ext_resource type="Script" uid="uid://bkeu6j2ek3su7" path="res://scripts/main_game_item/zombies_row.gd" id="4_mevug"]
 
@@ -16,31 +15,6 @@ offset_right = 290.098
 
 [node name="LawnMovers" parent="." index="2"]
 position = Vector2(-6.92795, -5.63695)
-
-[node name="LawnMover" parent="LawnMovers" index="0" instance=ExtResource("2_6s8l4")]
-z_index = 15
-position = Vector2(24.9279, 188.637)
-lane = 0
-
-[node name="LawnMover2" parent="LawnMovers" index="1" instance=ExtResource("2_6s8l4")]
-z_index = 25
-position = Vector2(24.9279, 280.637)
-lane = 1
-
-[node name="LawnMover3" parent="LawnMovers" index="2" instance=ExtResource("2_6s8l4")]
-z_index = 35
-position = Vector2(24.9279, 378.637)
-lane = 2
-
-[node name="LawnMover4" parent="LawnMovers" index="3" instance=ExtResource("2_6s8l4")]
-z_index = 45
-position = Vector2(24.9279, 476.637)
-lane = 3
-
-[node name="LawnMover5" parent="LawnMovers" index="4" instance=ExtResource("2_6s8l4")]
-z_index = 55
-position = Vector2(24.9279, 579.637)
-lane = 4
 
 [node name="PlantCellsRow1" type="Control" parent="PlantCellsRoot" index="0"]
 z_index = 10

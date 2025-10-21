@@ -6,6 +6,7 @@ class_name MoveComponent
 
 @onready var owner_zombie: Zombie000Base = owner
 @onready var _ground: Sprite2D = get_node_or_null("../Body/BodyCorrect/_ground")
+@onready var body: BodyCharacter = %Body
 
 ## 移动方式
 enum E_MoveMode {
@@ -13,15 +14,41 @@ enum E_MoveMode {
 	Speed,	## 根据速度移动
 }
 
-## 移动方向y值修正,移动时,对应y方向的修正,屋顶斜坡使用
-var move_dir_y_correct:Vector2 = Vector2.ZERO
+## 斜面移动的y值,斜面时每帧更新
+var y_value_correct_slope:float = 0
+## 屋顶斜坡 移动方向y值修正,移动时,对应y方向的修正,
+var move_dir_y_correct_slope:Vector2 = Vector2.ZERO
+
+## 爬梯下降的速度
+const SpeedLadderDown:float=100
+## 每次爬梯子移动的最大x值
+const MaxXOnLadderUp :float = 25
+## 爬梯移动的y值,爬梯时每帧更新
+var y_value_correct_ladder:float = 0
+## 爬梯移动上升的y累计值,爬梯时每帧更新,爬梯完成后下来
+var sum_y_value_correct_ladder_up:float = 0
+## 爬梯移动下降的y累计值,爬梯时每帧更新
+var sum_y_value_correct_ladder_down:float = 0
+## 梯子移动y值修正方向,根据状态决定上下移动
+var move_dir_y_correct_ladder:Vector2 = Vector2(1, 2.5)
+## 爬梯子时移动的x值
+var x_on_ladder:float = 0
+## 爬梯子状态
+var ladder_state :E_LadderState = E_LadderState.None
+enum E_LadderState{
+	None,
+	Up,
+	Down,
+}
 
 @export var move_mode:E_MoveMode = E_MoveMode.Ground
+## 根据速度移动
 @export var ori_speed :float = 20
 var curr_speed :float = 20
 var curr_speed_product :float
 var curr_speed_move :float = 1
 
+## 根据ground移动
 ## 上一帧的ground节点位置
 var _previous_ground_global_x:float
 ## 移动状态
@@ -49,9 +76,10 @@ enum E_MoveFactor{
 	IsDeath,				## 停止移动的死亡时
 }
 
-signal signal_move_body_y(move_y:float)
+signal signal_move_body_y(move_y_value:float)
 
 func _ready() -> void:
+	super()
 	curr_speed = ori_speed
 
 ## 根据角色速度修改移动速度
@@ -64,7 +92,7 @@ func update_only_move_speed(curr_speed_move:float=1):
 	curr_speed = ori_speed * curr_speed_product * curr_speed_move
 	self.curr_speed_move = curr_speed_move
 
-## 更新影响移动的因素
+## 更新影响移动的因素 true表示不移动
 func update_move_factor(value:bool, move_factor:E_MoveFactor):
 	move_factors[move_factor] = value
 	## 全为false时移动
@@ -83,6 +111,8 @@ func update_move_mode(new_move_mode:E_MoveMode):
 	move_mode = new_move_mode
 
 func _process(delta: float) -> void:
+	if ladder_state == E_LadderState.Down:
+		move_y_correct_ladder_down(delta)
 	if is_move:
 		match move_mode:
 			E_MoveMode.Ground:
@@ -98,7 +128,7 @@ func _process(delta: float) -> void:
 				var move_x = delta * curr_speed * owner_zombie.direction_x_root
 				owner_zombie.position.x -= move_x
 
-				move_y(move_x)
+				move_y_correct(move_x)
 
 func _walk():
 	# 计算ground的全局坐标变化量
@@ -107,15 +137,50 @@ func _walk():
 	owner_zombie.position.x -= ground_global_offset
 	# 更新记录值
 	_previous_ground_global_x = _ground.global_position.x
-	move_y(ground_global_offset)
+	move_y_correct(ground_global_offset)
 
+## 移动y方向上的修正
+func move_y_correct(move_x:float):
+	## 斜面移动修正
+	if move_dir_y_correct_slope != Vector2.ZERO:
+		move_y_correct_slope(move_x)
+	if ladder_state == E_LadderState.Up:
+		move_y_correct_ladder_up(move_x)
 
-## 移动y的方向
-func move_y(move_x:float):
-	if move_dir_y_correct == Vector2.ZERO:
-		return
+## 移动y的方向修正_斜面
+func move_y_correct_slope(move_x:float):
+	y_value_correct_slope = -move_x / move_dir_y_correct_slope.x * move_dir_y_correct_slope.y
+	signal_move_body_y.emit(y_value_correct_slope)
+
+## 爬梯移动修正y,只修改body y值
+func move_y_correct_ladder_up(move_x:float):
+	## 梯子移动修正
+	x_on_ladder += abs(move_x)
+	y_value_correct_ladder = -abs(move_x) / move_dir_y_correct_ladder.x * move_dir_y_correct_ladder.y
+	sum_y_value_correct_ladder_up -= y_value_correct_ladder
+	body.position.y += y_value_correct_ladder
+	if x_on_ladder >= MaxXOnLadderUp:
+		ladder_state = E_LadderState.Down
+
+## 下降状态 爬梯移动修正y,每帧更新,
+func move_y_correct_ladder_down(delta: float):
+	y_value_correct_ladder = SpeedLadderDown * delta
+	sum_y_value_correct_ladder_down += y_value_correct_ladder
+	if sum_y_value_correct_ladder_down > sum_y_value_correct_ladder_up:
+		y_value_correct_ladder -= sum_y_value_correct_ladder_down - sum_y_value_correct_ladder_up
+		ladder_state = E_LadderState.None
+	body.position.y +=  y_value_correct_ladder
+
+## 开始爬梯子
+func start_ladder():
+	if ladder_state != E_LadderState.None:
+		#printerr("正在爬梯子,无法继续爬梯子")
+		pass
 	else:
-		signal_move_body_y.emit(-move_x / move_dir_y_correct.x * move_dir_y_correct.y)
+		x_on_ladder = 0
+		sum_y_value_correct_ladder_up = 0
+		sum_y_value_correct_ladder_down = 0
+		ladder_state = E_LadderState.Up
 
 func _walking_start():
 	walking_status = WalkingStatus.start

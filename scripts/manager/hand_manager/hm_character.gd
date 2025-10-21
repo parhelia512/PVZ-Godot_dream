@@ -93,7 +93,7 @@ func _update_cell_shadow(plant_cell:PlantCell, characte_static_shadow:Node2D) ->
 		## 如果是普通植物并且当前格子可以种植普通植物
 		if not plant_condition.is_special_plants and plant_cell.can_common_plant:
 			## 如果地形当前格子地形符合 并且 当前格子对应的植物位置为空
-			if plant_condition.plant_condition & plant_cell.curr_condition and plant_cell.plant_in_cell[plant_condition.place_plant_in_cell] == null:
+			if plant_condition.plant_condition & plant_cell.curr_condition and not is_instance_valid(plant_cell.plant_in_cell[plant_condition.place_plant_in_cell]):
 				characte_static_shadow.global_position = plant_cell.get_new_plant_static_shadow_global_position(plant_condition.place_plant_in_cell)
 				characte_static_shadow.modulate.a = 0.5
 				return true
@@ -122,22 +122,30 @@ func _update_cell_shadow(plant_cell:PlantCell, characte_static_shadow:Node2D) ->
 		## 如果不是双地形
 		if zombie_row_type != Global.ZombieRowType.Both:
 			if zombie_row_type == MainGameDate.all_zombie_rows[plant_cell.row_col.x].zombie_row_type:
-				characte_static_shadow.global_position = Vector2(
-					plant_cell.global_position.x + plant_cell.size.x/2,
-					MainGameDate.all_zombie_rows[plant_cell.row_col.x].zombie_create_position.global_position.y
-				)
+				characte_static_shadow.global_position =  get_zombie_static_shadow_global_position(plant_cell)
 				characte_static_shadow.modulate.a = 0.5
 				return true
 			else:
 				characte_static_shadow.modulate.a = 0
 				return false
 		else:
-			characte_static_shadow.global_position = Vector2(
-				plant_cell.global_position.x + plant_cell.size.x/2,
-				MainGameDate.all_zombie_rows[plant_cell.row_col.x].zombie_create_position.global_position.y
-			)
+			characte_static_shadow.global_position = get_zombie_static_shadow_global_position(plant_cell)
 			characte_static_shadow.modulate.a = 0.5
 			return true
+
+## 获取种植僵尸的虚影位置
+func get_zombie_static_shadow_global_position(plant_cell)->Vector2:
+	var global_pos =  Vector2(
+		plant_cell.global_position.x + plant_cell.size.x/2,
+		MainGameDate.all_zombie_rows[plant_cell.row_col.x].zombie_create_position.global_position.y
+	)
+
+	## 如果有斜面
+	if is_instance_valid(MainGameDate.main_game_slope):
+		global_pos += Vector2(0, MainGameDate.main_game_slope.get_all_slope_y(global_pos.x))
+
+
+	return global_pos
 
 ## 鼠标移出cell
 func mouse_exit(plant_cell:PlantCell):
@@ -145,7 +153,7 @@ func mouse_exit(plant_cell:PlantCell):
 	if is_mode_column:
 		_mouse_exit_column()
 
-## 点击种植或铲掉植物
+## 点击种植植物\僵尸
 func click_cell(plant_cell:PlantCell):
 	if is_shadow_in_cell:
 		if curr_card.card_plant_type != 0:
@@ -157,7 +165,11 @@ func click_cell(plant_cell:PlantCell):
 				Character000Base.E_CharacterInitType.IsNorm,
 				plant_cell.row_col.x,
 				-1,
-				characte_static_shadow.global_position - MainGameDate.all_zombie_rows[plant_cell.row_col.x].global_position
+				Vector2(
+					plant_cell.global_position.x + plant_cell.size.x/2 - MainGameDate.all_zombie_rows[plant_cell.row_col.x].global_position.x,
+					MainGameDate.all_zombie_rows[plant_cell.row_col.x].zombie_create_position.position.y
+				),
+				get_special_zombie_callable(curr_card.card_zombie_type, plant_cell)
 			)
 
 		## 卡片种植完成后发射信号
@@ -206,7 +218,6 @@ func _mouse_exit_column():
 
 ## 柱子模式 点击种植或铲掉植物
 func _click_cell_column(plant_cell:PlantCell):
-
 	if curr_card.card_plant_type != 0:
 		for i in range(characte_static_shadow_colum.size()):
 			## 当前格子的图像透明
@@ -220,6 +231,7 @@ func _click_cell_column(plant_cell:PlantCell):
 			var _characte_static_shadow = characte_static_shadow_colum[i]
 			if _characte_static_shadow.modulate.a != 0:
 				var _plant_cell:PlantCell = MainGameDate.all_plant_cells[i][plant_cell.row_col.y]
+
 				MainGameDate.zombie_manager.create_norm_zombie(
 					curr_card.card_zombie_type,
 					MainGameDate.all_zombie_rows[_plant_cell.row_col.x],
@@ -228,7 +240,8 @@ func _click_cell_column(plant_cell:PlantCell):
 					-1,
 					Vector2(_characte_static_shadow.global_position.x - MainGameDate.all_zombie_rows[_plant_cell.row_col.x].global_position.x,
 						MainGameDate.all_zombie_rows[_plant_cell.row_col.x].zombie_create_position.position.y
-					)
+					),
+					get_special_zombie_callable(curr_card.card_zombie_type, _plant_cell)
 				)
 
 ## 柱子模式 清除数据
@@ -236,5 +249,19 @@ func _clear_curr_data_column():
 	for _characte_static_shadow in characte_static_shadow_colum:
 		_characte_static_shadow.queue_free()
 	characte_static_shadow_colum.clear()
+
+#endregion
+
+#region 特殊僵尸种植函数
+
+func get_special_zombie_callable(zombie_type:Global.ZombieType, plant_cell:PlantCell) -> Callable:
+	match zombie_type:
+		Global.ZombieType.Z021Bungi:
+			return plant_bungi.bind(plant_cell)
+	return Callable()
+
+## 蹦极僵尸
+func plant_bungi(zombie_bungi:Zombie021Bungi, plant_cell:PlantCell):
+	zombie_bungi.plant_cell = plant_cell
 
 #endregion

@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://cpwpymho34iuq"]
+[gd_scene load_steps=25 format=3 uid="uid://cpwpymho34iuq"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_vrn5c"]
 [ext_resource type="Texture2D" uid="uid://nj6m28m6k5p1" path="res://assets/reanim/PeaShooter_frontleaf_righttip.png" id="2_ese8j"]
+[ext_resource type="Script" uid="uid://wf0yg55yekfx" path="res://scripts/character/plant/plant_040_melon_pult.gd" id="2_myj7b"]
 [ext_resource type="Texture2D" uid="uid://dit0i5evvco14" path="res://assets/reanim/PeaShooter_frontleaf_lefttip.png" id="3_g6087"]
 [ext_resource type="Texture2D" uid="uid://b7uqfdos6ocy7" path="res://assets/reanim/Cabbagepult_basket.png" id="4_myj7b"]
 [ext_resource type="Texture2D" uid="uid://cyq6qjfok78qm" path="res://assets/reanim/Melonpult_melon.png" id="5_ien23"]
@@ -55,6 +56,7 @@ node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"TimeScale 2", 
 size = Vector2(800, 5)
 
 [node name="Plant040MelonPult" instance=ExtResource("1_vrn5c")]
+script = ExtResource("2_myj7b")
 plant_type = 40
 
 [node name="BodyCorrect" parent="Body" index="0"]
@@ -62,46 +64,52 @@ position = Vector2(-42, -65)
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
 position = Vector2(26.8, 57.4)
-rotation = -2.45917
-scale = Vector2(0.572, 0.444)
-skew = 3.13985
+rotation = -2.46079
+scale = Vector2(0.57107, 0.44307)
+skew = 3.1431
 texture = ExtResource("2_ese8j")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(64.8, 48.7)
-rotation = 2.51327
-scale = Vector2(0.572, 0.498)
+position = Vector2(64.707, 48.7)
+rotation = 2.51165
+scale = Vector2(0.57107, 0.498)
 skew = -3.13985
 texture = ExtResource("3_g6087")
 centered = false
 
 [node name="Cabbagepult_basket" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(-23.9, 9.5)
-scale = Vector2(0.8, 0.8)
+position = Vector2(-23.4719, 6.40338)
+rotation = 0.0523006
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("4_myj7b")
 centered = false
 
 [node name="Melonpult_mellon" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
-position = Vector2(-34, -15.3)
+position = Vector2(-30.7542, -21.7143)
+rotation = 0.0992428
+scale = Vector2(0.99893, 0.99893)
 texture = ExtResource("5_ien23")
 centered = false
 
 [node name="Cabbagepult_basket_overlay" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(-23.9, 9.5)
-scale = Vector2(0.8, 0.8)
+position = Vector2(-23.4719, 6.40338)
+rotation = 0.0523006
+scale = Vector2(0.799, 0.799)
 texture = ExtResource("6_3h8kf")
 centered = false
 
 [node name="Melonpult_stalk" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(16.5, 21.2)
-scale = Vector2(0.8, 0.8)
+position = Vector2(16.1789, 20.6579)
+rotation = 0.00584882
+scale = Vector2(0.80007, 0.8)
+skew = 0.0131977
 texture = ExtResource("7_y7nur")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(15.3, 33.3)
-scale = Vector2(0.8, 0.8)
+position = Vector2(15.507, 32.8719)
+scale = Vector2(0.794719, 0.810772)
 texture = ExtResource("8_lue24")
 centered = false
 
@@ -119,41 +127,44 @@ texture = ExtResource("10_ru083")
 centered = false
 
 [node name="Melonpult_eyebrow2" type="Sprite2D" parent="Body/BodyCorrect" index="9"]
-position = Vector2(35.5, 47)
+position = Vector2(35.5, 46.886)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_ru083")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(23.3, 54.6)
-rotation = 0.10472
-scale = Vector2(0.572, 0.444)
+position = Vector2(23.307, 54.9281)
+rotation = 0.101229
+scale = Vector2(0.572, 0.435438)
+skew = 0.0034908
 texture = ExtResource("11_42var")
 centered = false
 
 [node name="Frontleaf_right_tip1" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(57.6, 59.3)
-rotation = 0.10472
-scale = Vector2(0.572, 0.444)
+position = Vector2(57.286, 59.5211)
+rotation = 0.0635041
+scale = Vector2(0.572, 0.44186)
+skew = -0.00548158
 texture = ExtResource("2_ese8j")
 centered = false
 
 [node name="Frontleaf_tip_left1" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(19.4, 59.4)
-rotation = 0.10472
-scale = Vector2(0.572, 0.498)
+position = Vector2(19.8281, 59.5281)
+rotation = 0.119908
+scale = Vector2(0.576351, 0.482947)
+skew = 0.031877
 texture = ExtResource("3_g6087")
 centered = false
 
 [node name="Marker2DBullet" type="Marker2D" parent="Body/BodyCorrect" index="13"]
 position = Vector2(54, -30)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_o3ogr")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 tree_root = SubResource("AnimationNodeBlendTree_3h8kf")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
@@ -163,7 +174,7 @@ parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 2/scale" = 2.0
 
-[node name="AttackComponent" type="Node2D" parent="." index="12" node_paths=PackedStringArray("markers_2d_bullet")]
+[node name="AttackComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("markers_2d_bullet")]
 script = ExtResource("14_g6087")
 can_attack_zombie_status = 5
 attack_cd = 3.0

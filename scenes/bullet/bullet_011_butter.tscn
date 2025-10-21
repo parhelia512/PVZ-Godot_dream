@@ -37,8 +37,8 @@ butter_time = 4.0
 parabola_height = -500.0
 is_rotate = true
 attack_value = 40
-speed = 600.0
 bullet_mode = 2
+type_bullet_SFX = 4
 can_attack_zombie_status = 5
 
 [node name="BulletBody" parent="Body" index="0"]
@@ -63,7 +63,4 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_pveqk")
 
 [node name="CollisionShape2D" parent="Area2DAttack" index="0"]
-shape = SubResource("CircleShape2D_wo6mn")
-
-[node name="CollisionShape2D" parent="Area2DUp" index="0"]
 shape = SubResource("CircleShape2D_wo6mn")

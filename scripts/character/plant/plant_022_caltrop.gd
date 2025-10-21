@@ -18,7 +18,9 @@ func init_norm_signal_connect():
 ## 攻击一次
 func _attack_once():
 	SoundManager.play_plant_SFX(Global.PlantType.P001PeaShooterSingle, "Throw")
-	for enemy:Character000Base in attack_ray_component.all_ray_area_enenies_can_be_attacked[0]:
+	var all_enemy_can_be_attacked = attack_ray_component.get_all_enemy_can_be_attacked()
+	for i in range(all_enemy_can_be_attacked.size() - 1, -1, -1):
+		var enemy:Character000Base = all_enemy_can_be_attacked[i]
 		if enemy is Zombie000Base:
 			var zombie = enemy as Zombie000Base
 			zombie.be_attacked_bullet(attack_value, Global.AttackMode.Real, true, true)
@@ -29,5 +31,4 @@ func be_flattened(character:Character000Base):
 	if not is_flattened:
 		is_flattened = true
 		character.be_caltrop()
-		character_death()
 		super(character)

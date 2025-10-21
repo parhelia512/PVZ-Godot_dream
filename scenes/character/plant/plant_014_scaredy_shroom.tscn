@@ -129,31 +129,30 @@ size = Vector2(800, 5)
 radius = 109.0
 height = 378.0
 
-[node name="Plant014ScaredyShroom" node_paths=PackedStringArray("node_no_change_direction", "speech_influence_components") instance=ExtResource("1_rixsb")]
+[node name="Plant014ScaredyShroom" node_paths=PackedStringArray("node_no_change_direction") instance=ExtResource("1_rixsb")]
 script = ExtResource("2_esfqn")
 is_scared = false
 plant_type = 14
 is_sleep_in_day = true
 node_no_change_direction = [NodePath("HpComponent"), NodePath("SleepComponent"), null]
-speech_influence_components = [NodePath("AttackComponent")]
 
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-36, -72)
 
 [node name="ScaredyShroom_head_inner" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(21.4478, 28.2326)
-scale = Vector2(0.814653, 0.75963)
+position = Vector2(22.5, 25.4769)
+scale = Vector2(0.762, 0.8)
 texture = ExtResource("2_6htc2")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(27.6, 37.1566)
-scale = Vector2(0.8, 0.762391)
+position = Vector2(27.6, 35.9388)
+scale = Vector2(0.8, 0.786224)
 texture = ExtResource("3_esfqn")
 centered = false
 
 [node name="Anim_eye2" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(39.4, 33.9761)
+position = Vector2(39.4, 33.4463)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_tthcx")
 centered = false
@@ -163,22 +162,22 @@ visible = false
 centered = false
 
 [node name="ScaredyShroom_mouth" type="Sprite2D" parent="Body/BodyCorrect" index="4"]
-position = Vector2(38.5, 44.6522)
-rotation = 0.0700418
-scale = Vector2(1.60576, 0.8)
-skew = -0.0700418
+position = Vector2(38.5, 43.9925)
+rotation = -0.0656822
+scale = Vector2(1.60616, 0.8)
+skew = 0.0656822
 texture = ExtResource("5_n8m1a")
 centered = false
 
 [node name="ScaredyShroom_lips" type="Sprite2D" parent="Body/BodyCorrect" index="5"]
-position = Vector2(43.7522, 41.8566)
-rotation = 0.050767
-scale = Vector2(0.8, 0.773674)
+position = Vector2(43.0537, 39.6)
+rotation = -0.0424462
+scale = Vector2(0.8, 0.764292)
 texture = ExtResource("6_68pw3")
 centered = false
 
 [node name="Anim_eye1" type="Sprite2D" parent="Body/BodyCorrect" index="6"]
-position = Vector2(33.4, 35.7283)
+position = Vector2(33.4, 35.1694)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_wh8am")
 centered = false
@@ -188,8 +187,8 @@ visible = false
 centered = false
 
 [node name="ScaredyShroom_head" type="Sprite2D" parent="Body/BodyCorrect" index="8"]
-position = Vector2(4.14781, 9.50874)
-scale = Vector2(0.833848, 0.773674)
+position = Vector2(5.2, 6.45374)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_arnij")
 centered = false
 
@@ -198,15 +197,15 @@ visible = false
 centered = false
 
 [node name="ScaredyShroom_eyebrow1" type="Sprite2D" parent="Body/BodyCorrect" index="10"]
-position = Vector2(28.2761, 32.6326)
-rotation = 0.0407122
+position = Vector2(27.9537, 30.2463)
+rotation = -0.102215
 scale = Vector2(1.018, 0.8)
 texture = ExtResource("9_ts0jv")
 centered = false
 
 [node name="ScaredyShroom_eyebrow2" type="Sprite2D" parent="Body/BodyCorrect" index="11"]
-position = Vector2(39.0761, 29.1326)
-rotation = 0.0783516
+position = Vector2(39.9007, 25.1687)
+rotation = 0.21222
 scale = Vector2(0.999, 0.999)
 texture = ExtResource("10_lci7m")
 centered = false
@@ -223,18 +222,18 @@ centered = false
 position = Vector2(45, 51)
 scale = Vector2(0.5, 0.592593)
 
-[node name="SleepComponent" parent="." index="7" node_paths=PackedStringArray("sleep_influence_components")]
+[node name="SleepComponent" parent="." index="5" node_paths=PackedStringArray("sleep_influence_components")]
 sleep_influence_components = [NodePath("../BlinkComponent"), NodePath("../ScaredyComponent"), NodePath("../AttackComponent")]
 
-[node name="BlinkComponent" parent="." index="8"]
+[node name="BlinkComponent" parent="." index="6"]
 is_enable_default = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_ftdw2")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_erinp")
 advance_expression_base_node = NodePath("..")
@@ -245,7 +244,7 @@ parameters/OneShot/request = 0
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 2/scale" = 2.0
 
-[node name="AttackComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("markers_2d_bullet")]
+[node name="AttackComponent" type="Node2D" parent="." index="10" node_paths=PackedStringArray("markers_2d_bullet")]
 script = ExtResource("20_wh8am")
 attack_bullet_type = 5
 markers_2d_bullet = [NodePath("../Body/BodyCorrect/Marker2DBullet")]
@@ -264,7 +263,7 @@ collision_mask = 4
 position = Vector2(400, 0)
 shape = SubResource("RectangleShape2D_tthcx")
 
-[node name="ScaredyComponent" type="Node2D" parent="." index="12" node_paths=PackedStringArray("scaredy_influence_components")]
+[node name="ScaredyComponent" type="Node2D" parent="." index="11" node_paths=PackedStringArray("scaredy_influence_components")]
 script = ExtResource("19_tthcx")
 scaredy_influence_components = [NodePath("../AttackComponent")]
 

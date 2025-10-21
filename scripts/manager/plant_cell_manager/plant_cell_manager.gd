@@ -6,13 +6,16 @@ class_name PlantCellManager
 
 
 func _ready() -> void:
-	## 火爆辣椒爆炸特效和冰道
-	EventBus.subscribe("jalapeno_bomb_effect_and_ice_road", jalapeno_bomb_effect_and_ice_road)
+	## 火爆辣椒爆炸特效
+	EventBus.subscribe("jalapeno_bomb_effect", jalapeno_bomb_effect)
+	## 火爆辣椒销毁道具[冰道和梯子]
+	EventBus.subscribe("jalapeno_bomb_item_lane", jalapeno_bomb_item_lane)
 	MainGameDate.all_plant_cells.clear()
 	# 植物种植区域信号，更新植物位置列号,更新墓碑信息
 	for plant_cells_row_i in plant_cells_root.get_child_count():
 		## 某一行all_plant_cells
-		var plant_cells_row = plant_cells_root.get_child(plant_cells_row_i)
+		var plant_cells_row:CanvasItem = plant_cells_root.get_child(plant_cells_row_i)
+		plant_cells_row.z_index = (plant_cells_row_i+1) * 10
 		var plant_cells_row_node := []
 		## plant_cell是从右向左的顺序，这里从左到右
 		for plant_cells_col_j in range(plant_cells_row.get_child_count() - 1, -1, -1):
@@ -62,7 +65,7 @@ func create_tombstone(new_num:int):
 
 ## 火爆辣椒爆炸特效
 ## [lane:int]:行
-func jalapeno_bomb_effect_and_ice_road(lane:int):
+func jalapeno_bomb_effect(lane:int):
 	for plant_cell:PlantCell in MainGameDate.all_plant_cells[lane]:
 		var fire_new:BombEffectFire = SceneRegistry.FIRE.instantiate()
 		## 修改其图层
@@ -73,6 +76,22 @@ func jalapeno_bomb_effect_and_ice_road(lane:int):
 		fire_new.global_position = plant_cell.global_position + Vector2(plant_cell.size.x / 2, plant_cell.size.y)
 		fire_new.activate_bomb_effect()
 
+func jalapeno_bomb_item_lane(lane:int):
+	## 冰道
 	for i in range(MainGameDate.all_ice_roads[lane].size()-1, -1, -1):
 		var ice_road:IceRoad = MainGameDate.all_ice_roads[lane][i]
 		ice_road.ice_road_disappear()
+	## 梯子
+	for p_c :PlantCell in MainGameDate.all_plant_cells[lane]:
+		if is_instance_valid(p_c.ladder):
+			p_c.ladder.queue_free()
+
+
+## 获取有植物的植物格子
+func get_cell_have_plant()->Array[PlantCell]:
+	var all_cell_have_plant:Array[PlantCell]
+	for plant_cell_lane in MainGameDate.all_plant_cells:
+		for plant_cell:PlantCell in plant_cell_lane:
+			if plant_cell.get_curr_plant_num()>0:
+				all_cell_have_plant.append(plant_cell)
+	return all_cell_have_plant

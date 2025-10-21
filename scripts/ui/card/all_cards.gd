@@ -82,7 +82,7 @@ func _ready() -> void:
 #
 	#else:
 		#printerr("将该部分注释掉")
-####
+#####
 #func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint():
 		#frame_num += 1

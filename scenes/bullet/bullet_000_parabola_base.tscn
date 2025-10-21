@@ -7,3 +7,4 @@
 script = ExtResource("2_4yv73")
 max_diff_x = 200.0
 parabola_height = -300.0
+speed = 600.0

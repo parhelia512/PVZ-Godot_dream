@@ -3,11 +3,13 @@ extends Node
 ## 图层顺序种类
 #0,		## 世界背景
 #100,	## 鼠标未移入UI时，在最下面
-#395,	## 植物： 395	 每行隔10个图层
-	#395+5,	## 磁力菇吸的铁具
-	#395-2,		## 墓碑: 当前植物格子图层-2
-#400,	## 僵尸： 400	 每行僵尸隔10图层
+#395,	## 植物： 395	 代码更新每行图层 每行隔10个图层
+	#395+5,		## 磁力菇吸的铁具
+	#395-4,		## 墓碑: 当前植物格子图层-4
+#400,	## 僵尸： 400	 代码更新每行图层 每行僵尸隔10图层
 	#0,		## 保龄球根据行更新图层，在僵尸行之间
+	#400-7 蹦极僵尸
+	#400-7 +7+2 蹦极僵尸靶子
 #405,	## 小推车： 每行比僵尸行+5，
 #600,	## 子弹： 600
 #650,	## 爆炸： 650
@@ -100,8 +102,6 @@ func format_number_with_commas(n: int) -> String:
 		if count % 3 == 0 and i != 0:
 			result = "," + result
 	return result
-
-
 
 #endregion
 
@@ -213,6 +213,11 @@ var curr_zombie = [
 	ZombieType.Z019Pogo,
 	ZombieType.Z020Yeti,
 
+	ZombieType.Z021Bungi,
+	ZombieType.Z022Ladder,
+	ZombieType.Z023Catapult,
+	ZombieType.Z024Gargantuar,
+	ZombieType.Z025Imp,
 	### 单人雪橇车小队僵尸
 	#ZombieType.Z1001BobsledSingle,
 ]
@@ -750,9 +755,9 @@ const  PlantInfo = {
 ## 植物在格子中的位置
 enum PlacePlantInCell{
 	Norm,	## 普通位置
-	Float,	## 漂浮位置
-	Down,	## 花盆（睡莲）位置
 	Shell,	## 保护壳位置
+	Down,	## 花盆（睡莲）位置
+	Float,	## 漂浮位置
 }
 
 ## 获取植物属性方法
@@ -790,7 +795,7 @@ enum ZombieType {
 	Z019Pogo,
 	Z020Yeti,
 
-	Z021Bungee,
+	Z021Bungi,
 	Z022Ladder,
 	Z023Catapult,
 	Z024Gargantuar,
@@ -952,6 +957,41 @@ const ZombieInfo = {
 		ZombieInfoAttribute.ZombieScenes:preload("res://scenes/character/zombie/zombie_020_yeti.tscn"),
 		ZombieInfoAttribute.ZombieRowType:ZombieRowType.Land
 	},
+	ZombieType.Z021Bungi:{
+		ZombieInfoAttribute.ZombieName: "ZombieBungi",
+		ZombieInfoAttribute.CoolTime: 0.0,
+		ZombieInfoAttribute.SunCost: 100,
+		ZombieInfoAttribute.ZombieScenes:preload("res://scenes/character/zombie/zombie_021_bungi.tscn"),
+		ZombieInfoAttribute.ZombieRowType:ZombieRowType.Both
+	},
+	ZombieType.Z022Ladder:{
+		ZombieInfoAttribute.ZombieName: "ZombieLadder",
+		ZombieInfoAttribute.CoolTime: 0.0,
+		ZombieInfoAttribute.SunCost: 100,
+		ZombieInfoAttribute.ZombieScenes:preload("res://scenes/character/zombie/zombie_022_ladder.tscn"),
+		ZombieInfoAttribute.ZombieRowType:ZombieRowType.Land
+	},
+	ZombieType.Z023Catapult:{
+		ZombieInfoAttribute.ZombieName: "ZombieCatapult",
+		ZombieInfoAttribute.CoolTime: 0.0,
+		ZombieInfoAttribute.SunCost: 100,
+		ZombieInfoAttribute.ZombieScenes:preload("res://scenes/character/zombie/zombie_023_catapult.tscn"),
+		ZombieInfoAttribute.ZombieRowType:ZombieRowType.Land
+	},
+	ZombieType.Z024Gargantuar:{
+		ZombieInfoAttribute.ZombieName: "ZombieGargantuar",
+		ZombieInfoAttribute.CoolTime: 0.0,
+		ZombieInfoAttribute.SunCost: 100,
+		ZombieInfoAttribute.ZombieScenes:preload("res://scenes/character/zombie/zombie_024_gargantuar.tscn"),
+		ZombieInfoAttribute.ZombieRowType:ZombieRowType.Land
+	},
+	ZombieType.Z025Imp:{
+		ZombieInfoAttribute.ZombieName: "ZombieImp",
+		ZombieInfoAttribute.CoolTime: 0.0,
+		ZombieInfoAttribute.SunCost: 100,
+		ZombieInfoAttribute.ZombieScenes:preload("res://scenes/character/zombie/zombie_025_imp.tscn"),
+		ZombieInfoAttribute.ZombieRowType:ZombieRowType.Land
+	},
 
 	## 单独雪橇僵尸
 	ZombieType.Z1001BobsledSingle:{
@@ -965,6 +1005,8 @@ const ZombieInfo = {
 
 ## 获取僵尸属性方法
 func get_zombie_info(zombie_type:ZombieType, info_attribute:ZombieInfoAttribute):
+	if zombie_type == 0:
+		printerr("空僵尸")
 	var curr_zombie_info = ZombieInfo[zombie_type]
 	return curr_zombie_info[info_attribute]
 
@@ -1000,7 +1042,9 @@ enum BulletType{
 	Bullet009Cabbage,		## 卷心菜
 	Bullet010Corn,			## 玉米
 	Bullet011Butter,		## 黄油
-	Bullet012Melon,		## 西瓜
+	Bullet012Melon,			## 西瓜
+
+	Bullet013Basketball,	## 篮球
 
 }
 
@@ -1018,6 +1062,9 @@ const BulletTypeMap := {
 	BulletType.Bullet010Corn :preload("res://scenes/bullet/bullet_010_corn.tscn"),
 	BulletType.Bullet011Butter :preload("res://scenes/bullet/bullet_011_butter.tscn"),
 	BulletType.Bullet012Melon :preload("res://scenes/bullet/bullet_012_melon.tscn"),
+
+	BulletType.Bullet013Basketball :preload("res://scenes/bullet/bullet_013_basketball.tscn"),
+
 }
 
 ## 获取子弹场景方法
@@ -1150,13 +1197,13 @@ func load_config():
 
 ## 加载场景
 enum MainScenes{
-	StartMenu,
-	ChooseLevel,
-	ChooseLevelMiniGame,
-
 	MainGameFront,
 	MainGameBack,
 	MainGameRoof,
+
+	StartMenu,
+	ChooseLevel,
+	ChooseLevelMiniGame,
 
 	Garden,
 	Almanac,
@@ -1164,13 +1211,13 @@ enum MainScenes{
 }
 
 var MainScenesMap = {
-	MainScenes.StartMenu: "res://scenes/main/01StartMenu.tscn",
-	MainScenes.ChooseLevel: "res://scenes/main/02ChooesLevel.tscn",
-	MainScenes.ChooseLevelMiniGame: "res://scenes/main/03MiniGameChooesLevel.tscn",
-
 	MainScenes.MainGameFront: "res://scenes/main/MainGame01Front.tscn",
 	MainScenes.MainGameBack: "res://scenes/main/MainGame02Back.tscn",
 	MainScenes.MainGameRoof: "res://scenes/main/MainGame03Roof.tscn",
+
+	MainScenes.StartMenu: "res://scenes/main/01StartMenu.tscn",
+	MainScenes.ChooseLevel: "res://scenes/main/02ChooesLevel.tscn",
+	MainScenes.ChooseLevelMiniGame: "res://scenes/main/03MiniGameChooesLevel.tscn",
 
 	MainScenes.Garden: "res://scenes/main/10Garden.tscn",
 	MainScenes.Almanac: "res://scenes/main/11Almanac.tscn",

@@ -151,13 +151,13 @@ visible = false
 centered = false
 
 [node name="PotatoMine_rock4" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
-position = Vector2(38.6, 62.6)
+position = Vector2(38.6, 62.9241)
 scale = Vector2(0.59, 0.59)
 texture = ExtResource("2_q8gyy")
 centered = false
 
 [node name="PotatoMine_rock2" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
-position = Vector2(23.9, 61.8)
+position = Vector2(23.9, 60.5037)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_gxhax")
 centered = false
@@ -203,7 +203,7 @@ visible = false
 centered = false
 
 [node name="Anim_light" type="Sprite2D" parent="Body/BodyCorrect" index="12"]
-position = Vector2(28.2, 40.5)
+position = Vector2(28.2, 42.9815)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_36d07")
 centered = false
@@ -213,7 +213,7 @@ visible = false
 centered = false
 
 [node name="PotatoMine_rock6" type="Sprite2D" parent="Body/BodyCorrect" index="14"]
-position = Vector2(14.7, 66.1)
+position = Vector2(14.7, 66.7482)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_27vsk")
 centered = false
@@ -225,33 +225,33 @@ texture = ExtResource("8_c7j4p")
 centered = false
 
 [node name="PotatoMine_rock3" type="Sprite2D" parent="Body/BodyCorrect" index="16"]
-position = Vector2(42.5, 64.5)
+position = Vector2(42.5, 63.8518)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("9_tq0os")
 centered = false
 
 [node name="PotatoMine_rock5" type="Sprite2D" parent="Body/BodyCorrect" index="17"]
-position = Vector2(31.1, 69.1)
+position = Vector2(31.1, 68.4518)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_iq31m")
 centered = false
 
-[node name="BlinkComponent" parent="." index="7"]
+[node name="BlinkComponent" parent="." index="6"]
 all_blink_body_change = Array[ExtResource("15_6w1u8")]([SubResource("Resource_l48fy")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_8d14f")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_f5s5r")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="AttackRayComponent" type="Node2D" parent="." index="11"]
+[node name="AttackRayComponent" type="Node2D" parent="." index="10"]
 script = ExtResource("24_kp7v2")
 
 [node name="Area2D" type="Area2D" parent="AttackRayComponent" index="0"]
@@ -263,7 +263,7 @@ collision_mask = 4
 position = Vector2(10.5, 0)
 shape = SubResource("RectangleShape2D_kp7v2")
 
-[node name="BombComponent" type="Node2D" parent="." index="12"]
+[node name="BombComponent" type="Node2D" parent="." index="11"]
 script = ExtResource("20_iq31m")
 is_cherry_bomb = false
 is_auto_bomb_in_death = false
@@ -274,7 +274,7 @@ bomb_sfx = &"PotatoMine"
 
 [node name="Area2DBomb" type="Area2D" parent="BombComponent" index="0"]
 collision_layer = 0
-collision_mask = 20
+collision_mask = 21
 input_pickable = false
 monitorable = false
 
@@ -302,7 +302,7 @@ position = Vector2(-68, -76)
 texture = ExtResource("23_hi8k1")
 centered = false
 
-[node name="PrepareTimer" type="Timer" parent="." index="13"]
+[node name="PrepareTimer" type="Timer" parent="." index="12"]
 one_shot = true
 
 [connection signal="timeout" from="PrepareTimer" to="." method="_on_prepare_timer_timeout"]

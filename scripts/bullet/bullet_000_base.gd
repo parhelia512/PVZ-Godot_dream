@@ -1,8 +1,8 @@
 extends Node2D
 class_name Bullet000Base
 
-@onready var area_2d_up: Area2D = $Area2DUp
 @onready var bullet_shadow: Sprite2D = $BulletShadow
+@onready var area_2d_attack: Area2D = $Area2DAttack
 
 ## 子弹击中特效
 @onready var bullet_effect: BulletEffect000Base = $BulletEffect
@@ -10,6 +10,8 @@ class_name Bullet000Base
 @onready var body: Node2D = $Body
 ## 子弹基类
 @export_group("子弹基础属性")
+## 子弹阵营
+@export var bullet_camp:Global.CharacterType = Global.CharacterType.Plant
 ## 子弹是否旋转
 @export var is_rotate := false
 ## 最大攻击次数(-1表示可以无限攻击)
@@ -24,10 +26,6 @@ var curr_attack_num:=0
 @export var direction: Vector2 = Vector2.RIGHT
 ## 子弹伤害模式：普通，穿透，真实
 @export var bullet_mode : Global.AttackMode
-## 是否触发受击音效(火焰豌豆就不触发)
-@export var trigger_be_attack_sfx := true
-## 子弹本身音效
-@export var type_bullet_SFX :SoundManagerClass.TypeBulletSFX =  SoundManagerClass.TypeBulletSFX.Pea
 ## 子弹移动离出生点最大距离，超过自动销毁
 @export var max_distance := 2000.0
 ## 子弹初始位置
@@ -37,6 +35,12 @@ var start_pos: Vector2
 var bullet_lane_activate:bool
 ## 子弹行属性
 var bullet_lane :int = -1
+@export_subgroup("子弹音效相关")
+## 是否触发受击音效(火焰豌豆就不触发)
+@export var trigger_be_attack_sfx := true
+## 子弹本身音效
+@export var type_bullet_SFX :SoundManagerClass.TypeBulletSFX =  SoundManagerClass.TypeBulletSFX.Pea
+
 
 @export_group("子弹攻击相关")
 ## 可以攻击的敌人状态
@@ -83,11 +87,11 @@ func _on_area_2d_attack_area_entered(area: Area2D) -> void:
 	var enemy:Character000Base = area.owner
 	## TODO:攻击植物子弹
 	if enemy is Plant000Base:
-		return
+		if not enemy.curr_be_attack_status & can_attack_plant_status:
+			return
 	elif enemy is Zombie000Base:
-		var zombie = enemy as Zombie000Base
 		## 如果不是可攻击状态敌人
-		if not zombie.curr_be_attack_status & can_attack_zombie_status:
+		if not enemy.curr_be_attack_status & can_attack_zombie_status:
 			return
 	else:
 		push_error("敌人不是植物,不是僵尸")
@@ -103,10 +107,21 @@ func _on_area_2d_attack_area_entered(area: Area2D) -> void:
 	if max_attack_num == -1:
 		attack_once(enemy)
 
+
 ## 对敌人造成伤害
 func _attack_enemy(enemy:Character000Base):
-	## 攻击敌人
-	enemy.be_attacked_bullet(attack_value, bullet_mode, true, trigger_be_attack_sfx)
+	if enemy is Zombie000Base:
+		## 攻击敌人
+		enemy.be_attacked_bullet(attack_value, bullet_mode, true, trigger_be_attack_sfx)
+	elif enemy is Plant000Base:
+		enemy = get_first_be_hit_plant_in_cell(enemy)
+		## 攻击敌人
+		enemy.be_attacked_bullet(attack_value, bullet_mode, true, trigger_be_attack_sfx)
+
+## 直线子弹先对壳类进行攻击
+## 抛物线子弹先对Norm进行攻击
+func get_first_be_hit_plant_in_cell(plant:Plant000Base)->Plant000Base:
+	return plant
 
 ## 攻击一次
 func attack_once(enemy:Character000Base):
@@ -116,9 +131,9 @@ func attack_once(enemy:Character000Base):
 	## 对敌人造成伤害
 	if enemy != null:
 		_attack_enemy(enemy)
-	## 是否有音效
-	if type_bullet_SFX != SoundManagerClass.TypeBulletSFX.Null:
-		SoundManager.play_bullet_attack_SFX(type_bullet_SFX)
+		## 是否有音效
+		if type_bullet_SFX != SoundManagerClass.TypeBulletSFX.Null:
+			SoundManager.play_bullet_attack_SFX(type_bullet_SFX)
 	## 如果有子弹特效
 	if bullet_effect.is_bullet_effect:
 		bullet_effect.activate_bullet_effect()
