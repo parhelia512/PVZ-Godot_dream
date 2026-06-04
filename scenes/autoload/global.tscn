@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c50o87181155y"]
+[gd_scene format=3 uid="uid://c50o87181155y"]
 
 [ext_resource type="Script" uid="uid://bgwxsr7olomf7" path="res://scripts/autoload/global/global.gd" id="1_3e7rl"]
 [ext_resource type="Script" uid="uid://bct64figeu6iv" path="res://scripts/autoload/global/character_registry.gd" id="2_gxwvw"]
@@ -11,43 +11,43 @@
 [ext_resource type="Script" uid="uid://bfp02l7lpb1hc" path="res://scripts/autoload/global/global_game_state.gd" id="8_t0h6q"]
 [ext_resource type="Script" uid="uid://bylmo3te1r3qj" path="res://scripts/autoload/global/global_read_data.gd" id="10_vrmlj"]
 
-[node name="Global" type="Node"]
+[node name="Global" type="Node" unique_id=1477215444]
 script = ExtResource("1_3e7rl")
 
-[node name="Registry" type="Node" parent="."]
+[node name="Registry" type="Node" parent="." unique_id=955345454]
 
-[node name="CharacterRegistry" type="Node" parent="Registry"]
+[node name="CharacterRegistry" type="Node" parent="Registry" unique_id=1012602212]
 unique_name_in_owner = true
 script = ExtResource("2_gxwvw")
 
-[node name="MainSceneRegistry" type="Node" parent="Registry"]
+[node name="MainSceneRegistry" type="Node" parent="Registry" unique_id=2071164601]
 unique_name_in_owner = true
 script = ExtResource("3_8byp4")
 
-[node name="ItemRegistry" type="Node" parent="Registry"]
+[node name="ItemRegistry" type="Node" parent="Registry" unique_id=1194166479]
 unique_name_in_owner = true
 script = ExtResource("4_ccgnt")
 
-[node name="BulletRegistry" type="Node" parent="Registry"]
+[node name="BulletRegistry" type="Node" parent="Registry" unique_id=674292397]
 unique_name_in_owner = true
 script = ExtResource("5_8byp4")
 
-[node name="UserManager" type="Node" parent="."]
+[node name="UserManager" type="Node" parent="." unique_id=782063090]
 unique_name_in_owner = true
 script = ExtResource("6_ccgnt")
 
-[node name="SaveService" type="Node" parent="."]
+[node name="SaveService" type="Node" parent="." unique_id=708818696]
 unique_name_in_owner = true
 script = ExtResource("7_dvwfn")
 
-[node name="ConfigService" type="Node" parent="."]
+[node name="ConfigService" type="Node" parent="." unique_id=365566570]
 unique_name_in_owner = true
 script = ExtResource("7_clw33")
 
-[node name="GlobalGameState" type="Node" parent="."]
+[node name="GlobalGameState" type="Node" parent="." unique_id=1502665354]
 unique_name_in_owner = true
 script = ExtResource("8_t0h6q")
 
-[node name="GlobalReadData" type="Node" parent="."]
+[node name="GlobalReadData" type="Node" parent="." unique_id=2070056274]
 unique_name_in_owner = true
 script = ExtResource("10_vrmlj")

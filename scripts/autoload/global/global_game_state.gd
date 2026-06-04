@@ -79,6 +79,9 @@ var curr_plant :Array[CharacterRegistry.PlantType]= [
 	CharacterRegistry.PlantType.P047SpikeRock,
 	CharacterRegistry.PlantType.P048CobCannon,
 	CharacterRegistry.PlantType.P049PeaShooterDoubleReverse,
+	CharacterRegistry.PlantType.P1001WallNutBowling,
+	CharacterRegistry.PlantType.P1002WallNutBowlingBomb,
+	CharacterRegistry.PlantType.P1003WallNutBowlingBig,
 ]
 
 var curr_zombie :Array[CharacterRegistry.ZombieType]= [
@@ -104,8 +107,8 @@ var curr_zombie :Array[CharacterRegistry.ZombieType]= [
 	CharacterRegistry.ZombieType.Z020Yeti,
 	CharacterRegistry.ZombieType.Z021Bungi,
 	CharacterRegistry.ZombieType.Z022Ladder,
-	CharacterRegistry.ZombieType.Z023Catapult,
-	CharacterRegistry.ZombieType.Z024Gargantuar,
-	CharacterRegistry.ZombieType.Z025Imp,
-	CharacterRegistry.ZombieType.Z1001BobsledSingle,
+	#CharacterRegistry.ZombieType.Z023Catapult,
+	#CharacterRegistry.ZombieType.Z024Gargantuar,
+	#CharacterRegistry.ZombieType.Z025Imp,
+	#CharacterRegistry.ZombieType.Z1001BobsledSingle,
 ]

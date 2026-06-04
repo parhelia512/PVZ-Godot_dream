@@ -23,6 +23,7 @@ extends Node
 
 
 func _ready() -> void:
+
 	## 读取当前用户名
 	var is_have_user := user_manager.load_current_user()
 	if is_have_user and not user_manager.curr_user_name.is_empty():

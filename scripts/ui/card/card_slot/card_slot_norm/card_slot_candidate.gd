@@ -204,7 +204,7 @@ func _on_next_page_button_pressed() -> void:
 
 func change_page(change_num:int= 1):
 	all_show_page[curr_page].visible = false
-	curr_page += change_num
+	curr_page += change_num + all_show_page.size()
 	curr_page %= all_show_page.size()
 	all_show_page[curr_page].visible = true
 
@@ -241,7 +241,7 @@ func _on_imitater_next_page_button_pressed() -> void:
 
 func change_page_imitater(change_num:int= 1):
 	all_show_page_imitater[curr_page_imitater].visible = false
-	curr_page_imitater += change_num
+	curr_page_imitater += change_num + all_show_page_imitater.size()
 	curr_page_imitater %= all_show_page_imitater.size()
 	all_show_page_imitater[curr_page_imitater].visible = true
 #endregion
