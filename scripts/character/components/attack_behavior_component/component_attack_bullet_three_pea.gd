@@ -17,6 +17,8 @@ func _ready() -> void:
 	if is_instance_valid(Global.main_game):
 		_init_attack_component_bullet_three_pea(owner.row_col)
 
+	# 三线使用行属性进行攻击判断（super中使用检测组件的值）
+	is_lane = true
 
 func _init_attack_component_bullet_three_pea(row_col:Vector2i):
 	_judge_position_bullet_position(row_col)

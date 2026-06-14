@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c78n78gfrkolq"]
+[gd_scene format=3 uid="uid://c78n78gfrkolq"]
 
 [ext_resource type="PackedScene" uid="uid://c5cke4cm02um7" path="res://scenes/character/plant/plant_000_base.tscn" id="1_qbo1e"]
 [ext_resource type="Texture2D" uid="uid://bx76a21ng1hd1" path="res://assets/reanim/Tallnut_body.png" id="2_814ck"]
@@ -66,7 +66,7 @@ metadata/_custom_type_script = "uid://jl0nl4a234bc"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0h6i8"]
 size = Vector2(50, 50)
 
-[node name="Plant024TallNut" node_paths=PackedStringArray("node2d_detect_in_slope") instance=ExtResource("1_qbo1e")]
+[node name="Plant024TallNut" unique_id=487282947 node_paths=PackedStringArray("node2d_detect_in_slope") instance=ExtResource("1_qbo1e")]
 script = ExtResource("2_lgypc")
 plant_type = 24
 is_can_ladder = true
@@ -75,28 +75,28 @@ node2d_detect_in_slope = [NodePath("HurtBoxComponent/HurtBoxDetection"), NodePat
 [node name="BodyCorrect" parent="Body" index="0"]
 position = Vector2(-43, -74)
 
-[node name="Anim_idle" type="Sprite2D" parent="Body/BodyCorrect" index="0"]
-position = Vector2(0.33533943, -36.08421)
-rotation = 0.0068108994
-scale = Vector2(0.80580455, 0.80729324)
+[node name="Anim_idle" type="Sprite2D" parent="Body/BodyCorrect" index="0" unique_id=712037803]
+position = Vector2(0.9911445, -34.553997)
+rotation = 0.016186647
+scale = Vector2(0.81454855, 0.7941771)
 texture = ExtResource("2_814ck")
 centered = false
 
-[node name="Anim_blink_twice" type="Sprite2D" parent="Body/BodyCorrect" index="1"]
+[node name="Anim_blink_twice" type="Sprite2D" parent="Body/BodyCorrect" index="1" unique_id=1708990816]
 visible = false
 position = Vector2(31.2, -15)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_se5o2")
 centered = false
 
-[node name="Anim_blink_thrice" type="Sprite2D" parent="Body/BodyCorrect" index="2"]
+[node name="Anim_blink_thrice" type="Sprite2D" parent="Body/BodyCorrect" index="2" unique_id=385456172]
 visible = false
 position = Vector2(31.2, -15)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_se5o2")
 centered = false
 
-[node name="blink" type="Sprite2D" parent="Body/BodyCorrect" index="3"]
+[node name="blink" type="Sprite2D" parent="Body/BodyCorrect" index="3" unique_id=1440586104]
 visible = false
 position = Vector2(53, 1.07288e-06)
 scale = Vector2(0.774038, 0.608428)
@@ -108,29 +108,27 @@ max_hp = 8000
 [node name="BlinkComponent" parent="." index="5"]
 all_blink_body_change = Array[ExtResource("6_lgypc")]([SubResource("Resource_6hwhb")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
-libraries = {
-&"": SubResource("AnimationLibrary_mp8j5")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8" unique_id=1148062067]
+libraries/ = SubResource("AnimationLibrary_mp8j5")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9" unique_id=964082886]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_ecgny")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
 
-[node name="HpStageChangeComponent" type="Node2D" parent="." index="10"]
+[node name="HpStageChangeComponent" type="Node2D" parent="." index="10" unique_id=1209532543]
 script = ExtResource("5_ecgny")
 boundary_value_hp = Array[int]([5332, 2666, 0])
 body_change = Array[ExtResource("6_lgypc")]([SubResource("Resource_sum7j"), SubResource("Resource_hev76"), null])
 
-[node name="Area2DStopJump" type="Area2D" parent="." index="11"]
+[node name="Area2DStopJump" type="Area2D" parent="." index="11" unique_id=1115883712]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DStopJump" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DStopJump" index="0" unique_id=1619359853]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_0h6i8")
 
