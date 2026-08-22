@@ -35,9 +35,9 @@ func jump_up_start():
 
 	var tween:Tween = create_tween()
 	if is_instance_valid(detect_component.enemy_can_be_attacked):
-		tween.tween_property(self, "global_position:x", detect_component.enemy_can_be_attacked.shadow.global_position.x, 0.3).set_ease(Tween.EASE_IN)
+		tween.tween_property(self, "global_position:x", detect_component.enemy_can_be_attacked.shadow.global_position.x - 18, 0.1667).set_ease(Tween.EASE_IN)
 	else:
-		tween.tween_property(self, "global_position:x", target_x, 0.3).set_ease(Tween.EASE_IN)
+		tween.tween_property(self, "global_position:x", target_x, 0.1667).set_ease(Tween.EASE_IN)
 
 ## 压扁所有范围内可攻击僵尸
 func squash_all_area_zombie():
